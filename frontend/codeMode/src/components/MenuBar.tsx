@@ -5,27 +5,25 @@ import './MenuBar.css';
 const MenuBar: React.FC = () => {
   const navigate = useNavigate();
 
-  // פונקציה לגלילה חלקה
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
     <ul className="menu-bar">
+      <li onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+        Home
+      </li>
       <li onClick={() => navigate('/login')} style={{ cursor: 'pointer' }}>
         Login & Signup
       </li>
-      <li onClick={() => scrollToSection('about-us')} style={{ cursor: 'pointer' }}>
-        About Us
+      <li onClick={() => navigate('/dashboard')} style={{ cursor: 'pointer' }}>
+        Dashboard
       </li>
-      <li onClick={() => scrollToSection('developer')} style={{ cursor: 'pointer' }}>
-        Developer
+      <li onClick={() => navigate('/practice')} style={{ cursor: 'pointer' }}>
+        Practice
       </li>
-      <li onClick={() => scrollToSection('product')} style={{ cursor: 'pointer' }}>
-        Product
+      <li onClick={() => navigate('/feedback')} style={{ cursor: 'pointer' }}>
+        Feedback
+      </li>
+      <li onClick={() => navigate('/profile')} style={{ cursor: 'pointer' }}>
+        Profile
       </li>
     </ul>
   );

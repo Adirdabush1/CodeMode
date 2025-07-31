@@ -8,7 +8,7 @@ body {
   margin: 0;
 }
 
-/* --- אנימציית הכותרת --- */
+/* --- כותרת --- */
 .animated-title-container {
   display: flex;
   justify-content: center;
@@ -69,26 +69,79 @@ body {
   }
 }
 
-/* --- רשימת כרטיסיות אנכית --- */
+/* --- רשימת כרטיסיות --- */
 .cards-list {
-  max-width: 900px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  padding: 2rem 1rem;
+  gap: 6rem;
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* עטיפה של כל כרטיס + טקסט */
+.card-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+  position: relative;
+}
+
+/* טקסט צדדי */
+.side-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* מיקומים */
+.side-text.left {
+  left: -220px;
+}
+
+.card-section.reverse .side-text.right {
+  right: -220px;
+}
+
+/* צבעים שונים */
+.text-white {
+  color: white;
+}
+
+.text-gray {
+  color: #888;
+}
+
+.text-black {
+  color: black;
+}
+
+/* כרטיס */
 .card {
   display: flex;
+  flex-direction: row;
+  max-width: 600px;
+  width: 100%;
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 1.5rem;
   box-shadow:
     inset -2px 2px hsl(0 0% 100% / 1),
     -10px 10px 20px hsl(0 0% 0% / 0.1);
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
+  z-index: 2;
+}
+
+/* היפוך צדדים */
+.card-section.reverse .card {
+  flex-direction: row-reverse;
+  text-align: right;
 }
 
 .icon {
@@ -118,9 +171,9 @@ body {
 }
 
 /* רספונסיביות */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .card {
-    flex-direction: column;
+    flex-direction: column !important;
     text-align: center;
   }
 
@@ -130,5 +183,9 @@ body {
 
   .text-content h2 {
     font-size: 1.5rem;
+  }
+
+  .side-text {
+    display: none;
   }
 }

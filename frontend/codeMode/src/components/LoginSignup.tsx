@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './LoginSignup.css';
-
+import MenuBar from "../components/MenuBar";
 const LoginSignup: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -70,6 +70,7 @@ const LoginSignup: React.FC = () => {
 
   return (
     <>
+<MenuBar/>
     <div className="login-signup-root">
       <div className="container" id="container" ref={containerRef}>
         <div className="form-container sign-up-container">
