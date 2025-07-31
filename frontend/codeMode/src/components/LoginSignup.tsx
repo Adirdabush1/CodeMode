@@ -70,6 +70,7 @@ const LoginSignup: React.FC = () => {
 
   return (
     <>
+    <div className="login-signup-root">
       <div className="container" id="container" ref={containerRef}>
         <div className="form-container sign-up-container">
           <form onSubmit={handleSignUpSubmit}>
@@ -154,6 +155,7 @@ const LoginSignup: React.FC = () => {
       <footer>
         <p>all rights reserved &copy; 2025 CodeMode</p>
       </footer>
+      </div>
     </>
   );
 };

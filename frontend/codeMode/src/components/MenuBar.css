@@ -1,0 +1,87 @@
+.menu-bar {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  height: 4rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 20px;
+  margin: 0;
+
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  z-index: 1000;
+}
+
+
+
+/* פריטי התפריט */
+.menu-bar li {
+  list-style: none;
+  color: rgb(0, 0, 0);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  padding: 14px 20px;
+  margin: 0 6px;
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.menu-bar li::before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  transition: 0.2s;
+  border-radius: 25px;
+}
+
+.menu-bar li:hover::before {
+  background: linear-gradient(to bottom, #e8edec, #d2d1d3);
+  box-shadow: 0px 3px 20px 0px black;
+  transform: scale(1.2);
+}
+
+.menu-bar li:hover {
+  color: black;
+}
+
+/* ריספונסיביות - במובייל נדחוס את התפריט למצב עמודה */
+@media (max-width: 450px) {
+  .menu-bar {
+    flex-direction: row;
+    width: 95%;
+    padding: 10px;
+    border-radius: 15px;
+  }
+
+  .menu-bar li {
+    padding: 10px 0;
+    margin: 5px 0;
+    text-align: center;
+  }
+}
+
+/* דחיקת תוכן למטה כדי לא להסתיר אותו מתחת לתפריט */
+.home-content {
+  padding-top: 90px;
+  /* מתאים לגובה התפריט */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}

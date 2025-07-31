@@ -1,0 +1,134 @@
+@import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+
+body {
+  background: #d0dbe1;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  color: #444447;
+  margin: 0;
+}
+
+/* --- אנימציית הכותרת --- */
+.animated-title-container {
+  display: flex;
+  justify-content: center;
+  margin: 4rem 0 3rem 0;
+}
+
+.split-text-container {
+  display: flex;
+  font-size: 3.5rem;
+  font-weight: bold;
+  text-transform: none;
+  color: #222;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+}
+
+.text-part {
+  display: inline-block;
+  position: relative;
+  transform: translateX(0);
+  animation-duration: 1.8s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.text-part.left {
+  transform: translateX(-200%);
+  animation-name: slide-in-left;
+}
+
+.text-part.right {
+  transform: translateX(200%);
+  animation-name: slide-in-right;
+  margin-left: 0.5rem;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-200%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* --- רשימת כרטיסיות אנכית --- */
+.cards-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem 1rem;
+}
+
+.card {
+  display: flex;
+  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow:
+    inset -2px 2px hsl(0 0% 100% / 1),
+    -10px 10px 20px hsl(0 0% 0% / 0.1);
+  align-items: center;
+  gap: 2rem;
+}
+
+.icon {
+  flex-shrink: 0;
+  font-size: 4rem;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.text-content h2 {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+}
+
+.text-content p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* רספונסיביות */
+@media (max-width: 600px) {
+  .card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .icon {
+    font-size: 3rem;
+  }
+
+  .text-content h2 {
+    font-size: 1.5rem;
+  }
+}
