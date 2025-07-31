@@ -6,6 +6,12 @@ body {
   font-family: system-ui, sans-serif;
   color: #444447;
   margin: 0;
+  overflow-x: hidden;
+
+}
+
+a {
+  color: black;
 }
 
 /* --- כותרת --- */
@@ -69,7 +75,7 @@ body {
   }
 }
 
-/* --- רשימת כרטיסיות --- */
+/* --- כרטיסיות --- */
 .cards-list {
   display: flex;
   flex-direction: column;
@@ -108,7 +114,7 @@ body {
   right: -220px;
 }
 
-/* צבעים שונים */
+/* צבעים */
 .text-white {
   color: white;
 }
@@ -136,12 +142,55 @@ body {
   align-items: center;
   gap: 1rem;
   z-index: 2;
+  opacity: 0;
+  /* כדי שלא יופיע לפני האנימציה */
 }
 
-/* היפוך צדדים */
+/* כיוון טקסט הפוך */
 .card-section.reverse .card {
   flex-direction: row-reverse;
   text-align: right;
+}
+
+/* --- אנימציות גלילה --- */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.card-section:not(.reverse) .card {
+  animation-name: slideInFromLeft;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.card-section.reverse .card {
+  animation-name: slideInFromRight;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 1s;
+  animation-fill-mode: both;
 }
 
 .icon {
