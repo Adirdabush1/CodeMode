@@ -1,7 +1,9 @@
-import React from 'react'
-
+import MenuBar from '../components/MenuBar'
 export default function profile() {
   return (
-    <div>profile</div>
+    <div>
+      <MenuBar/>
+      profile
+    </div>
   )
 }

@@ -1,7 +1,8 @@
-import React from 'react'
-
+import MenuBar from '../components/MenuBar'
 export default function feedback () {
   return (
-    <div>feedback </div>
+    <div>
+      <MenuBar/>
+      feedback </div>
   )
 }

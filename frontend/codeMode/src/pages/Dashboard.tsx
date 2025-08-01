@@ -1,7 +1,12 @@
-import React from 'react'
+import MenuBar from "../components/MenuBar";
 
 export default function dashboard() {
   return (
-    <div>dashboard</div>
+    <div>
+      <MenuBar/>
+
+      dashboard
+
+    </div>
   )
 }

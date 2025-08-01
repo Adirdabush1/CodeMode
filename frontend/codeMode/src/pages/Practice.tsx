@@ -1,7 +1,20 @@
-import React from 'react'
-
+import MenuBar from '../components/MenuBar';
+import MonacoEditor from '../components/MonacoEditor';
 export default function practice() {
   return (
-    <div>practice</div>
+    <div>
+      <MenuBar/>
+      <p>"
+        
+        
+        
+        
+        
+        
+        
+        "</p>
+     <MonacoEditor/>
+
+    </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import MenuBar from "../components/MenuBar";
 import "./Home.css";
-
+import MonacoEditor from "../components/MonacoEditor";
 const Home: React.FC = () => {
   return (
     <>
@@ -30,6 +30,7 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
+<MonacoEditor/>
 
         <div className="card-section reverse">
           <div className="side-text right text-gray">Secure Your Skills</div>
