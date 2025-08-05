@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginSignup from './components/LoginSignup';
 import Home from './pages/Home';
-import Dashboard from './pages/dashboard';
-import Practice from './pages/practice';
-import Feedback from './pages/feedback ';
-import Profile from './pages/profile';
+import Dashboard from './pages/Dashboard';
+import Practice from './pages/Practice';
+import Feedback from './pages/Feedback '; 
+import Profile from './pages/Profile';
 import './App.css';
 
 function App() {

@@ -7,7 +7,6 @@ body {
   color: #444447;
   margin: 0;
   overflow-x: hidden;
-
 }
 
 a {
@@ -18,7 +17,7 @@ a {
 .animated-title-container {
   display: flex;
   justify-content: center;
-  margin: 4rem 0 3rem 0;
+  margin: 20rem 0 3rem 0;
 }
 
 .split-text-container {
@@ -98,33 +97,34 @@ a {
 /* טקסט צדדי */
 .side-text {
   position: absolute;
+  width: auto;
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
   font-weight: bold;
   white-space: nowrap;
+  z-index: 1;
 }
 
-/* מיקומים */
 .side-text.left {
-  left: -220px;
+  left: 2rem;
 }
 
 .card-section.reverse .side-text.right {
-  right: -220px;
+  right: 2rem;
 }
 
 /* צבעים */
 .text-white {
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 .text-gray {
-  color: #888;
+  color: #888888b7;
 }
 
 .text-black {
-  color: black;
+  color: rgb(6, 6, 6);
 }
 
 /* כרטיס */
@@ -143,7 +143,17 @@ a {
   gap: 1rem;
   z-index: 2;
   opacity: 0;
-  /* כדי שלא יופיע לפני האנימציה */
+}
+
+/* הוספתי מרווחים כדי לא לעלות על ה-side-text */
+.card-section:not(.reverse) .card {
+  margin-left: 10rem;
+  margin-right: 2rem;
+}
+
+.card-section.reverse .card {
+  margin-right: 10rem;
+  margin-left: 2rem;
 }
 
 /* כיוון טקסט הפוך */
@@ -155,7 +165,7 @@ a {
 /* --- אנימציות גלילה --- */
 @keyframes slideInFromLeft {
   from {
-    transform: translateX(-100vw);
+    transform: translateX(-200px);
     opacity: 0;
   }
 
@@ -167,7 +177,7 @@ a {
 
 @keyframes slideInFromRight {
   from {
-    transform: translateX(100vw);
+    transform: translateX(200px);
     opacity: 0;
   }
 
@@ -224,6 +234,8 @@ a {
   .card {
     flex-direction: column !important;
     text-align: center;
+    margin: 0;
+    /* ביטול המרווחים בצדדים במסכים קטנים */
   }
 
   .icon {

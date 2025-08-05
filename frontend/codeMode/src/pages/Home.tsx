@@ -16,7 +16,7 @@ const Home: React.FC = () => {
 
       <div className="cards-list">
         <div className="card-section">
-          <div className="side-text left text-white">AI Learns With You</div>
+          <div className="side-text left text-white">AI Learns </div>
           <div className="card">
             <div className="icon">
               <i className="fa-thin fa-laptop-code"></i>

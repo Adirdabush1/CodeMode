@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { AiAnalyzeModule } from './ai-analyze/ai-analyze.module';
 
 const mongoUri = process.env.MONGODB_URI;
 if (!mongoUri) {
@@ -21,6 +22,7 @@ if (!mongoUri) {
     MongooseModule.forRoot(process.env.MONGODB_URI),
     UserModule,
     AuthModule,
+    AiAnalyzeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
