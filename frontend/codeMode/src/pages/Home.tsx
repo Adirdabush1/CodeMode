@@ -1,8 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MenuBar from "../components/MenuBar";
 import "./Home.css";
 import MonacoEditor from "../components/MonacoEditor";
+
+const exercisesByLanguage: Record<string, string[]> = {
+  javascript: [
+    "Write a function to reverse a string",
+    "Implement Fibonacci sequence",
+    "Validate an email address format",
+  ],
+  python: [
+    "Check if a number is prime",
+    "Calculate factorial using recursion",
+    "Parse a JSON string and print values",
+  ],
+  java: [
+    "Create a class with getters and setters",
+    "Implement bubble sort algorithm",
+    "Check if a string is a palindrome",
+  ],
+  typescript: [
+    "Define interfaces and use them in a function",
+    "Create a generic function",
+    "Validate object with optional properties",
+  ],
+  csharp: [
+    "Create a simple console application",
+    "Use LINQ to filter a list",
+    "Implement exception handling",
+  ],
+  cpp: [
+    "Write a program to swap two numbers",
+    "Implement a stack using arrays",
+    "Use pointers to access array elements",
+  ],
+};
+
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const [selectedLanguage, setSelectedLanguage] = useState("javascript");
+
+  const handleMoreExercisesClick = () => {
+    if (!token) {
+      navigate("/login", { state: { redirectTo: "/practice" } });
+    } else {
+      navigate("/practice");
+    }
+  };
+
+  const handleLanguageSelect = (lang: string) => {
+    setSelectedLanguage(lang);
+  };
+
+  const exercises = exercisesByLanguage[selectedLanguage] || [];
+
   return (
     <>
       <MenuBar />
@@ -15,6 +68,27 @@ const Home: React.FC = () => {
       </div>
 
       <div className="cards-list">
+        {/* עוזר אישי */}
+        <div className="card-section special-card">
+          <div className="card">
+            <h2>Personal AI Assistant</h2>
+            {!token ? (
+              <>
+                <p>To use the personal AI assistant, please log in or sign up.</p>
+                <button
+                  onClick={() => navigate("/login", { state: { redirectTo: "/practice" } })}
+                  className="login-button"
+                >
+                  Login / Sign Up
+                </button>
+              </>
+            ) : (
+              <p>Welcome back! Use the AI assistant to enhance your coding skills.</p>
+            )}
+          </div>
+        </div>
+
+        {/* תכנות */}
         <div className="card-section">
           <div className="side-text left text-white">AI Learns </div>
           <div className="card">
@@ -30,8 +104,37 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-<MonacoEditor/>
 
+        {/* תרגילים עם בחירת שפה בכרטיסים */}
+        <div className="card-section exercises-samples">
+          <h3>Sample Exercises</h3>
+
+          <div className="language-card-grid">
+            {Object.keys(exercisesByLanguage).map((lang) => (
+              <button
+                key={lang}
+                className={`language-card ${selectedLanguage === lang ? "active" : ""}`}
+                onClick={() => handleLanguageSelect(lang)}
+              >
+                {lang.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
+          <ul>
+            {exercises.map((ex, index) => (
+              <li key={index}>{`Exercise ${index + 1}: ${ex}`}</li>
+            ))}
+          </ul>
+
+          <button onClick={handleMoreExercisesClick} className="more-exercises-button">
+            See More Exercises
+          </button>
+        </div>
+
+        <MonacoEditor />
+
+        {/* אבטחה */}
         <div className="card-section reverse">
           <div className="side-text right text-gray">Secure Your Skills</div>
           <div className="card">
@@ -48,6 +151,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
+        {/* תחזוקה */}
         <div className="card-section">
           <div className="side-text left text-black">Maintain Like a Pro</div>
           <div className="card">

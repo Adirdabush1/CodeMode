@@ -1,6 +1,9 @@
+import '../../src/pages/Practice.css';
+import './MonacoEditor.css';
+
 import React, { useState } from 'react';
 import MonacoEditor from '@monaco-editor/react';
-import './MonacoEditor.css';
+import Swal from 'sweetalert2';
 
 const supportedLanguages = ['typescript', 'javascript', 'python', 'java', 'csharp', 'cpp', 'html', 'css'] as const;
 
@@ -22,6 +25,12 @@ const MyEditor: React.FC = () => {
   const [userFeedback, setUserFeedback] = useState('');
   const [isRunning, setIsRunning] = useState(false);
 
+  // Count AI usage stored in localStorage
+  const [aiUsageCount, setAiUsageCount] = useState<number>(() => {
+    const saved = localStorage.getItem('aiUsageCount');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+
   async function runCode() {
     setIsRunning(true);
     setOutput('Running...');
@@ -42,22 +51,46 @@ const MyEditor: React.FC = () => {
   }
 
   async function analyzeCode() {
+    const token = localStorage.getItem('token');
+
+    // Check usage count and token before allowing AI analysis
+    if (!token && aiUsageCount >= 1) {
+      Swal.fire({
+        icon: 'info',
+        title: 'AI Access Limited',
+        text: 'To continue using AI analysis, please log in or sign up.',
+        confirmButtonText: 'Login',
+        confirmButtonColor: '#3085d6',
+        background: '#f4f6f9',
+      }).then(result => {
+        if (result.isConfirmed) {
+          window.location.href = '/login'; // Adjust path if needed
+        }
+      });
+      return;
+    }
+
     setIsRunning(true);
     setOutput('Analyzing with AI...');
     try {
-      const token = localStorage.getItem('token');
-     const res = await fetch('http://localhost:5000/ai-analyze', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    Authorization: token ? `Bearer ${token}` : '',
-  },
-  body: JSON.stringify({ code, userFeedback }),
-});
+      const res = await fetch('http://localhost:5000/ai-analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+        body: JSON.stringify({ code, userFeedback }),
+      });
 
       const data = await res.json();
-setOutput(data.result || 'No analysis returned');
+      setOutput(data.result || 'No analysis returned');
 
+      // If no token, increase AI usage count and save it
+      if (!token) {
+        const newCount = aiUsageCount + 1;
+        localStorage.setItem('aiUsageCount', newCount.toString());
+        setAiUsageCount(newCount);
+      }
     } catch (e) {
       setOutput('Error: ' + (e instanceof Error ? e.message : 'Unknown error'));
     } finally {

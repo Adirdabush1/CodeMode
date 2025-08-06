@@ -78,13 +78,12 @@ a {
 .cards-list {
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 4rem;
   padding: 3rem 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* עטיפה של כל כרטיס + טקסט */
 .card-section {
   display: flex;
   flex-direction: column;
@@ -145,7 +144,6 @@ a {
   opacity: 0;
 }
 
-/* הוספתי מרווחים כדי לא לעלות על ה-side-text */
 .card-section:not(.reverse) .card {
   margin-left: 10rem;
   margin-right: 2rem;
@@ -156,16 +154,182 @@ a {
   margin-left: 2rem;
 }
 
-/* כיוון טקסט הפוך */
 .card-section.reverse .card {
   flex-direction: row-reverse;
   text-align: right;
 }
 
+.card-section.exercises-samples {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+
+  width: 90%;
+  max-width: 800px;
+  height: auto;
+  max-height: 400px;
+
+  /* בטל ירושה מ-min-height: 100vh */
+  min-height: unset;
+
+  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+  padding: 1rem;
+  border-radius: 1.5rem;
+  box-shadow:
+    inset -2px 2px hsl(0 0% 100% / 1),
+    -10px 10px 20px hsl(0 0% 0% / 0.1);
+
+  text-align: right;
+  overflow-y: auto;
+
+  animation: slideInFromLeft 1s ease forwards;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  opacity: 0;
+}
+
+.language-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.language-card {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  background: #ffffff88;
+  backdrop-filter: blur(5px);
+  border: 2px solid transparent;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.language-card:hover {
+  background: #ffffffcc;
+  transform: scale(1.05);
+}
+
+.language-card.active {
+  background: #000;
+  color: #fff;
+  border-color: #333;
+}
+
+#language-select {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  appearance: none;
+  /* מסיר עיצוב דיפולטי */
+}
+
+/* כפתור בעיצוב זכוכית */
+.more-exercises-button {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  padding: 0.75rem 1rem;
+  ;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  /* אפקט כניסה */
+  opacity: 0;
+  transform: translateY(100px);
+  animation-name: slideInFromBottom;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.choose-language-button {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  /* אפקט כניסה */
+  opacity: 0;
+  transform: translateY(100px);
+  animation-name: slideInFromBottom;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.more-exercises-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(95px) scale(1.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* כרטיסיית שאלות */
+.card-section.exercises-samples {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+  border-radius: 1.5rem;
+  box-shadow:
+    inset -2px 2px hsl(0 0% 100% / 1),
+    -10px 10px 20px hsl(0 0% 0% / 0.1);
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+  text-align: right;
+
+
+}
+
+.card-section.exercises-samples h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card-section.exercises-samples::-webkit-scrollbar {
+  display: none;
+}
+
+.card-section.exercises-samples ul {
+  padding-right: 1.5rem;
+  list-style: disc;
+
+}
+
+.card-section.exercises-samples li {
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
 /* --- אנימציות גלילה --- */
 @keyframes slideInFromLeft {
   from {
-    transform: translateX(-200px);
+    transform: translateX(-400px);
     opacity: 0;
   }
 
@@ -177,7 +341,7 @@ a {
 
 @keyframes slideInFromRight {
   from {
-    transform: translateX(200px);
+    transform: translateX(400px);
     opacity: 0;
   }
 
@@ -187,21 +351,35 @@ a {
   }
 }
 
-.card-section:not(.reverse) .card {
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* אנימציות מתחלפות לפי הסדר */
+.card-section:nth-child(odd) .card {
   animation-name: slideInFromLeft;
   animation-timeline: view();
   animation-range: cover 0% cover 40%;
-  animation-duration: 1s;
+  animation-duration: 2s;
   animation-fill-mode: both;
 }
 
-.card-section.reverse .card {
+.card-section:nth-child(even) .card {
   animation-name: slideInFromRight;
   animation-timeline: view();
   animation-range: cover 0% cover 40%;
-  animation-duration: 1s;
+  animation-duration: 2s;
   animation-fill-mode: both;
 }
+
 
 .icon {
   flex-shrink: 0;
@@ -235,7 +413,6 @@ a {
     flex-direction: column !important;
     text-align: center;
     margin: 0;
-    /* ביטול המרווחים בצדדים במסכים קטנים */
   }
 
   .icon {
