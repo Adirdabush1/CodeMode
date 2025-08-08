@@ -9,7 +9,7 @@
 
 .container {
   width: 100%;
-  max-width: 400px;
+  max-width: 700px;
 }
 
 /* Profile Card */
@@ -21,6 +21,12 @@
   border-radius: 1.5rem;
   overflow: hidden;
   transition: transform 0.3s ease;
+}
+
+.profile-card {
+  max-height: 730px;
+  /* שים גובה שמתאים לך */
+
 }
 
 .profile-card:hover {

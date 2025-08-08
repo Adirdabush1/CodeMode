@@ -1,5 +1,5 @@
-import MenuBar from '../components/MenuBar'
-export default function feedback () {
+import MenuBar from '../components/MenuBar';
+export default function Feedback () {
   return (
     <div>
       <MenuBar/>

@@ -134,6 +134,41 @@ const Home: React.FC = () => {
 
         <MonacoEditor />
 
+        {/* כרטיסים נוספים רק למשתמשים מחוברים */}
+        {token && (
+          <>
+            <div className="card-section">
+              <div className="side-text left text-black">Your Progress</div>
+              <div className="card">
+                <div className="icon">
+                  <i className="fa-thin fa-chart-line"></i>
+                </div>
+                <div className="text-content">
+                  <h2>Practice History</h2>
+                  <p>
+                    View your past exercises, track your coding journey, and revisit challenges you've completed.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="card-section reverse">
+              <div className="side-text right text-black">For You</div>
+              <div className="card">
+                <div className="icon">
+                  <i className="fa-thin fa-lightbulb-on"></i>
+                </div>
+                <div className="text-content">
+                  <h2>Recommended Topics</h2>
+                  <p>
+                    Receive personalized coding exercises based on your skill level and learning progress.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
         {/* אבטחה */}
         <div className="card-section reverse">
           <div className="side-text right text-gray">Secure Your Skills</div>

@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import './LoginSignup.css';
 import MenuBar from "../components/MenuBar";
+import { useAuth } from '../components/useAuth';
+
 
 type LoginResponse = {
   access_token: string;
@@ -44,7 +46,7 @@ const LoginSignup: React.FC = () => {
         icon: 'success',
         title: 'Registration successful!',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1000
       });
       setSignUpMessage('');
       containerRef.current?.classList.remove('right-panel-active');
@@ -64,7 +66,7 @@ const LoginSignup: React.FC = () => {
       }
     }
   };
-
+const { login } = useAuth();
   const handleSignInSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -75,6 +77,7 @@ const LoginSignup: React.FC = () => {
       const token = response.data.access_token;
       if (token) {
         localStorage.setItem('token', token);
+              login(); 
       }
       await Swal.fire({
         icon: 'success',

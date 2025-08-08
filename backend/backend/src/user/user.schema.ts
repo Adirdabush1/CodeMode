@@ -13,6 +13,38 @@ export class User {
 
   @Prop()
   name?: string;
+  @Prop()
+  avatarUrl?: string;
+
+  @Prop()
+  title?: string;
+
+  @Prop()
+  description?: string;
+
+  @Prop({ default: 0 })
+  points: number;
+
+  @Prop({ default: '1' })
+  level: string;
+
+  @Prop({ default: 0 })
+  exercisesSolved: number;
+
+  @Prop({ default: 0 })
+  successRate: number;
+
+  @Prop()
+  avgSolveTime?: string;
+
+  @Prop({ type: [String], default: [] })
+  badges: string[];
+
+  @Prop()
+  githubUrl?: string;
+
+  @Prop({ default: 'Active' })
+  status: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
