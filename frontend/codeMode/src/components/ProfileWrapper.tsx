@@ -5,36 +5,27 @@ import Profile from '../pages/Profile';
 type UserData = {
   name: string;
   email: string;
-  // אם יש עוד שדות תוסיף אותם פה
 };
 
 const ProfileWrapper = () => {
   const [userData, setUserData] = useState<UserData | null>(null);
 
- useEffect(() => {
-  const fetchProfile = async () => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.log('No token found');
-      return;
-    }
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get<UserData>('http://localhost:5000/user/me', {
+          withCredentials: true, // חשוב!
+        });
+        setUserData(response.data);
+      } catch (err) {
+        console.error('Failed to fetch user data:', err);
+        setUserData(null);
+        // פה אפשר להוסיף ניתוב לדף login או הודעה למשתמש
+      }
+    };
 
-    try {
-      const response = await axios.get<UserData>('http://localhost:5000/user/me', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      console.log('Response data:', response.data);
-      setUserData(response.data);
-    } catch (err) {
-      console.error('Failed to fetch user data:', err);
-    }
-  };
-
-  fetchProfile();
-}, []);
-
-
-
+    fetchProfile();
+  }, []);
 
   if (!userData) return <div>Loading profile...</div>;
 
@@ -51,7 +42,7 @@ const ProfileWrapper = () => {
       email={userData.email}
       githubUrl="https://github.com/placeholder"
       status="Active"
-      badges={["Newbie", "Explorer"]}
+      badges={['Newbie', 'Explorer']}
       avatarUrl="https://i.pravatar.cc/150?img=3"
     />
   );

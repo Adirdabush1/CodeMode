@@ -6,22 +6,31 @@ import './LoginSignup.css';
 import MenuBar from "../components/MenuBar";
 import { useAuth } from '../components/useAuth';
 
+interface CustomAxiosError {
+  isAxiosError: boolean;
+  response?: { data?: { message?: string } };
+  message: string;
+}
 
-type LoginResponse = {
-  access_token: string;
-};
+function isAxiosError(error: unknown): error is CustomAxiosError {
+  return (
+    typeof error === 'object' &&
+    error !== null &&
+    'isAxiosError' in error &&
+    (error as CustomAxiosError).isAxiosError === true
+  );
+}
 
 const LoginSignup: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
-  // States טופס הרשמה
   const [signUpName, setSignUpName] = useState('');
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
   const [signUpMessage, setSignUpMessage] = useState('');
 
-  // States טופס התחברות
   const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [signInMessage, setSignInMessage] = useState('');
@@ -37,67 +46,76 @@ const LoginSignup: React.FC = () => {
   const handleSignUpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/auth/signup', {
-        name: signUpName,
-        email: signUpEmail,
-        password: signUpPassword,
-      });
+      await axios.post(
+        'http://localhost:5000/auth/signup',
+        {
+          name: signUpName,
+          email: signUpEmail,
+          password: signUpPassword,
+        },
+        { withCredentials: true } // חשוב לשמור קוקי HttpOnly
+      );
       await Swal.fire({
         icon: 'success',
         title: 'Registration successful!',
         showConfirmButton: false,
-        timer: 1000
+        timer: 1000,
       });
       setSignUpMessage('');
       containerRef.current?.classList.remove('right-panel-active');
-      navigate('/profile'); 
+      navigate('/profile');
     } catch (error: unknown) {
-      if (error instanceof Error) {
+      if (isAxiosError(error)) {
         Swal.fire({
           icon: 'error',
           title: 'Registration failed',
-          text: error.message,
+          text: error.response?.data?.message || error.message,
         });
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Registration failed',
+          text: 'An unexpected error occurred',
         });
       }
     }
   };
-const { login } = useAuth();
+
   const handleSignInSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post<LoginResponse>('http://localhost:5000/auth/login', {
-        email: signInEmail,
-        password: signInPassword,
-      });
-      const token = response.data.access_token;
-      if (token) {
-        localStorage.setItem('token', token);
-              login(); 
-      }
+      await axios.post(
+        'http://localhost:5000/auth/login',
+        {
+          email: signInEmail,
+          password: signInPassword,
+        },
+        { withCredentials: true } // שולח את קוקי ה־HttpOnly אוטומטית
+      );
+
+      login(); // מעדכן סטטוס התחברות ב־context/מחלקה
+
       await Swal.fire({
         icon: 'success',
         title: 'Login successful!',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
+
       setSignInMessage('');
       navigate('/profile');
     } catch (error: unknown) {
-      if (error instanceof Error) {
+      if (isAxiosError(error)) {
         Swal.fire({
           icon: 'error',
           title: 'Login failed',
-          text: error.message,
+          text: error.response?.data?.message || error.message,
         });
       } else {
         Swal.fire({
           icon: 'error',
           title: 'Login failed',
+          text: 'An unexpected error occurred',
         });
       }
     }
@@ -105,9 +123,10 @@ const { login } = useAuth();
 
   return (
     <>
-      <MenuBar/>
+      <MenuBar />
       <div className="login-signup-root">
         <div className="container" id="container" ref={containerRef}>
+          {/* Sign Up */}
           <div className="form-container sign-up-container">
             <form onSubmit={handleSignUpSubmit}>
               <h1>Create Account</h1>
@@ -137,12 +156,14 @@ const { login } = useAuth();
                 value={signUpPassword}
                 onChange={(e) => setSignUpPassword(e.target.value)}
                 required
+                autoComplete="new-password"
               />
               <button type="submit">Sign Up</button>
               {signUpMessage && <p>{signUpMessage}</p>}
             </form>
           </div>
 
+          {/* Sign In */}
           <div className="form-container sign-in-container">
             <form onSubmit={handleSignInSubmit}>
               <h1>Sign in</h1>
@@ -158,6 +179,7 @@ const { login } = useAuth();
                 value={signInEmail}
                 onChange={(e) => setSignInEmail(e.target.value)}
                 required
+                autoComplete="username"
               />
               <input
                 type="password"
@@ -165,6 +187,7 @@ const { login } = useAuth();
                 value={signInPassword}
                 onChange={(e) => setSignInPassword(e.target.value)}
                 required
+                autoComplete="current-password"
               />
               <a href="#">Forgot your password?</a>
               <button type="submit">Sign In</button>
@@ -172,6 +195,7 @@ const { login } = useAuth();
             </form>
           </div>
 
+          {/* Overlay */}
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-panel overlay-left">

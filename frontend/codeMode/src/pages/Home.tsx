@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuBar from "../components/MenuBar";
 import "./Home.css";
 import MonacoEditor from "../components/MonacoEditor";
+import axios from "axios";
 
 const exercisesByLanguage: Record<string, string[]> = {
   javascript: [
@@ -39,11 +40,21 @@ const exercisesByLanguage: Record<string, string[]> = {
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loadingAuth, setLoadingAuth] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
 
+  useEffect(() => {
+    // בדיקה אם המשתמש מחובר דרך קריאת API עם קוקיז
+    axios
+      .get("http://localhost:5000/user/me", { withCredentials: true })
+      .then(() => setIsLoggedIn(true))
+      .catch(() => setIsLoggedIn(false))
+      .then(() => setLoadingAuth(false));
+  }, []);
+
   const handleMoreExercisesClick = () => {
-    if (!token) {
+    if (!isLoggedIn) {
       navigate("/login", { state: { redirectTo: "/practice" } });
     } else {
       navigate("/practice");
@@ -55,6 +66,17 @@ const Home: React.FC = () => {
   };
 
   const exercises = exercisesByLanguage[selectedLanguage] || [];
+
+  if (loadingAuth) {
+    return (
+      <>
+        <MenuBar />
+        <div className="profile-page">
+          <h1>Checking authentication...</h1>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -72,11 +94,13 @@ const Home: React.FC = () => {
         <div className="card-section special-card">
           <div className="card">
             <h2>Personal AI Assistant</h2>
-            {!token ? (
+            {!isLoggedIn ? (
               <>
                 <p>To use the personal AI assistant, please log in or sign up.</p>
                 <button
-                  onClick={() => navigate("/login", { state: { redirectTo: "/practice" } })}
+                  onClick={() =>
+                    navigate("/login", { state: { redirectTo: "/practice" } })
+                  }
                   className="login-button"
                 >
                   Login / Sign Up
@@ -98,8 +122,9 @@ const Home: React.FC = () => {
             <div className="text-content">
               <h2>Programming</h2>
               <p>
-                Practice coding with real-time AI assistance and improve your skills.
-                Work on challenges, get feedback, and level up your coding game.
+                Practice coding with real-time AI assistance and improve your
+                skills. Work on challenges, get feedback, and level up your
+                coding game.
               </p>
             </div>
           </div>
@@ -113,7 +138,9 @@ const Home: React.FC = () => {
             {Object.keys(exercisesByLanguage).map((lang) => (
               <button
                 key={lang}
-                className={`language-card ${selectedLanguage === lang ? "active" : ""}`}
+                className={`language-card ${
+                  selectedLanguage === lang ? "active" : ""
+                }`}
                 onClick={() => handleLanguageSelect(lang)}
               >
                 {lang.toUpperCase()}
@@ -127,7 +154,10 @@ const Home: React.FC = () => {
             ))}
           </ul>
 
-          <button onClick={handleMoreExercisesClick} className="more-exercises-button">
+          <button
+            onClick={handleMoreExercisesClick}
+            className="more-exercises-button"
+          >
             See More Exercises
           </button>
         </div>
@@ -135,7 +165,7 @@ const Home: React.FC = () => {
         <MonacoEditor />
 
         {/* כרטיסים נוספים רק למשתמשים מחוברים */}
-        {token && (
+        {isLoggedIn && (
           <>
             <div className="card-section">
               <div className="side-text left text-black">Your Progress</div>
@@ -146,7 +176,8 @@ const Home: React.FC = () => {
                 <div className="text-content">
                   <h2>Practice History</h2>
                   <p>
-                    View your past exercises, track your coding journey, and revisit challenges you've completed.
+                    View your past exercises, track your coding journey, and
+                    revisit challenges you've completed.
                   </p>
                 </div>
               </div>
@@ -161,7 +192,8 @@ const Home: React.FC = () => {
                 <div className="text-content">
                   <h2>Recommended Topics</h2>
                   <p>
-                    Receive personalized coding exercises based on your skill level and learning progress.
+                    Receive personalized coding exercises based on your skill
+                    level and learning progress.
                   </p>
                 </div>
               </div>
@@ -179,8 +211,8 @@ const Home: React.FC = () => {
             <div className="text-content">
               <h2>Security</h2>
               <p>
-                Learn how to write secure and protected code with our guided exercises.
-                Understand vulnerabilities and how to avoid them.
+                Learn how to write secure and protected code with our guided
+                exercises. Understand vulnerabilities and how to avoid them.
               </p>
             </div>
           </div>
@@ -196,8 +228,8 @@ const Home: React.FC = () => {
             <div className="text-content">
               <h2>Maintenance</h2>
               <p>
-                Understand best practices for code maintenance and real-world development.
-                Keep your projects clean, manageable, and scalable.
+                Understand best practices for code maintenance and real-world
+                development. Keep your projects clean, manageable, and scalable.
               </p>
             </div>
           </div>

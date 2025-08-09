@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import './Practice.css';
+import ExerciseList from '../components/ExerciseList';
 import MenuBar from '../components/MenuBar';
+
 
 const supportedLanguages = ['typescript', 'javascript', 'python', 'java', 'csharp', 'cpp', 'html', 'css'] as const;
 
@@ -67,6 +69,13 @@ const Practice: React.FC = () => {
   return (
     <div>
       <MenuBar />
+      <p>"
+        
+        
+        
+        
+        "</p>
+      <ExerciseList/>
       <div className="practice-page">
         <div style={{ padding: 20 }}>
           <label>

@@ -14,7 +14,7 @@ import { ConfigModule } from '@nestjs/config';
     PassportModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'secretKey', // מומלץ להשתמש ב-.env
-      signOptions: { expiresIn: '1h' },
+      signOptions: { expiresIn: '7d' },
     }),
   ],
   providers: [AuthService, JwtStrategy],
