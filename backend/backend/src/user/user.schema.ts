@@ -45,6 +45,17 @@ export class User {
 
   @Prop({ default: 'Active' })
   status: string;
+  @Prop({
+    type: [
+      {
+        exerciseId: String,
+        code: String,
+        solvedAt: { type: Date, default: Date.now },
+      },
+    ],
+    default: [],
+  })
+  solvedExercises: { exerciseId: string; code: string; solvedAt: Date }[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -20,6 +20,15 @@ export class UserService {
     });
     return createdUser.save();
   }
+  async addSolvedExercise(email: string, exerciseId: string, code: string) {
+    return this.userModel.findOneAndUpdate(
+      { email },
+      {
+        $push: { solvedExercises: { exerciseId, code, solvedAt: new Date() } },
+      },
+      { new: true },
+    );
+  }
 
   async findByEmail(email: string): Promise<UserDocument | null> {
     return this.userModel.findOne({ email }).exec();

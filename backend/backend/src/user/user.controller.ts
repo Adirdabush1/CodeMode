@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Request } from 'express';
 import { UserService } from './user.service';
@@ -30,6 +30,30 @@ export class UserController {
       githubUrl: user.githubUrl || '',
       status: user.status || 'Active',
       badges: user.badges || [],
+      solvedExercises: user.solvedExercises || [], // נוסיף החזרה של תרגילים שנפתרו
+    };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('add-solved')
+  async addSolved(
+    @Req() req: Request,
+    @Body() body: { exerciseId: string; code: string },
+  ) {
+    const { email } = req.user as { email: string };
+    if (!body.exerciseId || !body.code) {
+      return { message: 'Missing exerciseId or code' };
+    }
+
+    const updatedUser = await this.userService.addSolvedExercise(
+      email,
+      body.exerciseId,
+      body.code,
+    );
+
+    return {
+      message: 'Exercise saved successfully',
+      solvedExercises: updatedUser.solvedExercises,
     };
   }
 }

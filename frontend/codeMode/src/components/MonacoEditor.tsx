@@ -5,7 +5,16 @@ import React, { useState } from 'react';
 import MonacoEditor from '@monaco-editor/react';
 import Swal from 'sweetalert2';
 
-const supportedLanguages = ['typescript', 'javascript', 'python', 'java', 'csharp', 'cpp', 'html', 'css'] as const;
+const supportedLanguages = [
+  'typescript',
+  'javascript',
+  'python',
+  'java',
+  'csharp',
+  'cpp',
+  'html',
+  'css',
+] as const;
 
 const languageToIdMap: Record<typeof supportedLanguages[number], number> = {
   python: 71,
@@ -19,13 +28,12 @@ const languageToIdMap: Record<typeof supportedLanguages[number], number> = {
 };
 
 const MyEditor: React.FC = () => {
-  const [code, setCode] = useState('// כתוב כאן קוד...');
-  const [language, setLanguage] = useState<typeof supportedLanguages[number]>('typescript');
-  const [output, setOutput] = useState('');
-  const [userFeedback, setUserFeedback] = useState('');
-  const [isRunning, setIsRunning] = useState(false);
+  const [code, setCode] = useState<string>('// Write code here..');
+  const [language, setLanguage] = useState<typeof supportedLanguages[number]>('javascript');
+  const [output, setOutput] = useState<string>('');
+  const [userFeedback, setUserFeedback] = useState<string>('');
+  const [isRunning, setIsRunning] = useState<boolean>(false);
 
-  // Count AI usage stored in localStorage
   const [aiUsageCount, setAiUsageCount] = useState<number>(() => {
     const saved = localStorage.getItem('aiUsageCount');
     return saved ? parseInt(saved, 10) : 0;
@@ -53,7 +61,6 @@ const MyEditor: React.FC = () => {
   async function analyzeCode() {
     const token = localStorage.getItem('token');
 
-    // Check usage count and token before allowing AI analysis
     if (!token && aiUsageCount >= 1) {
       Swal.fire({
         icon: 'info',
@@ -64,7 +71,7 @@ const MyEditor: React.FC = () => {
         background: '#f4f6f9',
       }).then(result => {
         if (result.isConfirmed) {
-          window.location.href = '/login'; // Adjust path if needed
+          window.location.href = '/login';
         }
       });
       return;
@@ -81,11 +88,9 @@ const MyEditor: React.FC = () => {
         },
         body: JSON.stringify({ code, userFeedback }),
       });
-
       const data = await res.json();
       setOutput(data.result || 'No analysis returned');
 
-      // If no token, increase AI usage count and save it
       if (!token) {
         const newCount = aiUsageCount + 1;
         localStorage.setItem('aiUsageCount', newCount.toString());
@@ -106,7 +111,9 @@ const MyEditor: React.FC = () => {
         onChange={e => setLanguage(e.target.value as typeof supportedLanguages[number])}
       >
         {supportedLanguages.map(lang => (
-          <option key={lang} value={lang}>{lang}</option>
+          <option key={lang} value={lang}>
+            {lang}
+          </option>
         ))}
       </select>
 
@@ -115,7 +122,7 @@ const MyEditor: React.FC = () => {
         language={language}
         value={code}
         theme="vs-dark"
-        onChange={value => setCode(value || '')}
+        onChange={value => setCode(value ?? '')}
         options={{
           minimap: { enabled: false },
           automaticLayout: true,
@@ -124,7 +131,7 @@ const MyEditor: React.FC = () => {
       />
 
       <textarea
-        placeholder="מה למדת? איפה נתקעת?"
+        placeholder="What did you learn? Where did you get stuck?"
         value={userFeedback}
         onChange={e => setUserFeedback(e.target.value)}
         style={{ width: '100%', height: 100, marginTop: 20, fontSize: 16, padding: 10 }}
@@ -138,7 +145,7 @@ const MyEditor: React.FC = () => {
         {isRunning ? 'Analyzing...' : 'Analyze with AI'}
       </button>
 
-      <pre className="output-pre">{output}</pre>
+      <pre className="output-pre">{output || 'No output yet. Run code to see results.'}</pre>
     </div>
   );
 };

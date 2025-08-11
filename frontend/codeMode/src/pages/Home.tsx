@@ -43,9 +43,9 @@ const Home: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loadingAuth, setLoadingAuth] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
+  const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
 
   useEffect(() => {
-    // בדיקה אם המשתמש מחובר דרך קריאת API עם קוקיז
     axios
       .get("http://localhost:5000/user/me", { withCredentials: true })
       .then(() => setIsLoggedIn(true))
@@ -57,12 +57,19 @@ const Home: React.FC = () => {
     if (!isLoggedIn) {
       navigate("/login", { state: { redirectTo: "/practice" } });
     } else {
-      navigate("/practice");
+      navigate("/practice", {
+        state: { language: selectedLanguage, exercise: selectedExercise },
+      });
     }
   };
 
   const handleLanguageSelect = (lang: string) => {
     setSelectedLanguage(lang);
+    setSelectedExercise(null); // איפוס בחירת תרגיל אם השפה משתנה
+  };
+
+  const handleExerciseSelect = (exercise: string) => {
+    setSelectedExercise(exercise);
   };
 
   const exercises = exercisesByLanguage[selectedLanguage] || [];
@@ -130,7 +137,7 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        {/* תרגילים עם בחירת שפה בכרטיסים */}
+        {/* תרגילים עם בחירת שפה ובחירת תרגיל */}
         <div className="card-section exercises-samples">
           <h3>Sample Exercises</h3>
 
@@ -150,15 +157,33 @@ const Home: React.FC = () => {
 
           <ul>
             {exercises.map((ex, index) => (
-              <li key={index}>{`Exercise ${index + 1}: ${ex}`}</li>
+              <li
+                key={index}
+                onClick={() => handleExerciseSelect(ex)}
+                className={selectedExercise === ex ? "selected" : ""}
+                style={{
+                  cursor: "pointer",
+                  fontWeight: selectedExercise === ex ? "bold" : "normal",
+                }}
+              >
+                {`Exercise ${index + 1}: ${ex}`}
+              </li>
             ))}
           </ul>
+
+          {selectedExercise && (
+            <div className="selected-exercise">
+              <h4>Selected Exercise:</h4>
+              <p>{selectedExercise}</p>
+            </div>
+          )}
 
           <button
             onClick={handleMoreExercisesClick}
             className="more-exercises-button"
+            disabled={!selectedExercise}
           >
-            See More Exercises
+            {selectedExercise ? "Start This Exercise" : "Select an Exercise First"}
           </button>
         </div>
 

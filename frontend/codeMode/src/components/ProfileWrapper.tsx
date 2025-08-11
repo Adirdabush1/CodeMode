@@ -1,10 +1,21 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Profile from '../pages/Profile';
-
 type UserData = {
   name: string;
   email: string;
+  title: string;
+  description: string;
+  points: number;
+  level: string;
+  exercisesSolved: number;
+  successRate: number;
+  avgSolveTime: string;
+  githubUrl: string;
+  status: string;
+  badges: string[];
+  avatarUrl: string;
+  solvedExercises: string[];
 };
 
 const ProfileWrapper = () => {
@@ -14,13 +25,12 @@ const ProfileWrapper = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get<UserData>('http://localhost:5000/user/me', {
-          withCredentials: true, // חשוב!
+          withCredentials: true,
         });
         setUserData(response.data);
       } catch (err) {
         console.error('Failed to fetch user data:', err);
         setUserData(null);
-        // פה אפשר להוסיף ניתוב לדף login או הודעה למשתמש
       }
     };
 
@@ -28,22 +38,23 @@ const ProfileWrapper = () => {
   }, []);
 
   if (!userData) return <div>Loading profile...</div>;
-
+console.log("Solved Exercises from backend:", userData.solvedExercises);
   return (
     <Profile
       name={userData.name || 'Anonymous'}
-      title="Beginner"
-      description="No description yet."
-      points={100}
-      level="1"
-      exercisesSolved={5}
-      successRate={70}
-      avgSolveTime="2 min"
+      title={userData.title || 'Beginner'}
+      description={userData.description || 'No description yet.'}
+      points={userData.points || 0}
+      level={userData.level || '1'}
+      exercisesSolved={userData.exercisesSolved || 0}
+      successRate={userData.successRate || 0}
+      avgSolveTime={userData.avgSolveTime || 'N/A'}
       email={userData.email}
-      githubUrl="https://github.com/placeholder"
-      status="Active"
-      badges={['Newbie', 'Explorer']}
-      avatarUrl="https://i.pravatar.cc/150?img=3"
+      githubUrl={userData.githubUrl || ''}
+      status={userData.status || 'Active'}
+      badges={userData.badges || []}
+      avatarUrl={userData.avatarUrl || 'https://i.pravatar.cc/150?img=3'}
+      solvedExercises={userData.solvedExercises || []}
     />
   );
 };
