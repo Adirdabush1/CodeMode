@@ -5,13 +5,19 @@ import LoginSignup from './components/LoginSignup';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Practice from './pages/Practice';
-import Feedback from './pages/Feedback ';
+
 import ProfileWrapper from './components/ProfileWrapper';
+import { Loader } from './components/Loader';  // הוספתי את ה-loader
 
 import './App.css';
 
 function App() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, loading } = useAuth();  // הנח ש־useAuth מחזיר גם loading
+
+  if (loading) {
+    // מציג את ה-loader כל עוד הטעינה בעיצומה
+    return <Loader />;
+  }
 
   return (
     <BrowserRouter>
@@ -23,9 +29,8 @@ function App() {
         />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/practice" element={<Practice />} />
-        <Route path="/Feedback" element={<Feedback />} />
-
-        {/* רק מחוברים יכולים לראות פרופיל */}
+        
+        
         <Route
           path="/profile"
           element={isLoggedIn ? <ProfileWrapper /> : <Navigate to="/login" />}

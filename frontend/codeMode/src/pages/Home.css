@@ -284,6 +284,28 @@ a {
   animation-fill-mode: both;
 }
 
+.login-button {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  /* אפקט כניסה */
+  opacity: 0;
+  transform: translateY(100px);
+  animation-name: slideInFromBottom;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
 .more-exercises-button:hover {
   background: rgba(255, 255, 255, 0.25);
   transform: translateY(95px) scale(1.05);

@@ -103,24 +103,44 @@ const Practice: React.FC = () => {
       <MenuBar />
       <h1>Practice Page</h1>
 
-      <div style={{ padding: 20 }}>
-        <label>
-          Choose language:
-          <select
-            value={language}
-            onChange={e => {
-              setLanguage(e.target.value as typeof supportedLanguages[number]);
-              setSelectedExercise(null);
-              setSaveStatus('idle');
-              setSaveErrorMessage(null);
-            }}
-            style={{ marginLeft: 10 }}
-          >
-            {supportedLanguages.map(lang => (
-              <option key={lang} value={lang}>{lang}</option>
-            ))}
-          </select>
-        </label>
+   <label className="language-selector-label">
+  <span>Choose language:</span>
+  <div className="liquidGlass-wrapper" style={{ marginLeft: 10 }}>
+    <select
+      className="liquidGlass-text"
+      value={language}
+      onChange={e => {
+        setLanguage(e.target.value as typeof supportedLanguages[number]);
+        setSelectedExercise(null);
+        setSaveStatus('idle');
+        setSaveErrorMessage(null);
+      }}
+      style={{
+        appearance: 'none',
+        border: 'none',
+        background: 'transparent',
+        fontSize: '2rem',
+        fontWeight: 600,
+        color: 'black',
+        cursor: 'pointer',
+        padding: '0.3rem 0.6rem',
+        outline: 'none',
+        zIndex: 3,
+        position: 'relative',
+      }}
+    >
+      {supportedLanguages.map(lang => (
+        <option key={lang} value={lang}>
+          {lang}
+        </option>
+      ))}
+    </select>
+
+    <div className="liquidGlass-effect"></div>
+    <div className="liquidGlass-tint"></div>
+    <div className="liquidGlass-shine"></div>
+  </div>
+</label>
 
         <ExerciseList
           selectedLanguage={language}
@@ -128,10 +148,11 @@ const Practice: React.FC = () => {
           selectedExercise={selectedExercise}
         />
 
-        <div style={{ margin: '10px 0', fontWeight: 'bold' }}>
+       
+ 
+ <div style={{ margin: '10px 0', fontWeight: 'bold' }}>
           Selected Exercise: {selectedExercise || 'None'}
         </div>
-
         <Editor
           height="400px"
           language={language}
@@ -180,7 +201,6 @@ const Practice: React.FC = () => {
           {output}
         </pre>
       </div>
-    </div>
   );
 };
 

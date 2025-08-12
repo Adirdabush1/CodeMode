@@ -17,7 +17,7 @@ const MenuBar: React.FC = () => {
 
       <li onClick={() => navigate('/dashboard')}>Dashboard</li>
       <li onClick={() => navigate('/practice')}>Practice</li>
-      <li onClick={() => navigate('/feedback')}>Feedback</li>
+     
 
       {isLoggedIn && (
         <>

@@ -178,14 +178,12 @@
   margin-top: 20px;
   color: #EFD09E;
   /* צבע טקסט בולט, אפשר לשנות */
-  background: rgba(39, 39, 39, 0.85);
+
   /* רקע כהה שקוף */
-  border-radius: 1rem;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem 1.5rem;
   max-height: 250px;
   /* אם יש הרבה תרגילים, שיהיה גלילה */
   overflow-y: auto;
-  box-shadow: 0 0 10px #EFD09EAA;
   font-weight: 600;
   font-size: 1rem;
 }
