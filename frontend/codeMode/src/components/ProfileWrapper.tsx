@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Profile from '../pages/Profile';
+
+type SolvedExercise = {
+  exerciseId: string;
+  code: string;
+  solvedAt: string;
+};
+
 type UserData = {
   name: string;
   email: string;
@@ -15,7 +22,7 @@ type UserData = {
   status: string;
   badges: string[];
   avatarUrl: string;
-  solvedExercises: string[];
+  solvedExercises: string[];  // כפי שמגיע מה-backend
 };
 
 const ProfileWrapper = () => {
@@ -38,7 +45,14 @@ const ProfileWrapper = () => {
   }, []);
 
   if (!userData) return <div>Loading profile...</div>;
-console.log("Solved Exercises from backend:", userData.solvedExercises);
+
+  // ממיר את המערך של מזהים למערך אובייקטים תואם ל-Profile
+  const mappedSolvedExercises: SolvedExercise[] = userData.solvedExercises.map(id => ({
+    exerciseId: id,
+    code: "",
+    solvedAt: "", // או תאריך ברירת מחדל אם יש
+  }));
+
   return (
     <Profile
       name={userData.name || 'Anonymous'}
@@ -54,7 +68,7 @@ console.log("Solved Exercises from backend:", userData.solvedExercises);
       status={userData.status || 'Active'}
       badges={userData.badges || []}
       avatarUrl={userData.avatarUrl || 'https://i.pravatar.cc/150?img=3'}
-      solvedExercises={userData.solvedExercises || []}
+      solvedExercises={mappedSolvedExercises}
     />
   );
 };
