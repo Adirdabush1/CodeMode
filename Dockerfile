@@ -29,8 +29,9 @@ WORKDIR /api
 COPY Gemfile* ./
 RUN RAILS_ENV=production bundle
 
-COPY cron /etc/cron.d
-RUN cat /etc/cron.d/* | crontab -
+# השורות הבאות הוסרו כי אין תיקיית cron:
+# COPY cron /etc/cron.d
+# RUN cat /etc/cron.d/* | crontab -
 
 COPY . .
 
