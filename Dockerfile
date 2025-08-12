@@ -14,9 +14,7 @@ ENV GEM_HOME "/opt/.gem/"
 
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
-  cron \
-  libpq-dev \
-  sudo && \
+  libpq-dev && \
   rm -rf /var/lib/apt/lists/* && \
   echo "gem: --no-document" > /root/.gemrc && \
   gem install bundler:2.1.4 && \
@@ -28,10 +26,6 @@ WORKDIR /api
 
 COPY Gemfile* ./
 RUN RAILS_ENV=production bundle
-
-# השורות הבאות הוסרו כי אין תיקיית cron:
-# COPY cron /etc/cron.d
-# RUN cat /etc/cron.d/* | crontab -
 
 COPY . .
 
@@ -48,7 +42,6 @@ USER judge0
 
 ENV JUDGE0_VERSION "1.13.1"
 LABEL version=$JUDGE0_VERSION
-
 
 FROM production AS development
 
