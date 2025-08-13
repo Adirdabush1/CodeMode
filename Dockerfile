@@ -1,5 +1,5 @@
 # ===============================
-# Dockerfile מותאם Render
+# Dockerfile מותאם Render (ללא Ruby/Bundler)
 # ===============================
 FROM judge0/compilers:1.4.0-slim AS production
 
@@ -12,49 +12,27 @@ LABEL source_code=$JUDGE0_SOURCE_CODE
 ENV JUDGE0_MAINTAINER="Herman Zvonimir Došilović <hermanz.d.z@gmail.com>"
 LABEL maintainer=$JUDGE0_MAINTAINER
 
-# עוקף בעיית chown בזמן חילוץ או התקנות npm/gem
-ENV TAR_OPTIONS="--no-same-owner"
+# עוקף בעיות הרשאות בזמן התקנות npm
 ENV NPM_CONFIG_USER=root
 
-# משתמש root להתקנות
+# התקנת Node.js וכלים בסיסיים
 USER root
-
-# התקנות בסיסיות
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends \
-  libpq-dev \
-  build-essential \
-  curl \
-  ruby-full \
-  nodejs \
-  npm && \
+  apt-get install -y --no-install-recommends curl nodejs npm libpq-dev build-essential && \
   rm -rf /var/lib/apt/lists/* && \
-  echo "gem: --no-document" > /root/.gemrc && \
-  gem install bundler:2.1.4 && \
   npm install -g --unsafe-perm aglio@2.3.0
 
-# תיקיית העבודה
+# תיקיית עבודה
 WORKDIR /api
 
-# העתקת קבצי Gemfile בלבד לפני שאר הקוד
-COPY Gemfile Gemfile.lock* ./
-
-# בדיקה שהקבצים הועתקו
-RUN ls -l /api
-
-# התקנת תלויות Ruby (Bundler)
-RUN bundle config set deployment 'true' && \
-  bundle config set without 'development test' && \
-  bundle install
-
-# העתקת יתר הקוד
+# העתקת כל הקוד
 COPY . .
 
-# entrypoint ו-cmd
+# entrypoint ו־CMD
 ENTRYPOINT ["/api/docker-entrypoint.sh"]
 CMD ["/api/scripts/server"]
 
-# שימוש במשתמש סטנדרטי
+# משתמש סטנדרטי
 USER 1000:1000
 
 EXPOSE 2358
