@@ -25,30 +25,19 @@ RUN apt-get update && \
   libpq-dev \
   build-essential \
   curl \
-  ruby-full \
   nodejs \
   npm && \
   rm -rf /var/lib/apt/lists/* && \
-  echo "gem: --no-document" > /root/.gemrc && \
-  gem install bundler:2.1.4 && \
   npm install -g --unsafe-perm aglio@2.3.0
 
 # תיקיית העבודה
 WORKDIR /api
 
-# העתקת קבצי Gemfile בלבד לפני שאר הקוד
-COPY Gemfile Gemfile.lock* ./
+# העתקת כל הקוד
+COPY . .
 
 # בדיקה שהקבצים הועתקו
 RUN ls -l /api
-
-# התקנת תלויות Ruby (Bundler)
-RUN bundle config set deployment 'true' && \
-  bundle config set without 'development test' && \
-  bundle install
-
-# העתקת יתר הקוד
-COPY . .
 
 # entrypoint ו-cmd
 ENTRYPOINT ["/api/docker-entrypoint.sh"]
