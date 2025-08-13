@@ -16,11 +16,11 @@ LABEL maintainer=$JUDGE0_MAINTAINER
 ENV TAR_OPTIONS="--no-same-owner"
 ENV NPM_CONFIG_USER=root
 
-# התקנות בסיסיות + תיקון הרפוזיטוריות ל־archive
+# משתמש root להתקנות
 USER root
-RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list && \
-  sed -i 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list && \
-  apt-get update && \
+
+# התקנות בסיסיות
+RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   libpq-dev \
   build-essential \
@@ -33,19 +33,28 @@ RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /
   gem install bundler:2.1.4 && \
   npm install -g --unsafe-perm aglio@2.3.0
 
-# סביבה
+# תיקיית העבודה
 WORKDIR /api
 
-COPY Gemfile* ./
-RUN bundle install --deployment --without development test
+# העתקת קבצי Gemfile בלבד לפני שאר הקוד
+COPY Gemfile Gemfile.lock* ./
 
+# בדיקה שהקבצים הועתקו
+RUN ls -l /api
+
+# התקנת תלויות Ruby (Bundler)
+RUN bundle config set deployment 'true' && \
+  bundle config set without 'development test' && \
+  bundle install
+
+# העתקת יתר הקוד
 COPY . .
 
-# אל תעתיק .env, משתני סביבה מחוץ לדוקר
+# entrypoint ו-cmd
 ENTRYPOINT ["/api/docker-entrypoint.sh"]
 CMD ["/api/scripts/server"]
 
-# משתמש סטנדרטי ללא שינוי UID/GID
+# שימוש במשתמש סטנדרטי
 USER 1000:1000
 
 EXPOSE 2358
