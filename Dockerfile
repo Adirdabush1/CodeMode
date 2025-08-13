@@ -1,7 +1,7 @@
 # ===============================
 # Dockerfile מותאם Render
 # ===============================
-FROM judge0/compilers:1.4.0-slim AS production
+FROM ruby:2.7-slim AS production
 
 ENV JUDGE0_HOMEPAGE="https://judge0.com"
 LABEL homepage=$JUDGE0_HOMEPAGE
@@ -19,30 +19,27 @@ ENV NPM_CONFIG_USER=root
 # משתמש root להתקנות
 USER root
 
-# עדכון מקורות ל־Debian archive + התקנות בסיסיות
-RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list && \
-  sed -i 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list && \
-  apt-get -o Acquire::Check-Valid-Until=false update && \
+# התקנות בסיסיות + Node.js + npm + build tools
+RUN apt-get update && \
   apt-get install -y --no-install-recommends \
-  libpq-dev \
   build-essential \
   curl \
-  ruby-full \
+  libpq-dev \
   nodejs \
-  npm && \
-  rm -rf /var/lib/apt/lists/* && \
-  echo "gem: --no-document" > /root/.gemrc && \
-  gem install bundler:2.1.4 && \
+  npm \
+  git \
+  ca-certificates && \
+  rm -rf /var/lib/apt/lists/*
+
+# התקנת bundler ו-aglio
+RUN gem install bundler:2.1.4 && \
   npm install -g --unsafe-perm aglio@2.3.0
 
 # תיקיית העבודה
 WORKDIR /api
 
 # העתקת קבצי Gemfile בלבד לפני שאר הקוד
-COPY Gemfile Gemfile.lock* ./ 
-
-# בדיקה שהקבצים הועתקו
-RUN ls -l /api
+COPY Gemfile Gemfile.lock* ./
 
 # התקנת תלויות Ruby (Bundler)
 RUN bundle config set deployment 'true' && \
