@@ -16,11 +16,17 @@ LABEL maintainer=$JUDGE0_MAINTAINER
 ENV TAR_OPTIONS="--no-same-owner"
 ENV NPM_CONFIG_USER=root
 
-# התקנות בסיסיות
+# התקנות בסיסיות על Bullseye (גרסה נתמכת)
 USER root
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends libpq-dev && \
-  rm -rf /var/lib/apt/lists/* && \
+  apt-get install -y --no-install-recommends \
+  libpq-dev \
+  build-essential \
+  curl \
+  ruby-full \
+  nodejs \
+  npm \
+  && rm -rf /var/lib/apt/lists/* && \
   echo "gem: --no-document" > /root/.gemrc && \
   gem install bundler:2.1.4 && \
   npm install -g --unsafe-perm aglio@2.3.0
