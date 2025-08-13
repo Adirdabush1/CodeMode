@@ -27,8 +27,7 @@ RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /
   libpq-dev \
   build-essential \
   curl \
-  ruby2.7 \
-  ruby2.7-dev \
+  ruby-full \
   nodejs \
   npm && \
   rm -rf /var/lib/apt/lists/* && \
