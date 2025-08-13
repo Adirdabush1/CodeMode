@@ -27,7 +27,8 @@ RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /
   libpq-dev \
   build-essential \
   curl \
-  ruby-full \
+  ruby2.7 \
+  ruby2.7-dev \
   nodejs \
   npm && \
   rm -rf /var/lib/apt/lists/* && \
@@ -39,7 +40,7 @@ RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /
 WORKDIR /api
 
 # העתקת קבצי Gemfile בלבד לפני שאר הקוד
-COPY Gemfile Gemfile.lock* ./
+COPY Gemfile Gemfile.lock* ./ 
 
 # בדיקה שהקבצים הועתקו
 RUN ls -l /api
