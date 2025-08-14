@@ -49,6 +49,9 @@ RUN bundle config set deployment 'true' && \
 # העתקת יתר הקוד
 COPY . .
 
+# מתן הרשאות ריצה לסקריפטים
+RUN chmod +x /api/docker-entrypoint.sh /api/scripts/server
+
 # entrypoint ו-cmd
 ENTRYPOINT ["/api/docker-entrypoint.sh"]
 CMD ["/api/scripts/server"]
