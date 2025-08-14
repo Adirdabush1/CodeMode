@@ -51,15 +51,9 @@ COPY . .
 
 # יצירת סקריפטים חסרים ומתן הרשאות ריצה
 RUN mkdir -p /api/scripts && \
-  tee /api/docker-entrypoint.sh > /dev/null << 'EOF'
-#!/bin/sh
-exec "$@"
-EOF
-&& tee /api/scripts/server > /dev/null << 'EOF'
-#!/bin/sh
-exec bundle exec rails server -b 0.0.0.0 -p 2358
-EOF
-&& chmod +x /api/docker-entrypoint.sh /api/scripts/server
+  echo '#!/bin/sh\nexec "$@"' > /api/docker-entrypoint.sh && \
+  echo '#!/bin/sh\nexec bundle exec rails server -b 0.0.0.0 -p 2358' > /api/scripts/server && \
+  chmod +x /api/docker-entrypoint.sh /api/scripts/server
 
 # entrypoint ו-cmd
 ENTRYPOINT ["/api/docker-entrypoint.sh"]
