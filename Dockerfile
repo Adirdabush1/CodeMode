@@ -49,8 +49,17 @@ RUN bundle config set deployment 'true' && \
 # העתקת יתר הקוד
 COPY . .
 
-# מתן הרשאות ריצה לסקריפטים
-RUN chmod +x /api/docker-entrypoint.sh /api/scripts/server
+# יצירת סקריפטים חסרים ומתן הרשאות ריצה
+RUN mkdir -p /api/scripts && \
+  tee /api/docker-entrypoint.sh > /dev/null << 'EOF'
+#!/bin/sh
+exec "$@"
+EOF
+&& tee /api/scripts/server > /dev/null << 'EOF'
+#!/bin/sh
+exec bundle exec rails server -b 0.0.0.0 -p 2358
+EOF
+&& chmod +x /api/docker-entrypoint.sh /api/scripts/server
 
 # entrypoint ו-cmd
 ENTRYPOINT ["/api/docker-entrypoint.sh"]
