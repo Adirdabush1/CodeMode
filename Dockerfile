@@ -26,14 +26,14 @@ RUN apt-get update && \
 # --- התקנת Bundler ---
 RUN gem install bundler:2.1.4
 
-# --- העתקת Gemfile של Judge0 בלבד ---
+# --- העתקת Gemfile בלבד כדי לבצע bundle install ---
 COPY Gemfile Gemfile.lock* ./
 RUN bundle install --jobs 4 --retry 3
 
 # --- העתקת כל הקוד של Judge0 ---
 COPY . .
 
-# --- הרצת precompile לassets (אם יש) ---
+# --- הרצת precompile ל-assets (אם יש) ---
 RUN if [ -f "config/application.rb" ]; then \
   bundle exec rails assets:precompile; \
   fi
@@ -42,14 +42,17 @@ RUN if [ -f "config/application.rb" ]; then \
 RUN printf '#!/bin/sh\n\
   # בדיקה אם יש צורך ב-database migration\n\
   if [ -f "config/database.yml" ]; then\n\
+  echo "Checking DB migrations..."\n\
   bundle exec rails db:migrate 2>/dev/null || true\n\
   fi\n\
   \n\
-  # הרצת השרת\n\
-  exec bundle exec rails server -b 0.0.0.0 -p ${PORT:-2358}\n' > /api/start.sh && \
+  # הרצת השרת על כל ה-interfaces\n\
+  exec bundle exec rails server -b 0.0.0.0 -p ${PORT:-2358}\n' \
+  > /api/start.sh && \
   dos2unix /api/start.sh && \
   chmod +x /api/start.sh
 
 ENTRYPOINT ["/api/start.sh"]
 
+# --- פתיחת פורט ---
 EXPOSE ${PORT:-2358}
