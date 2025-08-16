@@ -1,26 +1,15 @@
 # ===============================
-# Dockerfile מותאם Render - גרסה מתוקנת עם טיפול ב-CRLF
+# Dockerfile ל-Judge0 API על Render
 # ===============================
 FROM ruby:2.7-slim AS production
 
-# --- מידע על המתחזק והפרויקט ---
-ENV JUDGE0_HOMEPAGE="https://judge0.com"
-LABEL homepage=$JUDGE0_HOMEPAGE
+# --- משתני סביבה ---
+ENV RAILS_ENV=production
+ENV BUNDLE_DEPLOYMENT=true
+ENV BUNDLE_WITHOUT="development test"
+WORKDIR /api
 
-ENV JUDGE0_SOURCE_CODE="https://github.com/judge0/judge0"
-LABEL source_code=$JUDGE0_SOURCE_CODE
-
-ENV JUDGE0_MAINTAINER="Herman Zvonimir Došilović <hermanz.d.z@gmail.com>"
-LABEL maintainer=$JUDGE0_MAINTAINER
-
-# --- הגדרות סביבת עבודה ---
-ENV TAR_OPTIONS="--no-same-owner"
-ENV NPM_CONFIG_USER=root
-
-# --- משתמש root להתקנות ---
-USER root
-
-# --- התקנות בסיסיות ---
+# --- התקנות בסיס ---
 RUN apt-get update && \
   apt-get install -y --no-install-recommends \
   build-essential \
@@ -33,37 +22,23 @@ RUN apt-get update && \
   dos2unix && \
   rm -rf /var/lib/apt/lists/*
 
-# --- התקנת bundler ו-aglio ---
-RUN gem install bundler:2.1.4 && \
-  npm install -g --unsafe-perm aglio@2.3.0
+# --- התקנת Bundler ---
+RUN gem install bundler:2.1.4
 
-# --- תיקיית העבודה ---
-WORKDIR /api
-
-# --- העתקת קבצי Gemfile ---
+# --- העתקת Gemfile של Judge0 בלבד ---
 COPY Gemfile Gemfile.lock* ./
+RUN bundle install
 
-# --- התקנת תלויות Ruby ---
-RUN bundle config set deployment 'true' && \
-  bundle config set without 'development test' && \
-  bundle install
-
-# --- העתקת יתר הקוד ---
+# --- העתקת כל הקוד של Judge0 ---
 COPY . .
 
-# --- יצירת סקריפטים עם LF בלבד והרשאות ---
-RUN mkdir -p /api/scripts && \
-  printf '#!/bin/sh\nexec "$@"\n' > /api/docker-entrypoint.sh && \
-  printf '#!/bin/sh\nbundle exec rails server -b 0.0.0.0 -p 2358\n' > /api/scripts/server && \
-  dos2unix /api/docker-entrypoint.sh /api/scripts/server && \
-  chmod +x /api/docker-entrypoint.sh /api/scripts/server
+# --- סקריפט להרצת השרת ---
+RUN printf '#!/bin/sh\nexec "$@"\n' > /api/docker-entrypoint.sh && \
+  printf '#!/bin/sh\nbundle exec rails server -b 0.0.0.0 -p 2358\n' > /api/server && \
+  dos2unix /api/docker-entrypoint.sh /api/server && \
+  chmod +x /api/docker-entrypoint.sh /api/server
 
-# --- הפעלת השרת ---
 ENTRYPOINT ["/api/docker-entrypoint.sh"]
-CMD ["/api/scripts/server"]
+CMD ["/api/server"]
 
-# --- חזרה למשתמש רגיל ---
-USER 1000:1000
-
-# --- פתיחת פורט ---
 EXPOSE 2358
