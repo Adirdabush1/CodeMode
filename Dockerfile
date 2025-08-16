@@ -1,5 +1,5 @@
 # ===============================
-# Dockerfile ל-Judge0 API על Render
+# Dockerfile מותאם ל-Judge0 API על Render
 # ===============================
 FROM ruby:2.7-slim AS production
 
@@ -52,6 +52,7 @@ RUN printf '#!/bin/sh\n\
   dos2unix /api/start.sh && \
   chmod +x /api/start.sh
 
+# --- פקודת הפעלה ---
 ENTRYPOINT ["/api/start.sh"]
 
 # --- פתיחת פורט ---
