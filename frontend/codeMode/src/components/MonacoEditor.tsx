@@ -44,11 +44,18 @@ const MyEditor: React.FC = () => {
     setOutput('Running...');
     try {
       const languageId = languageToIdMap[language];
-      const res = await fetch('http://localhost:2358/submissions?base64_encoded=false&wait=true', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ source_code: code, language_id: languageId }),
-      });
+      const res = await fetch(
+        'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-RapidAPI-Key': process.env.REACT_APP_JUDGE0_KEY!,
+            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
+          },
+          body: JSON.stringify({ source_code: code, language_id: languageId }),
+        }
+      );
       const data = await res.json();
       setOutput(data.stdout || data.compile_output || data.stderr || 'No output');
     } catch (e) {
