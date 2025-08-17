@@ -21,6 +21,8 @@ function isAxiosError(error: unknown): error is CustomAxiosError {
   );
 }
 
+const BACKEND_URL = 'https://backend-codemode.onrender.com';
+
 const LoginSignup: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -35,25 +37,20 @@ const LoginSignup: React.FC = () => {
   const [signInPassword, setSignInPassword] = useState('');
   const [signInMessage, setSignInMessage] = useState('');
 
-  const handleSignUpClick = () => {
-    containerRef.current?.classList.add('right-panel-active');
-  };
-
-  const handleSignInClick = () => {
-    containerRef.current?.classList.remove('right-panel-active');
-  };
+  const handleSignUpClick = () => containerRef.current?.classList.add('right-panel-active');
+  const handleSignInClick = () => containerRef.current?.classList.remove('right-panel-active');
 
   const handleSignUpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await axios.post(
-        'http://localhost:5000/auth/signup',
+        `${BACKEND_URL}/auth/signup`,
         {
           name: signUpName,
           email: signUpEmail,
           password: signUpPassword,
         },
-        { withCredentials: true } // חשוב לשמור קוקי HttpOnly
+        { withCredentials: true }
       );
       await Swal.fire({
         icon: 'success',
@@ -85,15 +82,15 @@ const LoginSignup: React.FC = () => {
     e.preventDefault();
     try {
       await axios.post(
-        'http://localhost:5000/auth/login,https://backend-codemode.onrender.com',
+        `${BACKEND_URL}/auth/signin`, // ודא שזה הנתיב הנכון ב-backend שלך
         {
           email: signInEmail,
           password: signInPassword,
         },
-        { withCredentials: true } // שולח את קוקי ה־HttpOnly אוטומטית
+        { withCredentials: true }
       );
 
-      login(); // מעדכן סטטוס התחברות ב־context/מחלקה
+      login(); // מעדכן סטטוס התחברות ב-context
 
       await Swal.fire({
         icon: 'success',
@@ -130,11 +127,6 @@ const LoginSignup: React.FC = () => {
           <div className="form-container sign-up-container">
             <form onSubmit={handleSignUpSubmit}>
               <h1>Create Account</h1>
-              <div className="social-container">
-                <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-                <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-                <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-              </div>
               <span>or use your email for registration</span>
               <input
                 type="text"
@@ -167,11 +159,6 @@ const LoginSignup: React.FC = () => {
           <div className="form-container sign-in-container">
             <form onSubmit={handleSignInSubmit}>
               <h1>Sign in</h1>
-              <div className="social-container">
-                <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
-                <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
-                <a href="#" className="social"><i className="fab fa-linkedin-in"></i></a>
-              </div>
               <span>or use your account</span>
               <input
                 type="email"
@@ -189,7 +176,6 @@ const LoginSignup: React.FC = () => {
                 required
                 autoComplete="current-password"
               />
-              <a href="#">Forgot your password?</a>
               <button type="submit">Sign In</button>
               {signInMessage && <p>{signInMessage}</p>}
             </form>
@@ -201,12 +187,12 @@ const LoginSignup: React.FC = () => {
               <div className="overlay-panel overlay-left">
                 <h1>Welcome Back!</h1>
                 <p>To keep connected with us please login with your personal info</p>
-                <button className="ghost" id="signIn" onClick={handleSignInClick}>Sign In</button>
+                <button className="ghost" onClick={handleSignInClick}>Sign In</button>
               </div>
               <div className="overlay-panel overlay-right">
                 <h1>Hello, Friend!</h1>
                 <p>Enter your personal details and start journey with us</p>
-                <button className="ghost" id="signUp" onClick={handleSignUpClick}>Sign Up</button>
+                <button className="ghost" onClick={handleSignUpClick}>Sign Up</button>
               </div>
             </div>
           </div>
