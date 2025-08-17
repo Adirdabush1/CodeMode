@@ -47,7 +47,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user/me", { withCredentials: true })
+      .get("https://backend-codemode.onrender.com/user/me", { withCredentials: true })
       .then(() => setIsLoggedIn(true))
       .catch(() => setIsLoggedIn(false))
       .then(() => setLoadingAuth(false));

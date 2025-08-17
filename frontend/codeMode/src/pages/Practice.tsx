@@ -37,7 +37,7 @@ const Practice: React.FC = () => {
     setSaveErrorMessage(null);
 
     try {
-      const res = await fetch('http://localhost:5000/user/add-solved', {
+      const res = await fetch('https://backend-codemode.onrender.com/user/add-solved', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

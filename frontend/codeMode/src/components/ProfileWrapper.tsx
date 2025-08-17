@@ -31,7 +31,7 @@ const ProfileWrapper = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get<UserData>('http://localhost:5000/user/me', {
+        const response = await axios.get<UserData>('https://backend-codemode.onrender.com/user/me', {
           withCredentials: true,
         });
         setUserData(response.data);

@@ -80,7 +80,7 @@ const MyEditor: React.FC = () => {
     setIsRunning(true);
     setOutput('Analyzing with AI...');
     try {
-      const res = await fetch('http://localhost:5000/ai-analyze', {
+      const res = await fetch('https://backend-codemode.onrender.com/ai-analyze', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
