@@ -1,6 +1,6 @@
 // src/components/Loader.tsx
 import React from 'react';
-import './Loader.css';
+import './Laoder.css';
 
 export const Loader: React.FC = () => {
   return (
