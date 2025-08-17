@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { AiAnalyzeModule } from './ai-analyze/ai-analyze.module';
+import { JudgeController } from '../judge.controller';
 
 const mongoUri = process.env.MONGODB_URI;
 if (!mongoUri) {
@@ -24,7 +25,7 @@ if (!mongoUri) {
     AuthModule,
     AiAnalyzeModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, JudgeController], // ✅ הוספנו את JudgeController
   providers: [AppService],
 })
 export class AppModule {}

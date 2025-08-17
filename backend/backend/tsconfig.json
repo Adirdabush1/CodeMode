@@ -19,6 +19,12 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true
   },
-    "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*",
+    "backend/**/*"   // ✅ תוודא שזה הנתיב שבו יושב judge.controller.ts
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
