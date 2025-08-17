@@ -10,7 +10,7 @@ async function bootstrap() {
 
   // מפעיל CORS - אפשר גם להגדיר הגבלות
   app.enableCors({
-    origin: 'http://localhost:5173,https://codemode.onrender.com', // הכתובת של הפרונטאנד שלך
+    origin: 'https://codemode.onrender.com', // הכתובת של הפרונטאנד שלך
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials: true,
   });
