@@ -7,17 +7,6 @@ import './Practice.css';
 
 const supportedLanguages = ['typescript', 'javascript', 'python', 'java', 'csharp', 'cpp', 'html', 'css'] as const;
 
-const languageToIdMap: Record<typeof supportedLanguages[number], number> = {
-  python: 71,
-  javascript: 63,
-  typescript: 74,
-  java: 62,
-  csharp: 51,
-  cpp: 54,
-  html: 85,
-  css: 79,
-};
-
 const Practice: React.FC = () => {
   const [code, setCode] = useState('// Write your code here...');
   const [language, setLanguage] = useState<typeof supportedLanguages[number]>('javascript');
@@ -39,7 +28,7 @@ const Practice: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          exerciseId: selectedExercise, // ✅ שולח רק את השם של התרגיל
+          exerciseId: selectedExercise,
           code,
           feedback: userFeedback,
         }),
@@ -63,31 +52,28 @@ const Practice: React.FC = () => {
   }
 
   async function runCode() {
+    if (!selectedExercise) return;
+
     setIsRunning(true);
     setOutput('⏳ Running code...');
     setSaveStatus('idle');
     setSaveErrorMessage(null);
 
     try {
-      const languageId = languageToIdMap[language];
-      const res = await fetch(
-        'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-RapidAPI-Key': process.env.REACT_APP_JUDGE0_KEY!,
-            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
-          },
-          body: JSON.stringify({ source_code: code, language_id: languageId }),
-        }
-      );
+      // קריאה ל-backend שלך שמריץ את Judge0
+      const res = await fetch('https://backend-codemode.onrender.com/judge/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code, language }),
+      });
 
       const data = await res.json();
       const resultOutput = data.stdout || data.compile_output || data.stderr || '⚠ No output';
       setOutput(resultOutput);
 
-      if (!data.stderr && resultOutput.trim()) await saveExercise();
+      if (!data.stderr && resultOutput.trim()) {
+        await saveExercise();
+      }
     } catch (e) {
       setOutput('❌ Error running code: ' + (e instanceof Error ? e.message : 'Unknown error'));
     } finally {
@@ -141,7 +127,7 @@ const Practice: React.FC = () => {
 
       <ExerciseList
         selectedLanguage={language}
-        onSelectExercise={setSelectedExercise} // ✅ שולח רק string
+        onSelectExercise={setSelectedExercise}
         selectedExercise={selectedExercise}
       />
 
@@ -174,9 +160,7 @@ const Practice: React.FC = () => {
       {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
       {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
       {saveStatus === 'error' && (
-        <p style={{ color: 'red' }}>
-          Error saving exercise: {saveErrorMessage || 'Unknown error'}
-        </p>
+        <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>
       )}
 
       <pre
