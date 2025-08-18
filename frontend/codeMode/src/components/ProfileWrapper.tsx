@@ -22,7 +22,7 @@ type UserData = {
   status: string;
   badges: string[];
   avatarUrl: string;
-  solvedExercises: string[];  // כפי שמגיע מה-backend
+  solvedExercises: (string | number | null)[];  // יכול להגיע מספר, null או string
 };
 
 const ProfileWrapper = () => {
@@ -46,11 +46,11 @@ const ProfileWrapper = () => {
 
   if (!userData) return <div>Loading profile...</div>;
 
-  // ממיר את המערך של מזהים למערך אובייקטים תואם ל-Profile
+  // ממיר את המערך של מזהים למערך אובייקטים תואם ל-Profile עם המרה בטוחה ל-string
   const mappedSolvedExercises: SolvedExercise[] = userData.solvedExercises.map(id => ({
-    exerciseId: id,
-    code: "",
-    solvedAt: "", // או תאריך ברירת מחדל אם יש
+    exerciseId: id != null ? String(id) : '',  // תמיד מחרוזת
+    code: '',
+    solvedAt: '', // תאריך ברירת מחדל
   }));
 
   return (
