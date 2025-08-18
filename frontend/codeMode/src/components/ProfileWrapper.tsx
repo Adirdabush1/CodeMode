@@ -4,6 +4,7 @@ import Profile from '../pages/Profile';
 
 type SolvedExercise = {
   exerciseId: string;
+  name?: string; // שם התרגיל
   code: string;
   solvedAt: string;
 };
@@ -22,7 +23,17 @@ type UserData = {
   status: string;
   badges: string[];
   avatarUrl: string;
-  solvedExercises: (string | number | null)[];  // יכול להגיע מספר, null או string
+  solvedExercises: (string | number | null)[];  // מזהי תרגילים
+};
+
+// מיפוי מזהי תרגילים לשמות
+const exercisesById: Record<string, string> = {
+  '1': 'Reverse a string',
+  '2': 'Fibonacci sequence',
+  '3': 'Email validation',
+  '4': 'Check prime number',
+  '5': 'Factorial with recursion',
+  '6': 'Parse JSON and validate',
 };
 
 const ProfileWrapper = () => {
@@ -31,9 +42,10 @@ const ProfileWrapper = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get<UserData>('https://backend-codemode.onrender.com/user/me', {
-          withCredentials: true,
-        });
+        const response = await axios.get<UserData>(
+          'https://backend-codemode.onrender.com/user/me',
+          { withCredentials: true }
+        );
         setUserData(response.data);
       } catch (err) {
         console.error('Failed to fetch user data:', err);
@@ -46,12 +58,16 @@ const ProfileWrapper = () => {
 
   if (!userData) return <div>Loading profile...</div>;
 
-  // ממיר את המערך של מזהים למערך אובייקטים תואם ל-Profile עם המרה בטוחה ל-string
-  const mappedSolvedExercises: SolvedExercise[] = userData.solvedExercises.map(id => ({
-    exerciseId: id != null ? String(id) : '',  // תמיד מחרוזת
-    code: '',
-    solvedAt: '', // תאריך ברירת מחדל
-  }));
+  // ממיר מזהי תרגילים למערך אובייקטים כולל שם
+  const mappedSolvedExercises: SolvedExercise[] = userData.solvedExercises.map(id => {
+    const exerciseId = id != null ? String(id) : '';
+    return {
+      exerciseId,
+      name: exercisesById[exerciseId] || 'Unknown Exercise',
+      code: '',
+      solvedAt: '', // אפשר לשים תאריך אמיתי אם יש
+    };
+  });
 
   return (
     <Profile

@@ -1,17 +1,11 @@
 // Practice.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import ExerciseList from '../components/ExerciseList';
 import MenuBar from '../components/MenuBar';
 import './Practice.css';
 
 const supportedLanguages = ['typescript', 'javascript', 'python', 'java', 'csharp', 'cpp', 'html', 'css'] as const;
-
-interface SolvedExercise {
-  exerciseId: string;
-  name: string;
-  solvedAt?: string;
-}
 
 const Practice: React.FC = () => {
   const [code, setCode] = useState('// Write your code here...');
@@ -22,25 +16,6 @@ const Practice: React.FC = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
   const [saveErrorMessage, setSaveErrorMessage] = useState<string | null>(null);
-  const [solvedExercises, setSolvedExercises] = useState<SolvedExercise[]>([]);
-
-  // Fetch solved exercises on mount
-  useEffect(() => {
-    async function fetchSolvedExercises() {
-      try {
-        const res = await fetch('https://backend-codemode.onrender.com/user/me', {
-          credentials: 'include',
-        });
-        if (!res.ok) throw new Error('Failed to fetch user data');
-
-        const userData = await res.json();
-        setSolvedExercises(userData.solvedExercises || []);
-      } catch (e) {
-        console.error('Error fetching solved exercises:', e);
-      }
-    }
-    fetchSolvedExercises();
-  }, []);
 
   async function saveExercise() {
     if (!selectedExercise || !code.trim()) return;
@@ -68,8 +43,6 @@ const Practice: React.FC = () => {
         return;
       }
 
-      const data = await res.json();
-      setSolvedExercises(data.solvedExercises || []);
       setSaveStatus('success');
     } catch (e) {
       const errorMsg = e instanceof Error ? e.message : 'Unknown error';
@@ -87,6 +60,7 @@ const Practice: React.FC = () => {
     setSaveErrorMessage(null);
 
     try {
+      // קריאה ל-backend שלך שמריץ את Judge0
       const res = await fetch('https://backend-codemode.onrender.com/judge/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -155,7 +129,6 @@ const Practice: React.FC = () => {
         selectedLanguage={language}
         onSelectExercise={setSelectedExercise}
         selectedExercise={selectedExercise}
-        solvedExercises={solvedExercises} // pass solved exercises
       />
 
       <div style={{ margin: '10px 0', fontWeight: 'bold' }}>

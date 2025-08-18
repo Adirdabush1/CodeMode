@@ -4,6 +4,7 @@ import MenuBar from "../components/MenuBar";
 
 type SolvedExercise = {
   exerciseId: string;
+  name?: string; // שם התרגיל
   code: string;
   solvedAt: string | Date;
 };
@@ -22,7 +23,7 @@ type ProfileProps = {
   status: string;
   badges: string[];
   avatarUrl: string;
-  solvedExercises?: SolvedExercise[]; // מערך אובייקטים אופציונלי
+  solvedExercises?: SolvedExercise[];
 };
 
 const Profile: React.FC<ProfileProps> = ({
@@ -39,14 +40,11 @@ const Profile: React.FC<ProfileProps> = ({
   status,
   badges,
   avatarUrl,
-  solvedExercises = [], // ברירת מחדל למערך ריק
+  solvedExercises = [],
 }) => {
-  // סינון תרגילים לפי exerciseId לא ריק
   const filteredExercises = solvedExercises.filter(
     (ex) => ex.exerciseId && ex.exerciseId.trim() !== ""
   );
-
-  console.log("Solved Exercises prop:", solvedExercises);
 
   return (
     <>
@@ -108,7 +106,7 @@ const Profile: React.FC<ProfileProps> = ({
                 ) : (
                   <ul>
                     {filteredExercises.map((ex, i) => (
-                      <li key={i}>{ex.exerciseId}</li>
+                      <li key={i}>{ex.name || ex.exerciseId}</li>
                     ))}
                   </ul>
                 )}
@@ -117,9 +115,7 @@ const Profile: React.FC<ProfileProps> = ({
               <div className="skills">
                 {badges.length > 0 ? (
                   badges.map((badge, index) => (
-                    <div key={index} className="skill">
-                      {badge}
-                    </div>
+                    <div key={index} className="skill">{badge}</div>
                   ))
                 ) : (
                   <div className="skill">No badges</div>
