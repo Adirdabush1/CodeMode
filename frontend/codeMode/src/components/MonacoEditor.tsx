@@ -50,7 +50,7 @@ const MyEditor: React.FC = () => {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-RapidAPI-Key': process.env.REACT_APP_JUDGE0_KEY!,
+               'X-RapidAPI-Key': import.meta.env.VITE_JUDGE0_KEY!, 
             'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
           },
           body: JSON.stringify({ source_code: code, language_id: languageId }),
