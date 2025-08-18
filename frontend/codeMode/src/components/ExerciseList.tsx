@@ -12,16 +12,24 @@ const exercisesByLanguage: Record<string, string[]> = {
   cpp: ["Swap two numbers", "Stack with array", "Pointers to array"]
 };
 
+interface SolvedExercise {
+  exerciseId: string;
+  name: string;
+  solvedAt?: string;
+}
+
 interface ExerciseListProps {
   selectedLanguage: string;
-  onSelectExercise: (exerciseName: string) => void;
+  onSelectExercise: (exerciseId: string) => void;
   selectedExercise: string | null;
+  solvedExercises?: SolvedExercise[];
 }
 
 const ExerciseList: React.FC<ExerciseListProps> = ({
   selectedLanguage,
   onSelectExercise,
   selectedExercise,
+  solvedExercises = [],
 }) => {
   const auth = useContext(AuthContext);
 
@@ -50,6 +58,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
       </div>
 
       <ul>
+        {/* תרגילים לדוגמה לפי שפה */}
         {exercisesByLanguage[selectedLanguage].map((exercise) => (
           <li
             key={exercise}
@@ -60,6 +69,23 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
             {exercise}
           </li>
         ))}
+
+        {/* תרגילים שנפתרו מהמשתמש */}
+        {solvedExercises.length > 0 && (
+          <>
+            <h4>Solved Exercises</h4>
+            {solvedExercises.map((ex) => (
+              <li
+                key={ex.exerciseId}
+                className={selectedExercise === ex.exerciseId ? 'selected-exercise' : ''}
+                onClick={() => onSelectExercise(ex.exerciseId)}
+                style={{ cursor: 'pointer', fontStyle: 'italic', color: 'green' }}
+              >
+                {ex.name}
+              </li>
+            ))}
+          </>
+        )}
       </ul>
     </div>
   );
