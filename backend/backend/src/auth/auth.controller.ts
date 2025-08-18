@@ -26,8 +26,8 @@ export class AuthController {
 
     res.cookie('jwt', access_token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // מאובטח ב-HTTPS בפרודקשן
-      sameSite: 'strict',
+      secure: process.env.NODE_ENV === 'production', // ב-Production חייב HTTPS
+      sameSite: 'lax', // 'lax' עובד טוב יותר עם דומיינים שונים
       maxAge: 1000 * 60 * 60 * 24 * 7, // שבוע
     });
 
