@@ -4,7 +4,7 @@ import Profile from '../pages/Profile';
 
 type SolvedExercise = {
   exerciseId: string;
-  name?: string; // שם התרגיל
+  name?: string;
   code: string;
   solvedAt: string;
 };
@@ -23,11 +23,7 @@ type UserData = {
   status: string;
   badges: string[];
   avatarUrl: string;
-  solvedExercises: {
-    exerciseId: string;
-    code: string;
-    solvedAt: string;
-  }[]; // עכשיו זה מערך אובייקטים
+  solvedExercises: { exerciseId: string; code: string; solvedAt: string }[]; // אובייקטים
 };
 
 // מיפוי מזהי תרגילים לשמות
@@ -56,18 +52,17 @@ const ProfileWrapper = () => {
         setUserData(null);
       }
     };
-
     fetchProfile();
   }, []);
 
   if (!userData) return <div>Loading profile...</div>;
 
-  // ממיר solvedExercises לאובייקטים עם שם ותאריך
+  // ממיר את solvedExercises למערך עם שם ותאריך
   const mappedSolvedExercises: SolvedExercise[] = userData.solvedExercises.map(ex => ({
     exerciseId: ex.exerciseId,
-    name: exercisesById[ex.exerciseId] || 'Unknown Exercise',
+    name: exercisesById[ex.exerciseId] || ex.exerciseId,
     code: ex.code,
-    solvedAt: ex.solvedAt || new Date().toISOString(),
+    solvedAt: new Date(ex.solvedAt).toLocaleString(), // תאריך קריא
   }));
 
   return (
