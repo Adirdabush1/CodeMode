@@ -106,7 +106,10 @@ const Profile: React.FC<ProfileProps> = ({
                 ) : (
                   <ul>
                     {filteredExercises.map((ex, i) => (
-                      <li key={i}>{ex.name || ex.exerciseId}</li>
+                      <li key={i}>
+                        {ex.name || ex.exerciseId}{" "}
+                        {ex.solvedAt && `- solved at: ${new Date(ex.solvedAt).toLocaleString()}`}
+                      </li>
                     ))}
                   </ul>
                 )}

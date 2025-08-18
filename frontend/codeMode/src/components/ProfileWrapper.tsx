@@ -58,14 +58,14 @@ const ProfileWrapper = () => {
 
   if (!userData) return <div>Loading profile...</div>;
 
-  // ממיר מזהי תרגילים למערך אובייקטים כולל שם
+  // ממיר מזהי תרגילים למערך אובייקטים כולל שם ותאריך
   const mappedSolvedExercises: SolvedExercise[] = userData.solvedExercises.map(id => {
     const exerciseId = id != null ? String(id) : '';
     return {
       exerciseId,
       name: exercisesById[exerciseId] || 'Unknown Exercise',
       code: '',
-      solvedAt: '', // אפשר לשים תאריך אמיתי אם יש
+      solvedAt: '', // ניתן לשדרג למידע אמיתי אם ה־API מחזיר תאריך
     };
   });
 
