@@ -16,17 +16,6 @@ const supportedLanguages = [
   'css',
 ] as const;
 
-const languageToIdMap: Record<typeof supportedLanguages[number], number> = {
-  python: 71,
-  javascript: 63,
-  typescript: 74,
-  java: 62,
-  csharp: 51,
-  cpp: 54,
-  html: 85,
-  css: 79,
-};
-
 const MyEditor: React.FC = () => {
   const [code, setCode] = useState<string>('// Write code here..');
   const [language, setLanguage] = useState<typeof supportedLanguages[number]>('javascript');
@@ -39,23 +28,20 @@ const MyEditor: React.FC = () => {
     return saved ? parseInt(saved, 10) : 0;
   });
 
+  // === הרצת הקוד דרך ה-backend ===
   async function runCode() {
+    if (!code.trim()) return;
+
     setIsRunning(true);
     setOutput('Running...');
+
     try {
-      const languageId = languageToIdMap[language];
-      const res = await fetch(
-        'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-               'X-RapidAPI-Key': import.meta.env.VITE_JUDGE0_KEY!, 
-            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
-          },
-          body: JSON.stringify({ source_code: code, language_id: languageId }),
-        }
-      );
+      const res = await fetch('https://backend-codemode.onrender.com/judge/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code, language }),
+      });
+
       const data = await res.json();
       setOutput(data.stdout || data.compile_output || data.stderr || 'No output');
     } catch (e) {
@@ -65,6 +51,7 @@ const MyEditor: React.FC = () => {
     }
   }
 
+  // === ניתוח קוד עם AI ===
   async function analyzeCode() {
     const token = localStorage.getItem('token');
 
@@ -86,6 +73,7 @@ const MyEditor: React.FC = () => {
 
     setIsRunning(true);
     setOutput('Analyzing with AI...');
+
     try {
       const res = await fetch('https://backend-codemode.onrender.com/ai-analyze', {
         method: 'POST',
@@ -95,6 +83,7 @@ const MyEditor: React.FC = () => {
         },
         body: JSON.stringify({ code, userFeedback }),
       });
+
       const data = await res.json();
       setOutput(data.result || 'No analysis returned');
 
