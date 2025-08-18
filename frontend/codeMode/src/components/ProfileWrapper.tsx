@@ -23,7 +23,11 @@ type UserData = {
   status: string;
   badges: string[];
   avatarUrl: string;
-  solvedExercises: (string | number | null)[];  // מזהי תרגילים
+  solvedExercises: {
+    exerciseId: string;
+    code: string;
+    solvedAt: string;
+  }[]; // עכשיו זה מערך אובייקטים
 };
 
 // מיפוי מזהי תרגילים לשמות
@@ -58,16 +62,13 @@ const ProfileWrapper = () => {
 
   if (!userData) return <div>Loading profile...</div>;
 
-  // ממיר מזהי תרגילים למערך אובייקטים כולל שם ותאריך
-  const mappedSolvedExercises: SolvedExercise[] = userData.solvedExercises.map(id => {
-    const exerciseId = id != null ? String(id) : '';
-    return {
-      exerciseId,
-      name: exercisesById[exerciseId] || 'Unknown Exercise',
-      code: '',
-      solvedAt: '', // ניתן לשדרג למידע אמיתי אם ה־API מחזיר תאריך
-    };
-  });
+  // ממיר solvedExercises לאובייקטים עם שם ותאריך
+  const mappedSolvedExercises: SolvedExercise[] = userData.solvedExercises.map(ex => ({
+    exerciseId: ex.exerciseId,
+    name: exercisesById[ex.exerciseId] || 'Unknown Exercise',
+    code: ex.code,
+    solvedAt: ex.solvedAt || new Date().toISOString(),
+  }));
 
   return (
     <Profile
