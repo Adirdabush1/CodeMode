@@ -82,7 +82,7 @@ const LoginSignup: React.FC = () => {
     e.preventDefault();
     try {
       await axios.post(
-        `${BACKEND_URL}/auth/signin`, // ודא שזה הנתיב הנכון ב-backend שלך
+        `${BACKEND_URL}/auth/login`, // ודא שזה הנתיב הנכון ב-backend שלך
         {
           email: signInEmail,
           password: signInPassword,
