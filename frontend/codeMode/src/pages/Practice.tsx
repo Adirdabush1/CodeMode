@@ -1,3 +1,4 @@
+// Practice.tsx
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import ExerciseList from '../components/ExerciseList';
@@ -38,7 +39,7 @@ const Practice: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          exerciseId: selectedExercise,
+          exerciseId: selectedExercise, // ✅ שולח רק את השם של התרגיל
           code,
           feedback: userFeedback,
         }),
@@ -140,7 +141,7 @@ const Practice: React.FC = () => {
 
       <ExerciseList
         selectedLanguage={language}
-        onSelectExercise={setSelectedExercise}
+        onSelectExercise={setSelectedExercise} // ✅ שולח רק string
         selectedExercise={selectedExercise}
       />
 
