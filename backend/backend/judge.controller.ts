@@ -12,7 +12,7 @@ const languageToIdMap: Record<string, number> = {
   css: 79,
 };
 
-// נגדיר ממשק לתוצאה שמגיעה מ־Judge0
+// נגדיר ממשק לתוצאה שמגיעה מ‑Judge0
 interface Judge0Response {
   stdout?: string | null;
   stderr?: string | null;
@@ -32,30 +32,44 @@ export class JudgeController {
     @Body('language') language: string,
   ): Promise<Judge0Response | { error: string; details: unknown }> {
     try {
-      const languageId = languageToIdMap[language];
+      const languageId = languageToIdMap[language.toLowerCase()];
       if (!languageId) {
         return { error: 'Unsupported language', details: language };
       }
 
+      // כאן אנו שולחים בקשה ל‑Judge0 המקומי שרץ ב‑Docker
       const response = await fetch(
-        'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true',
+        'http://localhost:2358/submissions?base64_encoded=false&wait=true',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'X-RapidAPI-Key': process.env.JUDGE0_KEY ?? '',
-            'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
           },
           body: JSON.stringify({ source_code: code, language_id: languageId }),
         },
       );
 
-      // ✨ במקום any – נצמיד את זה ל־Judge0Response
-      const data = (await response.json()) as Judge0Response;
+      if (!response.ok) {
+        const text = await response.text();
+        return {
+          error: 'Judge0 error',
+          details: text,
+        };
+      }
 
-      return data;
-    } catch (err) {
-      return { error: 'Server error', details: err };
+      const data: unknown = await response.json();
+
+      if (typeof data === 'object' && data !== null) {
+        return data as Judge0Response;
+      } else {
+        return { error: 'Invalid response from Judge0', details: data };
+      }
+    } catch (err: unknown) {
+      const errorMessage =
+        err instanceof Error ? err.message : JSON.stringify(err);
+      console.error('Error running code:', errorMessage);
+
+      return { error: 'Server error', details: errorMessage };
     }
   }
 }
