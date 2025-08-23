@@ -39,7 +39,7 @@ export class JudgeController {
 
       // כאן אנו שולחים בקשה ל‑Judge0 המקומי שרץ ב‑Docker
       const response = await fetch(
-        'http://localhost:2358/submissions?base64_encoded=false&wait=true',
+        'http://91.99.50.112:2358/submissions?base64_encoded=false&wait=true',
         {
           method: 'POST',
           headers: {
