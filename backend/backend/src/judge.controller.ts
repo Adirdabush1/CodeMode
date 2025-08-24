@@ -12,7 +12,6 @@ const languageToIdMap: Record<string, number> = {
   css: 79,
 };
 
-// נגדיר ממשק לתוצאה שמגיעה מ‑Judge0
 interface Judge0Response {
   stdout?: string | null;
   stderr?: string | null;
@@ -24,52 +23,66 @@ interface Judge0Response {
   };
 }
 
+interface RunCodeDto {
+  code: string;
+  language: string;
+  stdin?: string; // אופציונלי
+}
+
 @Controller('judge')
 export class JudgeController {
   @Post('run')
-  async runCode(
-    @Body('code') code: string,
-    @Body('language') language: string,
-  ): Promise<Judge0Response | { error: string; details: unknown }> {
+  async runCode(@Body() body: RunCodeDto): Promise<{ output: string }> {
+    const { code, language, stdin = '' } = body;
+
     try {
       const languageId = languageToIdMap[language.toLowerCase()];
       if (!languageId) {
-        return { error: 'Unsupported language', details: language };
+        return { output: `❌ Unsupported language: ${language}` };
       }
 
-      // כאן אנו שולחים בקשה ל‑Judge0 המקומי שרץ ב‑Docker
       const response = await fetch(
         'http://91.99.50.112:2358/submissions?base64_encoded=false&wait=true',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            ...(process.env.JUDGE0_KEY
+              ? { 'X-Auth-Token': process.env.JUDGE0_KEY }
+              : {}),
           },
-          body: JSON.stringify({ source_code: code, language_id: languageId }),
+          body: JSON.stringify({
+            source_code: code,
+            language_id: languageId,
+            stdin,
+          }),
         },
       );
 
       if (!response.ok) {
         const text = await response.text();
-        return {
-          error: 'Judge0 error',
-          details: text,
-        };
+        return { output: `❌ Judge0 error: ${text}` };
       }
 
-      const data: unknown = await response.json();
+      const data: Judge0Response = await response.json();
 
-      if (typeof data === 'object' && data !== null) {
-        return data as Judge0Response;
-      } else {
-        return { error: 'Invalid response from Judge0', details: data };
+      let output = '';
+
+      if (data.compile_output)
+        output += `🛠 Compile Output:\n${data.compile_output}\n`;
+      if (data.stderr) output += `⚠ Runtime Error:\n${data.stderr}\n`;
+      if (data.stdout) output += `✅ Output:\n${data.stdout}\n`;
+
+      if (!output.trim()) {
+        output = `⚠ No output returned. Status: ${data.status?.description || 'Unknown'}`;
       }
+
+      return { output };
     } catch (err: unknown) {
       const errorMessage =
         err instanceof Error ? err.message : JSON.stringify(err);
       console.error('Error running code:', errorMessage);
-
-      return { error: 'Server error', details: errorMessage };
+      return { output: `❌ Server error: ${errorMessage}` };
     }
   }
 }

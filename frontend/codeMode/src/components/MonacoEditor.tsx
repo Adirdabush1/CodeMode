@@ -19,6 +19,7 @@ const supportedLanguages = [
 const MyEditor: React.FC = () => {
   const [code, setCode] = useState<string>('// Write code here..');
   const [language, setLanguage] = useState<typeof supportedLanguages[number]>('javascript');
+  const [stdin, setStdin] = useState<string>(''); // קלט אפשרי
   const [output, setOutput] = useState<string>('');
   const [userFeedback, setUserFeedback] = useState<string>('');
   const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -44,12 +45,18 @@ const MyEditor: React.FC = () => {
           'Content-Type': 'application/json',
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({ code, language }),
-        credentials: token ? undefined : 'include', // אם אין token, שלח קוקי
+        body: JSON.stringify({ code, language, stdin }),
+        credentials: token ? undefined : 'include',
       });
 
       const data = await res.json();
-      const resultOutput = data.stdout || data.compile_output || data.stderr || '⚠ No output';
+      // הצגה מסודרת של כל הפלט
+      let resultOutput = '';
+      if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n\n`;
+      if (data.stdout) resultOutput += `✅ Stdout:\n${data.stdout}\n\n`;
+      if (data.stderr) resultOutput += `❌ Stderr:\n${data.stderr}\n\n`;
+      if (!resultOutput) resultOutput = '⚠ No output';
+
       setOutput(resultOutput);
     } catch (e) {
       setOutput('❌ Error running code: ' + (e instanceof Error ? e.message : 'Unknown error'));
@@ -87,7 +94,7 @@ const MyEditor: React.FC = () => {
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify({ code, userFeedback }),
-        credentials: token ? undefined : 'include', // אם אין token, השתמש בקוקי
+        credentials: token ? undefined : 'include',
       });
 
       const data = await res.json();
@@ -130,6 +137,13 @@ const MyEditor: React.FC = () => {
           automaticLayout: true,
           fontSize: 14,
         }}
+      />
+
+      <textarea
+        placeholder="Optional input (stdin) for the exercise"
+        value={stdin}
+        onChange={e => setStdin(e.target.value)}
+        style={{ width: '100%', height: 80, marginTop: 10, fontSize: 14, padding: 10 }}
       />
 
       <textarea

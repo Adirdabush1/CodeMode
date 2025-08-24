@@ -6,11 +6,21 @@ import MenuBar from '../components/MenuBar';
 import Swal from 'sweetalert2';
 import './Practice.css';
 
-const supportedLanguages = ['typescript', 'javascript', 'python', 'java', 'csharp', 'cpp', 'html', 'css'] as const;
+const supportedLanguages = [
+  'typescript',
+  'javascript',
+  'python',
+  'java',
+  'csharp',
+  'cpp',
+  'html',
+  'css',
+] as const;
 
 const Practice: React.FC = () => {
   const [code, setCode] = useState('// Write your code here...');
   const [language, setLanguage] = useState<typeof supportedLanguages[number]>('javascript');
+  const [stdin, setStdin] = useState(''); // קלט אפשרי לתרגילים
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
   const [userFeedback, setUserFeedback] = useState('');
   const [output, setOutput] = useState('');
@@ -18,7 +28,6 @@ const Practice: React.FC = () => {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
   const [saveErrorMessage, setSaveErrorMessage] = useState<string | null>(null);
 
-  // AI usage count
   const [aiUsageCount, setAiUsageCount] = useState<number>(() => {
     const saved = localStorage.getItem('aiUsageCount');
     return saved ? parseInt(saved, 10) : 0;
@@ -39,8 +48,9 @@ const Practice: React.FC = () => {
           exerciseId: selectedExercise,
           code,
           feedback: userFeedback,
+          stdin,
         }),
-        credentials: 'include', // 🔹 חובה לשליחת JWT cookie
+        credentials: 'include',
       });
 
       if (!res.ok) {
@@ -72,14 +82,16 @@ const Practice: React.FC = () => {
       const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, language }),
-        credentials: 'include', // 🔹 אם הקוקי נחוץ
+        body: JSON.stringify({ code, language, stdin }),
+        credentials: 'include',
       });
 
       const data = await res.json();
-      const resultOutput = data.stdout || data.compile_output || data.stderr || '⚠ No output';
+      const resultOutput =
+        data.stdout || data.compile_output || data.stderr || '⚠ No output';
       setOutput(resultOutput);
 
+      // אם אין שגיאות, שמור את התרגיל
       if (!data.stderr && resultOutput.trim()) {
         await saveExercise();
       }
@@ -119,7 +131,7 @@ const Practice: React.FC = () => {
           Authorization: token ? `Bearer ${token}` : '',
         },
         body: JSON.stringify({ code, userFeedback }),
-        credentials: token ? undefined : 'include', // 🔹 אם לא משתמשים ב-token, השתמש בקוקי
+        credentials: token ? undefined : 'include',
       });
 
       const data = await res.json();
@@ -174,7 +186,6 @@ const Practice: React.FC = () => {
               </option>
             ))}
           </select>
-
           <div className="liquidGlass-effect"></div>
           <div className="liquidGlass-tint"></div>
           <div className="liquidGlass-shine"></div>
@@ -201,17 +212,23 @@ const Practice: React.FC = () => {
       />
 
       <textarea
+        placeholder="Optional input (stdin) for the exercise"
+        value={stdin}
+        onChange={e => setStdin(e.target.value)}
+        style={{ width: '100%', height: 80, marginTop: 10, fontSize: 14, padding: 10 }}
+      />
+
+      <textarea
         placeholder="What did you learn? Where did you get stuck?"
         value={userFeedback}
         onChange={e => setUserFeedback(e.target.value)}
-        style={{ width: '100%', height: 100, marginTop: 20, fontSize: 16, padding: 10 }}
+        style={{ width: '100%', height: 100, marginTop: 10, fontSize: 16, padding: 10 }}
       />
 
       <div style={{ marginTop: 10 }}>
         <button onClick={runCode} disabled={isRunning || !selectedExercise}>
           {isRunning ? 'Running...' : 'Run Code'}
         </button>
-
         <button onClick={analyzeCode} disabled={isRunning} style={{ marginLeft: 10 }}>
           {isRunning ? 'Analyzing...' : 'Analyze with AI'}
         </button>
