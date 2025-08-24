@@ -14,7 +14,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
 
   // בדיקת התחברות אוטומטית בעת טעינת הקומפוננטה
   useEffect(() => {
-    axios.get('https://backend-codemode-9p1s.onrender.com/api/user/me', { withCredentials: true })
+    axios.get('https://backend-codemode-9p1s.onrender.com/user/me', { withCredentials: true })
       .then(() => setIsLoggedIn(true))
       .catch(() => setIsLoggedIn(false))
       .then(() => setLoading(false)); // שימוש ב-finally לשחרור loading בכל מצב
