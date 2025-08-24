@@ -31,7 +31,7 @@ const Practice: React.FC = () => {
     setSaveErrorMessage(null);
 
     try {
-      const res = await fetch('https://backend-codemode.onrender.com/user/add-solved', {
+      const res = await fetch('https://backend-codemode-9p1s.onrender.com/user/add-solved', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -67,7 +67,7 @@ const Practice: React.FC = () => {
     setSaveErrorMessage(null);
 
     try {
-      const res = await fetch('https://backend-codemode.onrender.com/judge/run', {
+      const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, language }),
@@ -111,7 +111,7 @@ const Practice: React.FC = () => {
     setOutput('🤖 Analyzing with AI...');
 
     try {
-      const res = await fetch('https://backend-codemode.onrender.com/ai-analyze', {
+      const res = await fetch('https://backend-codemode-9p1s.onrender.com/ai-analyze', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

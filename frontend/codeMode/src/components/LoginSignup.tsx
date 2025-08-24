@@ -21,7 +21,7 @@ function isAxiosError(error: unknown): error is CustomAxiosError {
   );
 }
 
-const BACKEND_URL = 'https://backend-codemode.onrender.com';
+const BACKEND_URL = 'https://backend-codemode-9p1s.onrender.com';
 
 const LoginSignup: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);

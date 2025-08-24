@@ -43,7 +43,7 @@ const ProfileWrapper = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get<UserData>(
-          'https://backend-codemode.onrender.com/api/user/me',
+          'https://backend-codemode-9p1s.onrender.com/api/user/me',
           { withCredentials: true }
         );
         setUserData(response.data);
