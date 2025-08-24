@@ -33,19 +33,26 @@ const MyEditor: React.FC = () => {
     if (!code.trim()) return;
 
     setIsRunning(true);
-    setOutput('Running...');
+    setOutput('⏳ Running code...');
 
     try {
+      const token = localStorage.getItem('token');
+
       const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify({ code, language }),
+        credentials: token ? undefined : 'include', // אם אין token, שלח קוקי
       });
 
       const data = await res.json();
-      setOutput(data.stdout || data.compile_output || data.stderr || 'No output');
+      const resultOutput = data.stdout || data.compile_output || data.stderr || '⚠ No output';
+      setOutput(resultOutput);
     } catch (e) {
-      setOutput('Error: ' + (e instanceof Error ? e.message : 'Unknown error'));
+      setOutput('❌ Error running code: ' + (e instanceof Error ? e.message : 'Unknown error'));
     } finally {
       setIsRunning(false);
     }
@@ -64,24 +71,23 @@ const MyEditor: React.FC = () => {
         confirmButtonColor: '#3085d6',
         background: '#f4f6f9',
       }).then(result => {
-        if (result.isConfirmed) {
-          window.location.href = '/login';
-        }
+        if (result.isConfirmed) window.location.href = '/login';
       });
       return;
     }
 
     setIsRunning(true);
-    setOutput('Analyzing with AI...');
+    setOutput('🤖 Analyzing with AI...');
 
     try {
       const res = await fetch('https://backend-codemode-9p1s.onrender.com/ai-analyze', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token ? `Bearer ${token}` : '',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify({ code, userFeedback }),
+        credentials: token ? undefined : 'include', // אם אין token, השתמש בקוקי
       });
 
       const data = await res.json();
@@ -93,7 +99,7 @@ const MyEditor: React.FC = () => {
         setAiUsageCount(newCount);
       }
     } catch (e) {
-      setOutput('Error: ' + (e instanceof Error ? e.message : 'Unknown error'));
+      setOutput('❌ Error analyzing: ' + (e instanceof Error ? e.message : 'Unknown error'));
     } finally {
       setIsRunning(false);
     }

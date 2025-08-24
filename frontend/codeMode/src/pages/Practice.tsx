@@ -18,12 +18,13 @@ const Practice: React.FC = () => {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
   const [saveErrorMessage, setSaveErrorMessage] = useState<string | null>(null);
 
-  // AI usage count (כמו ב-MyEditor)
+  // AI usage count
   const [aiUsageCount, setAiUsageCount] = useState<number>(() => {
     const saved = localStorage.getItem('aiUsageCount');
     return saved ? parseInt(saved, 10) : 0;
   });
 
+  // 🔹 Save exercise (with credentials)
   async function saveExercise() {
     if (!selectedExercise || !code.trim()) return;
 
@@ -39,7 +40,7 @@ const Practice: React.FC = () => {
           code,
           feedback: userFeedback,
         }),
-        credentials: 'include',
+        credentials: 'include', // 🔹 חובה לשליחת JWT cookie
       });
 
       if (!res.ok) {
@@ -58,6 +59,7 @@ const Practice: React.FC = () => {
     }
   }
 
+  // 🔹 Run code
   async function runCode() {
     if (!selectedExercise) return;
 
@@ -71,6 +73,7 @@ const Practice: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, language }),
+        credentials: 'include', // 🔹 אם הקוקי נחוץ
       });
 
       const data = await res.json();
@@ -87,7 +90,7 @@ const Practice: React.FC = () => {
     }
   }
 
-  // === ניתוח קוד עם AI ===
+  // 🔹 Analyze code with AI
   async function analyzeCode() {
     const token = localStorage.getItem('token');
 
@@ -100,9 +103,7 @@ const Practice: React.FC = () => {
         confirmButtonColor: '#3085d6',
         background: '#f4f6f9',
       }).then(result => {
-        if (result.isConfirmed) {
-          window.location.href = '/login';
-        }
+        if (result.isConfirmed) window.location.href = '/login';
       });
       return;
     }
@@ -118,6 +119,7 @@ const Practice: React.FC = () => {
           Authorization: token ? `Bearer ${token}` : '',
         },
         body: JSON.stringify({ code, userFeedback }),
+        credentials: token ? undefined : 'include', // 🔹 אם לא משתמשים ב-token, השתמש בקוקי
       });
 
       const data = await res.json();
