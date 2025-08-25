@@ -26,7 +26,7 @@ interface Judge0Response {
 interface RunCodeDto {
   code: string;
   language: string;
-  stdin?: string; // אופציונלי
+  stdin?: string;
 }
 
 @Controller('judge')
@@ -61,10 +61,14 @@ export class JudgeController {
 
       if (!response.ok) {
         const text = await response.text();
+        console.error('Judge0 returned error:', text);
         return { output: `❌ Judge0 error: ${text}` };
       }
 
       const data = (await response.json()) as Judge0Response;
+
+      // 🔹 הדפסת הלוג המלא ל־debug
+      console.log('Judge0 full response:', JSON.stringify(data, null, 2));
 
       let output = '';
 
@@ -72,6 +76,8 @@ export class JudgeController {
         output += `🛠 Compile Output:\n${data.compile_output}\n`;
       if (data.stderr) output += `⚠ Runtime Error:\n${data.stderr}\n`;
       if (data.stdout) output += `✅ Output:\n${data.stdout}\n`;
+      if (data.message) output += `ℹ Message:\n${data.message}\n`;
+      if (data.status) output += `📌 Status: ${data.status.description}\n`;
 
       if (!output.trim()) {
         output = `⚠ No output returned. Status: ${data.status?.description || 'Unknown'}`;
