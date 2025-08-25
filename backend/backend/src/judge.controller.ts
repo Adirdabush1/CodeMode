@@ -64,7 +64,7 @@ export class JudgeController {
         return { output: `❌ Judge0 error: ${text}` };
       }
 
-      const data: Judge0Response = await response.json();
+      const data = (await response.json()) as Judge0Response;
 
       let output = '';
 
