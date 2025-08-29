@@ -2,14 +2,14 @@ import { Controller, Post, Body } from '@nestjs/common';
 import fetch from 'node-fetch';
 
 const languageToIdMap: Record<string, number> = {
-  python: 71,
-  javascript: 63,
-  typescript: 74,
-  java: 62,
-  csharp: 51,
-  cpp: 54,
-  html: 85,
-  css: 79,
+  python: 34, // Python 3.6.0
+  javascript: 29, // JavaScript nodejs 8.5.0
+  java: 26, // Java OpenJDK 9
+  cpp: 10, // C++ g++ 7.2.0
+  c: 4, // C gcc 7.2.0
+  csharp: 16, // C# mono 5.4.0.167
+  ruby: 38, // Ruby 2.4.0
+  go: 22, // Go 1.9
 };
 
 interface Judge0Response {
