@@ -20,12 +20,12 @@ if (!mongoUri) {
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
 
-    MongooseModule.forRoot(process.env.MONGODB_URI),
+    MongooseModule.forRoot(mongoUri),
     UserModule,
     AuthModule,
     AiAnalyzeModule,
   ],
-  controllers: [AppController, JudgeController], // ✅ הוספנו את JudgeController
+  controllers: [AppController, JudgeController], // ✅ JudgeController זמין עכשיו
   providers: [AppService],
 })
 export class AppModule {}
