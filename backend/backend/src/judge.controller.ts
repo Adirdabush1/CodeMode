@@ -2,14 +2,12 @@ import { Controller, Post, Body } from '@nestjs/common';
 import fetch from 'node-fetch';
 
 const languageToIdMap: Record<string, number> = {
-  python: 71, // Python 3.8.1
-  javascript: 63, // Node.js 12.14.0
-  java: 62, // Java OpenJDK 13.0.1
-  cpp: 54, // C++ GCC 9.2.0
-  c: 50, // C GCC 9.2.0
-  csharp: 51, // C# Mono 6.6.0.161
-  ruby: 72, // Ruby 2.7.0
-  go: 60, // Go 1.13.5
+  python: 71,
+  javascript: 63,
+  java: 62,
+  cpp: 54,
+  c: 50,
+  csharp: 51,
 };
 
 interface Judge0Response {
@@ -59,14 +57,20 @@ export class JudgeController {
       );
 
       if (!response.ok) {
-        const text = await response.text();
-        console.error('Judge0 returned error:', text);
-        return { output: `❌ Judge0 error: ${text}` };
+        const status = response.status;
+        const statusText = response.statusText;
+        let text = '';
+        try {
+          text = await response.text();
+        } catch {
+          text = 'Unable to read response body';
+        }
+        console.error('Judge0 returned error:', status, statusText, text);
+        return { output: `❌ Judge0 error: ${status} ${statusText}\n${text}` };
       }
 
       const data = (await response.json()) as Judge0Response;
 
-      // 🔹 הדפסת הלוג המלא ל־debug
       console.log('Judge0 full response:', JSON.stringify(data, null, 2));
 
       let output = '';
@@ -87,7 +91,9 @@ export class JudgeController {
       const errorMessage =
         err instanceof Error ? err.message : JSON.stringify(err);
       console.error('Error running code:', errorMessage);
-      return { output: `❌ Server error: ${errorMessage}` };
+      return {
+        output: `❌ Server error: ${errorMessage}\nCheck your API key, network connection, or Judge0 service status.`,
+      };
     }
   }
 }
