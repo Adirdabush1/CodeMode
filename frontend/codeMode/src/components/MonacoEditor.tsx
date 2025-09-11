@@ -1,3 +1,4 @@
+// MyEditor.tsx
 import '../../src/pages/Practice.css';
 import './MonacoEditor.css';
 
@@ -49,17 +50,27 @@ const MyEditor: React.FC = () => {
         credentials: token ? undefined : 'include',
       });
 
+      if (!res.ok) {
+        const text = await res.text();
+        setOutput(`❌ Judge0 error (HTTP ${res.status}): ${text}`);
+        return;
+      }
+
       const data = await res.json();
+
       // הצגה מסודרת של כל הפלט
       let resultOutput = '';
       if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n\n`;
       if (data.stdout) resultOutput += `✅ Stdout:\n${data.stdout}\n\n`;
       if (data.stderr) resultOutput += `❌ Stderr:\n${data.stderr}\n\n`;
-      if (!resultOutput) resultOutput = '⚠ No output';
+      if (data.message) resultOutput += `ℹ Message:\n${data.message}\n\n`;
+      if (data.status) resultOutput += `📌 Status: ${data.status.description}\n\n`;
+      if (!resultOutput.trim()) resultOutput = '⚠ No output';
 
       setOutput(resultOutput);
-    } catch (e) {
-      setOutput('❌ Error running code: ' + (e instanceof Error ? e.message : 'Unknown error'));
+    } catch (e: unknown) {
+      const errorMessage = e instanceof Error ? e.message : JSON.stringify(e);
+      setOutput(`❌ Error running code: ${errorMessage}`);
     } finally {
       setIsRunning(false);
     }
@@ -105,8 +116,9 @@ const MyEditor: React.FC = () => {
         localStorage.setItem('aiUsageCount', newCount.toString());
         setAiUsageCount(newCount);
       }
-    } catch (e) {
-      setOutput('❌ Error analyzing: ' + (e instanceof Error ? e.message : 'Unknown error'));
+    } catch (e: unknown) {
+      const errorMessage = e instanceof Error ? e.message : JSON.stringify(e);
+      setOutput(`❌ Error analyzing: ${errorMessage}`);
     } finally {
       setIsRunning(false);
     }
@@ -153,13 +165,15 @@ const MyEditor: React.FC = () => {
         style={{ width: '100%', height: 100, marginTop: 20, fontSize: 16, padding: 10 }}
       />
 
-      <button onClick={runCode} disabled={isRunning} className="run-button">
-        {isRunning ? 'Running...' : 'Run Code'}
-      </button>
+      <div style={{ marginTop: 10 }}>
+        <button onClick={runCode} disabled={isRunning} className="run-button">
+          {isRunning ? 'Running...' : 'Run Code'}
+        </button>
 
-      <button onClick={analyzeCode} disabled={isRunning} style={{ marginLeft: 10 }}>
-        {isRunning ? 'Analyzing...' : 'Analyze with AI'}
-      </button>
+        <button onClick={analyzeCode} disabled={isRunning} style={{ marginLeft: 10 }}>
+          {isRunning ? 'Analyzing...' : 'Analyze with AI'}
+        </button>
+      </div>
 
       <pre className="output-pre">{output || 'No output yet. Run code to see results.'}</pre>
     </div>

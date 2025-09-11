@@ -69,7 +69,7 @@ const Practice: React.FC = () => {
     }
   }
 
-  // 🔹 Run code
+  // 🔹 Run code (מעודכן)
   async function runCode() {
     if (!selectedExercise) return;
 
@@ -79,24 +79,49 @@ const Practice: React.FC = () => {
     setSaveErrorMessage(null);
 
     try {
+      const token = localStorage.getItem('token');
+
       const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
         body: JSON.stringify({ code, language, stdin }),
-        credentials: 'include',
+        credentials: token ? undefined : 'include',
       });
 
+      if (!res.ok) {
+        const text = await res.text();
+        setOutput(`❌ Judge0 error (HTTP ${res.status}): ${text}`);
+        return;
+      }
+
       const data = await res.json();
-      const resultOutput =
-        data.stdout || data.compile_output || data.stderr || '⚠ No output';
+
+      let resultOutput = data.output || '';
+
+      if (!resultOutput.trim()) {
+        if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n`;
+        if (data.stderr) resultOutput += `❌ Runtime Error:\n${data.stderr}\n`;
+        if (data.stdout) resultOutput += `✅ Output:\n${data.stdout}\n`;
+        if (data.message) resultOutput += `ℹ Message:\n${data.message}\n`;
+        if (data.status) resultOutput += `📌 Status: ${data.status.description}\n`;
+      }
+
+      if (!resultOutput.trim()) {
+        resultOutput = '⚠ No output returned.';
+      }
+
       setOutput(resultOutput);
 
       // אם אין שגיאות, שמור את התרגיל
       if (!data.stderr && resultOutput.trim()) {
         await saveExercise();
       }
-    } catch (e) {
-      setOutput('❌ Error running code: ' + (e instanceof Error ? e.message : 'Unknown error'));
+    } catch (e: unknown) {
+      const errorMessage = e instanceof Error ? e.message : JSON.stringify(e);
+      setOutput(`❌ Error running code: ${errorMessage}`);
     } finally {
       setIsRunning(false);
     }
@@ -128,7 +153,7 @@ const Practice: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token ? `Bearer ${token}` : '',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
         body: JSON.stringify({ code, userFeedback }),
         credentials: token ? undefined : 'include',
