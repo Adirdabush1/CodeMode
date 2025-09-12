@@ -58,14 +58,19 @@ const MyEditor: React.FC = () => {
 
       const data = await res.json();
 
-      // הצגה מסודרת של כל הפלט
-      let resultOutput = '';
-      if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n\n`;
-      if (data.stdout) resultOutput += `✅ Stdout:\n${data.stdout}\n\n`;
-      if (data.stderr) resultOutput += `❌ Stderr:\n${data.stderr}\n\n`;
-      if (data.message) resultOutput += `ℹ Message:\n${data.message}\n\n`;
-      if (data.status) resultOutput += `📌 Status: ${data.status.description}\n\n`;
-      if (!resultOutput.trim()) resultOutput = '⚠ No output';
+      let resultOutput = data.output || '';
+
+      if (!resultOutput.trim()) {
+        if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n`;
+        if (data.stderr) resultOutput += `❌ Runtime Error:\n${data.stderr}\n`;
+        if (data.stdout) resultOutput += `✅ Output:\n${data.stdout}\n`;
+        if (data.message) resultOutput += `ℹ Message:\n${data.message}\n`;
+        if (data.status) resultOutput += `📌 Status: ${data.status.description}\n`;
+      }
+
+      if (!resultOutput.trim()) {
+        resultOutput = '⚠ No output returned.';
+      }
 
       setOutput(resultOutput);
     } catch (e: unknown) {

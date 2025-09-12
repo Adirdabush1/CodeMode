@@ -79,7 +79,7 @@ const Home: React.FC = () => {
       <>
         <MenuBar />
         <div className="profile-page">
-          <h1>Checking authentication...</h1>
+          <h1>Loading...</h1>
         </div>
       </>
     );
