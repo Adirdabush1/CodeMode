@@ -192,3 +192,456 @@
   font-size: 1.4rem !important;
   padding: 0.3rem 0.8rem !important;
 }
+
+@import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+
+body {
+  background: #d0dbe1;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  color: #444447;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+a {
+  color: black;
+}
+
+/* --- כותרת --- */
+.animated-title-container {
+  display: flex;
+  justify-content: center;
+  margin: 20rem 0 3rem 0;
+}
+
+.split-text-container {
+  display: flex;
+  font-size: 3.5rem;
+  font-weight: bold;
+  text-transform: none;
+  color: #222;
+  overflow: hidden;
+  font-family: 'Arial', sans-serif;
+}
+
+.text-part {
+  display: inline-block;
+  position: relative;
+  transform: translateX(0);
+  animation-duration: 1.8s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.text-part.left {
+  transform: translateX(-200%);
+  animation-name: slide-in-left;
+}
+
+.text-part.right {
+  transform: translateX(200%);
+  animation-name: slide-in-right;
+  margin-left: 0.5rem;
+}
+
+@keyframes slide-in-left {
+  0% {
+    transform: translateX(-200%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* --- כרטיסיות --- */
+.cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: center;
+  position: relative;
+}
+
+/* טקסט צדדי */
+.side-text {
+  position: absolute;
+  width: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.side-text.left {
+  left: 2rem;
+}
+
+.card-section.reverse .side-text.right {
+  right: 2rem;
+}
+
+/* צבעים */
+.text-white {
+  color: rgb(0, 0, 0);
+}
+
+.text-gray {
+  color: #888888b7;
+}
+
+.text-black {
+  color: rgb(6, 6, 6);
+}
+
+/* כרטיס */
+.card {
+  display: flex;
+  flex-direction: row;
+  max-width: 600px;
+  width: 100%;
+  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow:
+    inset -2px 2px hsl(0 0% 100% / 1),
+    -10px 10px 20px hsl(0 0% 0% / 0.1);
+  align-items: center;
+  gap: 1rem;
+  z-index: 2;
+  opacity: 0;
+}
+
+.card-section:not(.reverse) .card {
+  margin-left: 10rem;
+  margin-right: 2rem;
+}
+
+.card-section.reverse .card {
+  margin-right: 10rem;
+  margin-left: 2rem;
+}
+
+.card-section.reverse .card {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.card-section.exercises-samples {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+
+  width: 90%;
+  max-width: 800px;
+  height: auto;
+  max-height: 400px;
+
+  /* בטל ירושה מ-min-height: 100vh */
+  min-height: unset;
+
+  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+  padding: 1rem;
+  border-radius: 1.5rem;
+  box-shadow:
+    inset -2px 2px hsl(0 0% 100% / 1),
+    -10px 10px 20px hsl(0 0% 0% / 0.1);
+
+  text-align: right;
+  overflow-y: auto;
+
+  animation: slideInFromLeft 1s ease forwards;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  opacity: 0;
+}
+
+.language-card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.language-card {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  background: #ffffff88;
+  backdrop-filter: blur(5px);
+  border: 2px solid transparent;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.language-card:hover {
+  background: #ffffffcc;
+  transform: scale(1.05);
+}
+
+.language-card.active {
+  background: #000;
+  color: #fff;
+  border-color: #333;
+}
+
+#language-select {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  appearance: none;
+  /* מסיר עיצוב דיפולטי */
+}
+
+/* כפתור בעיצוב זכוכית */
+.more-exercises-button {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  padding: 0.75rem 1rem;
+  ;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  /* אפקט כניסה */
+  opacity: 0;
+  transform: translateY(100px);
+  animation-name: slideInFromBottom;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.choose-language-button {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  /* אפקט כניסה */
+  opacity: 0;
+  transform: translateY(100px);
+  animation-name: slideInFromBottom;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.login-button {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #000;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  /* אפקט כניסה */
+  opacity: 0;
+  transform: translateY(100px);
+  animation-name: slideInFromBottom;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.more-exercises-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(95px) scale(1.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* כרטיסיית שאלות */
+.card-section.exercises-samples {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+  border-radius: 1.5rem;
+  box-shadow:
+    inset -2px 2px hsl(0 0% 100% / 1),
+    -10px 10px 20px hsl(0 0% 0% / 0.1);
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+  text-align: right;
+
+
+}
+
+.card-section.exercises-samples h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card-section.exercises-samples::-webkit-scrollbar {
+  display: none;
+}
+
+.card-section.exercises-samples ul {
+  padding-right: 1.5rem;
+  list-style: disc;
+
+}
+
+.card-section.exercises-samples li {
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+/* --- אנימציות גלילה --- */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-400px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    transform: translateY(200px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* אנימציות מתחלפות לפי הסדר */
+.card-section:nth-child(odd) .card {
+  animation-name: slideInFromLeft;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 2s;
+  animation-fill-mode: both;
+}
+
+.card-section:nth-child(even) .card {
+  animation-name: slideInFromRight;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  animation-duration: 2s;
+  animation-fill-mode: both;
+}
+
+
+.icon {
+  flex-shrink: 0;
+  font-size: 4rem;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-content {
+  flex: 1;
+}
+
+.text-content h2 {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+}
+
+.text-content p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* רספונסיביות */
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column !important;
+    text-align: center;
+    margin: 0;
+  }
+
+  .icon {
+    font-size: 3rem;
+  }
+
+  .text-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .side-text {
+    display: none;
+  }
+}

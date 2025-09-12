@@ -1,4 +1,3 @@
-// Practice.tsx
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import ExerciseList from '../components/ExerciseList';
@@ -20,7 +19,7 @@ const supportedLanguages = [
 const Practice: React.FC = () => {
   const [code, setCode] = useState('// Write your code here...');
   const [language, setLanguage] = useState<typeof supportedLanguages[number]>('javascript');
-  const [stdin, setStdin] = useState(''); // קלט אפשרי לתרגילים
+  const [stdin, setStdin] = useState('');
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
   const [userFeedback, setUserFeedback] = useState('');
   const [output, setOutput] = useState('');
@@ -69,7 +68,7 @@ const Practice: React.FC = () => {
     }
   }
 
-  // 🔹 Run code (מעודכן)
+  // 🔹 Run code
   async function runCode() {
     if (!selectedExercise) return;
 
@@ -98,7 +97,6 @@ const Practice: React.FC = () => {
       }
 
       const data = await res.json();
-
       let resultOutput = data.output || '';
 
       if (!resultOutput.trim()) {
@@ -109,16 +107,12 @@ const Practice: React.FC = () => {
         if (data.status) resultOutput += `📌 Status: ${data.status.description}\n`;
       }
 
-      if (!resultOutput.trim()) {
-        resultOutput = '⚠ No output returned.';
-      }
+      if (!resultOutput.trim()) resultOutput = '⚠ No output returned.';
 
       setOutput(resultOutput);
 
       // אם אין שגיאות, שמור את התרגיל
-      if (!data.stderr && resultOutput.trim()) {
-        await saveExercise();
-      }
+      if (!data.stderr && resultOutput.trim()) await saveExercise();
     } catch (e: unknown) {
       const errorMessage = e instanceof Error ? e.message : JSON.stringify(e);
       setOutput(`❌ Error running code: ${errorMessage}`);
@@ -175,13 +169,13 @@ const Practice: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className="practice-page">
       <MenuBar />
       <h1>Practice Page</h1>
 
       <label className="language-selector-label">
         <span>Choose language:</span>
-        <div className="liquidGlass-wrapper" style={{ marginLeft: 10 }}>
+        <div className="liquidGlass-wrapper">
           <select
             className="liquidGlass-text"
             value={language}
@@ -190,19 +184,6 @@ const Practice: React.FC = () => {
               setSelectedExercise(null);
               setSaveStatus('idle');
               setSaveErrorMessage(null);
-            }}
-            style={{
-              appearance: 'none',
-              border: 'none',
-              background: 'transparent',
-              fontSize: '2rem',
-              fontWeight: 600,
-              color: 'black',
-              cursor: 'pointer',
-              padding: '0.3rem 0.6rem',
-              outline: 'none',
-              zIndex: 3,
-              position: 'relative',
             }}
           >
             {supportedLanguages.map(lang => (
@@ -236,8 +217,6 @@ const Practice: React.FC = () => {
         options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
       />
 
-
-
       <div style={{ marginTop: 10 }}>
         <button onClick={runCode} disabled={isRunning || !selectedExercise}>
           {isRunning ? 'Running...' : 'Run Code'}
@@ -253,31 +232,18 @@ const Practice: React.FC = () => {
         <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>
       )}
 
-      <pre
-        style={{
-          background: '#222',
-          color: '#eee',
-          padding: 15,
-          marginTop: 20,
-          minHeight: 150,
-          whiteSpace: 'pre-wrap',
-          borderRadius: 6,
-        }}
-      >
-        {output}
-        </pre>
-<textarea
-  placeholder="What did you learn? Where did you get stuck?"
-  value={userFeedback}
-  onChange={e => setUserFeedback(e.target.value)}
-  style={{ width: '100%', height: 100, marginTop: 10, fontSize: 16, padding: 10 }}
-/>
-<textarea
-  placeholder="Optional input (stdin) for the exercise"
-  value={stdin}
-  onChange={e => setStdin(e.target.value)}
-  style={{ width: '100%', height: 80, marginTop: 10, fontSize: 14, padding: 10 }}
-/>
+      <pre className="output-pre">{output}</pre>
+
+      <textarea
+        placeholder="What did you learn? Where did you get stuck?"
+        value={userFeedback}
+        onChange={e => setUserFeedback(e.target.value)}
+      />
+      <textarea
+        placeholder="Optional input (stdin) for the exercise"
+        value={stdin}
+        onChange={e => setStdin(e.target.value)}
+      />
     </div>
   );
 };
