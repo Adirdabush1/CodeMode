@@ -236,19 +236,7 @@ const Practice: React.FC = () => {
         options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
       />
 
-      <textarea
-        placeholder="Optional input (stdin) for the exercise"
-        value={stdin}
-        onChange={e => setStdin(e.target.value)}
-        style={{ width: '100%', height: 80, marginTop: 10, fontSize: 14, padding: 10 }}
-      />
 
-      <textarea
-        placeholder="What did you learn? Where did you get stuck?"
-        value={userFeedback}
-        onChange={e => setUserFeedback(e.target.value)}
-        style={{ width: '100%', height: 100, marginTop: 10, fontSize: 16, padding: 10 }}
-      />
 
       <div style={{ marginTop: 10 }}>
         <button onClick={runCode} disabled={isRunning || !selectedExercise}>
@@ -277,7 +265,19 @@ const Practice: React.FC = () => {
         }}
       >
         {output}
-      </pre>
+        </pre>
+<textarea
+  placeholder="What did you learn? Where did you get stuck?"
+  value={userFeedback}
+  onChange={e => setUserFeedback(e.target.value)}
+  style={{ width: '100%', height: 100, marginTop: 10, fontSize: 16, padding: 10 }}
+/>
+<textarea
+  placeholder="Optional input (stdin) for the exercise"
+  value={stdin}
+  onChange={e => setStdin(e.target.value)}
+  style={{ width: '100%', height: 80, marginTop: 10, fontSize: 14, padding: 10 }}
+/>
     </div>
   );
 };

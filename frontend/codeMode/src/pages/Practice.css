@@ -79,7 +79,6 @@
 /* כפתור */
 .practice-page button {
   background: rgba(255, 255, 255, 0.5);
-  /* יותר אטום */
   border: 1.5px solid rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -89,56 +88,25 @@
   font-weight: 700;
   font-size: 1rem;
   color: #222;
-  /* כהה לקריאות */
-  box-shadow:
-    0 4px 30px rgba(255, 255, 255, 0.2);
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
   align-self: flex-start;
   margin-top: 1rem;
 }
 
-.practice-page button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.75);
-  border-color: rgba(255, 255, 255, 1);
-  color: #111;
-  box-shadow:
-    0 6px 40px rgba(255, 255, 255, 0.35);
+.practice-page button:not(:disabled):hover {
+  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 65, 108, 0.8);
 }
 
 .practice-page button:disabled {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.4);
   color: #999;
   cursor: not-allowed;
   box-shadow: none;
-}
-
-
-.practice-page button:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.7);
-  box-shadow:
-    0 6px 40px rgba(255, 255, 255, 0.25);
-}
-
-.practice-page button:disabled {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #bbb;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-
-.practice-page button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-.practice-page button:not(:disabled):hover {
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
-  box-shadow: 0 6px 18px rgb(255 65 108 / 0.8);
 }
 
 /* תיבת פלט */
@@ -160,8 +128,7 @@
 /* מונאקו */
 .practice-page .monaco-editor {
   border-radius: 1rem;
-  box-shadow:
-    inset 0 0 10px #ff4b2b;
+  box-shadow: inset 0 0 10px #ff4b2b;
   height: 400px !important;
   width: 100%;
 }
@@ -193,10 +160,8 @@
   align-items: center;
   font-weight: 700;
   font-size: 1.4rem;
-  /* הגדלתי קצת */
   color: #222;
   gap: 12px;
-  /* רווח בין הטקסט לכפתור */
   margin-bottom: 1rem;
 }
 
@@ -210,22 +175,19 @@
   justify-content: center;
   align-items: center;
   padding: 0.5rem 1.5rem;
-  /* פחות padding מהמקורי */
   border-radius: 2rem;
   font-weight: 600;
   font-size: 1.4rem;
-  /* גודל טקסט תואם ללייבל */
   color: black;
   cursor: pointer;
   overflow: hidden;
-
-  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(0, 0, 0, 0.1);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(6px);
 }
 
-/* לשפר את הגודל וה-padding של select inline סטייל (אם יש לך) */
 .liquidGlass-text {
   font-size: 1.4rem !important;
   padding: 0.3rem 0.8rem !important;
