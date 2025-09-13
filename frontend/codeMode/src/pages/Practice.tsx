@@ -190,14 +190,14 @@ const Practice: React.FC = () => {
         options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
       />
 
-      <div style={{ marginTop: 10 }}>
+      
         <button onClick={runCode} disabled={isRunning || !selectedExercise}>
           {isRunning ? 'Running...' : 'Run Code'}
         </button>
         <button onClick={analyzeCode} disabled={isRunning} >
           {isRunning ? 'Get help with AI assistant...' : 'Get help with AI assistant'}
         </button>
-      </div>
+      
 
       {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
       {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
