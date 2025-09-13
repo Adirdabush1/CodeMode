@@ -18,6 +18,7 @@ const Practice: React.FC = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'success' | 'error'>('idle');
   const [saveErrorMessage, setSaveErrorMessage] = useState<string | null>(null);
+
   const [aiUsageCount, setAiUsageCount] = useState<number>(() => {
     const saved = localStorage.getItem('aiUsageCount');
     return saved ? parseInt(saved, 10) : 0;
@@ -161,12 +162,18 @@ const Practice: React.FC = () => {
   return (
     <div className="practice-page">
       <MenuBar />
+     <h1>             
+      
 
-      {/* 🔹 Exercise list */}
+      
+     </h1>
+
+      {/* 🔹 Exercise list is now the only selector */}
       <ExerciseList
         selectedLanguage={language}
         selectedExercise={selectedExercise}
         onSelectExercise={(exercise) => {
+          // exercise = { id: string, language: Language }
           setSelectedExercise(exercise.id);
           setLanguage(exercise.language);
           setSaveStatus('idle');
@@ -178,26 +185,23 @@ const Practice: React.FC = () => {
         Selected Exercise: {selectedExercise || 'None'}
       </div>
 
-      {/* 🟢 Wrapper חדש: עורך + כפתורים */}
-      <div className="editor-container">
-        <Editor
-          height="400px"
-          language={language}
-          value={code}
-          onChange={value => setCode(value || '')}
-          theme="vs-dark"
-          options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
-        />
+      <Editor
+        height="400px"
+        language={language}
+        value={code}
+        onChange={value => setCode(value || '')}
+        theme="vs-dark"
+        options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
 
-        <div className="left-buttons">
-          <button onClick={runCode} disabled={isRunning || !selectedExercise}>
-            {isRunning ? 'Running...' : 'Run Code'}
-          </button>
-          <button onClick={analyzeCode} disabled={isRunning}>
-            {isRunning ? 'Get help with AI assistant...' : 'Get help with AI assistant'}
-          </button>
-        </div>
-      </div>
+        />
+      
+        <button onClick={runCode} disabled={isRunning || !selectedExercise}>
+          {isRunning ? 'Running...' : 'Run Code'}
+        </button>
+        <button onClick={analyzeCode} disabled={isRunning} >
+          {isRunning ? 'Get help with AI assistant...' : 'Get help with AI assistant'}
+        </button>
+      
 
       {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
       {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}

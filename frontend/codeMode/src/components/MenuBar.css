@@ -11,7 +11,6 @@
   align-items: center;
   padding: 0 20px;
   margin: 0;
-  margin-bottom: 20px;
 
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -21,11 +20,6 @@
   -webkit-backdrop-filter: blur(12px);
 
   z-index: 1000;
-}
-
-body {
-  padding-top: 90px;
-  /* דוחף את כל התוכן מתחת לתפריט */
 }
 
 
@@ -86,12 +80,8 @@ body {
 .home-content {
   padding-top: 90px;
   /* מתאים לגובה התפריט */
-  padding-top: calc(64px + 20px);
-  /* גובה התפריט + 20px רווח */
   max-width: 1200px;
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
-  margin-bottom: 20px;
-
 }
