@@ -162,7 +162,7 @@ const Practice: React.FC = () => {
   return (
     <div className="practice-page">
       <MenuBar />
-      <h1>Practice Page</h1>
+     
 
       {/* 🔹 Exercise list is now the only selector */}
       <ExerciseList
@@ -194,7 +194,7 @@ const Practice: React.FC = () => {
         <button onClick={runCode} disabled={isRunning || !selectedExercise}>
           {isRunning ? 'Running...' : 'Run Code'}
         </button>
-        <button onClick={analyzeCode} disabled={isRunning} style={{ marginLeft: 10 }}>
+        <button onClick={analyzeCode} disabled={isRunning} >
           {isRunning ? 'Get help with AI assistant...' : 'Get help with AI assistant'}
         </button>
       </div>

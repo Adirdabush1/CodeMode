@@ -2,6 +2,23 @@
   background: radial-gradient(125% 125% at 50% 10%, #fff 40%, #475569 100%);
 }
 
+.practice-page>div {
+  width: 100%;
+  max-width: 600px;
+  /* לא יותר מ-600px */
+  margin: 1.5rem 0;
+  /* מרווח אחיד */
+  padding: 2rem;
+  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+  border-radius: 1.5rem;
+  box-shadow:
+    inset -2px 2px hsl(0 0% 100% / 1),
+    -10px 10px 20px hsl(0 0% 0% / 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .practice-page {
   background: #d0dbe1;
   color: #444447;
@@ -136,6 +153,7 @@
   /* גבול פנימי עדין */
   margin-top: 1rem;
   /* קצת רווח מעל */
+  width: 100%;
 }
 
 
