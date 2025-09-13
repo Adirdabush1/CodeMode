@@ -1,4 +1,3 @@
-// components/ExerciseList.tsx
 import React, { useContext } from 'react';
 import { AuthContext } from './AuthContext';
 import './ExerciseList.css';
@@ -18,9 +17,12 @@ interface SolvedExercise {
   solvedAt?: string;
 }
 
+export type Language = 'typescript' | 'javascript' | 'python' | 'java' | 'csharp' | 'cpp' | 'html' | 'css';
+export type ExerciseItem = { id: string; language: Language };
+
 interface ExerciseListProps {
-  selectedLanguage: string;
-  onSelectExercise: (exerciseId: string) => void;
+  selectedLanguage: Language;
+  onSelectExercise: (exercise: ExerciseItem) => void;
   selectedExercise: string | null;
   solvedExercises?: SolvedExercise[];
 }
@@ -50,7 +52,9 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
           <button
             key={lang}
             className={`language-card ${selectedLanguage === lang ? 'active' : ''}`}
-            onClick={() => onSelectExercise('')} // ניקוי הבחירה כשמשנים שפה
+            onClick={() =>
+              onSelectExercise({ id: '', language: lang as Language }) // ניקוי הבחירה כשמשנים שפה
+            }
           >
             {lang.toUpperCase()}
           </button>
@@ -63,7 +67,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
           <li
             key={exercise}
             className={selectedExercise === exercise ? 'selected-exercise' : ''}
-            onClick={() => onSelectExercise(exercise)}
+            onClick={() => onSelectExercise({ id: exercise, language: selectedLanguage })}
             style={{ cursor: 'pointer' }}
           >
             {exercise}
@@ -78,7 +82,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
               <li
                 key={ex.exerciseId}
                 className={selectedExercise === ex.exerciseId ? 'selected-exercise' : ''}
-                onClick={() => onSelectExercise(ex.exerciseId)}
+                onClick={() => onSelectExercise({ id: ex.exerciseId, language: selectedLanguage })}
                 style={{ cursor: 'pointer', fontStyle: 'italic', color: 'green' }}
               >
                 {ex.name}

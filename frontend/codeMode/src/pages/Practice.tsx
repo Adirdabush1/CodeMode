@@ -6,20 +6,11 @@ import MenuBar from '../components/MenuBar';
 import Swal from 'sweetalert2';
 import './Practice.css';
 
-const supportedLanguages = [
-  'typescript',
-  'javascript',
-  'python',
-  'java',
-  'csharp',
-  'cpp',
-  'html',
-  'css',
-] as const;
+type Language = 'typescript' | 'javascript' | 'python' | 'java' | 'csharp' | 'cpp' | 'html' | 'css';
 
 const Practice: React.FC = () => {
   const [code, setCode] = useState('// Write your code here...');
-  const [language, setLanguage] = useState<typeof supportedLanguages[number]>('javascript');
+  const [language, setLanguage] = useState<Language>('javascript');
   const [stdin, setStdin] = useState('');
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
   const [userFeedback, setUserFeedback] = useState('');
@@ -173,28 +164,17 @@ const Practice: React.FC = () => {
       <MenuBar />
       <h1>Practice Page</h1>
 
-      {/* 🔹 Language selection with clickable cards */}
-      <div className="language-card-grid">
-        {supportedLanguages.map(lang => (
-          <div
-            key={lang}
-            className={`language-card ${language === lang ? 'active' : ''}`}
-            onClick={() => {
-              setLanguage(lang);
-              setSelectedExercise(null);
-              setSaveStatus('idle');
-              setSaveErrorMessage(null);
-            }}
-          >
-            {lang}
-          </div>
-        ))}
-      </div>
-
+      {/* 🔹 Exercise list is now the only selector */}
       <ExerciseList
         selectedLanguage={language}
         selectedExercise={selectedExercise}
-        onSelectExercise={setSelectedExercise}
+        onSelectExercise={(exercise) => {
+          // exercise = { id: string, language: Language }
+          setSelectedExercise(exercise.id);
+          setLanguage(exercise.language);
+          setSaveStatus('idle');
+          setSaveErrorMessage(null);
+        }}
       />
 
       <div style={{ margin: '10px 0', fontWeight: 'bold' }}>
