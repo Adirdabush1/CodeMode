@@ -19,37 +19,72 @@
   gap: 1.5rem;
 }
 
+.practice-page {
+  background: #d0dbe1;
+  color: #444447;
+  font-family: system-ui, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* הדחיקה מתחת ל-MenuBar */
+.practice-page>*:first-child {
+  margin-top: 90px;
+  /* גובה התפריט + רווח */
+}
+
+/* קונטיינר לעורך + כפתורים */
+.editor-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* ריווח בין עורך לכפתורים */
+  margin: 2rem 0;
+}
+
+/* כפתורים מתחת לעורך */
 .left-buttons {
   display: flex;
   flex-direction: column;
-  /* אחד מעל השני */
   align-items: flex-start;
-  /* שמאלה */
   gap: 10px;
-  /* ריווח בין הכפתורים */
-  position: absolute;
-  /* מיקום קבוע יחסית ל-page */
-  top: 20px;
-  left: 20px;
-  z-index: 100;
 }
 
 .left-buttons button {
   all: unset;
-  /* מסיר כל עיצוב קודם */
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 10px 20px;
   border: 1px solid #000;
-  border-radius: 4px;
+  border-radius: 2px;
+  /* מלבני */
   background-color: #fff;
   color: #000;
   font-weight: 600;
   font-size: 1rem;
+  transition: background-color 0.2s;
 }
 
 .left-buttons button:hover {
   background-color: #eee;
 }
+
+/* תיבת פלט */
+.output-pre {
+  width: 100%;
+  max-width: 800px;
+  background-color: #f4f6f9;
+  border-radius: 8px;
+  padding: 10px;
+  overflow-x: auto;
+}
+
 
 .practice-page {
   background: #d0dbe1;
