@@ -81,6 +81,8 @@
 .home-content {
   padding-top: 90px;
   /* מתאים לגובה התפריט */
+  padding-top: calc(64px + 20px);
+  /* גובה התפריט + 20px רווח */
   max-width: 1200px;
   margin: 0 auto;
   padding-left: 20px;

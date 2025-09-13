@@ -19,34 +19,36 @@
   gap: 1.5rem;
 }
 
-.button-container {
+.left-buttons {
   display: flex;
   flex-direction: column;
-  /* אם רוצים אחד מעל השני, אחרת row */
+  /* אחד מעל השני */
   align-items: flex-start;
   /* שמאלה */
   gap: 10px;
-  /* רווח בין הכפתורים */
-  margin: 20px;
-  /* ריווח מהקצוות */
+  /* ריווח בין הכפתורים */
+  position: absolute;
+  /* מיקום קבוע יחסית ל-page */
+  top: 20px;
+  left: 20px;
+  z-index: 100;
 }
 
-.button-container button {
+.left-buttons button {
   all: unset;
-  /* מסיר כמעט כל עיצוב קיים */
+  /* מסיר כל עיצוב קודם */
   cursor: pointer;
   padding: 8px 12px;
   border: 1px solid #000;
   border-radius: 4px;
   background-color: #fff;
   color: #000;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
-.button-container button:hover {
-  background-color: #475569;
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.left-buttons button:hover {
+  background-color: #eee;
 }
 
 .practice-page {

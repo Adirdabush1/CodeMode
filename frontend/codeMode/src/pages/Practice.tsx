@@ -191,7 +191,7 @@ const Practice: React.FC = () => {
         />
 
       
-       <div className="button-container">
+       <div className="left-buttons">
   <button onClick={runCode} disabled={isRunning || !selectedExercise}>
     {isRunning ? 'Running...' : 'Run Code'}
   </button>
