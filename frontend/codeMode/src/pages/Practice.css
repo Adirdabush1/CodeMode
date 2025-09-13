@@ -95,11 +95,15 @@
 }
 
 .practice-page button:not(:disabled):hover {
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: linear-gradient(to right, #888, #aaa);
+  /* אפור כהה → אפור בהיר */
   border-color: transparent;
   color: #fff;
-  box-shadow: 0 6px 18px rgba(255, 65, 108, 0.8);
+  /* שמירה על טקסט לבן */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  /* צל כהה עדין */
 }
+
 
 .practice-page button:disabled {
   background: rgba(255, 255, 255, 0.2);
@@ -109,21 +113,26 @@
   box-shadow: none;
 }
 
-/* תיבת פלט */
 .practice-page pre.output-pre {
-  background: #f2f6f9;
+  background: #e8e8e8;
+  /* אפור בהיר יותר לרקע */
   border-radius: 1rem;
-  padding: 15px;
+  padding: 20px;
+  /* ריווח פנימי גדול יותר */
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.95rem;
+  font-size: 1rem;
   overflow-x: auto;
   min-height: 150px;
   white-space: pre-wrap;
   word-wrap: break-word;
-  color: #444447;
-  box-shadow: inset 0 0 10px #444447;
-  margin-top: 0;
+  color: #333;
+  /* טקסט אפור כהה */
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  /* גבול פנימי עדין */
+  margin-top: 1rem;
+  /* קצת רווח מעל */
 }
+
 
 /* מונאקו */
 .practice-page .monaco-editor {
