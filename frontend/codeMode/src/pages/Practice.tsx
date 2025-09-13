@@ -195,7 +195,7 @@ const Practice: React.FC = () => {
           {isRunning ? 'Running...' : 'Run Code'}
         </button>
         <button onClick={analyzeCode} disabled={isRunning} style={{ marginLeft: 10 }}>
-          {isRunning ? 'Analyzing...' : 'Analyze with AI'}
+          {isRunning ? 'Get help with AI assistant...' : 'Get help with AI assistant'}
         </button>
       </div>
 

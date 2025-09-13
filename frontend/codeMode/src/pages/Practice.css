@@ -12,7 +12,7 @@
 }
 
 .practice-page>div {
-  max-width: 900px;
+  max-width: 300px;
   width: 100%;
   margin: 2rem 0 6rem 0;
   padding: 2rem;
@@ -117,7 +117,7 @@
   background: #e8e8e8;
   /* אפור בהיר יותר לרקע */
   border-radius: 1rem;
-  padding: 20px;
+  padding: 100px;
   /* ריווח פנימי גדול יותר */
   font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
