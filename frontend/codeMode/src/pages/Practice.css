@@ -1,3 +1,7 @@
+.buddy {
+  background: radial-gradient(125% 125% at 50% 10%, #fff 40%, #475569 100%);
+}
+
 .practice-page {
   background: #d0dbe1;
   color: #444447;
@@ -12,8 +16,7 @@
 }
 
 .practice-page>div {
-  max-width: 300px;
-  width: 100%;
+  width: 300px;
   margin: 2rem 0 6rem 0;
   padding: 2rem;
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
@@ -58,6 +61,8 @@
 
 /* textarea אם יש */
 .practice-page textarea {
+  width: 100%;
+  min-height: 100px;
   background-color: #f2f6f9;
   border: 1px solid #ccc;
   color: #444447;
