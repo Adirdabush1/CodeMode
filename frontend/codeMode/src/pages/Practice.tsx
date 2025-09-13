@@ -1,3 +1,4 @@
+// Practice.tsx
 import React, { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import ExerciseList from '../components/ExerciseList';
@@ -32,7 +33,7 @@ const Practice: React.FC = () => {
     return saved ? parseInt(saved, 10) : 0;
   });
 
-  // 🔹 Save exercise (with credentials)
+  // 🔹 Save exercise
   async function saveExercise() {
     if (!selectedExercise || !code.trim()) return;
 
@@ -111,7 +112,6 @@ const Practice: React.FC = () => {
 
       setOutput(resultOutput);
 
-      // אם אין שגיאות, שמור את התרגיל
       if (!data.stderr && resultOutput.trim()) await saveExercise();
     } catch (e: unknown) {
       const errorMessage = e instanceof Error ? e.message : JSON.stringify(e);
@@ -173,30 +173,23 @@ const Practice: React.FC = () => {
       <MenuBar />
       <h1>Practice Page</h1>
 
-      <label className="language-selector-label">
-        <span>Choose language:</span>
-        <div className="liquidGlass-wrapper">
-          <select
-            className="liquidGlass-text"
-            value={language}
-            onChange={e => {
-              setLanguage(e.target.value as typeof supportedLanguages[number]);
+      {/* 🔹 Language selection with clickable cards */}
+      <div className="language-card-grid">
+        {supportedLanguages.map(lang => (
+          <div
+            key={lang}
+            className={`language-card ${language === lang ? 'active' : ''}`}
+            onClick={() => {
+              setLanguage(lang);
               setSelectedExercise(null);
               setSaveStatus('idle');
               setSaveErrorMessage(null);
             }}
           >
-            {supportedLanguages.map(lang => (
-              <option key={lang} value={lang}>
-                {lang}
-              </option>
-            ))}
-          </select>
-          <div className="liquidGlass-effect"></div>
-          <div className="liquidGlass-tint"></div>
-          <div className="liquidGlass-shine"></div>
-        </div>
-      </label>
+            {lang}
+          </div>
+        ))}
+      </div>
 
       <ExerciseList
         selectedLanguage={language}
