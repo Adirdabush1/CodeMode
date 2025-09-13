@@ -5,11 +5,17 @@
   box-sizing: border-box;
 }
 
-
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #1e293b;
+  color: #fff;
+}
 
 .container {
   width: 100%;
   max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 /* Profile Card */
@@ -20,17 +26,13 @@
   backdrop-filter: blur(10px);
   border-radius: 1.5rem;
   overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.profile-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   max-height: 1000px;
-  /* שים גובה שמתאים לך */
-
 }
 
 .profile-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .card-content {
@@ -81,10 +83,13 @@
   border: 3px solid transparent;
   border-radius: 50%;
   background: linear-gradient(45deg, #60a5fa, #a78bfa) border-box;
+
+  /* Fix for VSCode warnings */
   -webkit-mask:
     linear-gradient(#fff 0 0) padding-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
 }
 
@@ -98,7 +103,12 @@
   margin-bottom: 0.5rem;
   background: linear-gradient(to right, #60a5fa, #a78bfa);
   -webkit-background-clip: text;
+  background-clip: text;
+  /* Standard property */
   -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* Standard property */
+  font-weight: 700;
 }
 
 .title {
@@ -121,6 +131,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: center;
 }
 
 .stat-value {
@@ -128,7 +139,11 @@
   font-weight: bold;
   background: linear-gradient(to right, #60a5fa, #a78bfa);
   -webkit-background-clip: text;
+  background-clip: text;
+  /* Standard property */
   -webkit-text-fill-color: transparent;
+  color: transparent;
+  /* Standard property */
 }
 
 .stat-label {
@@ -150,6 +165,7 @@
   gap: 0.8rem;
   justify-content: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .skill {
@@ -172,40 +188,7 @@
 .actions {
   display: flex;
   gap: 1rem;
-}
-
-.solved-exercises {
-  margin-top: 20px;
-  color: #EFD09E;
-  /* צבע טקסט בולט, אפשר לשנות */
-
-  /* רקע כהה שקוף */
-  padding: 1.5rem 1.5rem;
-  max-height: 250px;
-  /* אם יש הרבה תרגילים, שיהיה גלילה */
-  overflow-y: auto;
-  font-weight: 600;
-  font-size: 1rem;
-}
-
-.solved-exercises h3 {
-  margin-bottom: 1rem;
-  color: #D4AA7D;
-  /* צבע כותרת שונה */
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-.solved-exercises ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  max-height: 180px;
-  overflow-y: auto;
-}
-
-.solved-exercises li {
-  margin-bottom: 0.4rem;
-  color: #fff;
+  flex-wrap: wrap;
 }
 
 .action-btn {
@@ -261,6 +244,38 @@
   opacity: 1;
 }
 
+/* Solved Exercises */
+.solved-exercises {
+  margin-top: 20px;
+  color: #EFD09E;
+  padding: 1.5rem;
+  max-height: 250px;
+  overflow-y: auto;
+  font-weight: 600;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 1rem;
+}
+
+.solved-exercises h3 {
+  margin-bottom: 1rem;
+  color: #D4AA7D;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.solved-exercises ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.solved-exercises li {
+  margin-bottom: 0.4rem;
+  color: #fff;
+}
+
 /* Card Effects */
 .card-shine {
   position: absolute;
@@ -287,10 +302,13 @@
   border: 2px solid transparent;
   border-radius: 1.5rem;
   background: linear-gradient(45deg, #60a5fa, #a78bfa) border-box;
+
+  /* Fix for mask warnings */
   -webkit-mask:
     linear-gradient(#fff 0 0) padding-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -335,5 +353,10 @@
 
   .skills {
     flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .actions {
+    flex-direction: column;
   }
 }

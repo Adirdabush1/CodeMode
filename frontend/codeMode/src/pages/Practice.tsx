@@ -198,12 +198,11 @@ const Practice: React.FC = () => {
         </div>
       </label>
 
-     <ExerciseList
-  selectedLanguage={language}
-  selectedExercise={selectedExercise}
-  onSelectExercise={setSelectedExercise}
-/>
-
+      <ExerciseList
+        selectedLanguage={language}
+        selectedExercise={selectedExercise}
+        onSelectExercise={setSelectedExercise}
+      />
 
       <div style={{ margin: '10px 0', fontWeight: 'bold' }}>
         Selected Exercise: {selectedExercise || 'None'}
