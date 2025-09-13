@@ -19,6 +19,36 @@
   gap: 1.5rem;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: column;
+  /* אם רוצים אחד מעל השני, אחרת row */
+  align-items: flex-start;
+  /* שמאלה */
+  gap: 10px;
+  /* רווח בין הכפתורים */
+  margin: 20px;
+  /* ריווח מהקצוות */
+}
+
+.button-container button {
+  all: unset;
+  /* מסיר כמעט כל עיצוב קיים */
+  cursor: pointer;
+  padding: 8px 12px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #000;
+}
+
+.button-container button:hover {
+  background-color: #475569;
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 .practice-page {
   background: #d0dbe1;
   color: #444447;

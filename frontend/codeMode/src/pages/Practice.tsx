@@ -188,15 +188,18 @@ const Practice: React.FC = () => {
         onChange={value => setCode(value || '')}
         theme="vs-dark"
         options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
-      />
+        />
 
       
-        <button onClick={runCode} disabled={isRunning || !selectedExercise}>
-          {isRunning ? 'Running...' : 'Run Code'}
-        </button>
-        <button onClick={analyzeCode} disabled={isRunning} >
-          {isRunning ? 'Get help with AI assistant...' : 'Get help with AI assistant'}
-        </button>
+       <div className="button-container">
+  <button onClick={runCode} disabled={isRunning || !selectedExercise}>
+    {isRunning ? 'Running...' : 'Run Code'}
+  </button>
+  <button onClick={analyzeCode} disabled={isRunning}>
+    {isRunning ? 'Get help with AI assistant...' : 'Get help with AI assistant'}
+  </button>
+</div>
+
       
 
       {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
