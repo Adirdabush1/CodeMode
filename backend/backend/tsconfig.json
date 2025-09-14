@@ -23,7 +23,7 @@
   "include": [
     "src/**/*",
     "backend/backend/**/*"
-  ],
+, "server/data/questions"  ],
   "exclude": [
     "node_modules",
     "dist"

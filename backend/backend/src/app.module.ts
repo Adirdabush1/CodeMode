@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { AiAnalyzeModule } from './ai-analyze/ai-analyze.module';
 import { JudgeController } from './judge.controller';
+import { QuestionsModule } from './questions/questions.module';
 
 const mongoUri = process.env.MONGODB_URI;
 if (!mongoUri) {
@@ -24,6 +25,7 @@ if (!mongoUri) {
     UserModule,
     AuthModule,
     AiAnalyzeModule,
+    QuestionsModule,
   ],
   controllers: [AppController, JudgeController], // ✅ JudgeController זמין עכשיו
   providers: [AppService],
