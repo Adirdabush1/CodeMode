@@ -44,7 +44,10 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
     const fetchExercises = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`/questions?language=${selectedLanguage}`);
+        const res = await fetch(`https://backend-codemode-9p1s.onrender.com/questions?language=${selectedLanguage}`, {
+  credentials: 'include', 
+});
+
         const data = await res.json();
         setExercises(data?.items || []);
       } catch (err) {
