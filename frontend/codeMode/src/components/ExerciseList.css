@@ -59,6 +59,33 @@
 }
 
 .card-section.exercises-samples li {
-  font-size: 0.5rem;
+  font-size: 1rem;
   line-height: 1.6;
+}
+
+.card-section.exercises-samples {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  /* משתנה מ-center ל-flex-start כדי שהשפה תמיד למעלה */
+  margin: 0 auto;
+  width: 90%;
+  max-width: 800px;
+  height: auto;
+  /* מאפשר גובה משתנה */
+  min-height: 500px;
+  /* או יותר לפי הצורך */
+  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+  padding: 1rem;
+  border-radius: 1.5rem;
+  box-shadow:
+    inset -2px 2px hsl(0 0% 100% / 1),
+    -10px 10px 20px hsl(0 0% 0% / 0.1);
+  text-align: right;
+  overflow-y: auto;
+  animation: slideInFromLeft 1s ease forwards;
+  animation-timeline: view();
+  animation-range: cover 0% cover 40%;
+  opacity: 0;
 }

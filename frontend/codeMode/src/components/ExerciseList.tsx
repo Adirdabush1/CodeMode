@@ -84,13 +84,13 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
   const difficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'easy':
-        return 'green';
+        return '#a0a0a0';
       case 'medium':
-        return 'orange';
+        return '#555555';
       case 'hard':
-        return 'red';
+        return '#000000';
       default:
-        return 'black';
+        return '#333333';
     }
   };
 
