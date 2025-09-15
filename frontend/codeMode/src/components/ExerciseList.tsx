@@ -4,7 +4,7 @@ import './ExerciseList.css';
 
 interface Exercise {
   _id: string;
-  name: string; // ← שמות תואמים מה-DB
+  name: string;
   difficulty: 'easy' | 'medium' | 'hard';
   programmingLanguage: string;
   description?: string;
@@ -62,12 +62,10 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
         const data = await res.json();
         console.log('📥 fetched data:', data);
 
-        // אם ה-backend מחזיר אובייקט עם items/total:
         if (data.items && data.total !== undefined) {
           setExercises(data.items);
           setTotal(data.total);
         } else {
-          // אם מחזיר מערך ישיר
           setExercises(data);
           setTotal(data.length);
         }
@@ -149,7 +147,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
               }
               style={{ cursor: 'pointer', color: difficultyColor(exercise.difficulty) }}
             >
-              {exercise.name} ({exercise.difficulty})
+              {exercise.description || 'No description available'}
             </li>
           ))}
 
@@ -173,7 +171,6 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
         </ul>
       )}
 
-      {/* Pagination controls */}
       {total > exercises.length && (
         <div className="pagination-controls">
           <button disabled={page === 1} onClick={() => setPage(page - 1)}>
