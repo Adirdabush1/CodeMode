@@ -4,9 +4,9 @@ import './ExerciseList.css';
 
 interface Exercise {
   _id: string;
-  title: string; // ← תיקון כאן
+  name: string; // ← שמות תואמים מה-DB
   difficulty: 'easy' | 'medium' | 'hard';
-  language: string;
+  programmingLanguage: string;
   description?: string;
   tags?: string[];
   examples?: { input: string; output: string }[];
@@ -55,16 +55,22 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
       setLoading(true);
       try {
         const res = await fetch(
-          `https://backend-codemode-9p1s.onrender.com/questions?language=${selectedLanguage}&page=${page}`,
-          {
-            credentials: 'include',
-          }
+          `https://backend-codemode-9p1s.onrender.com/questions?programmingLanguage=${selectedLanguage}&page=${page}`,
+          { credentials: 'include' }
         );
 
         const data = await res.json();
-        console.log("📥 fetched data:", data);
-        setExercises(data?.items || []);
-        setTotal(data?.total || 0);
+        console.log('📥 fetched data:', data);
+
+        // אם ה-backend מחזיר אובייקט עם items/total:
+        if (data.items && data.total !== undefined) {
+          setExercises(data.items);
+          setTotal(data.total);
+        } else {
+          // אם מחזיר מערך ישיר
+          setExercises(data);
+          setTotal(data.length);
+        }
       } catch (err) {
         console.error('Error fetching exercises', err);
         setExercises([]);
@@ -143,7 +149,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
               }
               style={{ cursor: 'pointer', color: difficultyColor(exercise.difficulty) }}
             >
-              {exercise.title} ({exercise.difficulty}) {/* ← תיקון כאן */}
+              {exercise.name} ({exercise.difficulty})
             </li>
           ))}
 
@@ -170,8 +176,12 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
       {/* Pagination controls */}
       {total > exercises.length && (
         <div className="pagination-controls">
-          <button disabled={page === 1} onClick={() => setPage(page - 1)}>Prev</button>
-          <button disabled={page * 30 >= total} onClick={() => setPage(page + 1)}>Next</button>
+          <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+            Prev
+          </button>
+          <button disabled={page * 30 >= total} onClick={() => setPage(page + 1)}>
+            Next
+          </button>
         </div>
       )}
     </div>
