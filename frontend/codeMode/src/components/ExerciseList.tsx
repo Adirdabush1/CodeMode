@@ -62,6 +62,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
         );
 
         const data = await res.json();
+        console.log("📥 fetched data:", data);
         setExercises(data?.items || []);
         setTotal(data?.total || 0);
       } catch (err) {
