@@ -14,7 +14,7 @@ async function run() {
     await client.connect();
     console.log("✅ Connected to MongoDB Atlas");
 
-    const database = client.db("codeModeDB");
+    const database = client.db("tset");
     const questionsCollection = database.collection("questions");
 
     // קריאת הקובץ JSON
