@@ -18,7 +18,15 @@ interface SolvedExercise {
   solvedAt?: string;
 }
 
-export type Language = 'typescript' | 'javascript' | 'python' | 'java' | 'csharp' | 'cpp' | 'html' | 'css';
+export type Language =
+  | 'typescript'
+  | 'javascript'
+  | 'python'
+  | 'java'
+  | 'csharp'
+  | 'cpp'
+  | 'html'
+  | 'css';
 export type ExerciseItem = { id: string; language: Language };
 
 interface ExerciseListProps {
@@ -36,6 +44,8 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
 }) => {
   const auth = useContext(AuthContext);
   const [exercises, setExercises] = useState<Exercise[]>([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -44,29 +54,38 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
     const fetchExercises = async () => {
       setLoading(true);
       try {
-        const res = await fetch(`https://backend-codemode-9p1s.onrender.com/questions?language=${selectedLanguage}`, {
-  credentials: 'include', 
-});
+        const res = await fetch(
+          `https://backend-codemode-9p1s.onrender.com/questions?language=${selectedLanguage}&page=${page}`,
+          {
+            credentials: 'include',
+          }
+        );
 
         const data = await res.json();
         setExercises(data?.items || []);
+        setTotal(data?.total || 0);
       } catch (err) {
         console.error('Error fetching exercises', err);
         setExercises([]);
+        setTotal(0);
       } finally {
         setLoading(false);
       }
     };
 
     fetchExercises();
-  }, [selectedLanguage, auth?.isLoggedIn]);
+  }, [selectedLanguage, auth?.isLoggedIn, page]);
 
   const difficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'easy': return 'green';
-      case 'medium': return 'orange';
-      case 'hard': return 'red';
-      default: return 'black';
+      case 'easy':
+        return 'green';
+      case 'medium':
+        return 'orange';
+      case 'hard':
+        return 'red';
+      default:
+        return 'black';
     }
   };
 
@@ -78,18 +97,34 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
     );
   }
 
-  const languages: Language[] = ['javascript','python','java','typescript','csharp','cpp','html','css'];
+  const languages: Language[] = [
+    'javascript',
+    'python',
+    'java',
+    'typescript',
+    'csharp',
+    'cpp',
+    'html',
+    'css',
+  ];
 
   return (
     <div className="card-section exercises-samples">
-      <h3>Exercises</h3>
+      <h3>
+        Exercises ({total}) - Page {page}
+      </h3>
 
       <div className="language-card-grid">
         {languages.map((lang) => (
           <button
             key={lang}
-            className={`language-card ${selectedLanguage === lang ? 'active' : ''}`}
-            onClick={() => onSelectExercise({ id: '', language: lang })}
+            className={`language-card ${
+              selectedLanguage === lang ? 'active' : ''
+            }`}
+            onClick={() => {
+              setPage(1);
+              onSelectExercise({ id: '', language: lang });
+            }}
           >
             {lang.toUpperCase()}
           </button>
@@ -103,9 +138,16 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
           {exercises.map((exercise) => (
             <li
               key={exercise._id}
-              className={selectedExercise === exercise._id ? 'selected-exercise' : ''}
-              onClick={() => onSelectExercise({ id: exercise._id, language: selectedLanguage })}
-              style={{ cursor: 'pointer', color: difficultyColor(exercise.difficulty) }}
+              className={
+                selectedExercise === exercise._id ? 'selected-exercise' : ''
+              }
+              onClick={() =>
+                onSelectExercise({ id: exercise._id, language: selectedLanguage })
+              }
+              style={{
+                cursor: 'pointer',
+                color: difficultyColor(exercise.difficulty),
+              }}
             >
               {exercise.title} ({exercise.difficulty})
             </li>
@@ -117,9 +159,20 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
               {solvedExercises.map((ex) => (
                 <li
                   key={ex.exerciseId}
-                  className={selectedExercise === ex.exerciseId ? 'selected-exercise' : ''}
-                  onClick={() => onSelectExercise({ id: ex.exerciseId, language: selectedLanguage })}
-                  style={{ cursor: 'pointer', fontStyle: 'italic', color: 'green' }}
+                  className={
+                    selectedExercise === ex.exerciseId ? 'selected-exercise' : ''
+                  }
+                  onClick={() =>
+                    onSelectExercise({
+                      id: ex.exerciseId,
+                      language: selectedLanguage,
+                    })
+                  }
+                  style={{
+                    cursor: 'pointer',
+                    fontStyle: 'italic',
+                    color: 'green',
+                  }}
                 >
                   {ex.name}
                 </li>
@@ -127,6 +180,21 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
             </>
           )}
         </ul>
+      )}
+
+      {/* Pagination controls */}
+      {total > exercises.length && (
+        <div className="pagination-controls">
+          <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+            Prev
+          </button>
+          <button
+            disabled={page * 30 >= total}
+            onClick={() => setPage(page + 1)}
+          >
+            Next
+          </button>
+        </div>
       )}
     </div>
   );
