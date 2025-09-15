@@ -22,9 +22,11 @@ async function run() {
     const questionsData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
     // המרה למערך אחד עם שדה language
+    // המרה למערך אחד עם שדה language קטן
     const questionsArray = Object.entries(questionsData).flatMap(([language, questions]) =>
-      questions.map(q => ({ ...q, language }))
+      questions.map(q => ({ ...q, language: language.toLowerCase() }))
     );
+
 
     // קבלת כל השאלות הקיימות
     const existingQuestions = await questionsCollection.find({}, { projection: { name: 1, language: 1 } }).toArray();
