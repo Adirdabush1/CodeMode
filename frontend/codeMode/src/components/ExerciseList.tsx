@@ -4,7 +4,7 @@ import './ExerciseList.css';
 
 interface Exercise {
   _id: string;
-  title: string;
+  title: string; // ← תיקון כאן
   difficulty: 'easy' | 'medium' | 'hard';
   language: string;
   description?: string;
@@ -119,9 +119,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
         {languages.map((lang) => (
           <button
             key={lang}
-            className={`language-card ${
-              selectedLanguage === lang ? 'active' : ''
-            }`}
+            className={`language-card ${selectedLanguage === lang ? 'active' : ''}`}
             onClick={() => {
               setPage(1);
               onSelectExercise({ id: '', language: lang });
@@ -139,18 +137,13 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
           {exercises.map((exercise) => (
             <li
               key={exercise._id}
-              className={
-                selectedExercise === exercise._id ? 'selected-exercise' : ''
-              }
+              className={selectedExercise === exercise._id ? 'selected-exercise' : ''}
               onClick={() =>
                 onSelectExercise({ id: exercise._id, language: selectedLanguage })
               }
-              style={{
-                cursor: 'pointer',
-                color: difficultyColor(exercise.difficulty),
-              }}
+              style={{ cursor: 'pointer', color: difficultyColor(exercise.difficulty) }}
             >
-              {exercise.title} ({exercise.difficulty})
+              {exercise.title} ({exercise.difficulty}) {/* ← תיקון כאן */}
             </li>
           ))}
 
@@ -160,20 +153,11 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
               {solvedExercises.map((ex) => (
                 <li
                   key={ex.exerciseId}
-                  className={
-                    selectedExercise === ex.exerciseId ? 'selected-exercise' : ''
-                  }
+                  className={selectedExercise === ex.exerciseId ? 'selected-exercise' : ''}
                   onClick={() =>
-                    onSelectExercise({
-                      id: ex.exerciseId,
-                      language: selectedLanguage,
-                    })
+                    onSelectExercise({ id: ex.exerciseId, language: selectedLanguage })
                   }
-                  style={{
-                    cursor: 'pointer',
-                    fontStyle: 'italic',
-                    color: 'green',
-                  }}
+                  style={{ cursor: 'pointer', fontStyle: 'italic', color: 'green' }}
                 >
                   {ex.name}
                 </li>
@@ -186,15 +170,8 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
       {/* Pagination controls */}
       {total > exercises.length && (
         <div className="pagination-controls">
-          <button disabled={page === 1} onClick={() => setPage(page - 1)}>
-            Prev
-          </button>
-          <button
-            disabled={page * 30 >= total}
-            onClick={() => setPage(page + 1)}
-          >
-            Next
-          </button>
+          <button disabled={page === 1} onClick={() => setPage(page - 1)}>Prev</button>
+          <button disabled={page * 30 >= total} onClick={() => setPage(page + 1)}>Next</button>
         </div>
       )}
     </div>
