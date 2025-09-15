@@ -35,7 +35,11 @@ export class QuestionsController {
     if (tag) filter.tags = tag;
     if (q) filter.$text = { $search: q };
 
-    return this.svc.find(filter, page, pageSize);
+    // שליפה מהשירות
+    const results = await this.svc.find(filter, page, pageSize);
+
+    // עוטף את התוצאה ב-items כדי להתאים ל-frontend
+    return { items: results };
   }
 
   @Get('tags')
