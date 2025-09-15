@@ -181,9 +181,7 @@ const Practice: React.FC = () => {
         }}
       />
 
-      <div style={{ margin: '10px 0', fontWeight: 'bold' }}>
-        Selected Exercise: {selectedExercise || 'None'}
-      </div>
+    
 
       <Editor
         height="400px"
