@@ -86,11 +86,11 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
       case 'easy':
         return '#a0a0a0';
       case 'medium':
-        return '#555555';
+        return '#464545ff';
       case 'hard':
         return '#000000';
       default:
-        return '#333333';
+        return '#2b2a2aff';
     }
   };
 

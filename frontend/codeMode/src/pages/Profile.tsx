@@ -50,7 +50,7 @@ const Profile: React.FC<ProfileProps> = ({
     <>
       <MenuBar />
       <div className="profile-page">
-        <h1 className="page-title">Profile</h1>
+        
         <div className="container">
           <div className="profile-card">
             <div className="card-glow"></div>
