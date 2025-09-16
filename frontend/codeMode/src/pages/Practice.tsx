@@ -6,7 +6,15 @@ import MenuBar from '../components/MenuBar';
 import Swal from 'sweetalert2';
 import './Practice.css';
 
-type Language = 'typescript' | 'javascript' | 'python' | 'java' | 'csharp' | 'cpp' | 'html' | 'css';
+type Language =
+  | 'typescript'
+  | 'javascript'
+  | 'python'
+  | 'java'
+  | 'csharp'
+  | 'cpp'
+  | 'html'
+  | 'css';
 
 const Practice: React.FC = () => {
   const [code, setCode] = useState('// Write your code here...');
@@ -32,17 +40,20 @@ const Practice: React.FC = () => {
     setSaveErrorMessage(null);
 
     try {
-      const res = await fetch('https://backend-codemode-9p1s.onrender.com/user/add-solved', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          exerciseId: selectedExercise,
-          code,
-          feedback: userFeedback,
-          stdin,
-        }),
-        credentials: 'include',
-      });
+      const res = await fetch(
+        'https://backend-codemode-9p1s.onrender.com/user/add-solved',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            exerciseId: selectedExercise,
+            code,
+            feedback: userFeedback,
+            stdin,
+          }),
+          credentials: 'include',
+        }
+      );
 
       if (!res.ok) {
         const errorData = await res.json();
@@ -60,6 +71,22 @@ const Practice: React.FC = () => {
     }
   }
 
+  // helper לבדוק אם מחובר (token או cookies)
+  async function isLoggedIn(): Promise<boolean> {
+    const token = localStorage.getItem('token');
+    if (token) return true;
+
+    try {
+      const meRes = await fetch(
+        'https://backend-codemode-9p1s.onrender.com/user/me',
+        { credentials: 'include' }
+      );
+      return meRes.ok;
+    } catch {
+      return false;
+    }
+  }
+
   // 🔹 Run code
   async function runCode() {
     if (!selectedExercise) return;
@@ -72,15 +99,18 @@ const Practice: React.FC = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({ code, language, stdin }),
-        credentials: token ? undefined : 'include',
-      });
+      const res = await fetch(
+        'https://backend-codemode-9p1s.onrender.com/judge/run',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({ code, language, stdin }),
+          credentials: token ? undefined : 'include',
+        }
+      );
 
       if (!res.ok) {
         const text = await res.text();
@@ -92,11 +122,14 @@ const Practice: React.FC = () => {
       let resultOutput = data.output || '';
 
       if (!resultOutput.trim()) {
-        if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n`;
-        if (data.stderr) resultOutput += `❌ Runtime Error:\n${data.stderr}\n`;
+        if (data.compile_output)
+          resultOutput += `💻 Compile Output:\n${data.compile_output}\n`;
+        if (data.stderr)
+          resultOutput += `❌ Runtime Error:\n${data.stderr}\n`;
         if (data.stdout) resultOutput += `✅ Output:\n${data.stdout}\n`;
         if (data.message) resultOutput += `ℹ Message:\n${data.message}\n`;
-        if (data.status) resultOutput += `📌 Status: ${data.status.description}\n`;
+        if (data.status)
+          resultOutput += `📌 Status: ${data.status.description}\n`;
       }
 
       if (!resultOutput.trim()) resultOutput = '⚠ No output returned.';
@@ -114,9 +147,9 @@ const Practice: React.FC = () => {
 
   // 🔹 Analyze code with AI
   async function analyzeCode() {
-    const token = localStorage.getItem('token');
+    const loggedIn = await isLoggedIn();
 
-    if (!token && aiUsageCount >= 1) {
+    if (!loggedIn && aiUsageCount >= 1) {
       Swal.fire({
         icon: 'info',
         title: 'AI Access Limited',
@@ -124,7 +157,7 @@ const Practice: React.FC = () => {
         confirmButtonText: 'Login',
         confirmButtonColor: '#3085d6',
         background: '#f4f6f9',
-      }).then(result => {
+      }).then((result) => {
         if (result.isConfirmed) window.location.href = '/login';
       });
       return;
@@ -134,26 +167,33 @@ const Practice: React.FC = () => {
     setOutput('🤖 Analyzing with AI...');
 
     try {
-      const res = await fetch('https://backend-codemode-9p1s.onrender.com/ai-analyze', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
-        body: JSON.stringify({ code, userFeedback }),
-        credentials: token ? undefined : 'include',
-      });
+      const token = localStorage.getItem('token');
+      const res = await fetch(
+        'https://backend-codemode-9p1s.onrender.com/ai-analyze',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          body: JSON.stringify({ code, userFeedback }),
+          credentials: token ? undefined : 'include',
+        }
+      );
 
       const data = await res.json();
       setOutput(data.result || 'No analysis returned');
 
-      if (!token) {
+      if (!loggedIn) {
         const newCount = aiUsageCount + 1;
         localStorage.setItem('aiUsageCount', newCount.toString());
         setAiUsageCount(newCount);
       }
     } catch (e) {
-      setOutput('❌ Error analyzing: ' + (e instanceof Error ? e.message : 'Unknown error'));
+      setOutput(
+        '❌ Error analyzing: ' +
+          (e instanceof Error ? e.message : 'Unknown error')
+      );
     } finally {
       setIsRunning(false);
     }
@@ -162,18 +202,12 @@ const Practice: React.FC = () => {
   return (
     <div className="practice-page">
       <MenuBar />
-     <h1>             
-      
+      <h1></h1>
 
-      
-     </h1>
-
-      {/* 🔹 Exercise list is now the only selector */}
       <ExerciseList
         selectedLanguage={language}
         selectedExercise={selectedExercise}
         onSelectExercise={(exercise) => {
-          // exercise = { id: string, language: Language }
           setSelectedExercise(exercise.id);
           setLanguage(exercise.language);
           setSaveStatus('idle');
@@ -181,30 +215,32 @@ const Practice: React.FC = () => {
         }}
       />
 
-    
-
       <Editor
         height="400px"
         language={language}
         value={code}
-        onChange={value => setCode(value || '')}
+        onChange={(value) => setCode(value || '')}
         theme="vs-dark"
         options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
+      />
 
-        />
-      
-        <button onClick={runCode} disabled={isRunning || !selectedExercise}>
-          {isRunning ? 'Running...' : 'Run Code'}
-        </button>
-        <button onClick={analyzeCode} disabled={isRunning} >
-          {isRunning ? 'Get help with AI assistant...' : 'Get help with AI assistant'}
-        </button>
-      
+      <button onClick={runCode} disabled={isRunning || !selectedExercise}>
+        {isRunning ? 'Running...' : 'Run Code'}
+      </button>
+      <button onClick={analyzeCode} disabled={isRunning}>
+        {isRunning ? 'Get help with AI assistant...' : 'Get help with AI assistant'}
+      </button>
 
-      {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
-      {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
+      {saveStatus === 'saving' && (
+        <p style={{ color: 'blue' }}>Saving exercise...</p>
+      )}
+      {saveStatus === 'success' && (
+        <p style={{ color: 'green' }}>Exercise saved successfully!</p>
+      )}
       {saveStatus === 'error' && (
-        <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>
+        <p style={{ color: 'red' }}>
+          Error saving exercise: {saveErrorMessage || 'Unknown error'}
+        </p>
       )}
 
       <pre className="output-pre">{output}</pre>
@@ -212,12 +248,12 @@ const Practice: React.FC = () => {
       <textarea
         placeholder="What did you learn? Where did you get stuck?"
         value={userFeedback}
-        onChange={e => setUserFeedback(e.target.value)}
+        onChange={(e) => setUserFeedback(e.target.value)}
       />
       <textarea
         placeholder="Optional input (stdin) for the exercise"
         value={stdin}
-        onChange={e => setStdin(e.target.value)}
+        onChange={(e) => setStdin(e.target.value)}
       />
     </div>
   );

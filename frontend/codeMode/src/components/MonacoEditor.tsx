@@ -20,7 +20,7 @@ const supportedLanguages = [
 const MyEditor: React.FC = () => {
   const [code, setCode] = useState<string>('// Write code here..');
   const [language, setLanguage] = useState<typeof supportedLanguages[number]>('javascript');
-  const [stdin, setStdin] = useState<string>(''); // קלט אפשרי
+  const [stdin, setStdin] = useState<string>(''); 
   const [output, setOutput] = useState<string>('');
   const [userFeedback, setUserFeedback] = useState<string>('');
   const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -85,7 +85,20 @@ const MyEditor: React.FC = () => {
   async function analyzeCode() {
     const token = localStorage.getItem('token');
 
-    if (!token && aiUsageCount >= 1) {
+    // אם אין טוקן, נבדוק אם המשתמש מחובר עם קוקיז
+    let loggedIn = !!token;
+    if (!token) {
+      try {
+        const meRes = await fetch('https://backend-codemode-9p1s.onrender.com/user/me', {
+          credentials: 'include',
+        });
+        loggedIn = meRes.ok;
+      } catch {
+        loggedIn = false;
+      }
+    }
+
+    if (!loggedIn && aiUsageCount >= 1) {
       Swal.fire({
         icon: 'info',
         title: 'AI Access Limited',
@@ -116,7 +129,8 @@ const MyEditor: React.FC = () => {
       const data = await res.json();
       setOutput(data.result || 'No analysis returned');
 
-      if (!token) {
+      // נעדכן שימוש חינמי רק אם המשתמש לא מחובר
+      if (!loggedIn) {
         const newCount = aiUsageCount + 1;
         localStorage.setItem('aiUsageCount', newCount.toString());
         setAiUsageCount(newCount);
