@@ -42,6 +42,7 @@ const Dashboard: React.FC = () => {
     if (!API_URL) {
       console.error("REACT_APP_API_URL לא מוגדר!");
       setErrorMsg("לא ניתן לטעון נתונים מהשרת. הגדר REACT_APP_API_URL.");
+      console.log("API URL =", process.env.REACT_APP_API_URL);
       setLoading(false);
       return;
     }
