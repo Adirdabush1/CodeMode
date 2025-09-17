@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MenuBar from "../components/MenuBar";
-import "./Dashbord.css";
-
-const API_URL = process.env.REACT_APP_API_URL || "";
+import "./Dashboard.css";
 
 type UserSummary = {
   id?: string;
@@ -38,16 +36,20 @@ const Dashboard: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<UserSummary | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  const API_URL = process.env.REACT_APP_API_URL || "";
+
   useEffect(() => {
-    // טען בו-זמנית את המשתמש והפוסטים
-    const load = async () => {
+    if (!API_URL) {
+      console.error("REACT_APP_API_URL לא מוגדר!");
+      setErrorMsg("לא ניתן לטעון נתונים מהשרת. הגדר REACT_APP_API_URL.");
+      setLoading(false);
+      return;
+    }
+
+    const loadDashboard = async () => {
       setLoading(true);
       setErrorMsg(null);
       try {
-        if (!API_URL) {
-          throw new Error("REACT_APP_API_URL לא מוגדר. הגדר את כתובת ה-API ב-.env");
-        }
-
         const [userRes, postsRes] = await Promise.all([
           axios.get<UserSummary>(`${API_URL}/user/me`, { withCredentials: true }),
           axios.get<Post[]>(`${API_URL}/posts`, { withCredentials: true }),
@@ -57,35 +59,24 @@ const Dashboard: React.FC = () => {
         setPosts(postsRes.data);
       } catch (err) {
         console.error("Failed to load dashboard data:", err);
-        // אל תטען דמה — רק הודעה רלוונטית
-        setErrorMsg("לא ניתן לטעון נתונים מהשרת. ודא שהשרת פועל ושהגדרת REACT_APP_API_URL נכון.");
-        setPosts([]); // ריק במקום דמה
+        setErrorMsg("לא ניתן לטעון נתונים מהשרת. ודא שהשרת פועל וה-API מוגדר נכון.");
         setCurrentUser(null);
+        setPosts([]);
       } finally {
         setLoading(false);
       }
     };
 
-    load();
-  }, []);
+    loadDashboard();
+  }, [API_URL]);
 
   const handleShare = async () => {
     const content = newPostText.trim();
-    if (!content) return;
+    if (!content || !currentUser) return;
 
-    // אם אין משתמש מחובר — הסר אפשרות לפרסם
-    if (!currentUser) {
-      setErrorMsg("עליך להיות מחובר כדי לפרסם פוסט.");
-      return;
-    }
-
-    // יצירת פוסט באופן אופטימיסטי בצד לקוח
     const optimisticPost: Post = {
       id: `temp-${Date.now()}`,
-      author: {
-        name: currentUser.name,
-        avatarUrl: currentUser.avatarUrl,
-      },
+      author: { name: currentUser.name, avatarUrl: currentUser.avatarUrl },
       content,
       createdAt: new Date().toISOString(),
       likes: 0,
@@ -93,7 +84,7 @@ const Dashboard: React.FC = () => {
       comments: [],
     };
 
-    setPosts((p) => [optimisticPost, ...p]);
+    setPosts((prev) => [optimisticPost, ...prev]);
     setNewPostText("");
 
     try {
@@ -102,51 +93,35 @@ const Dashboard: React.FC = () => {
         { content },
         { withCredentials: true }
       );
-
-      // אם השרת מחזיר את הפוסט שנוצר — החלף את הפוסט האופטימיסטי
       if (res.data) {
-        setPosts((prev) => prev.map((pt) => (pt.id === optimisticPost.id ? res.data : pt)));
-      } else {
-        // אם השרת לא החזיר פוסט, אפשר לרענן את כל הרשימה
-        const postsRes = await axios.get<Post[]>(`${API_URL}/posts`, { withCredentials: true });
-        setPosts(postsRes.data);
+        setPosts((prev) =>
+          prev.map((p) => (p.id === optimisticPost.id ? res.data : p))
+        );
       }
     } catch (err) {
       console.error("Failed to post:", err);
       setErrorMsg("שגיאה בשליחת הפוסט — נסה שנית.");
-      // הסר את הפוסט האופטימיסטי במקרה של כישלון
       setPosts((prev) => prev.filter((p) => p.id !== optimisticPost.id));
     }
   };
 
   const toggleLike = async (postId: string) => {
-    // עדכון מקומי מהיר
     setPosts((prev) =>
       prev.map((p) => {
         if (p.id !== postId) return p;
         const liked = !p.likedByMe;
-        return {
-          ...p,
-          likedByMe: liked,
-          likes: liked ? p.likes + 1 : Math.max(0, p.likes - 1),
-        };
+        return { ...p, likedByMe: liked, likes: liked ? p.likes + 1 : Math.max(0, p.likes - 1) };
       })
     );
 
     try {
-      await axios.post(
-        `${API_URL}/posts/${postId}/like`,
-        {},
-        { withCredentials: true }
-      );
+      await axios.post(`${API_URL}/posts/${postId}/like`, {}, { withCredentials: true });
     } catch (err) {
       console.error("Failed to toggle like:", err);
-      // במקרה של שגיאה — נרענן את הפוסט מהשרת כדי להיות בקונסיסטנטיות
       try {
         const postsRes = await axios.get<Post[]>(`${API_URL}/posts`, { withCredentials: true });
         setPosts(postsRes.data);
       } catch (e) {
-        // השאר כמו שיש אם גם הרענון נכשל
         console.error("Also failed to refresh posts after like error:", e);
       }
     }
@@ -165,7 +140,7 @@ const Dashboard: React.FC = () => {
                   rows={2}
                   placeholder={currentUser ? "What are you thinking?" : "You must be logged in to post"}
                   value={newPostText}
-                  onChange={(ev: React.ChangeEvent<HTMLTextAreaElement>) => setNewPostText(ev.target.value)}
+                  onChange={(ev) => setNewPostText(ev.target.value)}
                   disabled={!currentUser}
                 />
                 <div className="mar-top clearfix">
@@ -174,7 +149,6 @@ const Dashboard: React.FC = () => {
                     type="button"
                     onClick={handleShare}
                     disabled={!currentUser || !newPostText.trim()}
-                    title={!currentUser ? "Please login to post" : "Share"}
                   >
                     <i className="fa fa-pencil fa-fw" /> Share
                   </button>
