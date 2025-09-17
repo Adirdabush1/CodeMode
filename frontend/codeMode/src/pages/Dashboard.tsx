@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import MenuBar from "../components/MenuBar";
-import "./Dashboard.css";
+import "./Dashbord.css";
 
 type UserSummary = {
   id?: string;
