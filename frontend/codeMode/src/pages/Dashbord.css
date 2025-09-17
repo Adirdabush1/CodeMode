@@ -1,0 +1,132 @@
+/* Dashboard.css */
+/* שמור את ההגדרות האלו כ- src/pages/Dashboard.css */
+
+body {
+  margin-top: 20px;
+  /* background: #ebeef0; */
+}
+
+.dashboard-page .img-sm {
+  width: 46px;
+  height: 46px;
+}
+
+.dashboard-page .panel {
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.075);
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 15px;
+}
+
+.dashboard-page .panel .panel-footer,
+.dashboard-page .panel>:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dashboard-page .panel .panel-heading,
+.dashboard-page .panel>:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.dashboard-page .panel-body {
+  padding: 25px 20px;
+}
+
+.dashboard-page .media-block .media-left {
+  display: block;
+  float: left;
+}
+
+.dashboard-page .media-block .media-right {
+  float: right;
+}
+
+.dashboard-page .media-block .media-body {
+  display: block;
+  overflow: hidden;
+  width: auto;
+}
+
+.dashboard-page .thumbnail {
+  border-radius: 0;
+  border-color: #e9e9e9;
+}
+
+.tag.tag-sm,
+.btn-group-sm>.tag {
+  padding: 5px 10px;
+}
+
+.tag:not(.label) {
+  background-color: #fff;
+  padding: 6px 12px;
+  border-radius: 2px;
+  border: 1px solid #cdd6e1;
+  font-size: 12px;
+  line-height: 1.42857;
+}
+
+.text-muted,
+a.text-muted:hover,
+a.text-muted:focus {
+  color: #acacac;
+}
+
+.text-sm {
+  font-size: 0.9em;
+}
+
+.btn-trans {
+  background-color: transparent;
+  border-color: transparent;
+  color: #929292;
+}
+
+.btn-icon {
+  padding-left: 9px;
+  padding-right: 9px;
+}
+
+.btn-sm,
+.btn-group-sm>.btn,
+.btn-icon.btn-sm {
+  padding: 5px 10px !important;
+}
+
+.mar-top {
+  margin-top: 15px;
+}
+
+/* עיצובים קטנים נוספים לתאימות */
+.dashboard-page .container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.dashboard-page .profile-img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+/* קליקים פעילים */
+.btn-hover-success:hover {
+  background: #e9f5ee;
+}
+
+.btn-hover-danger:hover {
+  background: #f9e9ea;
+}
+
+.btn-hover-primary:hover {
+  background: #eef5ff;
+}
+
+/* התאמה לרספונסיביות */
+@media (max-width: 768px) {
+  .dashboard-page .container {
+    padding: 0 10px;
+  }
+}
