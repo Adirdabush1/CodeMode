@@ -1,14 +1,17 @@
-// src/pages/Dashboard.tsx
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import MenuBar from "../components/MenuBar";
-import "./Dashbord.css";
+// Dashboard.tsx
+// מיקום מומלץ: src/pages/Dashboard.tsx
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import MenuBar from '../components/MenuBar';
+import './Dashboard.css';
+
+// אם ברצונך לשלב נקודת קצה שונה, הגדר REACT_APP_API_URL בקובץ .env
+const API_URL = process.env.REACT_APP_API_URL || '';
 
 type UserSummary = {
-  id?: string;
   name: string;
   avatarUrl?: string;
-  email?: string;
 };
 
 type Comment = {
@@ -31,78 +34,56 @@ type Post = {
 
 const Dashboard: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [newPostText, setNewPostText] = useState("");
-  const [loading, setLoading] = useState<boolean>(true);
-  const [currentUser, setCurrentUser] = useState<UserSummary | null>(null);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
-  const API_URL = process.env.REACT_APP_API_URL || "";
+  const [newPostText, setNewPostText] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!API_URL) {
-      console.error("REACT_APP_API_URL לא מוגדר!");
-      setErrorMsg("לא ניתן לטעון נתונים מהשרת. הגדר REACT_APP_API_URL.");
-      console.log("API URL =", process.env.REACT_APP_API_URL);
-      setLoading(false);
-      return;
-    }
+    fetchPosts();
+  }, []);
 
-    const loadDashboard = async () => {
-      setLoading(true);
-      setErrorMsg(null);
-      try {
-        const [userRes, postsRes] = await Promise.all([
-          axios.get<UserSummary>(`${API_URL}/user/me`, { withCredentials: true }),
-          axios.get<Post[]>(`${API_URL}/posts`, { withCredentials: true }),
-        ]);
-
-        setCurrentUser(userRes.data);
-        setPosts(postsRes.data);
-      } catch (err) {
-        console.error("Failed to load dashboard data:", err);
-        setErrorMsg("לא ניתן לטעון נתונים מהשרת. ודא שהשרת פועל וה-API מוגדר נכון.");
-        setCurrentUser(null);
-        setPosts([]);
-      } finally {
-        setLoading(false);
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      if (API_URL) {
+        const res = await axios.get<Post[]>(`${API_URL}/posts`, { withCredentials: true });
+        setPosts(res.data);
+      } else {
+        // אם אין backend מוגדר - טען דמה
+        setPosts(getMockPosts());
       }
-    };
-
-    loadDashboard();
-  }, [API_URL]);
+    } catch (err) {
+      console.error('Failed to fetch posts:', err);
+      setPosts(getMockPosts());
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleShare = async () => {
-    const content = newPostText.trim();
-    if (!content || !currentUser) return;
+    if (!newPostText.trim()) return;
 
-    const optimisticPost: Post = {
-      id: `temp-${Date.now()}`,
-      author: { name: currentUser.name, avatarUrl: currentUser.avatarUrl },
-      content,
+    const newPost: Post = {
+      id: String(Date.now()),
+      author: { name: 'You', avatarUrl: 'https://i.pravatar.cc/150?img=12' },
+      content: newPostText,
       createdAt: new Date().toISOString(),
       likes: 0,
       likedByMe: false,
       comments: [],
     };
 
-    setPosts((prev) => [optimisticPost, ...prev]);
-    setNewPostText("");
+    // עדכון אופטימיסטי
+    setPosts((p) => [newPost, ...p]);
+    setNewPostText('');
 
     try {
-      const res = await axios.post<Post>(
-        `${API_URL}/posts`,
-        { content },
-        { withCredentials: true }
-      );
-      if (res.data) {
-        setPosts((prev) =>
-          prev.map((p) => (p.id === optimisticPost.id ? res.data : p))
-        );
+      if (API_URL) {
+        await axios.post(`${API_URL}/posts`, { content: newPost.content }, { withCredentials: true });
+        // אפשר לרענן מהשרת במידת הצורך
       }
     } catch (err) {
-      console.error("Failed to post:", err);
-      setErrorMsg("שגיאה בשליחת הפוסט — נסה שנית.");
-      setPosts((prev) => prev.filter((p) => p.id !== optimisticPost.id));
+      console.error('Failed to post:', err);
+      // בהנחה שנרצה להתקן, אפשר להסיר את הפוסט האופטימיסטי או לסמן שגיאה
     }
   };
 
@@ -111,20 +92,20 @@ const Dashboard: React.FC = () => {
       prev.map((p) => {
         if (p.id !== postId) return p;
         const liked = !p.likedByMe;
-        return { ...p, likedByMe: liked, likes: liked ? p.likes + 1 : Math.max(0, p.likes - 1) };
+        return {
+          ...p,
+          likedByMe: liked,
+          likes: liked ? p.likes + 1 : Math.max(0, p.likes - 1),
+        };
       })
     );
 
     try {
-      await axios.post(`${API_URL}/posts/${postId}/like`, {}, { withCredentials: true });
-    } catch (err) {
-      console.error("Failed to toggle like:", err);
-      try {
-        const postsRes = await axios.get<Post[]>(`${API_URL}/posts`, { withCredentials: true });
-        setPosts(postsRes.data);
-      } catch (e) {
-        console.error("Also failed to refresh posts after like error:", e);
+      if (API_URL) {
+        await axios.post(`${API_URL}/posts/${postId}/like`, null, { withCredentials: true });
       }
+    } catch (err) {
+      console.error('Failed to toggle like:', err);
     }
   };
 
@@ -139,18 +120,12 @@ const Dashboard: React.FC = () => {
                 <textarea
                   className="form-control"
                   rows={2}
-                  placeholder={currentUser ? "What are you thinking?" : "You must be logged in to post"}
+                  placeholder="What are you thinking?"
                   value={newPostText}
-                  onChange={(ev) => setNewPostText(ev.target.value)}
-                  disabled={!currentUser}
+                  onChange={(e) => setNewPostText(e.target.value)}
                 />
                 <div className="mar-top clearfix">
-                  <button
-                    className="btn btn-sm btn-primary pull-right"
-                    type="button"
-                    onClick={handleShare}
-                    disabled={!currentUser || !newPostText.trim()}
-                  >
+                  <button className="btn btn-sm btn-primary pull-right" type="button" onClick={handleShare}>
                     <i className="fa fa-pencil fa-fw" /> Share
                   </button>
                   <a className="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#" />
@@ -162,21 +137,13 @@ const Dashboard: React.FC = () => {
 
             {loading ? (
               <div>Loading...</div>
-            ) : errorMsg ? (
-              <div style={{ color: "crimson", marginBottom: 12 }}>{errorMsg}</div>
-            ) : posts.length === 0 ? (
-              <div>No posts yet.</div>
             ) : (
               posts.map((post) => (
                 <div className="panel" key={post.id}>
                   <div className="panel-body">
                     <div className="media-block">
                       <a className="media-left" href="#">
-                        <img
-                          className="img-circle img-sm"
-                          alt="Profile"
-                          src={post.author.avatarUrl || "https://i.pravatar.cc/150"}
-                        />
+                        <img className="img-circle img-sm" alt="Profile" src={post.author.avatarUrl || 'https://i.pravatar.cc/150'} />
                       </a>
                       <div className="media-body">
                         <div className="mar-btm">
@@ -193,33 +160,25 @@ const Dashboard: React.FC = () => {
 
                         <div className="pad-ver">
                           <div className="btn-group">
-                            <button
-                              className={`btn btn-sm btn-default btn-hover-success ${post.likedByMe ? "active" : ""}`}
-                              onClick={() => toggleLike(post.id)}
-                            >
+                            <button className={`btn btn-sm btn-default btn-hover-success ${post.likedByMe ? 'active' : ''}`} onClick={() => toggleLike(post.id)}>
                               <i className="fa fa-thumbs-up" />
                             </button>
                             <button className="btn btn-sm btn-default btn-hover-danger">
                               <i className="fa fa-thumbs-down" />
                             </button>
                           </div>
-                          <a className="btn btn-sm btn-default btn-hover-primary" href="#">
-                            Comment
-                          </a>
+                          <a className="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
                         </div>
 
                         <hr />
 
+                        {/* comments */}
                         {post.comments && post.comments.length > 0 && (
                           <div>
                             {post.comments.map((c) => (
                               <div className="media-block" key={c.id} style={{ marginBottom: 12 }}>
                                 <a className="media-left" href="#">
-                                  <img
-                                    className="img-circle img-sm"
-                                    alt="Profile"
-                                    src={c.author.avatarUrl || "https://i.pravatar.cc/150?img=5"}
-                                  />
+                                  <img className="img-circle img-sm" alt="Profile" src={c.author.avatarUrl || 'https://i.pravatar.cc/150?img=5'} />
                                 </a>
                                 <div className="media-body">
                                   <div className="mar-btm">
@@ -249,19 +208,69 @@ const Dashboard: React.FC = () => {
 
 export default Dashboard;
 
-/* helpers */
+// ------- עזרי תצוגה ונתוני דמה -------
 function formatRelative(iso: string) {
   try {
     const then = new Date(iso).getTime();
     const diff = Date.now() - then;
     const minutes = Math.floor(diff / 60000);
-    if (minutes < 1) return "just now";
+    if (minutes < 1) return 'just now';
     if (minutes < 60) return `${minutes} min ago`;
     const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+    if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
     const days = Math.floor(hours / 24);
-    return `${days} day${days > 1 ? "s" : ""} ago`;
+    return `${days} day${days > 1 ? 's' : ''} ago`;
   } catch {
     return iso;
   }
 }
+
+function getMockPosts(): Post[] {
+  return [
+    {
+      id: 'p1',
+      author: { name: 'Lisa D.', avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar1.png' },
+      content:
+        'consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
+      createdAt: new Date(Date.now() - 11 * 60000).toISOString(),
+      likes: 12,
+      likedByMe: false,
+      comments: [
+        {
+          id: 'c1',
+          author: { name: 'Bobby Marz', avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar2.png' },
+          content:
+            'Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
+          createdAt: new Date(Date.now() - 7 * 60000).toISOString(),
+        },
+        {
+          id: 'c2',
+          author: { name: 'Lucy Moon', avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar3.png' },
+          content: 'Duis autem vel eum iriure dolor in hendrerit in vulputate ?',
+          createdAt: new Date(Date.now() - 2 * 60000).toISOString(),
+        },
+      ],
+    },
+    {
+      id: 'p2',
+      author: { name: 'John Doe', avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar1.png' },
+      content: 'Lorem ipsum dolor sit amet.',
+      imageUrl: 'https://www.bootdey.com/image/400x300',
+      createdAt: new Date(Date.now() - 70 * 60000).toISOString(),
+      likes: 250,
+      likedByMe: false,
+      comments: [
+        {
+          id: 'c3',
+          author: { name: 'Maria Leanz', avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar2.png' },
+          content: 'Duis autem vel eum iriure dolor in hendrerit in vulputate ?',
+          createdAt: new Date(Date.now() - 2 * 60000).toISOString(),
+        },
+      ],
+    },
+  ];
+}
+
+
+/* Dashboard.css */
+/* שמור את ההגדרות האלו כ- src/pages/Dashboard.css */
