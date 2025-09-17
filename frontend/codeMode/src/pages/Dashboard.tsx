@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MenuBar from '../components/MenuBar';
-import './Dashboard.css';
+import './Dashbord.css';
 
 // אם ברצונך לשלב נקודת קצה שונה, הגדר REACT_APP_API_URL בקובץ .env
 const API_URL = process.env.REACT_APP_API_URL || '';
