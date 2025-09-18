@@ -509,3 +509,66 @@ a {
     transition: none !important;
   }
 }
+
+/* ---------- אפקט "הזזה קלה" לכרטיסים ---------- */
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: inset -2px 2px hsl(0 0% 100% / 0.3),
+    -12px 12px 25px hsl(0 0% 0% / 0.15);
+  transition: all 0.3s ease;
+}
+
+/* ---------- אנימציית כניסה לכפתורים ---------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- אפקט זכוכית נוסף לכפתורים ---------- */
+.more-exercises-button,
+.choose-language-button,
+.login-button {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.more-exercises-button:hover,
+.choose-language-button:hover,
+.login-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* ---------- שיפורים לטקסט הצדדי ---------- */
+.side-text {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  font-family: 'Arial Black', sans-serif;
+}
+
+/* ---------- שיפורי גלילה בכרטיסי שאלות ---------- */
+.card-section.exercises-samples {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(255, 255, 255, 0.1);
+}
+
+.card-section.exercises-samples::-webkit-scrollbar {
+  width: 6px;
+}
+
+.card-section.exercises-samples::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.card-section.exercises-samples::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
