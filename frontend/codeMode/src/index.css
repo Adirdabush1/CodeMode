@@ -8,4 +8,22 @@ body,
 
 body {
   background: radial-gradient(125% 125% at 50% 10%, #fff 40%, #475569 100%);
+  overflow-x: auto;
+  /* מאפשר גלילה אופקית אם המסך צר */
+}
+
+/* wrapper שמכריח רוחב דסקטופ */
+.desktop-view-wrapper {
+  min-width: 1200px;
+  /* רוחב הדסקטופ שלך */
+  max-width: none;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* שומר גלילה אנכית רגילה */
+.page-root {
+  overflow-x: hidden;
+  height: 100%;
 }
