@@ -84,13 +84,13 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
   const difficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'easy':
-        return '#323131ff';
+        return '#4CAF50'; // ירוק בולט
       case 'medium':
-        return '#1d1d1dff';
+        return '#FF9800'; // כתום בולט
       case 'hard':
-        return '#000000';
+        return '#F44336'; // אדום חזק
       default:
-        return '#2b2a2aff';
+        return '#9E9E9E'; // אפור נייטרלי
     }
   };
 
@@ -112,6 +112,16 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
     'html',
     'css',
   ];
+
+  // ✅ מיון לפי דרגת קושי: קל -> בינוני -> קשה
+  const sortedExercises = [...exercises].sort((a, b) => {
+    const order: Record<'easy' | 'medium' | 'hard', number> = {
+      easy: 1,
+      medium: 2,
+      hard: 3,
+    };
+    return order[a.difficulty] - order[b.difficulty];
+  });
 
   return (
     <div className="card-section exercises-samples">
@@ -138,7 +148,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
         <p>Loading...</p>
       ) : (
         <ul>
-          {exercises.map((exercise) => (
+          {sortedExercises.map((exercise) => (
             <li
               key={exercise._id}
               className={selectedExercise === exercise._id ? 'selected-exercise' : ''}
