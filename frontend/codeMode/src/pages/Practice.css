@@ -679,3 +679,114 @@ a {
     display: none;
   }
 }
+
+/* --- שמירה על מראה דסקטופ גם במובייל (הדבק בסוף הקובץ) --- */
+html,
+body {
+  min-width: 1200px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: auto;
+  /* מאפשר גלילה אופקית כדי לשמר פריסה דסקטופ */
+}
+
+/* ביטול התאמות רספונסיביות — שמירת גדלים/פריסות הדסקטופ */
+@media (max-width: 1024px) {
+  /* אין שינויים — משאירים פריסה דסקטופ */
+}
+
+@media (max-width: 768px) {
+
+  /* practice page — שמירה על רוחב/מרווח/פדינג כמו בדסקטופ */
+  .practice-page>div {
+    width: 100% !important;
+    max-width: 600px !important;
+    margin: 1.5rem 0 !important;
+    padding: 2rem !important;
+  }
+
+  /* שמירת גודל select וכפתורים כמו בדסקטופ */
+  .practice-page select {
+    width: 150px !important;
+  }
+
+  .practice-page button {
+    width: auto !important;
+    align-self: flex-start !important;
+    margin-top: 1rem !important;
+  }
+
+  .practice-page .monaco-editor {
+    height: 400px !important;
+  }
+
+  /* כרטיסים — שמירת פריסה row כמו בדסקטופ */
+  .card {
+    flex-direction: row !important;
+    text-align: left !important;
+    margin: 0 !important;
+  }
+
+  .icon {
+    font-size: 4rem !important;
+  }
+
+  .text-content h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .side-text {
+    display: block !important;
+  }
+
+  /* שמירת מראה כפתורים ושפות */
+  #language-select,
+  .more-exercises-button,
+  .choose-language-button,
+  .login-button {
+    padding: 0.75rem 1rem !important;
+    width: auto !important;
+  }
+
+  .card-section.exercises-samples {
+    max-height: 400px !important;
+    width: 90% !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* שמירת טיפוגרפיה ופריסה דסקטופ גם במסכים קטנים מאוד */
+  .split-text-container {
+    font-size: 3.5rem !important;
+  }
+
+  .icon {
+    font-size: 4rem !important;
+  }
+
+  .text-content h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .text-content p {
+    font-size: 1rem !important;
+  }
+
+  .cards-list {
+    padding: 3rem 2rem !important;
+  }
+}
+
+/* כיבוד משתמשים שמעדיפים אנימציות מופחתות */
+@media (prefers-reduced-motion: reduce) {
+
+  .card,
+  .more-exercises-button,
+  .text-part {
+    animation: none !important;
+    transition: none !important;
+  }
+}

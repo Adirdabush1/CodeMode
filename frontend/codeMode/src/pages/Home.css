@@ -1,12 +1,20 @@
 @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
 
+html,
+body {
+  /* כופה על הדף להישאר ברוחב דסקטופ — כך המראה יהיה זהה גם במובייל (עם גלילה אופקית אם צריך) */
+  min-width: 1200px;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: #d0dbe1;
   padding: 2rem;
   font-family: system-ui, sans-serif;
   color: #444447;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: auto;
+  /* מאפשר גלילה אופקית כדי לשמור על המראה */
 }
 
 a {
@@ -324,8 +332,6 @@ a {
   animation: fadeIn 1s ease forwards;
   opacity: 0;
   text-align: right;
-
-
 }
 
 .card-section.exercises-samples h3 {
@@ -340,7 +346,6 @@ a {
 .card-section.exercises-samples ul {
   padding-right: 1.5rem;
   list-style: disc;
-
 }
 
 .card-section.exercises-samples li {
@@ -402,7 +407,6 @@ a {
   animation-fill-mode: both;
 }
 
-
 .icon {
   flex-shrink: 0;
   font-size: 4rem;
@@ -430,23 +434,78 @@ a {
   color: #555;
 }
 
-/* רספונסיביות */
+/* שומרים על מראה הדסקטופ גם בנקודות שבירה במובייל */
+/* (מניעת התאמות רספונסיביות — שומר על אותה פריסה כמו במחשב) */
+@media (max-width: 1024px) {
+  /* אין שינוי — משאירים פריסה כמו בדסקטופ */
+}
+
 @media (max-width: 768px) {
+
+  /* מבטלים שינויים: נשמור על פריסת ה-row ועל כל הגדלים */
   .card {
-    flex-direction: column !important;
-    text-align: center;
-    margin: 0;
+    flex-direction: row !important;
+    text-align: left !important;
+    margin: 0 !important;
+    width: 100% !important;
   }
 
   .icon {
-    font-size: 3rem;
+    font-size: 4rem !important;
   }
 
   .text-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem !important;
   }
 
   .side-text {
-    display: none;
+    display: block !important;
+  }
+
+  /* כפתורים ישמרו על מראה שלהם */
+  #language-select,
+  .more-exercises-button,
+  .choose-language-button,
+  .login-button {
+    padding: 0.75rem 1rem !important;
+    width: auto !important;
+  }
+
+  .card-section.exercises-samples {
+    max-height: 400px !important;
+    width: 90% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .split-text-container {
+    font-size: 3.5rem !important;
+  }
+
+  .icon {
+    font-size: 4rem !important;
+  }
+
+  .text-content h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .text-content p {
+    font-size: 1rem !important;
+  }
+
+  .cards-list {
+    padding: 3rem 2rem !important;
+  }
+}
+
+/* כיבוד העדפת משתמש לאנימציות מופחתות */
+@media (prefers-reduced-motion: reduce) {
+
+  .card,
+  .more-exercises-button,
+  .text-part {
+    animation: none !important;
+    transition: none !important;
   }
 }

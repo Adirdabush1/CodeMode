@@ -337,3 +337,86 @@
     flex-wrap: wrap;
   }
 }
+
+/* ---- לשים בסוף הקובץ: שמירה על מראה דסקטופ גם במובייל ---- */
+html,
+body {
+  min-width: 1200px;
+  /* כופה רוחב דסקטופ */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: auto;
+  /* מאפשר גלילה אופקית כדי לשמור על הפריסה */
+}
+
+/* מבטלים התאמות רספונסיביות קיימות לשמירת גדלים/פריסה */
+@media (max-width: 768px) {
+  .container {
+    max-width: 700px !important;
+    padding: 0 2rem !important;
+  }
+
+  .profile-card {
+    padding: 2.5rem !important;
+    max-height: 1000px !important;
+  }
+
+  .avatar-wrapper {
+    width: 120px !important;
+    height: 120px !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .name {
+    font-size: 1.8rem !important;
+  }
+
+  .title,
+  .bio,
+  .stat-value,
+  .stat-label,
+  .skill {
+    font-size: inherit !important;
+  }
+
+  .skills {
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+  }
+
+  .solved-exercises {
+    max-height: 250px !important;
+    padding: 1.5rem !important;
+  }
+
+  .actions .action-btn {
+    padding: 0.8rem !important;
+  }
+}
+
+/* גם במסכים מאוד קטנים — לשמור על גדלים של דסקטופ */
+@media (max-width: 480px) {
+  .container {
+    max-width: 700px !important;
+    padding: 0 2rem !important;
+  }
+
+  .profile-card {
+    padding: 2.5rem !important;
+  }
+
+  .avatar-wrapper {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .name {
+    font-size: 1.8rem !important;
+  }
+
+  .skills {
+    flex-wrap: nowrap !important;
+  }
+}
