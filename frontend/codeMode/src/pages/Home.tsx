@@ -63,15 +63,6 @@ const Home: React.FC = () => {
     }
   };
 
-  const handleAnalyzeAI = () => {
-    if (!isLoggedIn) {
-      navigate("/login", { state: { redirectTo: "/practice" } });
-    } else {
-      console.log("Analyze with AI");
-      // כאן אפשר לקרוא לפונקציה אמיתית של ניתוח AI
-    }
-  };
-
   const handleLanguageSelect = (lang: string) => {
     setSelectedLanguage(lang);
     setSelectedExercise(null); // איפוס בחירת תרגיל אם השפה משתנה
@@ -117,7 +108,7 @@ const Home: React.FC = () => {
                   onClick={() =>
                     navigate("/login", { state: { redirectTo: "/practice" } })
                   }
-                  className="action-btn"
+                  className="login-button"
                 >
                   Login / Sign Up
                 </button>
@@ -187,19 +178,13 @@ const Home: React.FC = () => {
             </div>
           )}
 
-          <div className="buttons-row">
-            <button
-              onClick={handleMoreExercisesClick}
-              className="action-btn"
-              disabled={!selectedExercise}
-            >
-              {selectedExercise ? "Start This Exercise" : "Select an Exercise First"}
-            </button>
-
-            <button onClick={handleAnalyzeAI} className="action-btn">
-              Analyze with AI
-            </button>
-          </div>
+          <button
+            onClick={handleMoreExercisesClick}
+            className="more-exercises-button"
+            disabled={!selectedExercise}
+          >
+            {selectedExercise ? "Start This Exercise" : "Select an Exercise First"}
+          </button>
         </div>
 
         <MonacoEditor />

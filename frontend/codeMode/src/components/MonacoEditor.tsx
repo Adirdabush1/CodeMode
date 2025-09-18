@@ -85,7 +85,6 @@ const MyEditor: React.FC = () => {
   async function analyzeCode() {
     const token = localStorage.getItem('token');
 
-    // אם אין טוקן, נבדוק אם המשתמש מחובר עם קוקיז
     let loggedIn = !!token;
     if (!token) {
       try {
@@ -129,7 +128,6 @@ const MyEditor: React.FC = () => {
       const data = await res.json();
       setOutput(data.result || 'No analysis returned');
 
-      // נעדכן שימוש חינמי רק אם המשתמש לא מחובר
       if (!loggedIn) {
         const newCount = aiUsageCount + 1;
         localStorage.setItem('aiUsageCount', newCount.toString());
@@ -185,11 +183,16 @@ const MyEditor: React.FC = () => {
       />
 
       <div style={{ marginTop: 10 }}>
-        <button onClick={runCode} disabled={isRunning} className="run-button">
+        <button onClick={runCode} disabled={isRunning} className="run-button glass-button">
           {isRunning ? 'Running...' : 'Run Code'}
         </button>
 
-        <button onClick={analyzeCode} disabled={isRunning} style={{ marginLeft: 10 }}>
+        <button
+          onClick={analyzeCode}
+          disabled={isRunning}
+          className="analyze-button glass-button"
+          style={{ marginLeft: 10 }}
+        >
           {isRunning ? 'Analyzing...' : 'Analyze with AI'}
         </button>
       </div>
