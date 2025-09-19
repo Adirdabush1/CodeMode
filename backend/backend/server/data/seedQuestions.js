@@ -7,6 +7,10 @@ dotenv.config();
 
 // --- הגדרות ---
 const uri = process.env.MONGODB_URI;
+if (!uri) {
+  throw new Error("MONGODB_URI is not defined in .env");
+}
+
 const client = new MongoClient(uri);
 
 async function run() {
@@ -19,23 +23,25 @@ async function run() {
 
     // --- ניהול אינדקסים ---
     try {
-      // מוחק את כל האינדקסים הקיימים
       await questionsCollection.dropIndexes();
       console.log("🗑️ Dropped all existing indexes");
     } catch (e) {
       console.log("ℹ️ No indexes to drop or error ignoring:", e.message);
     }
 
-    // יצירת אינדקסים חדשים
+
     await questionsCollection.createIndex({ programmingLanguage: 1 });
     await questionsCollection.createIndex({ difficulty: 1 });
     await questionsCollection.createIndex({ tags: 1 });
-    // אינדקס מורכב על שפה + רמת קושי
     await questionsCollection.createIndex({ programmingLanguage: 1, difficulty: 1 });
     console.log("✅ Indexes ensured (programmingLanguage, difficulty, tags, compound)");
 
     // --- קריאת הקובץ JSON ---
     const filePath = path.join(process.cwd(), "server", "data", "questions", "questions.json");
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`File not found: ${filePath}`);
+    }
+
     const questionsData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
     // המרה למערך אחד עם שדה programmingLanguage קטן
@@ -44,11 +50,15 @@ async function run() {
     );
 
     // קבלת כל השאלות הקיימות
-    const existingQuestions = await questionsCollection.find({}, { projection: { name: 1, programmingLanguage: 1 } }).toArray();
+    const existingQuestions = await questionsCollection
+      .find({}, { projection: { name: 1, programmingLanguage: 1 } })
+      .toArray();
 
     // סינון שאלות חדשות בלבד
     const newQuestions = questionsArray.filter(q => {
-      return !existingQuestions.some(eq => eq.name === q.title && eq.programmingLanguage === q.programmingLanguage);
+      return !existingQuestions.some(
+        eq => eq.name === q.title && eq.programmingLanguage === q.programmingLanguage
+      );
     });
 
     if (newQuestions.length === 0) {
@@ -56,13 +66,19 @@ async function run() {
       return;
     }
 
-    // הכנסת שאלות חדשות
+    // הכנסת שאלות חדשות עם כל השדות
     const result = await questionsCollection.insertMany(
       newQuestions.map(q => ({
         name: q.title,
         description: q.description,
+        fullDescription: q.fullDescription,
         difficulty: q.difficulty,
         tags: q.tags,
+        topics: q.topics,
+        constraints: q.constraints,
+        hints: q.hints,
+        solutionOutline: q.solutionOutline,
+        complexity: q.complexity,
         examples: q.examples,
         programmingLanguage: q.programmingLanguage,
       }))

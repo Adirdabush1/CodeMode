@@ -47,6 +47,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(selectedExercise);
 
   useEffect(() => {
     if (!auth?.isLoggedIn) return;
@@ -58,9 +59,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
           `https://backend-codemode-9p1s.onrender.com/questions?programmingLanguage=${selectedLanguage}&page=${page}`,
           { credentials: 'include' }
         );
-
         const data = await res.json();
-        console.log('📥 fetched data:', data);
 
         if (data.items && data.total !== undefined) {
           setExercises(data.items);
@@ -84,13 +83,13 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
   const difficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'easy':
-        return '#4CAF50'; // ירוק בולט
+        return '#4CAF50';
       case 'medium':
-        return '#FF9800'; // כתום בולט
+        return '#FF9800';
       case 'hard':
-        return '#F44336'; // אדום חזק
+        return '#F44336';
       default:
-        return '#9E9E9E'; // אפור נייטרלי
+        return '#9E9E9E';
     }
   };
 
@@ -113,7 +112,6 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
     'css',
   ];
 
-  // ✅ מיון לפי דרגת קושי: קל -> בינוני -> קשה
   const sortedExercises = [...exercises].sort((a, b) => {
     const order: Record<'easy' | 'medium' | 'hard', number> = {
       easy: 1,
@@ -137,6 +135,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
             onClick={() => {
               setPage(1);
               onSelectExercise({ id: '', language: lang });
+              setExpanded(null);
             }}
           >
             {lang.toUpperCase()}
@@ -147,17 +146,49 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul className="exercise-list">
           {sortedExercises.map((exercise) => (
-            <li
-              key={exercise._id}
-              className={selectedExercise === exercise._id ? 'selected-exercise' : ''}
-              onClick={() =>
-                onSelectExercise({ id: exercise._id, language: selectedLanguage })
-              }
-              style={{ cursor: 'pointer', color: difficultyColor(exercise.difficulty) }}
-            >
-              {exercise.description || 'No description available'}
+            <li key={exercise._id} className="exercise-item">
+              <div
+                className="exercise-header"
+                onClick={() => {
+                  setExpanded(expanded === exercise._id ? null : exercise._id);
+                  onSelectExercise({ id: exercise._id, language: selectedLanguage });
+                }}
+                style={{
+                  cursor: 'pointer',
+                  color: difficultyColor(exercise.difficulty),
+                  fontWeight: selectedExercise === exercise._id ? 'bold' : 'normal',
+                }}
+              >
+                {exercise.name} – {exercise.difficulty.toUpperCase()}
+              </div>
+
+              {expanded === exercise._id && (
+                <div className="exercise-details">
+                  <p>{exercise.description || 'No description available'}</p>
+
+                  {exercise.tags && (
+                    <p>
+                      <strong>Tags:</strong> {exercise.tags.join(', ')}
+                    </p>
+                  )}
+
+                  {exercise.examples && exercise.examples.length > 0 && (
+                    <div>
+                      <strong>Examples:</strong>
+                      <ul>
+                        {exercise.examples.map((ex, idx) => (
+                          <li key={idx}>
+                            <pre>Input: {ex.input}</pre>
+                            <pre>Output: {ex.output}</pre>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
             </li>
           ))}
 
@@ -167,7 +198,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
               {solvedExercises.map((ex) => (
                 <li
                   key={ex.exerciseId}
-                  className={selectedExercise === ex.exerciseId ? 'selected-exercise' : ''}
+                  className="exercise-item solved"
                   onClick={() =>
                     onSelectExercise({ id: ex.exerciseId, language: selectedLanguage })
                   }
