@@ -128,9 +128,7 @@ const Dashboard: React.FC = () => {
                   <button className="btn btn-sm btn-primary pull-right" type="button" onClick={handleShare}>
                     <i className="fa fa-pencil fa-fw" /> Share
                   </button>
-                  <a className="btn btn-trans btn-icon fa fa-video-camera add-tooltip" href="#" />
-                  <a className="btn btn-trans btn-icon fa fa-camera add-tooltip" href="#" />
-                  <a className="btn btn-trans btn-icon fa fa-file add-tooltip" href="#" />
+                 
                 </div>
               </div>
             </div>
