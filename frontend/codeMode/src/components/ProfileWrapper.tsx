@@ -1,3 +1,4 @@
+//profile wrapper
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Profile from '../pages/Profile';
