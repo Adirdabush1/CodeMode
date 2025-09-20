@@ -17,7 +17,8 @@ export class PostsService {
     const post = new this.postModel({
       authorName,
       authorAvatar,
-      ...dto,
+      content: dto.content,
+      imageUrl: dto.imageUrl,
       likes: 0,
       comments: [],
     });
@@ -36,9 +37,8 @@ export class PostsService {
   async toggleLike(postId: string) {
     const post = await this.postModel.findById(postId);
     if (!post) throw new NotFoundException('Post not found');
-    post.likes = post.likes + 1;
-    await post.save();
-    return post;
+    post.likes += 1;
+    return post.save();
   }
 
   async addComment(
@@ -49,13 +49,15 @@ export class PostsService {
   ) {
     const post = await this.postModel.findById(postId);
     if (!post) throw new NotFoundException('Post not found');
-    post.comments.push({
+
+    const comment: Comment = {
       authorName,
       authorAvatar,
       content: dto.content,
       createdAt: new Date(),
-    } as Comment);
-    await post.save();
-    return post;
+    } as Comment;
+
+    post.comments.push(comment);
+    return post.save();
   }
 }

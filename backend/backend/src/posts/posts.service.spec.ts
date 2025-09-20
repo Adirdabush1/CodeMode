@@ -1,3 +1,4 @@
+// posts.service.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
 import { PostsService } from './posts.service';
 

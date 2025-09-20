@@ -1,3 +1,4 @@
+//post.controller.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
 import { PostsController } from './posts.controller';
 
