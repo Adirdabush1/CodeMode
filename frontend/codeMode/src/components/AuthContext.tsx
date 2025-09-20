@@ -1,19 +1,19 @@
-// AuthContext.tsx
+// src/components/AuthContext.tsx
 import { createContext } from 'react';
 
 export type User = {
   _id: string;
   name: string;
   email?: string;
-   avatarUrl?: string;
-  // תוסיף כאן עוד שדות אם אתה מקבל מהשרת
+  avatarUrl?: string;
+  // הוסף שדות נוספים שמגיעים מה־API (title, points, וכו')
 };
 
 export type AuthContextType = {
   user: User | null;
   isLoggedIn: boolean;
   loading: boolean;
-  login: (userData: User) => void;
+  login: (user: User) => void;
   logout: () => void;
   setUser: (user: User | null) => void;
 };

@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import './LoginSignup.css';
 import MenuBar from "../components/MenuBar";
 import { useAuth } from '../components/useAuth';
+import type { User } from '../components/AuthContext';
 
 interface CustomAxiosError {
   isAxiosError: boolean;
@@ -36,6 +37,7 @@ const LoginSignup: React.FC = () => {
   const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
   const [signInMessage, setSignInMessage] = useState('');
+  const [signInLoading, setSignInLoading] = useState(false);
 
   const handleSignUpClick = () => containerRef.current?.classList.add('right-panel-active');
   const handleSignInClick = () => containerRef.current?.classList.remove('right-panel-active');
@@ -60,6 +62,8 @@ const LoginSignup: React.FC = () => {
       });
       setSignUpMessage('');
       containerRef.current?.classList.remove('right-panel-active');
+
+      // אופציה: לנווט לפרופיל או ל-login אוטומטי אם ה-backend יוצר session
       navigate('/profile');
     } catch (error: unknown) {
       if (isAxiosError(error)) {
@@ -80,9 +84,10 @@ const LoginSignup: React.FC = () => {
 
   const handleSignInSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSignInLoading(true);
     try {
-      await axios.post(
-        `${BACKEND_URL}/auth/login`, // ודא שזה הנתיב הנכון ב-backend שלך
+      const res = await axios.post(
+        `${BACKEND_URL}/auth/login`,
         {
           email: signInEmail,
           password: signInPassword,
@@ -90,7 +95,28 @@ const LoginSignup: React.FC = () => {
         { withCredentials: true }
       );
 
-      login(); // מעדכן סטטוס התחברות ב-context
+      // --- שינוי: cast ל-any כדי למנוע שגיאות טיפוסיות על res.data ---
+      const data: any = res.data;
+
+      // נסה להוציא את פרטי המשתמש מהתשובה (support ל-data.user או data)
+      let userFromServer: User | null = (data?.user ?? data) as User | null;
+
+      // אם אין פרטי משתמש בתשובת ה-login — בקש /user/me כגיבוי
+      if (!userFromServer || !userFromServer.name) {
+        try {
+          const meRes = await axios.get<User>(`${BACKEND_URL}/user/me`, { withCredentials: true });
+          userFromServer = meRes.data;
+        } catch  {
+          userFromServer = null;
+        }
+      }
+
+      if (!userFromServer) {
+        throw new Error('Login succeeded but failed to retrieve user profile.');
+      }
+
+      // מעדכן את ה־AuthContext עם פרטי המשתמש
+      login(userFromServer);
 
       await Swal.fire({
         icon: 'success',
@@ -112,9 +138,11 @@ const LoginSignup: React.FC = () => {
         Swal.fire({
           icon: 'error',
           title: 'Login failed',
-          text: 'An unexpected error occurred',
+          text: (error as Error)?.message || 'An unexpected error occurred',
         });
       }
+    } finally {
+      setSignInLoading(false);
     }
   };
 
@@ -176,7 +204,9 @@ const LoginSignup: React.FC = () => {
                 required
                 autoComplete="current-password"
               />
-              <button type="submit">Sign In</button>
+              <button type="submit" disabled={signInLoading}>
+                {signInLoading ? 'Signing in...' : 'Sign In'}
+              </button>
               {signInMessage && <p>{signInMessage}</p>}
             </form>
           </div>
