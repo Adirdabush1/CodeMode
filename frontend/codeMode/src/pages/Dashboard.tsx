@@ -1,5 +1,5 @@
 // src/pages/Dashboard.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import MenuBar from '../components/MenuBar';
 import { useAuth } from '../components/useAuth';
@@ -7,241 +7,154 @@ import './Dashboard.css';
 
 const API_URL = process.env.REACT_APP_API_URL || '';
 
-type UserSummary = {
-  name: string;
-  avatarUrl?: string;
-};
-
-type Comment = {
-  id: string;
-  author: UserSummary;
-  content: string;
-  createdAt: string;
-};
-
-type Post = {
-  id: string;
-  author: UserSummary;
-  content: string;
-  imageUrl?: string;
-  createdAt: string;
-  likes: number;
-  likedByMe?: boolean;
-  comments?: Comment[];
+type UserSummary = { name: string; avatarUrl?: string };
+type Comment = { id: string; author: UserSummary; content: string; createdAt: string };
+type Post = { 
+  id: string; 
+  author: UserSummary; 
+  content: string; 
+  imageUrl?: string; 
+  createdAt: string; 
+  likes: number; 
+  likedByMe?: boolean; 
+  comments?: Comment[]; 
 };
 
 const Dashboard: React.FC = () => {
-  const { user, loading: authLoading } = useAuth(); // ⬅️ נמשוך את המשתמש מהקונטקסט
+  const { user, loading: authLoading } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [newPostText, setNewPostText] = useState('');
+  const [newPostImage, setNewPostImage] = useState<File | null>(null);
+  const [commentText, setCommentText] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  useEffect(() => { fetchPosts(page); }, [page]);
 
-  const fetchPosts = async () => {
+  const fetchPosts = async (pageNum: number) => {
     setLoading(true);
     try {
       if (API_URL) {
-        const res = await axios.get<Post[]>(`${API_URL}/posts`, { withCredentials: true });
-        setPosts(res.data);
+        const res = await axios.get<Post[]>(`${API_URL}/posts?page=${pageNum}`, { withCredentials: true });
+        setPosts((prev) => [...prev, ...res.data]);
       } else {
-        setPosts(getMockPosts());
+        setPosts((prev) => [...prev, ...getMockPosts()]);
       }
-    } catch (err) {
-      console.error('Failed to fetch posts:', err);
-      setPosts(getMockPosts());
-    } finally {
-      setLoading(false);
-    }
+    } catch (err) { console.error(err); }
+    finally { setLoading(false); }
   };
 
   const handleShare = async () => {
     if (!newPostText.trim() || !user) return;
+    const formData = new FormData();
+    formData.append('content', newPostText);
+    if (newPostImage) formData.append('image', newPostImage);
 
     const newPost: Post = {
       id: String(Date.now()),
-      author: { name: user.name, avatarUrl: user.avatarUrl || 'https://i.pravatar.cc/150?img=12' },
+      author: { name: user.name, avatarUrl: user.avatarUrl },
       content: newPostText,
+      imageUrl: newPostImage ? URL.createObjectURL(newPostImage) : undefined,
       createdAt: new Date().toISOString(),
       likes: 0,
       likedByMe: false,
       comments: [],
     };
-
-    setPosts((p) => [newPost, ...p]);
+    setPosts((prev) => [newPost, ...prev]);
     setNewPostText('');
+    setNewPostImage(null);
 
-    try {
-      if (API_URL) {
-        await axios.post(
-          `${API_URL}/posts`,
-          { content: newPost.content },
-          { withCredentials: true }
-        );
-      }
-    } catch (err) {
-      console.error('Failed to post:', err);
-    }
+    try { if (API_URL) await axios.post(`${API_URL}/posts`, formData, { withCredentials: true }); } 
+    catch (err) { console.error(err); }
   };
 
   const toggleLike = async (postId: string) => {
-    setPosts((prev) =>
-      prev.map((p) => {
-        if (p.id !== postId) return p;
-        const liked = !p.likedByMe;
-        return {
-          ...p,
-          likedByMe: liked,
-          likes: liked ? p.likes + 1 : Math.max(0, p.likes - 1),
-        };
-      })
-    );
-
-    try {
-      if (API_URL) {
-        await axios.post(`${API_URL}/posts/${postId}/like`, null, { withCredentials: true });
-      }
-    } catch (err) {
-      console.error('Failed to toggle like:', err);
-    }
+    setPosts((prev) => prev.map((p) => p.id === postId ? { ...p, likedByMe: !p.likedByMe, likes: p.likedByMe ? p.likes -1 : p.likes +1 } : p));
+    try { if (API_URL) await axios.post(`${API_URL}/posts/${postId}/like`, null, { withCredentials: true }); } 
+    catch (err) { console.error(err); }
   };
+
+  const handleAddComment = async (postId: string) => {
+    if (!user || !commentText[postId]?.trim()) return;
+    const newComment: Comment = { id: String(Date.now()), author: { name: user.name, avatarUrl: user.avatarUrl }, content: commentText[postId], createdAt: new Date().toISOString() };
+    setPosts((prev) => prev.map((p) => p.id === postId ? { ...p, comments: [...(p.comments||[]), newComment] } : p));
+    setCommentText((prev) => ({ ...prev, [postId]: '' }));
+
+    try { if (API_URL) await axios.post(`${API_URL}/posts/${postId}/comments`, { content: newComment.content }, { withCredentials: true }); } 
+    catch (err) { console.error(err); }
+  };
+
+  // Infinite scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+        setPage((p) => p + 1);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   if (authLoading) return <div>Loading user...</div>;
 
   return (
     <>
       <MenuBar />
-      <div className="dashboard-page">
-        <div className="container bootdey">
-          <div className="col-md-12 bootstrap snippets">
-            <div className="panel">
-              <div className="panel-body">
-                <textarea
-                  className="form-control"
-                  rows={2}
-                  placeholder="What are you thinking?"
-                  value={newPostText}
-                  onChange={(e) => setNewPostText(e.target.value)}
-                />
-                <div className="mar-top clearfix">
-                  <button
-                    className="btn btn-sm btn-primary pull-right"
-                    type="button"
-                    onClick={handleShare}
-                    disabled={!user}
-                  >
-                    <i className="fa fa-pencil fa-fw" /> Share
-                  </button>
+      <div className="dashboard-page" ref={containerRef}>
+        <div className="container">
+          {/* New post */}
+          <div className="panel new-post">
+            <div className="new-post-header">
+              <img className="avatar" src={user?.avatarUrl || 'https://i.pravatar.cc/150'} />
+              <textarea placeholder="What's on your mind?" value={newPostText} onChange={(e) => setNewPostText(e.target.value)} />
+            </div>
+            <div className="new-post-actions">
+              <input type="file" onChange={(e) => setNewPostImage(e.target.files?.[0] || null)} />
+              <button className="btn-share" onClick={handleShare}>Share</button>
+            </div>
+          </div>
+
+          {/* Posts */}
+          {posts.map((post) => (
+            <div key={post.id} className="panel post">
+              <div className="media-block">
+                <img className="avatar" src={post.author.avatarUrl || 'https://i.pravatar.cc/150'} />
+                <div className="media-body">
+                  <div className="header">
+                    <strong>{post.author.name}</strong> • <small>{formatRelative(post.createdAt)}</small>
+                  </div>
+                  <p>{post.content}</p>
+                  {post.imageUrl && <img src={post.imageUrl} className="post-image" />}
+
+                  <div className="actions">
+                    <button onClick={() => toggleLike(post.id)}>{post.likedByMe ? '💙' : '🤍'} {post.likes}</button>
+                  </div>
+
+                  {/* Comments */}
+                  <div className="comments">
+                    {post.comments?.map((c) => (
+                      <div key={c.id} className="comment">
+                        <img className="avatar-sm" src={c.author.avatarUrl || 'https://i.pravatar.cc/150'} />
+                        <div>
+                          <strong>{c.author.name}</strong>: {c.content} • {formatRelative(c.createdAt)}
+                        </div>
+                      </div>
+                    ))}
+                    <input
+                      type="text"
+                      placeholder="Write a comment..."
+                      value={commentText[post.id] || ''}
+                      onChange={(e) => setCommentText((prev) => ({ ...prev, [post.id]: e.target.value }))}
+                    />
+                    <button onClick={() => handleAddComment(post.id)}>Send</button>
+                  </div>
                 </div>
               </div>
             </div>
-
-            {loading ? (
-              <div>Loading...</div>
-            ) : (
-              posts.map((post) => (
-                <div className="panel" key={post.id}>
-                  <div className="panel-body">
-                    <div className="media-block">
-                      <a className="media-left" href="#">
-                        <img
-                          className="img-circle img-sm"
-                          alt="Profile"
-                          src={post.author.avatarUrl || 'https://i.pravatar.cc/150'}
-                        />
-                      </a>
-                      <div className="media-body">
-                        <div className="mar-btm">
-                          <a
-                            href="#"
-                            className="btn-link text-semibold media-heading box-inline"
-                          >
-                            {post.author.name}
-                          </a>
-                          <p className="text-muted text-sm">
-                            <i className="fa fa-mobile fa-lg" /> -{' '}
-                            {formatRelative(post.createdAt)}
-                          </p>
-                        </div>
-                        <p>{post.content}</p>
-
-                        {post.imageUrl && (
-                          <img
-                            className="img-responsive thumbnail"
-                            src={post.imageUrl}
-                            alt="Post"
-                          />
-                        )}
-
-                        <div className="pad-ver">
-                          <div className="btn-group">
-                            <button
-                              className={`btn btn-sm btn-default btn-hover-success ${
-                                post.likedByMe ? 'active' : ''
-                              }`}
-                              onClick={() => toggleLike(post.id)}
-                            >
-                              <i className="fa fa-thumbs-up" />
-                            </button>
-                            <button className="btn btn-sm btn-default btn-hover-danger">
-                              <i className="fa fa-thumbs-down" />
-                            </button>
-                          </div>
-                          <a
-                            className="btn btn-sm btn-default btn-hover-primary"
-                            href="#"
-                          >
-                            Comment
-                          </a>
-                        </div>
-
-                        <hr />
-
-                        {post.comments && post.comments.length > 0 && (
-                          <div>
-                            {post.comments.map((c) => (
-                              <div
-                                className="media-block"
-                                key={c.id}
-                                style={{ marginBottom: 12 }}
-                              >
-                                <a className="media-left" href="#">
-                                  <img
-                                    className="img-circle img-sm"
-                                    alt="Profile"
-                                    src={
-                                      c.author.avatarUrl ||
-                                      'https://i.pravatar.cc/150?img=5'
-                                    }
-                                  />
-                                </a>
-                                <div className="media-body">
-                                  <div className="mar-btm">
-                                    <a
-                                      href="#"
-                                      className="btn-link text-semibold media-heading box-inline"
-                                    >
-                                      {c.author.name}
-                                    </a>
-                                    <p className="text-muted text-sm">
-                                      {formatRelative(c.createdAt)}
-                                    </p>
-                                  </div>
-                                  <p>{c.content}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
+          ))}
+          {loading && <div>Loading more posts...</div>}
         </div>
       </div>
     </>
@@ -250,79 +163,31 @@ const Dashboard: React.FC = () => {
 
 export default Dashboard;
 
-// ------- Helpers -------
+// Helpers
 function formatRelative(iso: string) {
-  try {
-    const then = new Date(iso).getTime();
-    const diff = Date.now() - then;
-    const minutes = Math.floor(diff / 60000);
-    if (minutes < 1) return 'just now';
-    if (minutes < 60) return `${minutes} min ago`;
-    const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-    const days = Math.floor(hours / 24);
-    return `${days} day${days > 1 ? 's' : ''} ago`;
-  } catch {
-    return iso;
-  }
+  const diff = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return mins + ' min ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + ' hour' + (hrs > 1 ? 's' : '') + ' ago';
+  const days = Math.floor(hrs / 24);
+  return days + ' day' + (days > 1 ? 's' : '') + ' ago';
 }
 
+// Mock posts
 function getMockPosts(): Post[] {
   return [
     {
       id: 'p1',
-      author: {
-        name: 'Lisa D.',
-        avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-      },
-      content:
-        'consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
+      author: { name: 'Lisa D.', avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar1.png' },
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       createdAt: new Date(Date.now() - 11 * 60000).toISOString(),
       likes: 12,
       likedByMe: false,
       comments: [
-        {
-          id: 'c1',
-          author: {
-            name: 'Bobby Marz',
-            avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-          },
-          content:
-            'Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.',
-          createdAt: new Date(Date.now() - 7 * 60000).toISOString(),
-        },
-        {
-          id: 'c2',
-          author: {
-            name: 'Lucy Moon',
-            avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar3.png',
-          },
-          content: 'Duis autem vel eum iriure dolor in hendrerit in vulputate ?',
-          createdAt: new Date(Date.now() - 2 * 60000).toISOString(),
-        },
-      ],
-    },
-    {
-      id: 'p2',
-      author: {
-        name: 'John Doe',
-        avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-      },
-      content: 'Lorem ipsum dolor sit amet.',
-      imageUrl: 'https://www.bootdey.com/image/400x300',
-      createdAt: new Date(Date.now() - 70 * 60000).toISOString(),
-      likes: 250,
-      likedByMe: false,
-      comments: [
-        {
-          id: 'c3',
-          author: {
-            name: 'Maria Leanz',
-            avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar2.png',
-          },
-          content: 'Duis autem vel eum iriure dolor in hendrerit in vulputate ?',
-          createdAt: new Date(Date.now() - 2 * 60000).toISOString(),
-        },
+        { id: 'c1', author: { name: 'Bobby M.', avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar2.png' }, content: 'Nice post!', createdAt: new Date(Date.now() - 7 * 60000).toISOString() },
+        { id: 'c2', author: { name: 'Lucy M.', avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar3.png' }, content: 'Agree!', createdAt: new Date(Date.now() - 2 * 60000).toISOString() },
       ],
     },
   ];
