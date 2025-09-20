@@ -96,6 +96,7 @@ const LoginSignup: React.FC = () => {
       );
 
       // --- שינוי: cast ל-any כדי למנוע שגיאות טיפוסיות על res.data ---
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const data: any = res.data;
 
       // נסה להוציא את פרטי המשתמש מהתשובה (support ל-data.user או data)
