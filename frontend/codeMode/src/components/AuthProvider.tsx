@@ -38,14 +38,22 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setIsLoggedIn(true);
   };
 
-  const logout = () => {
-    // אפשר לעשות כאן בקשת API ל־logout אם יש צורך, לדוגמה:
-    // axios.post(`${API_URL}/user/logout`, null, { withCredentials: true }).catch(...);
+ const logout = async () => {
+  try {
+    await axios.post(
+      'https://backend-codemode-9p1s.onrender.com/auth/logout',
+      {},
+      { withCredentials: true }
+    );
+  } catch (err) {
+    console.error('Logout failed', err);
+  } finally {
     setUser(null);
     setIsLoggedIn(false);
-  };
+  }
+};
 
-  if (loading) {
+ if (loading) {
     return <Loader />;
   }
 
