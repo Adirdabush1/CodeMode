@@ -1,3 +1,4 @@
+// auth.controller.ts - הגרסה המתוקנת
 import {
   Controller,
   Post,
@@ -5,39 +6,32 @@ import {
   Res,
   HttpCode,
   HttpStatus,
+  Get,
+  UseGuards,
+  Req,
 } from '@nestjs/common';
+import { Response, Request } from 'express';
 import { AuthService } from './auth.service';
-import { Response } from 'express';
+import { JwtAuthGuard } from './jwt-auth.guard';
+
+const COOKIE_NAME = 'jwt';
+const COOKIE_OPTIONS = (production = false) => ({
+  httpOnly: true,
+  secure: production, // רק בפרודקשן
+  sameSite: 'none' as const, // חשוב ל־cross-site
+  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 ימים
+  path: '/',
+  // domain: '.codemoode.com' // אפשר להפעיל אם צריכים שיתוף בין סאב־דומיינים
+});
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post('login')
-  @HttpCode(HttpStatus.OK)
-  async login(
-    @Body() body: { email: string; password: string },
-    @Res() res: Response,
-  ) {
-    const { access_token } = await this.authService.loginUser(
-      body.email,
-      body.password,
-    );
-
-    res.cookie('jwt', access_token, {
-      httpOnly: true,
-      secure: true, // חובה אם sameSite: 'none'
-      sameSite: 'none', // מאפשר שליחת קוקי בין דומיינים
-      maxAge: 1000 * 60 * 60 * 24 * 7, // שבוע
-    });
-
-    return res.send({ message: 'Logged in successfully' });
-  }
-
   @Post('signup')
   async signup(
     @Body() body: { email: string; password: string; name?: string },
-    @Res() res: Response,
+    @Res({ passthrough: true }) res: Response,
   ) {
     const { access_token } = await this.authService.signup(
       body.email,
@@ -45,20 +39,53 @@ export class AuthController {
       body.name,
     );
 
-    res.cookie('jwt', access_token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 1000 * 60 * 60 * 24 * 7,
-    });
+    res.cookie(
+      COOKIE_NAME,
+      access_token,
+      COOKIE_OPTIONS(process.env.NODE_ENV === 'production'),
+    );
 
-    return res.send({ message: 'Signed up successfully' });
+    return { message: 'Signed up successfully' };
+  }
+
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  async login(
+    @Body() body: { email: string; password: string },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const { access_token } = await this.authService.loginUser(
+      body.email,
+      body.password,
+    );
+
+    res.cookie(
+      COOKIE_NAME,
+      access_token,
+      COOKIE_OPTIONS(process.env.NODE_ENV === 'production'),
+    );
+
+    return { message: 'Logged in successfully' };
   }
 
   @Post('logout')
   @HttpCode(HttpStatus.OK)
-  logout(@Res() res: Response) {
-    res.clearCookie('jwt');
-    return res.send({ message: 'Logged out successfully' });
+  logout(@Res({ passthrough: true }) res: Response) {
+    // חשוב לנקות עם אותם פרמטרים (path, domain אם הוגדר)
+    res.clearCookie(COOKIE_NAME, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'none',
+      path: '/',
+      // domain: '.codemoode.com'
+    });
+    return { message: 'Logged out successfully' };
+  }
+
+  // אופציונלי: מחזיר את ה־payload/פרטי משתמש מתוך ה־jwt
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  me(@Req() req: Request) {
+    return req.user;
   }
 }

@@ -4,6 +4,7 @@ import MenuBar from "../components/MenuBar";
 import "./Home.css";
 import MonacoEditor from "../components/MonacoEditor";
 import axios from "axios";
+import Swal from "sweetalert2"; // ✅ הוספת SweetAlert2
 
 const exercisesByLanguage: Record<string, string[]> = {
   javascript: [
@@ -44,6 +45,35 @@ const Home: React.FC = () => {
   const [loadingAuth, setLoadingAuth] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
+
+  // ✅ Alert של קוקיז
+  useEffect(() => {
+    const cookiesChoice = localStorage.getItem("cookiesChoice");
+
+    if (!cookiesChoice) {
+      Swal.fire({
+        title: "Cookies Consent",
+        text: "This website uses cookies to enhance your experience. Do you accept?",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonText: "Accept",
+        cancelButtonText: "Decline",
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.setItem("cookiesChoice", "accepted");
+          Swal.fire("Thank you!", "You have accepted cookies.", "success");
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          localStorage.setItem("cookiesChoice", "declined");
+          Swal.fire(
+            "Notice",
+            "You have declined cookies. Some features may not work properly.",
+            "warning"
+          );
+        }
+      });
+    }
+  }, []);
 
   useEffect(() => {
     axios
