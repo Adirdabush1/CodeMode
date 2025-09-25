@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/useAuth'; 
+import { useAuth } from '../components/useAuth';
 import './MenuBar.css';
 
 const MenuBar: React.FC = () => {
@@ -15,9 +15,9 @@ const MenuBar: React.FC = () => {
         <li onClick={() => navigate('/login')}>Login & Signup</li>
       )}
 
-      <li onClick={() => navigate('/dashboard')}>Dashboard</li>
+      {/* <li onClick={() => navigate('/dashboard')}>Dashboard</li> */}
       <li onClick={() => navigate('/practice')}>Practice</li>
-     
+
 
       {isLoggedIn && (
         <>

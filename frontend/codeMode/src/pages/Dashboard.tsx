@@ -181,7 +181,7 @@ function getMockPosts(): Post[] {
     {
       id: 'p1',
       author: { name: 'Lisa D.', avatarUrl: 'https://bootdey.com/img/Content/avatar/avatar1.png' },
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      content: 'Lorem ipsum dolor sit amet, consectetur ',
       createdAt: new Date(Date.now() - 11 * 60000).toISOString(),
       likes: 12,
       likedByMe: false,
