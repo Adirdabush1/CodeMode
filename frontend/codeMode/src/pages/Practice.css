@@ -914,3 +914,14 @@ body {
     gap: 8px;
   }
 }
+
+/* --- ביטול מגבלות של practice-page על המודל --- */
+.practice-page .ai-chat-modal {
+  width: 90% !important;
+  /* תמיד 90% מהמסך */
+  max-width: none !important;
+  /* מבטל max-width 600px */
+  height: 80vh !important;
+  /* שומר גובה */
+  min-height: 480px;
+}
