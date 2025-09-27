@@ -793,153 +793,6 @@ body {
 
 /* ---------- AI Chat styles (add at the end of Practice.css) ---------- */
 /* ---------- AI Chat styles (add at the end of Practice.css) ---------- */
-
-.ai-chat-container {
-  width: 100%;
-  max-width: 600px;
-  margin-top: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.ai-chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-.ai-chat-title {
-  font-weight: 800;
-  font-size: 1.15rem;
-  color: #101214;
-}
-
-.ai-chat-sub {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-/* history box (inline variant) */
-.ai-chat-history {
-  border-radius: 12px;
-  padding: 12px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(250, 250, 252, 0.95));
-  box-shadow: 0 6px 18px rgba(6, 6, 6, 0.06);
-  max-height: 280px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* message bubbles */
-.ai-msg {
-  max-width: 82%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  white-space: pre-wrap;
-  word-wrap: break-word;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.95rem;
-  line-height: 1.35;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-}
-
-/* user (right-aligned) */
-.ai-msg.user {
-  align-self: flex-end;
-  background: linear-gradient(180deg, #dff6ea, #cfeee0);
-  border: 1px solid rgba(20, 120, 80, 0.08);
-  color: #08331f;
-  border-bottom-right-radius: 4px;
-}
-
-/* assistant (left-aligned) */
-.ai-msg.assistant {
-  align-self: flex-start;
-  background: linear-gradient(180deg, #f3f4f6, #e9eef3);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  color: #222;
-  border-bottom-left-radius: 4px;
-}
-
-/* small timestamp (optional) */
-.ai-msg .time {
-  display: block;
-  font-size: 0.75rem;
-  color: #666;
-  margin-top: 6px;
-  opacity: 0.9;
-}
-
-/* input row */
-.ai-chat-input-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  margin-top: 6px;
-}
-
-.ai-chat-input {
-  flex: 1;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  background: rgba(255, 255, 255, 0.9);
-  font-size: 1rem;
-  font-family: system-ui, sans-serif;
-  outline: none;
-  transition: box-shadow .18s ease, border-color .18s ease;
-}
-
-.ai-chat-input:focus {
-  box-shadow: 0 6px 20px rgba(255, 75, 43, 0.12);
-  border-color: #ff4b2b;
-}
-
-/* send button */
-.ai-send-btn {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: 800;
-  background: linear-gradient(90deg, #444, #777);
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-  transition: transform .12s ease, opacity .12s ease;
-}
-
-.ai-send-btn:active {
-  transform: translateY(1px);
-}
-
-.ai-send-btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* usage hint */
-.ai-usage {
-  font-size: 0.85rem;
-  color: #666;
-  margin-top: 6px;
-}
-
-/* responsive tweaks */
-@media (max-width: 600px) {
-  .ai-chat-history {
-    max-height: 220px;
-  }
-
-  .ai-chat-container {
-    max-width: 100%;
-  }
-}
-
 /* ---------- AI Chat Modal (overlay) ---------- */
 .ai-chat-modal-overlay {
   position: fixed;
@@ -950,18 +803,17 @@ body {
   align-items: center;
   z-index: 9999;
   padding: 20px;
-  box-sizing: border-box;
 }
 
-/* MAIN CHANGE: modal fills ~80% of viewport height */
+/* MAIN CHANGE: make modal wider (90% of viewport) and keep tall (80vh) */
 .ai-chat-modal {
-  width: 80%;
-  /* 80% מהדף */
-  max-width: 1200px;
+  width: 90%;
+  /* <-- increased from 80% to 90% */
+  max-width: 1400px;
+  /* <-- increased max width for large screens */
   height: 80vh;
-  /* <-- changed from 60vh to 80vh */
+  /* keeps modal ~80% of viewport height */
   min-height: 480px;
-  /* slightly larger min height */
   background: linear-gradient(to bottom left, #ffffff, #f5f7fa);
   border-radius: 12px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
@@ -978,7 +830,6 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  flex-shrink: 0;
 }
 
 /* body area: history + input */
@@ -986,10 +837,9 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  flex: 1 1 auto;
+  flex: 1;
   min-height: 0;
-  /* important for children with overflow in flex */
-  overflow: hidden;
+  /* allow flex child to shrink for overflow */
 }
 
 /* reuse .ai-chat-history style but make it fill the modal's remaining space */
@@ -1002,19 +852,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1 1 auto;
+  flex: 1;
   /* take remaining vertical space */
-  min-height: 0;
-  /* allow proper flexbox shrinking */
-}
-
-/* keep input row visible at bottom of modal even when history scrolls */
-.ai-chat-modal .ai-chat-input-row {
-  flex-shrink: 0;
-  margin-top: 8px;
-  background: transparent;
-  padding-top: 8px;
-  border-top: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 /* small close button */
@@ -1031,8 +870,15 @@ body {
   background: #e0e0e0;
 }
 
-/* ensure modal input uses the same styles but fits well */
-.ai-chat-modal .ai-chat-input {
+/* ensure input row sticks to bottom */
+.ai-chat-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* reuse .ai-chat-input and .ai-send-btn styles as in file, but ensure they fit modal */
+.ai-chat-input {
   flex: 1;
   padding: 10px 12px;
   border-radius: 10px;
@@ -1042,7 +888,7 @@ body {
   outline: none;
 }
 
-.ai-chat-modal .ai-send-btn {
+.ai-send-btn {
   padding: 10px 14px;
   border-radius: 10px;
   border: none;
@@ -1057,14 +903,16 @@ body {
 @media (max-width: 900px) {
   .ai-chat-modal {
     width: 95%;
-    height: 78vh;
+    height: 68vh;
+    max-width: 1200px;
+    /* slightly smaller cap on medium screens */
   }
 }
 
 @media (max-width: 480px) {
   .ai-chat-modal {
     width: 98%;
-    height: 85vh;
+    height: 75vh;
     padding: 12px;
   }
 
