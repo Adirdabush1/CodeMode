@@ -1,16 +1,23 @@
+/* manubar.css - החלף את כל הקובץ בזאת */
+
+/* גלובל */
 .menu-bar {
   position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
+  top: 16px;
+  /* רווח קטן מהקצה העליון */
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  /* מרכז את ה-fixed לפי רוחב */
+  width: 100%;
   max-width: 1200px;
+  /* מתיישב עם max-width של התוכן */
   height: 4rem;
   display: flex;
-  justify-content: space-around;
   align-items: center;
   padding: 0 20px;
-  margin: 0;
+  box-sizing: border-box;
+  z-index: 1000;
 
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -18,19 +25,33 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-
-  z-index: 1000;
 }
 
+/* קונטיינר פנימי שיעבוד בדיוק כמו cards-list */
+.menu-bar__inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* לוגו משמאל, פריטים מימין */
+  gap: 1rem;
+}
 
+/* פריטי התפריט (שמרתי את הסטיילים שלך) */
+.menu-bar__list {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
 
-/* פריטי התפריט */
-.menu-bar li {
+.menu-bar__list li {
   list-style: none;
   color: rgb(0, 0, 0);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 700;
-  padding: 14px 20px;
+  padding: 10px 14px;
   margin: 0 6px;
   position: relative;
   cursor: pointer;
@@ -38,7 +59,8 @@
   transition: color 0.3s ease;
 }
 
-.menu-bar li::before {
+/* היפר-אפקט של hover */
+.menu-bar__list li::before {
   content: " ";
   position: absolute;
   top: 0;
@@ -50,38 +72,45 @@
   border-radius: 25px;
 }
 
-.menu-bar li:hover::before {
+.menu-bar__list li:hover::before {
   background: linear-gradient(to bottom, #e8edec, #d2d1d3);
-  box-shadow: 0px 3px 20px 0px black;
-  transform: scale(1.2);
+  box-shadow: 0px 3px 20px 0px rgba(0, 0, 0, 0.25);
+  transform: scale(1.02);
 }
 
-.menu-bar li:hover {
+.menu-bar__list li:hover {
   color: black;
 }
 
-/* ריספונסיביות - במובייל נדחוס את התפריט למצב עמודה */
-@media (max-width: 450px) {
+/* במכשירים קטנים – נדחוס ונסתיר חלק מהריווח */
+@media (max-width: 768px) {
   .menu-bar {
-    flex-direction: row;
-    width: 95%;
-    padding: 10px;
-    border-radius: 15px;
+    top: 12px;
+    padding: 0 12px;
+    height: 3.6rem;
+    border-radius: 16px;
   }
 
-  .menu-bar li {
-    padding: 10px 0;
-    margin: 5px 0;
-    text-align: center;
+  .menu-bar__inner {
+    gap: 0.5rem;
+  }
+
+  .menu-bar__list li {
+    padding: 8px 10px;
+    margin: 0 4px;
+    font-size: 0.95rem;
   }
 }
 
-/* דחיקת תוכן למטה כדי לא להסתיר אותו מתחת לתפריט */
-.home-content {
-  padding-top: 90px;
-  /* מתאים לגובה התפריט */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
-}
+/* אם יש תרשים המורכב מווידג'ט לוגו + פריטים — דוגמא למבנה:
+<header class="menu-bar">
+  <div class="menu-bar__inner">
+    <div class="menu-bar__logo">...</div>
+    <ul class="menu-bar__list">
+      <li>Home</li>
+      <li>Practice</li>
+      ...
+    </ul>
+  </div>
+</header>
+*/
