@@ -791,29 +791,22 @@ body {
   }
 }
 
-/* ---------- AI Chat Modal Centered Full Overlay ---------- */
-
-/* Overlay שחוסם את כל הדף */
+/* Overlay שחוסם את כל המסך */
 .ai-chat-modal-overlay {
   position: fixed;
   inset: 0;
-  /* top:0; right:0; bottom:0; left:0 */
   background: rgba(0, 0, 0, 0.65);
-  /* כהה יותר כדי להסתרת תוכן */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
 
-/* Modal עצמו במרכז */
+/* חלון הצ'אט במרכז */
 .ai-chat-modal {
   width: 90vw;
-  /* 90% מרוחב המסך */
   max-width: 700px;
-  /* מקסימום רוחב */
   height: 80vh;
-  /* 80% מגובה המסך */
   min-height: 480px;
   background: linear-gradient(to bottom left, #ffffff, #f5f7fa);
   border-radius: 16px;
@@ -825,7 +818,7 @@ body {
   position: relative;
 }
 
-/* כותרת + כפתור סגירה */
+/* כותרת עם כפתורי פעולה */
 .ai-chat-modal-header {
   display: flex;
   justify-content: space-between;
@@ -847,7 +840,7 @@ body {
   background: #ddd;
 }
 
-/* אזור ההיסטוריה */
+/* גוף הצ'אט */
 .ai-chat-history {
   flex: 1;
   overflow-y: auto;
@@ -861,7 +854,23 @@ body {
   margin-bottom: 12px;
 }
 
-/* שורת קלט + שליחת הודעה */
+.ai-msg.user {
+  align-self: flex-end;
+  background: #d1e7ff;
+  border-radius: 12px;
+  padding: 8px 12px;
+  max-width: 80%;
+}
+
+.ai-msg.assistant {
+  align-self: flex-start;
+  background: #f0f0f0;
+  border-radius: 12px;
+  padding: 8px 12px;
+  max-width: 80%;
+}
+
+/* שורת קלט */
 .ai-chat-input-row {
   display: flex;
   gap: 10px;
@@ -874,7 +883,6 @@ body {
   border: 1px solid #ccc;
   font-size: 1rem;
   outline: none;
-  background: #fff;
 }
 
 .ai-send-btn {
@@ -892,17 +900,10 @@ body {
   transform: scale(1.05);
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .ai-chat-modal {
-    width: 95vw;
-    height: 70vh;
-  }
-}
-
+/* רספונסיביות */
 @media (max-width: 480px) {
   .ai-chat-modal {
-    width: 98vw;
+    width: 95vw;
     height: 75vh;
     padding: 12px;
   }

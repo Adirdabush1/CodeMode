@@ -3,7 +3,6 @@
 html,
 body {
   /* כופה על הדף להישאר ברוחב דסקטופ — כך המראה יהיה זהה גם במובייל (עם גלילה אופקית אם צריך) */
-  min-width: 1200px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -13,7 +12,7 @@ body {
   font-family: system-ui, sans-serif;
   color: #444447;
   margin: 0;
-  overflow-x: auto;
+  overflow-x: hidden;
   /* מאפשר גלילה אופקית כדי לשמור על המראה */
 }
 
@@ -439,63 +438,73 @@ a {
 
 
 @media (max-width: 768px) {
-
-  /* מבטלים שינויים: נשמור על פריסת ה-row ועל כל הגדלים */
   .card {
-    flex-direction: row !important;
-    text-align: left !important;
-    margin: 0 !important;
-    width: 100% !important;
+    flex-direction: column;
+    /* במקום row */
+    text-align: center;
+    margin: 1rem auto;
+    width: 90%;
   }
 
   .icon {
-    font-size: 4rem !important;
+    font-size: 3rem;
+    margin-bottom: 1rem;
   }
 
   .text-content h2 {
-    font-size: 1.8rem !important;
+    font-size: 1.5rem;
   }
 
   .side-text {
-    display: block !important;
+    position: static;
+    /* לא absolute */
+    transform: none;
+    margin-bottom: 1rem;
+    text-align: center;
   }
 
-  /* כפתורים ישמרו על מראה שלהם */
-  #language-select,
-  .more-exercises-button,
-  .choose-language-button,
-  .login-button {
-    padding: 0.75rem 1rem !important;
-    width: auto !important;
+  .card-section {
+    min-height: auto;
+    /* שלא יכפה 100vh */
+    padding: 2rem 1rem;
+  }
+
+  .cards-list {
+    padding: 1.5rem 1rem;
+    gap: 2rem;
   }
 
   .card-section.exercises-samples {
-    max-height: 400px !important;
-    width: 90% !important;
+    width: 100%;
+    max-height: none;
   }
 }
 
 @media (max-width: 480px) {
   .split-text-container {
-    font-size: 3.5rem !important;
+    font-size: 2rem;
+    flex-direction: column;
+    text-align: center;
   }
 
   .icon {
-    font-size: 4rem !important;
+    font-size: 2.5rem;
   }
 
   .text-content h2 {
-    font-size: 1.8rem !important;
+    font-size: 1.2rem;
   }
 
   .text-content p {
-    font-size: 1rem !important;
+    font-size: 0.9rem;
   }
 
   .cards-list {
-    padding: 3rem 2rem !important;
+    padding: 1rem;
+    gap: 1rem;
   }
 }
+
 
 /* כיבוד העדפת משתמש לאנימציות מופחתות */
 @media (prefers-reduced-motion: reduce) {
