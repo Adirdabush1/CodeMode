@@ -25,11 +25,9 @@ type ChatMessage = {
 const Practice: React.FC = () => {
   const [code, setCode] = useState('// Write your code here...');
   const [language, setLanguage] = useState<Language>('javascript');
-  const [stdin, //setStdin
-  ] = useState('');
+  const [stdin] = useState('');
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
-  const [userFeedback, //setUserFeedback
-  ] = useState('');
+  const [userFeedback] = useState('');
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isAiRunning, setIsAiRunning] = useState(false);
@@ -41,12 +39,10 @@ const Practice: React.FC = () => {
     return saved ? parseInt(saved, 10) : 0;
   });
 
-  // AI-specific state
   const [aiQuery, setAiQuery] = useState('');
   const [aiChat, setAiChat] = useState<ChatMessage[]>([]);
   const historyRef = useRef<HTMLDivElement | null>(null);
 
-  // toggle whether AI chat modal is visible
   const [showAiChat, setShowAiChat] = useState(false);
 
   useEffect(() => {
@@ -60,7 +56,6 @@ const Practice: React.FC = () => {
     }
   }, [aiChat, showAiChat]);
 
-  // close modal on Escape
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape' && showAiChat) setShowAiChat(false);
@@ -69,7 +64,6 @@ const Practice: React.FC = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [showAiChat]);
 
-  // save exercise
   async function saveExercise() {
     if (!selectedExercise || !code.trim()) return;
 
@@ -103,7 +97,6 @@ const Practice: React.FC = () => {
     }
   }
 
-  // check login
   async function isLoggedIn(): Promise<boolean> {
     const token = localStorage.getItem('token');
     if (token) return true;
@@ -118,7 +111,6 @@ const Practice: React.FC = () => {
     }
   }
 
-  // run code
   async function runCode() {
     if (!selectedExercise) return;
 
@@ -169,7 +161,6 @@ const Practice: React.FC = () => {
     }
   }
 
-  // analyze code
   async function analyzeCode() {
     const loggedIn = await isLoggedIn();
 
@@ -217,7 +208,6 @@ const Practice: React.FC = () => {
     }
   }
 
-  // AI question chat
   async function askAiQuestion() {
     const question = aiQuery.trim();
     if (!question) return;
@@ -315,25 +305,24 @@ const Practice: React.FC = () => {
           {isAiRunning ? 'Analyzing...' : 'Analyze Code (AI)'}
         </button>
 
-        {/* כפתור לפתיחת הצ'אט (מראה כ-overlay מלבני) */}
         <button onClick={() => setShowAiChat(true)} disabled={showAiChat}>
           Open AI Assistant
         </button>
       </div>
 
-      <div style={{ marginTop: 16 }}>
-        {(saveStatus === 'saving' || saveStatus === 'success' || saveStatus === 'error') && (
-          <div style={{ marginTop: 16 }}>
-            {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
-            {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
-            {saveStatus === 'error' && <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>}
-          </div>
-        )}
-      </div>
+      {/* הצגת סטטוס רק אחרי ניסיון שמירה */}
+      {saveStatus !== 'idle' && (
+        <div style={{ marginTop: 16 }}>
+          {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
+          {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
+          {saveStatus === 'error' && (
+            <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>
+          )}
+        </div>
+      )}
 
       <pre className="output-pre">{output}</pre>
 
-      {/* AI chat rendered as overlay modal when showAiChat === true */}
       {showAiChat && (
         <div className="ai-chat-modal-overlay" onClick={() => setShowAiChat(false)}>
           <div className="ai-chat-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
@@ -346,7 +335,6 @@ const Practice: React.FC = () => {
                 <button
                   className="ai-send-btn"
                   onClick={() => {
-                    // optional quick analyze when requested from modal header
                     if (!isAiRunning) analyzeCode();
                   }}
                   disabled={isAiRunning}

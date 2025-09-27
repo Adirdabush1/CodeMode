@@ -807,9 +807,8 @@ body {
 
 /* MAIN CHANGE: make modal wider (90% of viewport) and keep tall (80vh) */
 .ai-chat-modal {
-  width: 90%;
   /* <-- increased from 80% to 90% */
-  max-width: 3400px;
+  width: 80%;
   /* <-- increased max width for large screens */
   height: 80vh;
   /* keeps modal ~80% of viewport height */
