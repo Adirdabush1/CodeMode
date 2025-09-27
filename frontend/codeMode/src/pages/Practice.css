@@ -806,7 +806,7 @@ body {
 
 /* MAIN CHANGE: wider modal - 90% of viewport */
 .ai-chat-modal {
-  width: 90%;
+  width: 90vh;
   /* תופס 90% מרוחב הדף */
   height: 80vh;
   /* נשאר 80% מהגובה */
