@@ -791,8 +791,9 @@ body {
   }
 }
 
-/* -/* ---------- AI Chat styles (add at the end of Practice.css) ---------- */
-/* ---------- AI Chat Modal (overlay) ---------- */
+/* ---------- AI Chat Modal Styles ---------- */
+
+/* Overlay */
 .ai-chat-modal-overlay {
   position: fixed;
   inset: 0;
@@ -804,13 +805,15 @@ body {
   padding: 20px;
 }
 
-/* MAIN CHANGE: wider modal - 90% of viewport */
+/* Modal Container */
 .ai-chat-modal {
-  width: 90vh;
-  /* תופס 90% מרוחב הדף */
+  width: 90vw;
+  /* 90% מרוחב המסך */
   height: 80vh;
-  /* נשאר 80% מהגובה */
+  /* 80% מגובה המסך */
   min-height: 480px;
+  max-width: 1200px;
+  /* אפשר מגבלה אם רוצים */
   background: linear-gradient(to bottom left, #ffffff, #f5f7fa);
   border-radius: 12px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
@@ -819,9 +822,10 @@ body {
   gap: 12px;
   padding: 16px;
   overflow: hidden;
+  z-index: 10000;
 }
 
-/* header inside modal */
+/* Header */
 .ai-chat-modal-header {
   display: flex;
   justify-content: space-between;
@@ -829,7 +833,7 @@ body {
   gap: 12px;
 }
 
-/* body area: history + input */
+/* Chat Body: history + input */
 .ai-chat-modal-body {
   display: flex;
   flex-direction: column;
@@ -838,8 +842,8 @@ body {
   min-height: 0;
 }
 
-/* chat history fills remaining space */
-.ai-chat-modal .ai-chat-history {
+/* Chat History */
+.ai-chat-history {
   border-radius: 10px;
   padding: 12px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 250, 252, 0.98));
@@ -851,7 +855,7 @@ body {
   flex: 1;
 }
 
-/* small close button */
+/* Close Button */
 .ai-close-btn {
   padding: 8px 10px;
   border-radius: 8px;
@@ -865,14 +869,14 @@ body {
   background: #e0e0e0;
 }
 
-/* input row at bottom */
+/* Input Row */
 .ai-chat-input-row {
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
-/* chat input */
+/* Input Field */
 .ai-chat-input {
   flex: 1;
   padding: 10px 12px;
@@ -883,7 +887,7 @@ body {
   outline: none;
 }
 
-/* send button */
+/* Send Button */
 .ai-send-btn {
   padding: 10px 14px;
   border-radius: 10px;
@@ -895,17 +899,17 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
-/* responsive */
+/* Responsive */
 @media (max-width: 900px) {
   .ai-chat-modal {
-    width: 95%;
+    width: 95vw;
     height: 68vh;
   }
 }
 
 @media (max-width: 480px) {
   .ai-chat-modal {
-    width: 98%;
+    width: 98vw;
     height: 75vh;
     padding: 12px;
   }
@@ -913,15 +917,4 @@ body {
   .ai-chat-modal-header {
     gap: 8px;
   }
-}
-
-/* --- ביטול מגבלות של practice-page על המודל --- */
-.practice-page .ai-chat-modal {
-  width: 90% !important;
-  /* תמיד 90% מהמסך */
-  max-width: none !important;
-  /* מבטל max-width 600px */
-  height: 80vh !important;
-  /* שומר גובה */
-  min-height: 480px;
 }
