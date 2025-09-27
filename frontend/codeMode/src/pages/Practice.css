@@ -792,6 +792,7 @@ body {
 }
 
 /* ---------- AI Chat styles (add at the end of Practice.css) ---------- */
+/* ---------- AI Chat styles (add at the end of Practice.css) ---------- */
 
 .ai-chat-container {
   width: 100%;
@@ -820,7 +821,7 @@ body {
   color: #555;
 }
 
-/* history box */
+/* history box (inline variant) */
 .ai-chat-history {
   border-radius: 12px;
   padding: 12px;
@@ -850,7 +851,6 @@ body {
 .ai-msg.user {
   align-self: flex-end;
   background: linear-gradient(180deg, #dff6ea, #cfeee0);
-  /* subtle green glass */
   border: 1px solid rgba(20, 120, 80, 0.08);
   color: #08331f;
   border-bottom-right-radius: 4px;
@@ -950,14 +950,18 @@ body {
   align-items: center;
   z-index: 9999;
   padding: 20px;
+  box-sizing: border-box;
 }
 
+/* MAIN CHANGE: modal fills ~80% of viewport height */
 .ai-chat-modal {
   width: 80%;
   /* 80% מהדף */
   max-width: 1200px;
-  height: 60vh;
-  min-height: 320px;
+  height: 80vh;
+  /* <-- changed from 60vh to 80vh */
+  min-height: 480px;
+  /* slightly larger min height */
   background: linear-gradient(to bottom left, #ffffff, #f5f7fa);
   border-radius: 12px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
@@ -974,6 +978,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 /* body area: history + input */
@@ -981,9 +986,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
-  /* allow flex child to shrink for overflow */
+  /* important for children with overflow in flex */
+  overflow: hidden;
 }
 
 /* reuse .ai-chat-history style but make it fill the modal's remaining space */
@@ -996,8 +1002,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1;
+  flex: 1 1 auto;
   /* take remaining vertical space */
+  min-height: 0;
+  /* allow proper flexbox shrinking */
+}
+
+/* keep input row visible at bottom of modal even when history scrolls */
+.ai-chat-modal .ai-chat-input-row {
+  flex-shrink: 0;
+  margin-top: 8px;
+  background: transparent;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 /* small close button */
@@ -1014,15 +1031,8 @@ body {
   background: #e0e0e0;
 }
 
-/* ensure input row sticks to bottom */
-.ai-chat-input-row {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-/* reuse .ai-chat-input and .ai-send-btn styles as in file, but ensure they fit modal */
-.ai-chat-input {
+/* ensure modal input uses the same styles but fits well */
+.ai-chat-modal .ai-chat-input {
   flex: 1;
   padding: 10px 12px;
   border-radius: 10px;
@@ -1032,7 +1042,7 @@ body {
   outline: none;
 }
 
-.ai-send-btn {
+.ai-chat-modal .ai-send-btn {
   padding: 10px 14px;
   border-radius: 10px;
   border: none;
@@ -1047,14 +1057,14 @@ body {
 @media (max-width: 900px) {
   .ai-chat-modal {
     width: 95%;
-    height: 68vh;
+    height: 78vh;
   }
 }
 
 @media (max-width: 480px) {
   .ai-chat-modal {
     width: 98%;
-    height: 75vh;
+    height: 85vh;
     padding: 12px;
   }
 
