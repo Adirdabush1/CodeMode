@@ -790,6 +790,7 @@ body {
     transition: none !important;
   }
 }
+
 /* ---------- AI Chat styles (add at the end of Practice.css) ---------- */
 
 .ai-chat-container {
@@ -823,8 +824,8 @@ body {
 .ai-chat-history {
   border-radius: 12px;
   padding: 12px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,250,252,0.95));
-  box-shadow: 0 6px 18px rgba(6,6,6,0.06);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(250, 250, 252, 0.95));
+  box-shadow: 0 6px 18px rgba(6, 6, 6, 0.06);
   max-height: 280px;
   overflow-y: auto;
   display: flex;
@@ -842,14 +843,15 @@ body {
   font-family: 'Courier New', Courier, monospace;
   font-size: 0.95rem;
   line-height: 1.35;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 /* user (right-aligned) */
 .ai-msg.user {
   align-self: flex-end;
-  background: linear-gradient(180deg, #dff6ea, #cfeee0); /* subtle green glass */
-  border: 1px solid rgba(20,120,80,0.08);
+  background: linear-gradient(180deg, #dff6ea, #cfeee0);
+  /* subtle green glass */
+  border: 1px solid rgba(20, 120, 80, 0.08);
   color: #08331f;
   border-bottom-right-radius: 4px;
 }
@@ -858,7 +860,7 @@ body {
 .ai-msg.assistant {
   align-self: flex-start;
   background: linear-gradient(180deg, #f3f4f6, #e9eef3);
-  border: 1px solid rgba(0,0,0,0.04);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   color: #222;
   border-bottom-left-radius: 4px;
 }
@@ -885,7 +887,7 @@ body {
   padding: 10px 12px;
   border-radius: 10px;
   border: 1px solid #ddd;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   font-size: 1rem;
   font-family: system-ui, sans-serif;
   outline: none;
@@ -893,7 +895,7 @@ body {
 }
 
 .ai-chat-input:focus {
-  box-shadow: 0 6px 20px rgba(255,75,43,0.12);
+  box-shadow: 0 6px 20px rgba(255, 75, 43, 0.12);
   border-color: #ff4b2b;
 }
 
@@ -906,7 +908,7 @@ body {
   font-weight: 800;
   background: linear-gradient(90deg, #444, #777);
   color: #fff;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
   transition: transform .12s ease, opacity .12s ease;
 }
 
@@ -932,7 +934,131 @@ body {
   .ai-chat-history {
     max-height: 220px;
   }
+
   .ai-chat-container {
     max-width: 100%;
+  }
+}
+
+/* ---------- AI Chat Modal (overlay) ---------- */
+.ai-chat-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 6, 6, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.ai-chat-modal {
+  width: 80%;
+  /* 80% מהדף */
+  max-width: 1200px;
+  height: 60vh;
+  min-height: 320px;
+  background: linear-gradient(to bottom left, #ffffff, #f5f7fa);
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* header inside modal */
+.ai-chat-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* body area: history + input */
+.ai-chat-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+  /* allow flex child to shrink for overflow */
+}
+
+/* reuse .ai-chat-history style but make it fill the modal's remaining space */
+.ai-chat-modal .ai-chat-history {
+  border-radius: 10px;
+  padding: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 250, 252, 0.98));
+  box-shadow: 0 6px 18px rgba(6, 6, 6, 0.04);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  /* take remaining vertical space */
+}
+
+/* small close button */
+.ai-close-btn {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #eee;
+  font-weight: 700;
+}
+
+.ai-close-btn:hover {
+  background: #e0e0e0;
+}
+
+/* ensure input row sticks to bottom */
+.ai-chat-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* reuse .ai-chat-input and .ai-send-btn styles as in file, but ensure they fit modal */
+.ai-chat-input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: rgba(255, 255, 255, 0.98);
+  font-size: 1rem;
+  outline: none;
+}
+
+.ai-send-btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+  background: linear-gradient(90deg, #444, #777);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .ai-chat-modal {
+    width: 95%;
+    height: 68vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .ai-chat-modal {
+    width: 98%;
+    height: 75vh;
+    padding: 12px;
+  }
+
+  .ai-chat-modal-header {
+    gap: 8px;
   }
 }

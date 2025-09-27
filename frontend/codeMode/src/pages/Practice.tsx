@@ -25,7 +25,7 @@ type ChatMessage = {
 const Practice: React.FC = () => {
   const [code, setCode] = useState('// Write your code here...');
   const [language, setLanguage] = useState<Language>('javascript');
-  const [stdin,//setStdin
+  const [stdin, //setStdin
   ] = useState('');
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
   const [userFeedback, //setUserFeedback
@@ -46,6 +46,9 @@ const Practice: React.FC = () => {
   const [aiChat, setAiChat] = useState<ChatMessage[]>([]);
   const historyRef = useRef<HTMLDivElement | null>(null);
 
+  // toggle whether AI chat modal is visible
+  const [showAiChat, setShowAiChat] = useState(false);
+
   useEffect(() => {
     const el = historyRef.current || document.getElementById('aiChatHistory');
     if (el) {
@@ -55,7 +58,16 @@ const Practice: React.FC = () => {
         /* ignore */
       }
     }
-  }, [aiChat]);
+  }, [aiChat, showAiChat]);
+
+  // close modal on Escape
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape' && showAiChat) setShowAiChat(false);
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [showAiChat]);
 
   // save exercise
   async function saveExercise() {
@@ -302,72 +314,92 @@ const Practice: React.FC = () => {
         <button onClick={analyzeCode} disabled={isAiRunning}>
           {isAiRunning ? 'Analyzing...' : 'Analyze Code (AI)'}
         </button>
+
+        {/* כפתור לפתיחת הצ'אט (מראה כ-overlay מלבני) */}
+        <button onClick={() => setShowAiChat(true)} disabled={showAiChat}>
+          Open AI Assistant
+        </button>
       </div>
 
       <div style={{ marginTop: 16 }}>
-        {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
-        {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
-        {saveStatus === 'error' && <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>}
+        {(saveStatus === 'saving' || saveStatus === 'success' || saveStatus === 'error') && (
+          <div style={{ marginTop: 16 }}>
+            {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
+            {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
+            {saveStatus === 'error' && <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>}
+          </div>
+        )}
       </div>
 
       <pre className="output-pre">{output}</pre>
 
-      {/* <textarea
-        placeholder="What did you learn? Where did you get stuck?"
-        value={userFeedback}
-        onChange={(e) => setUserFeedback(e.target.value)}
-        style={{ width: '100%', minHeight: 80, marginTop: 12 }}
-      />
-      <textarea
-        placeholder="Optional input (stdin) for the exercise"
-        value={stdin}
-        onChange={(e) => setStdin(e.target.value)}
-        style={{ width: '100%', minHeight: 40, marginTop: 8 }}
-      /> */}
-
-      {/* ---------- AI Chat UI ---------- */}
-      <div className="ai-chat-container">
-        <div className="ai-chat-header">
-          <div className="ai-chat-title">AI Assistant</div>
-          <div className="ai-chat-sub">Ask questions about your code</div>
-        </div>
-
-        <div className="ai-chat-history" id="aiChatHistory" ref={historyRef}>
-          {aiChat.length === 0 ? (
-            <p style={{ color: '#666' }}>No messages yet. Ask the AI a question about your code.</p>
-          ) : (
-            aiChat.map((m, idx) => (
-              <div key={idx} className={`ai-msg ${m.role === 'user' ? 'user' : 'assistant'}`}>
-                <strong style={{ fontSize: 12 }}>{m.role === 'user' ? 'You' : 'AI'}</strong>
-                <div style={{ marginTop: 6 }}>{m.text}</div>
+      {/* AI chat rendered as overlay modal when showAiChat === true */}
+      {showAiChat && (
+        <div className="ai-chat-modal-overlay" onClick={() => setShowAiChat(false)}>
+          <div className="ai-chat-modal" onClick={(e) => e.stopPropagation()} role="dialog" aria-modal="true">
+            <div className="ai-chat-modal-header">
+              <div>
+                <div className="ai-chat-title">AI Assistant</div>
+                <div className="ai-chat-sub">Ask questions about your code</div>
               </div>
-            ))
-          )}
-        </div>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <button
+                  className="ai-send-btn"
+                  onClick={() => {
+                    // optional quick analyze when requested from modal header
+                    if (!isAiRunning) analyzeCode();
+                  }}
+                  disabled={isAiRunning}
+                  style={{ padding: '8px 10px' }}
+                >
+                  {isAiRunning ? 'Analyzing...' : 'Analyze'}
+                </button>
+                <button className="ai-close-btn" onClick={() => setShowAiChat(false)}>
+                  Close
+                </button>
+              </div>
+            </div>
 
-        <div className="ai-chat-input-row">
-          <input
-            className="ai-chat-input"
-            type="text"
-            placeholder="Ask a question about the code (e.g. 'Why do I get NullPointerException?')"
-            value={aiQuery}
-            onChange={(e) => setAiQuery(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                askAiQuestion();
-              }
-            }}
-          />
-          <button className="ai-send-btn" onClick={askAiQuestion} disabled={isAiRunning}>
-            {isAiRunning ? 'Thinking...' : 'Send'}
-          </button>
-        </div>
+            <div className="ai-chat-modal-body">
+              <div className="ai-chat-history" id="aiChatHistory" ref={historyRef}>
+                {aiChat.length === 0 ? (
+                  <p style={{ color: '#666' }}>No messages yet. Ask the AI a question about your code.</p>
+                ) : (
+                  aiChat.map((m, idx) => (
+                    <div key={idx} className={`ai-msg ${m.role === 'user' ? 'user' : 'assistant'}`}>
+                      <strong style={{ fontSize: 12 }}>{m.role === 'user' ? 'You' : 'AI'}</strong>
+                      <div style={{ marginTop: 6 }}>{m.text}</div>
+                    </div>
+                  ))
+                )}
+              </div>
 
-        <div className="ai-usage">
-          {!localStorage.getItem('token') && <span>Anonymous AI uses left: {Math.max(0, 1 - aiUsageCount)}</span>}
+              <div className="ai-chat-input-row">
+                <input
+                  className="ai-chat-input"
+                  type="text"
+                  placeholder="Ask a question about the code (press Enter to send)"
+                  value={aiQuery}
+                  onChange={(e) => setAiQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      askAiQuestion();
+                    }
+                  }}
+                />
+                <button className="ai-send-btn" onClick={askAiQuestion} disabled={isAiRunning}>
+                  {isAiRunning ? 'Thinking...' : 'Send'}
+                </button>
+              </div>
+
+              <div className="ai-usage" style={{ marginTop: 8 }}>
+                {!localStorage.getItem('token') && <span>Anonymous AI uses left: {Math.max(0, 1 - aiUsageCount)}</span>}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
