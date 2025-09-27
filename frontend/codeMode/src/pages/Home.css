@@ -497,3 +497,99 @@ video {
     transition: none !important;
   }
 }
+
+/* ======= תיקון יישור MenuBar + כרטיסים ======= */
+
+/* ודא של־MenuBar יש שם מחלקה (class) כמו .menu-bar.
+   אם בקומפוננטת MenuBar שלך המחלקה אחרת — החלף את .menu-bar בשם המתאים. */
+.menu-bar,
+.site-header,
+.header-container {
+  width: 100%;
+  max-width: 1200px;
+  /* התאמה למה שיש ב-cards-list */
+  margin: 0 auto;
+  /* מרכז את ה־MenuBar באותה רוחב כמו התוכן */
+  padding: 0 1rem;
+  /* מרווח פנימי קטן מצדדים */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* לוגו משמאל, קישורים/אייקונים מימין */
+  position: relative;
+  z-index: 50;
+}
+
+/* מרכיבים פנימיים בתפריט — דוגמאות, לא חובה: */
+.menu-bar .logo {
+  margin-right: 1rem;
+}
+
+.menu-bar .menu-items {
+  margin-left: auto;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* כרטיסים ומחלקת התוכן ישמרו במרכז (לבטל מרווחים גדולים) */
+.card-section:not(.reverse) .card,
+.card-section.reverse .card {
+  margin: 0 auto !important;
+  /* מרכז את הכרטיסים בכל רזולוציה */
+  /* אם תרצה להחזיר את "מראה מורם" בדסקטופ, עדיף להשתמש ב-padding של section במקום margin של הכרטיס */
+}
+
+/* אם השתמשנו קודם ב-margins גדולים לדסקטופ — נבטל אותם ונשאיר מקום באמצעות padding ל-section */
+.card-section {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* במידה ויש side-text שמופיע מחוץ לכרטיס — נשמור אותו absolute אך בלי לדחוף את ה-flow */
+.side-text {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1.25rem;
+  /* קבוע קטן משמאל */
+  right: auto;
+  white-space: nowrap;
+  pointer-events: none;
+  /* לא יפריע לקליקים בתוכן */
+}
+
+/* במובייל — side-text יהפוך לסטטי וישתלב מעל הכרטיסים */
+@media (max-width: 768px) {
+
+  .menu-bar,
+  .site-header,
+  .header-container {
+    padding: 0 0.75rem;
+  }
+
+  .card-section:not(.reverse) .card,
+  .card-section.reverse .card {
+    margin: 1rem auto !important;
+    width: 94%;
+    max-width: 700px;
+  }
+
+  .side-text {
+    position: static;
+    transform: none;
+    margin-bottom: 0.75rem;
+    text-align: center;
+    white-space: normal;
+    pointer-events: auto;
+  }
+}
+
+/* מקצה־חירום — אם יש עדיין אלמנט שגובה/רוחב שלו מחוץ למסגרת, נסתיר גלילה אופקית */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* ======= סוף תיקון היישור ======= */
