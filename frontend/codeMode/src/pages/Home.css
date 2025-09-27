@@ -1,8 +1,11 @@
 @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
-  /* כופה על הדף להישאר ברוחב דסקטופ — כך המראה יהיה זהה גם במובייל (עם גלילה אופקית אם צריך) */
   -webkit-text-size-adjust: 100%;
 }
 
@@ -13,7 +16,7 @@ body {
   color: #444447;
   margin: 0;
   overflow-x: hidden;
-  /* מאפשר גלילה אופקית כדי לשמור על המראה */
+  /* מוודא שאין גלילה אופקית כלל */
 }
 
 a {
@@ -24,7 +27,8 @@ a {
 .animated-title-container {
   display: flex;
   justify-content: center;
-  margin: 20rem 0 3rem 0;
+  margin: 8rem 0 3rem 0;
+  /* פחות מרווח ברירת מחדל (20rem היה גדול מדי) */
 }
 
 .split-text-container {
@@ -58,24 +62,24 @@ a {
 }
 
 @keyframes slide-in-left {
-  0% {
+  from {
     transform: translateX(-200%);
     opacity: 0;
   }
 
-  100% {
+  to {
     transform: translateX(0);
     opacity: 1;
   }
 }
 
 @keyframes slide-in-right {
-  0% {
+  from {
     transform: translateX(200%);
     opacity: 0;
   }
 
-  100% {
+  to {
     transform: translateX(0);
     opacity: 1;
   }
@@ -103,7 +107,6 @@ a {
 /* טקסט צדדי */
 .side-text {
   position: absolute;
-  width: auto;
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
@@ -149,16 +152,30 @@ a {
   gap: 1rem;
   z-index: 2;
   opacity: 0;
+  position: relative;
+  /* מאפשר תזוזות ללא השפעה על זרימת המסמך */
 }
 
-.card-section:not(.reverse) .card {
-  margin-left: 10rem;
-  margin-right: 2rem;
+/* מרווחים צדדיים ל־desktop בלבד — לא יגרמו לגלילה במובייל */
+@media (min-width: 1025px) {
+  .card-section:not(.reverse) .card {
+    margin-left: 10rem;
+    margin-right: 2rem;
+  }
+
+  .card-section.reverse .card {
+    margin-right: 10rem;
+    margin-left: 2rem;
+  }
 }
 
-.card-section.reverse .card {
-  margin-right: 10rem;
-  margin-left: 2rem;
+/* עבור מסכים קטנים: אין מרווחים גדולים */
+@media (max-width: 1024px) {
+
+  .card-section:not(.reverse) .card,
+  .card-section.reverse .card {
+    margin: 1rem auto;
+  }
 }
 
 .card-section.reverse .card {
@@ -166,38 +183,31 @@ a {
   text-align: right;
 }
 
+/* כרטיס התרגילים */
 .card-section.exercises-samples {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   margin: 0 auto;
-
   width: 90%;
   max-width: 700px;
   height: auto;
   max-height: 350px;
-
-  /* בטל ירושה מ-min-height: 100vh */
   min-height: unset;
-
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
   padding: 1rem;
   border-radius: 1.5rem;
   box-shadow:
     inset -2px 2px hsl(0 0% 100% / 1),
     -10px 10px 20px hsl(0 0% 0% / 0.1);
-
   text-align: right;
   overflow-y: auto;
-
   animation: slideInFromLeft 1s ease forwards;
-  animation-timeline: view();
-  animation-range: cover 0% cover 40%;
   opacity: 0;
 }
 
+/* גריד כפתורי שפה */
 .language-card-grid {
   display: flex;
   flex-wrap: wrap;
@@ -242,55 +252,11 @@ a {
   margin-bottom: 1rem;
   font-size: 1rem;
   appearance: none;
-  /* מסיר עיצוב דיפולטי */
 }
 
-/* כפתור בעיצוב זכוכית */
-.more-exercises-button {
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #000;
-  padding: 0.75rem 1rem;
-  ;
-  border-radius: 12px;
-  font-weight: bold;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  cursor: pointer;
-
-  /* אפקט כניסה */
-  opacity: 0;
-  transform: translateY(100px);
-  animation-name: slideInFromBottom;
-  animation-timeline: view();
-  animation-range: cover 0% cover 40%;
-  animation-duration: 0.8s;
-  animation-fill-mode: both;
-}
-
-.choose-language-button {
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: #000;
-  padding: 0.75rem 1rem;
-  border-radius: 12px;
-  font-weight: bold;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  cursor: pointer;
-
-  /* אפקט כניסה */
-  opacity: 0;
-  transform: translateY(100px);
-  animation-name: slideInFromBottom;
-  animation-timeline: view();
-  animation-range: cover 0% cover 40%;
-  animation-duration: 0.8s;
-  animation-fill-mode: both;
-}
-
+/* כפתורים זכוכית */
+.more-exercises-button,
+.choose-language-button,
 .login-button {
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.15);
@@ -302,8 +268,6 @@ a {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   cursor: pointer;
-
-  /* אפקט כניסה */
   opacity: 0;
   transform: translateY(100px);
   animation-name: slideInFromBottom;
@@ -317,20 +281,6 @@ a {
   background: rgba(255, 255, 255, 0.25);
   transform: translateY(95px) scale(1.05);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
-}
-
-/* כרטיסיית שאלות */
-.card-section.exercises-samples {
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
-  border-radius: 1.5rem;
-  box-shadow:
-    inset -2px 2px hsl(0 0% 100% / 1),
-    -10px 10px 20px hsl(0 0% 0% / 0.1);
-  animation: fadeIn 1s ease forwards;
-  opacity: 0;
-  text-align: right;
 }
 
 .card-section.exercises-samples h3 {
@@ -352,7 +302,7 @@ a {
   line-height: 1.6;
 }
 
-/* --- אנימציות גלילה --- */
+/* אנימציות */
 @keyframes slideInFromLeft {
   from {
     transform: translateX(-400px);
@@ -389,7 +339,6 @@ a {
   }
 }
 
-/* אנימציות מתחלפות לפי הסדר */
 .card-section:nth-child(odd) .card {
   animation-name: slideInFromLeft;
   animation-timeline: view();
@@ -415,6 +364,7 @@ a {
   -webkit-text-fill-color: transparent;
 }
 
+/* טקסט בתוכן */
 .text-content {
   flex: 1;
 }
@@ -433,17 +383,43 @@ a {
   color: #555;
 }
 
-/* שומרים על מראה הדסקטופ גם בנקודות שבירה במובייל */
-/* (מניעת התאמות רספונסיביות — שומר על אותה פריסה כמו במחשב) */
+/* תמונות, וידאו — שלא יחרגו מהרוחב */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
 
+/* --- רספונסיביות למובייל --- */
+@media (max-width: 1024px) {
+  .animated-title-container {
+    margin: 6rem 0 2rem 0;
+  }
+
+  .cards-list {
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+}
 
 @media (max-width: 768px) {
+  .animated-title-container {
+    margin: 4rem 0 1.5rem 0;
+  }
+
+  .split-text-container {
+    font-size: 2.2rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
   .card {
     flex-direction: column;
-    /* במקום row */
     text-align: center;
     margin: 1rem auto;
-    width: 90%;
+    width: 94%;
+    max-width: 700px;
   }
 
   .icon {
@@ -455,36 +431,38 @@ a {
     font-size: 1.5rem;
   }
 
+  .text-content p {
+    font-size: 0.95rem;
+  }
+
   .side-text {
     position: static;
-    /* לא absolute */
     transform: none;
     margin-bottom: 1rem;
     text-align: center;
+    white-space: normal;
   }
 
   .card-section {
     min-height: auto;
-    /* שלא יכפה 100vh */
     padding: 2rem 1rem;
-  }
-
-  .cards-list {
-    padding: 1.5rem 1rem;
-    gap: 2rem;
   }
 
   .card-section.exercises-samples {
     width: 100%;
     max-height: none;
+    min-height: auto;
+    overflow-y: auto;
   }
 }
 
 @media (max-width: 480px) {
+  .animated-title-container {
+    margin: 3rem 0 1rem 0;
+  }
+
   .split-text-container {
-    font-size: 2rem;
-    flex-direction: column;
-    text-align: center;
+    font-size: 1.8rem;
   }
 
   .icon {
@@ -503,8 +481,11 @@ a {
     padding: 1rem;
     gap: 1rem;
   }
-}
 
+  .card {
+    padding: 1rem;
+  }
+}
 
 /* כיבוד העדפת משתמש לאנימציות מופחתות */
 @media (prefers-reduced-motion: reduce) {
