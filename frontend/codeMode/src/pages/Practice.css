@@ -791,8 +791,7 @@ body {
   }
 }
 
-/* ---------- AI Chat styles (add at the end of Practice.css) ---------- */
-/* ---------- AI Chat styles (add at the end of Practice.css) ---------- */
+/* -/* ---------- AI Chat styles (add at the end of Practice.css) ---------- */
 /* ---------- AI Chat Modal (overlay) ---------- */
 .ai-chat-modal-overlay {
   position: fixed;
@@ -805,13 +804,12 @@ body {
   padding: 20px;
 }
 
-/* MAIN CHANGE: make modal wider (90% of viewport) and keep tall (80vh) */
+/* MAIN CHANGE: wider modal - 90% of viewport */
 .ai-chat-modal {
-  /* <-- increased from 80% to 90% */
-  width: 80%;
-  /* <-- increased max width for large screens */
+  width: 90%;
+  /* תופס 90% מרוחב הדף */
   height: 80vh;
-  /* keeps modal ~80% of viewport height */
+  /* נשאר 80% מהגובה */
   min-height: 480px;
   background: linear-gradient(to bottom left, #ffffff, #f5f7fa);
   border-radius: 12px;
@@ -838,10 +836,9 @@ body {
   gap: 10px;
   flex: 1;
   min-height: 0;
-  /* allow flex child to shrink for overflow */
 }
 
-/* reuse .ai-chat-history style but make it fill the modal's remaining space */
+/* chat history fills remaining space */
 .ai-chat-modal .ai-chat-history {
   border-radius: 10px;
   padding: 12px;
@@ -852,7 +849,6 @@ body {
   flex-direction: column;
   gap: 8px;
   flex: 1;
-  /* take remaining vertical space */
 }
 
 /* small close button */
@@ -869,14 +865,14 @@ body {
   background: #e0e0e0;
 }
 
-/* ensure input row sticks to bottom */
+/* input row at bottom */
 .ai-chat-input-row {
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
-/* reuse .ai-chat-input and .ai-send-btn styles as in file, but ensure they fit modal */
+/* chat input */
 .ai-chat-input {
   flex: 1;
   padding: 10px 12px;
@@ -887,6 +883,7 @@ body {
   outline: none;
 }
 
+/* send button */
 .ai-send-btn {
   padding: 10px 14px;
   border-radius: 10px;
@@ -903,8 +900,6 @@ body {
   .ai-chat-modal {
     width: 95%;
     height: 68vh;
-    max-width: 1200px;
-    /* slightly smaller cap on medium screens */
   }
 }
 
