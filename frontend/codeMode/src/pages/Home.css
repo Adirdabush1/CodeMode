@@ -1,5 +1,19 @@
 @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
 
+/* ================== קונטיינר מרכזי לאתר ================== */
+.main-container {
+  width: 100%;
+  max-width: 1200px;
+  /* רוחב מקסימלי */
+  min-width: 320px;
+  /* מינימום למסכים קטנים */
+  margin: 0 auto;
+  /* מרכז את כל התוכן */
+  padding: 0 1rem;
+  /* רווח פנימי קטן למובייל */
+  box-sizing: border-box;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -11,12 +25,14 @@ body {
 
 body {
   background: #d0dbe1;
-  padding: 2rem;
   font-family: system-ui, sans-serif;
   color: #444447;
   margin: 0;
   overflow-x: hidden;
-  /* מוודא שאין גלילה אופקית כלל */
+  /* מוודא שאין גלילה אופקית */
+  display: flex;
+  justify-content: center;
+  /* ממרכז את הקונטיינר */
 }
 
 a {
@@ -28,7 +44,6 @@ a {
   display: flex;
   justify-content: center;
   margin: 8rem 0 3rem 0;
-  /* פחות מרווח ברירת מחדל (20rem היה גדול מדי) */
 }
 
 .split-text-container {
@@ -92,6 +107,7 @@ a {
   gap: 4rem;
   padding: 3rem 2rem;
   max-width: 1200px;
+  /* תואם לקונטיינר */
   margin: 0 auto;
 }
 
@@ -153,10 +169,9 @@ a {
   z-index: 2;
   opacity: 0;
   position: relative;
-  /* מאפשר תזוזות ללא השפעה על זרימת המסמך */
 }
 
-/* מרווחים צדדיים ל־desktop בלבד — לא יגרמו לגלילה במובייל */
+/* מרווחים צדדיים ל־desktop בלבד */
 @media (min-width: 1025px) {
   .card-section:not(.reverse) .card {
     margin-left: 10rem;
@@ -169,7 +184,7 @@ a {
   }
 }
 
-/* עבור מסכים קטנים: אין מרווחים גדולים */
+/* מסכים קטנים — אין מרווחים גדולים */
 @media (max-width: 1024px) {
 
   .card-section:not(.reverse) .card,
@@ -383,7 +398,7 @@ a {
   color: #555;
 }
 
-/* תמונות, וידאו — שלא יחרגו מהרוחב */
+/* תמונות, וידאו */
 img,
 video {
   max-width: 100%;
@@ -391,7 +406,7 @@ video {
   display: block;
 }
 
-/* --- רספונסיביות למובייל --- */
+/* --- רספונסיביות --- */
 @media (max-width: 1024px) {
   .animated-title-container {
     margin: 6rem 0 2rem 0;
