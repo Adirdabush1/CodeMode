@@ -299,3 +299,56 @@
 .login-signup-root footer a:hover {
   text-decoration: underline;
 }
+
+/* ==== Media queries לרספונסיביות ==== */
+@media (max-width: 900px) {
+  .login-signup-root .container {
+    width: 90%;
+    min-height: 600px;
+  }
+
+  .login-signup-root .sign-in-container,
+  .login-signup-root .sign-up-container,
+  .login-signup-root .overlay-container {
+    width: 100%;
+    left: 0;
+  }
+
+  .login-signup-root .container.right-panel-active .sign-in-container {
+    transform: translateX(0);
+  }
+
+  .login-signup-root .container.right-panel-active .sign-up-container {
+    transform: translateX(0);
+  }
+
+  .login-signup-root .overlay {
+    display: none;
+    /* במובייל מסתיר את ה-overlay */
+  }
+
+  .login-signup-root form {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .login-signup-root input {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .login-signup-root button {
+    padding: 10px 30px;
+    font-size: 11px;
+  }
+
+  .login-signup-root h1 {
+    font-size: 24px;
+  }
+
+  .login-signup-root span,
+  .login-signup-root p {
+    font-size: 11px;
+  }
+}
