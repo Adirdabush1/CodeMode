@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 .login-signup-root {
-
   * {
     box-sizing: border-box;
   }
 
-  /* מחלקה שמכילה את כל הסגנונות */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,11 +14,10 @@
   margin: -20px 0 50px;
   color: #2D3436;
   background: #d0dbe1;
-  /* רקע שמנת בהיר ונעים */
   overflow: hidden;
   min-height: 80vh;
   padding: 20px;
-  box-sizing: border-box;
+  width: 100%;
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
@@ -30,35 +27,38 @@
   font-weight: bold;
   margin: 0;
   color: #3473b2;
-  /* כחול כהה לכותרות */
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
 }
 
 .login-signup-root h2 {
   text-align: center;
   color: #2C3E50;
+  font-size: clamp(1.1rem, 3vw, 2rem);
 }
 
 .login-signup-root p {
-  font-size: 14px;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
   font-weight: 300;
-  line-height: 20px;
+  line-height: 1.5;
   letter-spacing: 0.5px;
   margin: 20px 0 30px;
-  color: #dfe8ea;
-  /* טקסט משני, אפור בינוני */
+  color: #2d3436;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 .login-signup-root span {
-  font-size: 12px;
+  font-size: clamp(0.8rem, 2vw, 1rem);
   color: #636e72;
 }
 
 .login-signup-root a {
   color: #999999;
-  /* אפור בהיר */
-  font-size: 14px;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
   text-decoration: none;
   margin: 15px 0;
+  word-wrap: break-word;
 }
 
 .login-signup-root a:hover {
@@ -68,11 +68,9 @@
 .login-signup-root button {
   border-radius: 20px;
   border: 1px solid #E67E22;
-  /* כתום דגש */
   background-color: #E67E22;
-  /* כתום דגש */
   color: #FFFFFF;
-  font-size: 12px;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
   font-weight: bold;
   padding: 12px 45px;
   letter-spacing: 1px;
@@ -83,7 +81,6 @@
 
 .login-signup-root button:hover {
   background-color: #D35400;
-  /* כתום כהה בהובר */
   border-color: #D35400;
 }
 
@@ -98,7 +95,6 @@
 .login-signup-root button.ghost {
   background-color: transparent;
   border-color: #999999;
-  /* אפור בהיר */
   color: #ffffff;
 }
 
@@ -113,8 +109,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
+  padding: clamp(20px, 5vw, 50px);
+  width: 100%;
   text-align: center;
 }
 
@@ -124,7 +120,7 @@
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
-  font-size: 14px;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   color: #2D3436;
 }
 
@@ -203,7 +199,6 @@
 
 .login-signup-root .overlay {
   background: linear-gradient(to right, #999999, #2C3E50);
-  /* מעבר אפור בהיר לנייטרלי כהה */
   color: #FFFFFF;
   position: relative;
   left: -100%;
@@ -223,7 +218,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 40px;
+  padding: clamp(20px, 5vw, 40px);
   text-align: center;
   top: 0;
   height: 100%;
@@ -274,7 +269,7 @@
 .login-signup-root footer {
   background-color: #222;
   color: #fff;
-  font-size: 14px;
+  font-size: clamp(0.8rem, 2vw, 1rem);
   bottom: 0;
   position: fixed;
   left: 0;
@@ -298,4 +293,21 @@
 
 .login-signup-root footer a:hover {
   text-decoration: underline;
+}
+
+/* --- מדיה קווירי למסכים קטנים --- */
+@media (max-width: 768px) {
+
+  .login-signup-root .sign-in-container,
+  .login-signup-root .sign-up-container,
+  .login-signup-root .overlay-container,
+  .login-signup-root .overlay-panel {
+    width: 100%;
+    left: 0;
+    transform: translateX(0) !important;
+  }
+
+  .login-signup-root .container {
+    min-height: 600px;
+  }
 }
