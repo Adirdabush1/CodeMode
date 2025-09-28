@@ -299,3 +299,45 @@
 .login-signup-root footer a:hover {
   text-decoration: underline;
 }
+
+/* רספונסיביות למובייל */
+@media (max-width: 768px) {
+  .login-signup-root .container {
+    min-height: auto;
+    height: auto;
+  }
+
+  .login-signup-root .sign-in-container,
+  .login-signup-root .sign-up-container {
+    width: 100%;
+    position: relative;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .login-signup-root .overlay-container {
+    display: none;
+    /* מסתיר את ה-overlay במובייל */
+  }
+
+  .login-signup-root form {
+    padding: 20px;
+  }
+
+  .login-signup-root button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-signup-root {
+    padding: 10px;
+    margin: 0 auto;
+  }
+
+  .login-signup-root form {
+    padding: 15px;
+  }
+}
