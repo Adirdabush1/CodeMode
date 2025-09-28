@@ -29,10 +29,6 @@ body {
   color: #444447;
   margin: 0;
   overflow-x: hidden;
-  /* מוודא שאין גלילה אופקית */
-  display: flex;
-  justify-content: center;
-  /* ממרכז את הקונטיינר */
 }
 
 a {
@@ -115,7 +111,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
   justify-content: center;
   position: relative;
 }
