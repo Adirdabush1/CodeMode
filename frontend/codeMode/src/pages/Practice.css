@@ -682,7 +682,6 @@ a {
 /* --- שמירה על מראה דסקטופ גם במובייל (הדבק בסוף הקובץ) --- */
 html,
 body {
-  min-width: 1200px;
   -webkit-text-size-adjust: 100%;
 }
 
