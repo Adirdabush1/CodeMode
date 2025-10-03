@@ -1,6 +1,7 @@
 .menu-bar {
   position: fixed;
-  top: 0;
+  top: 10px;
+  /* קצת מרווח מהחלק העליון */
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
@@ -20,11 +21,10 @@
   -webkit-backdrop-filter: blur(12px);
 
   z-index: 1000;
+  flex-wrap: wrap;
+  /* מאפשר למשתמשים במובייל להסתדר */
 }
 
-
-
-/* פריטי התפריט */
 .menu-bar li {
   list-style: none;
   color: rgb(0, 0, 0);
@@ -60,11 +60,11 @@
   color: black;
 }
 
-/* ריספונסיביות - במובייל נדחוס את התפריט למצב עמודה */
-@media (max-width: 450px) {
+/* רספונסיביות - מסכים קטנים */
+@media (max-width: 600px) {
   .menu-bar {
-    flex-direction: row;
-    width: 95%;
+    flex-direction: column;
+    height: auto;
     padding: 10px;
     border-radius: 15px;
   }
