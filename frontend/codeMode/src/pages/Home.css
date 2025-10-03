@@ -131,7 +131,7 @@ a {
 
 /* צבעי טקסט */
 .text-white {
-  color: rgb(0, 0, 0);
+  color: #fff;
 }
 
 .text-gray {
@@ -139,7 +139,7 @@ a {
 }
 
 .text-black {
-  color: rgb(6, 6, 6);
+  color: #060606;
 }
 
 /* כרטיס */
@@ -216,9 +216,9 @@ a {
 }
 
 .card-section.exercises-samples ul {
-  padding-right: 1.5rem;
-  list-style: disc;
+  padding: 0 1rem;
   margin: 0 0 1rem 0;
+  list-style: disc;
 }
 
 .card-section.exercises-samples li {
@@ -301,8 +301,6 @@ a {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   cursor: pointer;
-  opacity: 1;
-  transform: none;
 }
 
 .more-exercises-button:hover,
@@ -388,7 +386,6 @@ video {
   }
 }
 
-/* כרטיסים — אנימציה סידורית */
 .card-section:nth-child(odd) .card {
   animation-name: slideInFromLeft;
   animation-duration: 1.6s;
@@ -426,6 +423,7 @@ video {
 
   .card {
     flex-direction: column;
+    align-items: center;
     text-align: center;
     margin: 1rem auto;
     width: 94%;
@@ -460,9 +458,21 @@ video {
 
   .card-section.exercises-samples {
     width: 100%;
+    max-width: 400px;
     max-height: none;
     min-height: auto;
     overflow-y: visible;
+  }
+
+  .language-card-grid {
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .language-card {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
 
@@ -497,7 +507,7 @@ video {
   }
 
   .card-section.exercises-samples ul {
-    padding-right: 0.8rem;
+    padding: 0 0.5rem;
   }
 
   .card-section.exercises-samples li {

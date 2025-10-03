@@ -749,9 +749,36 @@ body {
   }
 
   .card-section.exercises-samples {
-    max-height: 400px !important;
-    width: 90% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* השפה תמיד למעלה */
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 900px;
+    /* הגדלנו */
+    height: auto;
+    /* מאפשר גובה משתנה */
+    min-height: 500px;
+    /* מספיק מקום לתוכן */
+    max-height: none;
+    /* ביטלנו הגבלה */
+    background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+    padding: 2rem;
+    /* יותר אוויר פנימי */
+    border-radius: 1.5rem;
+    box-shadow:
+      inset -2px 2px hsl(0 0% 100% / 1),
+      -10px 10px 20px hsl(0 0% 0% / 0.1);
+    text-align: right;
+    overflow-y: auto;
+    /* אפשר גלילה אם צריך */
+    animation: slideInFromLeft 1s ease forwards;
+    opacity: 1;
+    /* נראה ישר */
   }
+
 }
 
 @media (max-width: 480px) {
