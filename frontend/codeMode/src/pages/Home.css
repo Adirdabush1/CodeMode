@@ -1,20 +1,6 @@
 @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
 
-/* ================== קונטיינר מרכזי לאתר ================== */
-.main-container {
-  width: 100%;
-  max-width: 1200px;
-  /* רוחב מקסימלי */
-  min-width: 320px;
-  /* מינימום למסכים קטנים */
-  margin: 0 auto;
-  /* מרכז את כל התוכן */
-  padding: 0 1rem;
-  /* רווח פנימי קטן למובייל */
-  box-sizing: border-box;
-}
-
-/* כללי */
+/* ================== כללי ================== */
 * {
   box-sizing: border-box;
 }
@@ -36,7 +22,17 @@ a {
   color: black;
 }
 
-/* --- כותרת --- */
+/* ================== קונטיינר מרכזי ================== */
+.main-container {
+  width: 100%;
+  max-width: 1200px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* ================== כותרת מונפשת ================== */
 .animated-title-container {
   display: flex;
   justify-content: center;
@@ -47,7 +43,6 @@ a {
   display: flex;
   font-size: 3.5rem;
   font-weight: bold;
-  text-transform: none;
   color: #222;
   overflow: hidden;
   font-family: 'Arial', sans-serif;
@@ -97,14 +92,13 @@ a {
   }
 }
 
-/* --- כרטיסיות --- */
+/* ================== כרטיסיות ================== */
 .cards-list {
   display: flex;
   flex-direction: column;
   gap: 4rem;
   padding: 3rem 2rem;
   max-width: 1200px;
-  /* תואם לקונטיינר */
   margin: 0 auto;
 }
 
@@ -116,7 +110,7 @@ a {
   position: relative;
 }
 
-/* טקסט צדדי */
+/* טקסט צדדי בכרטיס */
 .side-text {
   position: absolute;
   top: 50%;
@@ -135,7 +129,7 @@ a {
   right: 2rem;
 }
 
-/* צבעים */
+/* צבעי טקסט */
 .text-white {
   color: rgb(0, 0, 0);
 }
@@ -157,20 +151,22 @@ a {
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
   padding: 1.5rem;
   border-radius: 1.5rem;
-  box-shadow:
-    inset -2px 2px hsl(0 0% 100% / 1),
-    -10px 10px 20px hsl(0 0% 0% / 0.1);
+  box-shadow: inset -2px 2px hsl(0 0% 100% / 1), -10px 10px 20px hsl(0 0% 0% / 0.1);
   align-items: center;
   gap: 1rem;
   z-index: 2;
   opacity: 0;
   position: relative;
-  /* תיקון בעיה של טקסט שיוצא מהדיב */
   word-break: break-word;
   overflow-wrap: break-word;
 }
 
-/* מרווחים צדדיים ל־desktop בלבד */
+.card-section.reverse .card {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+/* מרווחים שולחניים */
 @media (min-width: 1025px) {
   .card-section:not(.reverse) .card {
     margin-left: 10rem;
@@ -183,7 +179,7 @@ a {
   }
 }
 
-/* מסכים קטנים — אין מרווחים גדולים */
+/* מסכים קטנים */
 @media (max-width: 1024px) {
 
   .card-section:not(.reverse) .card,
@@ -192,12 +188,7 @@ a {
   }
 }
 
-.card-section.reverse .card {
-  flex-direction: row-reverse;
-  text-align: right;
-}
-
-/* כרטיס התרגילים */
+/* כרטיסי תרגילים */
 .card-section.exercises-samples {
   display: flex;
   flex-direction: column;
@@ -206,27 +197,50 @@ a {
   margin: 0 auto;
   width: 90%;
   max-width: 700px;
-  height: auto;
-  /* הגדלנו ל־500px כדי לתת מקום בתצוגת שולחן עבודה */
   max-height: 500px;
-  min-height: unset;
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
   padding: 1rem;
   border-radius: 1.5rem;
-  box-shadow:
-    inset -2px 2px hsl(0 0% 100% / 1),
-    -10px 10px 20px hsl(0 0% 0% / 0.1);
-  /* טקסט מיושר לימין כבר בקוד שלך, נשמר */
+  box-shadow: inset -2px 2px hsl(0 0% 100% / 1), -10px 10px 20px hsl(0 0% 0% / 0.1);
   text-align: right;
   overflow-y: auto;
   animation: slideInFromLeft 1s ease forwards;
   opacity: 0;
-  /* שבירת מילים / אריכות שורות */
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
-/* גריד כפתורי שפה */
+.card-section.exercises-samples h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card-section.exercises-samples ul {
+  padding-right: 1.5rem;
+  list-style: disc;
+  margin: 0 0 1rem 0;
+}
+
+.card-section.exercises-samples li {
+  font-size: clamp(1rem, 1.2vw, 1.3rem);
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+/* תצוגת תרגיל נבחר */
+.selected-exercise {
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.8rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  word-wrap: break-word;
+}
+
+/* ================== כפתורים ================== */
 .language-card-grid {
   display: flex;
   flex-wrap: wrap;
@@ -274,7 +288,6 @@ a {
   appearance: none;
 }
 
-/* כפתורי זכוכית */
 .more-exercises-button,
 .choose-language-button,
 .login-button {
@@ -288,7 +301,6 @@ a {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   cursor: pointer;
-  /* חשוב — שיהיו נראים כברירת מחדל */
   opacity: 1;
   transform: none;
 }
@@ -301,52 +313,45 @@ a {
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
 }
 
-.card-section.exercises-samples h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+/* ================== תוכן הכרטיס ================== */
+.icon {
+  flex-shrink: 0;
+  font-size: 4rem;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* הסתרת סקרולר וובר-קיט (אופציונלי) */
-.card-section.exercises-samples::-webkit-scrollbar {
-  width: 8px;
+.text-content {
+  flex: 1;
+  min-width: 0;
 }
 
-.card-section.exercises-samples::-webkit-scrollbar-track {
-  background: transparent;
+.text-content h2 {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  text-transform: uppercase;
 }
 
-.card-section.exercises-samples::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.12);
-  border-radius: 8px;
-}
-
-/* מבנה רשימת תרגילים */
-.card-section.exercises-samples ul {
-  padding-right: 1.5rem;
-  list-style: disc;
-  margin: 0 0 1rem 0;
-}
-
-.card-section.exercises-samples li {
-  font-size: clamp(1rem, 1.2vw, 1.3rem);
+.text-content p {
+  margin: 0;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   line-height: 1.5;
-  margin-bottom: 0.6rem;
+  color: #555;
   word-break: break-word;
-  overflow-wrap: anywhere;
-  cursor: pointer;
+  overflow-wrap: break-word;
 }
 
-/* תצוגת תרגיל נבחר */
-.selected-exercise {
-  width: 100%;
-  margin: 1rem 0;
-  padding: 0.8rem;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
-  word-wrap: break-word;
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* אנימציות */
+/* ================== אנימציות ================== */
 @keyframes slideInFromLeft {
   from {
     transform: translateX(-400px);
@@ -383,7 +388,7 @@ a {
   }
 }
 
-/* שקופיות אנימציה לכרטיסים — נשארים רכים ונעימים */
+/* כרטיסים — אנימציה סידורית */
 .card-section:nth-child(odd) .card {
   animation-name: slideInFromLeft;
   animation-duration: 1.6s;
@@ -396,49 +401,7 @@ a {
   animation-fill-mode: both;
 }
 
-.icon {
-  flex-shrink: 0;
-  font-size: 4rem;
-  background: linear-gradient(to right, #ff416c, #ff4b2b);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* טקסט בתוכן */
-.text-content {
-  flex: 1;
-  /* כדי לוודא טקסט לא ייצא */
-  min-width: 0;
-}
-
-.text-content h2 {
-  margin: 0 0 0.5rem;
-  font-weight: 700;
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  /* גודל דינמי מותאם למובייל */
-  text-transform: uppercase;
-}
-
-.text-content p {
-  margin: 0;
-  font-size: clamp(0.9rem, 2vw, 1rem);
-  /* גודל דינמי */
-  line-height: 1.5;
-  color: #555;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}
-
-/* תמונות, וידאו */
-img,
-video {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* --- רספונסיביות --- */
+/* ================== רספונסיביות ================== */
 @media (max-width: 1024px) {
   .animated-title-container {
     margin: 6rem 0 2rem 0;
@@ -497,7 +460,6 @@ video {
 
   .card-section.exercises-samples {
     width: 100%;
-    /* מובייל — לא להגביל גובה כדי שלא ייחתכו טקסטים */
     max-height: none;
     min-height: auto;
     overflow-y: visible;
@@ -543,7 +505,7 @@ video {
   }
 }
 
-/* כיבוד העדפת משתמש לאנימציות מופחתות */
+/* ================== העדפות משתמש ================== */
 @media (prefers-reduced-motion: reduce) {
 
   .card,
