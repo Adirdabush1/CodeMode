@@ -232,3 +232,23 @@ a {
     padding: 3rem 2rem !important;
   }
 }
+
+/* ================== תיקון כרטיסי תרגילים למובייל ================== */
+.card-section.exercises-samples {
+  opacity: 1 !important;
+  /* תמיד נראה */
+  animation: none !important;
+  /* מבטל אנימציות מסתירות */
+  max-height: none;
+  /* לא חוסם תוכן */
+  overflow-y: visible;
+  /* מאפשר גלילה טבעית */
+}
+
+.card-section.exercises-samples ul,
+.card-section.exercises-samples li,
+.selected-exercise {
+  opacity: 1 !important;
+  /* מבטיח שהשאלות נראות */
+  animation: none !important;
+}
