@@ -386,6 +386,11 @@ a {
 }
 
 .card-section.exercises-samples {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+.card-section.exercises-samples {
   display: flex;
   flex-direction: column;
   align-items: center;
