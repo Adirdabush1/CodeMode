@@ -1,4 +1,4 @@
-//jwt.strategy.ts
+// jwt.strategy.ts
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
@@ -21,8 +21,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         (req: Request): string | null => {
-          // המרת cookies ל-Record<string, string> כדי למנוע any
-          const cookies = req.cookies as Record<string, string> | undefined;
+          if (!req || !req.cookies) return null;
+          const cookies = req.cookies as Record<string, string>;
           const token = cookies?.jwt;
           return typeof token === 'string' ? token : null;
         },

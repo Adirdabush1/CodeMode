@@ -1,16 +1,22 @@
+/* ================== כרטיסי תרגילים (Exercises Samples) ================== */
 .card-section.exercises-samples {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  /* השפה תמיד למעלה */
   margin: 0 auto;
-  width: 90%;
-  max-width: 800px;
+  width: 95%;
+  /* קצת יותר רחב */
+  max-width: 900px;
+  /* הגדלנו מ-800px */
+  min-height: 600px;
+  /* הגדלנו את הגובה */
   height: auto;
-  max-height: 400px;
-  min-height: unset;
+  /* מאפשר גובה משתנה לפי תוכן */
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
-  padding: 1rem;
+  padding: 2rem;
+  /* יותר מרווח פנימי */
   border-radius: 1.5rem;
   box-shadow:
     inset -2px 2px hsl(0 0% 100% / 1),
@@ -18,26 +24,59 @@
   text-align: right;
   overflow-y: auto;
   animation: slideInFromLeft 1s ease forwards;
-  animation-timeline: view();
-  animation-range: cover 0% cover 40%;
-  opacity: 0;
+  opacity: 1;
 }
 
+/* רשימת שאלות */
+.card-section.exercises-samples ul {
+  padding-right: 2rem;
+  /* יותר מרווח מהקצה */
+  list-style: disc;
+  margin-bottom: 1.5rem;
+}
+
+/* כל שאלה */
+.card-section.exercises-samples li {
+  font-size: 1.6rem;
+  /* הגדלנו את הפונט */
+  line-height: 2rem;
+  /* רווח בין שורות גדול יותר */
+  margin-bottom: 1rem;
+  /* רווח בין שאלות */
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+/* תרגיל נבחר */
+.selected-exercise {
+  width: 100%;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  word-wrap: break-word;
+}
+
+/* שפה / כפתורי שפה */
 .language-card-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .language-card {
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2rem;
   border-radius: 12px;
   background: #ffffff88;
   backdrop-filter: blur(5px);
   border: 2px solid transparent;
   font-weight: bold;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -53,39 +92,57 @@
   border-color: #333;
 }
 
-.card-section.exercises-samples ul {
-  padding-right: 1.5rem;
-  list-style: disc;
+/* ================== רספונסיביות ================== */
+@media (max-width: 1024px) {
+  .card-section.exercises-samples {
+    width: 90%;
+    min-height: 500px;
+    padding: 1.5rem;
+  }
+
+  .card-section.exercises-samples li {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
+
+  .selected-exercise {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+  }
 }
 
-.card-section.exercises-samples li {
-  font-size: 1.5rem;
-  line-height: 1.6;
+@media (max-width: 768px) {
+  .card-section.exercises-samples {
+    width: 95%;
+    min-height: auto;
+    padding: 1.5rem;
+  }
+
+  .card-section.exercises-samples li {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+  }
+
+  .selected-exercise {
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+  }
 }
 
-.card-section.exercises-samples {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  /* משתנה מ-center ל-flex-start כדי שהשפה תמיד למעלה */
-  margin: 0 auto;
-  width: 90%;
-  max-width: 800px;
-  height: auto;
-  /* מאפשר גובה משתנה */
-  min-height: 500px;
-  /* או יותר לפי הצורך */
-  background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
-  padding: 1rem;
-  border-radius: 1.5rem;
-  box-shadow:
-    inset -2px 2px hsl(0 0% 100% / 1),
-    -10px 10px 20px hsl(0 0% 0% / 0.1);
-  text-align: right;
-  overflow-y: auto;
-  animation: slideInFromLeft 1s ease forwards;
-  animation-timeline: view();
-  animation-range: cover 0% cover 40%;
-  opacity: 0;
+@media (max-width: 480px) {
+  .card-section.exercises-samples {
+    width: 100%;
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .card-section.exercises-samples li {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
+
+  .selected-exercise {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+  }
 }
