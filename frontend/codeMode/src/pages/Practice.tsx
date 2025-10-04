@@ -181,6 +181,7 @@ async function runCode() {
       ? currentExercise.examples
       : null;
 
+    // אם אין examples — ריצה רגילה מול Judge0
     if (!tests) {
       const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
         method: 'POST',
@@ -199,14 +200,12 @@ async function runCode() {
       }
 
       const data = await res.json();
-      let resultOutput = data.output || '';
+      let resultOutput = data.output || data.stdout || '';
 
       if (!resultOutput.trim()) {
         if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n`;
         if (data.stderr) resultOutput += `❌ Runtime Error:\n${data.stderr}\n`;
-        if (data.stdout) resultOutput += `✅ Output:\n${data.stdout}\n`;
         if (data.message) resultOutput += `ℹ Message:\n${data.message}\n`;
-        if (data.status) resultOutput += `📌 Status: ${data.status.description}\n`;
       }
 
       if (!resultOutput.trim()) resultOutput = '⚠ No output returned.';
@@ -218,6 +217,8 @@ async function runCode() {
 
     const results: string[] = [];
     let allPassed = true;
+
+    const normalize = (str: string) => str.trim().replace(/\r\n/g, '\n');
 
     for (let i = 0; i < tests.length; i++) {
       const test = tests[i];
@@ -242,31 +243,8 @@ async function runCode() {
       const actualRaw = data.stdout || data.output || '';
       const expectedRaw = test.output || '';
 
-      let actualNormalized, expectedNormalized;
-
-      try {
-        actualNormalized = JSON.stringify(JSON.parse(actualRaw));
-      } catch {
-        actualNormalized = JSON.stringify(actualRaw).trim();
-      }
-
-      try {
-        expectedNormalized = JSON.stringify(JSON.parse(expectedRaw));
-      } catch {
-        expectedNormalized = JSON.stringify(expectedRaw).trim();
-      }
-
-      if ((data.compile_output && data.compile_output.trim()) || (data.stderr && data.stderr.trim())) {
-        allPassed = false;
-        const compileMsg = data.compile_output ? `Compile Output:\n${data.compile_output}\n` : '';
-        const stderrMsg = data.stderr ? `Stderr:\n${data.stderr}\n` : '';
-        results.push(
-          `❌ Test ${i + 1} failed (compile/runtime error)\nInput: ${test.input}\n${compileMsg}${stderrMsg}Got Output: ${actualRaw || '(empty)'}`
-        );
-        continue;
-      }
-
-      if (actualNormalized === expectedNormalized) {
+      // השוואה נרמלת
+      if (normalize(actualRaw) === normalize(expectedRaw)) {
         results.push(`✅ Test ${i + 1} passed\nInput: ${test.input}\nOutput: ${actualRaw}`);
       } else {
         allPassed = false;
@@ -287,12 +265,15 @@ async function runCode() {
       });
       await saveExercise();
     } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Some tests failed',
-        text: 'See output for details and try again.',
-        background: '#fff7f7',
-      });
+      const failedTests = results.filter(r => r.startsWith('❌'));
+      if (failedTests.length > 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Some tests failed',
+          text: 'See output for details and try again.',
+          background: '#fff7f7',
+        });
+      }
     }
   } catch (e: unknown) {
     setOutput(`❌ Error running code: ${e instanceof Error ? e.message : JSON.stringify(e)}`);
