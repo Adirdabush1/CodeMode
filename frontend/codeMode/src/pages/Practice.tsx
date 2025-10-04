@@ -181,7 +181,13 @@ async function runCode() {
       ? currentExercise.examples
       : null;
 
-    const normalize = (str: string) => str.trim().replace(/\r\n/g, '\n');
+    // normalize חכם יותר: מסיר רווחים מכל שורה ושורות ריקות
+    const normalize = (str: string) =>
+      str
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(line => line.length > 0)
+        .join('\n');
 
     // אם אין examples — ריצה רגילה מול Judge0
     if (!tests) {
@@ -236,13 +242,28 @@ async function runCode() {
       const actualRaw = data.stdout || data.output || '';
       const expectedRaw = test.output || '';
 
-      // השוואה נרמלת בלבד
-      if (normalize(actualRaw) === normalize(expectedRaw)) {
+      const normalizedActual = normalize(actualRaw);
+      const normalizedExpected = normalize(expectedRaw);
+
+      if (normalizedActual === normalizedExpected) {
         results.push(`✅ Test ${i + 1} passed\nInput: ${test.input}\nOutput: ${actualRaw}`);
       } else {
         allPassed = false;
+
+        // הצגת ההבדלים בין השורות
+        const actualLines = normalizedActual.split('\n');
+        const expectedLines = normalizedExpected.split('\n');
+        const lineDiffs: string[] = [];
+
+        const maxLines = Math.max(actualLines.length, expectedLines.length);
+        for (let j = 0; j < maxLines; j++) {
+          const a = actualLines[j] ?? '(empty)';
+          const e = expectedLines[j] ?? '(empty)';
+          if (a !== e) lineDiffs.push(`Line ${j + 1}: Expected "${e}", got "${a}"`);
+        }
+
         results.push(
-          `❌ Test ${i + 1} failed\nInput: ${test.input}\nExpected: ${expectedRaw || '(empty)'}\nGot: ${actualRaw || '(empty)'}`
+          `❌ Test ${i + 1} failed\nInput: ${test.input}\nExpected: ${expectedRaw || '(empty)'}\nGot: ${actualRaw || '(empty)'}\nDifferences:\n${lineDiffs.join('\n')}`
         );
       }
     }
@@ -264,6 +285,7 @@ async function runCode() {
     setIsRunning(false);
   }
 }
+
 
 
   async function analyzeCode() {
