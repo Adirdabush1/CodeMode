@@ -181,7 +181,6 @@ async function runCode() {
       ? currentExercise.examples
       : null;
 
-    // normalize חכם יותר: מסיר רווחים מכל שורה ושורות ריקות
     const normalize = (str: string) =>
       str
         .split(/\r?\n/)
@@ -189,7 +188,7 @@ async function runCode() {
         .filter(line => line.length > 0)
         .join('\n');
 
-    // אם אין examples — ריצה רגילה מול Judge0
+    // ריצה רגילה אם אין examples
     if (!tests) {
       const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
         method: 'POST',
@@ -209,7 +208,6 @@ async function runCode() {
 
       const data = await res.json();
       const resultOutput = data.stdout || data.output || '';
-
       setOutput(resultOutput || '⚠ No output returned.');
       if (resultOutput.trim()) await saveExercise();
       return;
@@ -242,15 +240,24 @@ async function runCode() {
       const actualRaw = data.stdout || data.output || '';
       const expectedRaw = test.output || '';
 
-      const normalizedActual = normalize(actualRaw);
-      const normalizedExpected = normalize(expectedRaw);
+      let normalizedActual = normalize(actualRaw);
+      let normalizedExpected = normalize(expectedRaw);
+
+      // אם הפלט או הציפייה הם JSON (array/object) - נשווה באמצעות JSON.stringify
+      try {
+        const actualParsed = JSON.parse(actualRaw);
+        const expectedParsed = JSON.parse(expectedRaw);
+        normalizedActual = JSON.stringify(actualParsed);
+        normalizedExpected = JSON.stringify(expectedParsed);
+      } catch {
+        // אם לא JSON - נשאיר את הנרמול הרגיל
+      }
 
       if (normalizedActual === normalizedExpected) {
         results.push(`✅ Test ${i + 1} passed\nInput: ${test.input}\nOutput: ${actualRaw}`);
       } else {
         allPassed = false;
 
-        // הצגת ההבדלים בין השורות
         const actualLines = normalizedActual.split('\n');
         const expectedLines = normalizedExpected.split('\n');
         const lineDiffs: string[] = [];
