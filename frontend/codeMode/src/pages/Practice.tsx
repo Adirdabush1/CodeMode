@@ -181,6 +181,8 @@ async function runCode() {
       ? currentExercise.examples
       : null;
 
+    const normalize = (str: string) => str.trim().replace(/\r\n/g, '\n');
+
     // אם אין examples — ריצה רגילה מול Judge0
     if (!tests) {
       const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
@@ -200,25 +202,16 @@ async function runCode() {
       }
 
       const data = await res.json();
-      let resultOutput = data.output || data.stdout || '';
+      const resultOutput = data.stdout || data.output || '';
 
-      if (!resultOutput.trim()) {
-        if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n`;
-        if (data.stderr) resultOutput += `❌ Runtime Error:\n${data.stderr}\n`;
-        if (data.message) resultOutput += `ℹ Message:\n${data.message}\n`;
-      }
-
-      if (!resultOutput.trim()) resultOutput = '⚠ No output returned.';
-      setOutput(resultOutput);
-
-      if (!data.stderr && resultOutput.trim()) await saveExercise();
+      setOutput(resultOutput || '⚠ No output returned.');
+      if (resultOutput.trim()) await saveExercise();
       return;
     }
 
+    // עם examples
     const results: string[] = [];
     let allPassed = true;
-
-    const normalize = (str: string) => str.trim().replace(/\r\n/g, '\n');
 
     for (let i = 0; i < tests.length; i++) {
       const test = tests[i];
@@ -234,7 +227,7 @@ async function runCode() {
 
       if (!res.ok) {
         const txt = await res.text();
-        results.push(`❌ Test ${i + 1}: Judge error (HTTP ${res.status}): ${txt}`);
+        results.push(`⚠ Test ${i + 1}: Judge error (HTTP ${res.status}): ${txt}`);
         allPassed = false;
         continue;
       }
@@ -243,7 +236,7 @@ async function runCode() {
       const actualRaw = data.stdout || data.output || '';
       const expectedRaw = test.output || '';
 
-      // השוואה נרמלת
+      // השוואה נרמלת בלבד
       if (normalize(actualRaw) === normalize(expectedRaw)) {
         results.push(`✅ Test ${i + 1} passed\nInput: ${test.input}\nOutput: ${actualRaw}`);
       } else {
@@ -264,16 +257,6 @@ async function runCode() {
         background: '#f4f6f9',
       });
       await saveExercise();
-    } else {
-      const failedTests = results.filter(r => r.startsWith('❌'));
-      if (failedTests.length > 0) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Some tests failed',
-          text: 'See output for details and try again.',
-          background: '#fff7f7',
-        });
-      }
     }
   } catch (e: unknown) {
     setOutput(`❌ Error running code: ${e instanceof Error ? e.message : JSON.stringify(e)}`);
@@ -281,6 +264,7 @@ async function runCode() {
     setIsRunning(false);
   }
 }
+
 
   async function analyzeCode() {
     const loggedIn = await isLoggedIn();
