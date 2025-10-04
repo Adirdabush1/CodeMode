@@ -167,140 +167,139 @@ const Practice: React.FC = () => {
   }
 
   // Run Code — עכשיו גם בודק מול ה-examples אם קיימים, עם נרמול פלט
-  async function runCode() {
-    if (!selectedExercise) return;
+async function runCode() {
+  if (!selectedExercise) return;
 
-    setIsRunning(true);
-    setOutput('⏳ Running tests...');
-    setSaveStatus('idle');
-    setSaveErrorMessage(null);
+  setIsRunning(true);
+  setOutput('⏳ Running tests...');
+  setSaveStatus('idle');
+  setSaveErrorMessage(null);
 
-    // normalize: replace CRLF/CR with LF, remove NBSP, trim edges
-    const normalize = (str: string) =>
-      str.replace(/\r\n/g, '\n').replace(/\r/g, '\n').replace(/\u00A0/g, ' ').trim();
+  try {
+    const token = localStorage.getItem('token');
+    const tests = currentExercise?.examples && currentExercise.examples.length > 0
+      ? currentExercise.examples
+      : null;
 
-    try {
-      const token = localStorage.getItem('token');
+    if (!tests) {
+      const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ code, language, stdin }),
+        credentials: token ? undefined : 'include',
+      });
 
-      // אם יש examples בתרגיל — להריץ עבור כל אחד מהם ולבדוק תוצאה
-      const tests = currentExercise?.examples && currentExercise.examples.length > 0
-        ? currentExercise.examples
-        : null;
-
-      if (!tests) {
-        // התנהגות ישנה: הרצה יחידה עם stdin הרגיל
-        const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          body: JSON.stringify({ code, language, stdin }),
-          credentials: token ? undefined : 'include',
-        });
-
-        if (!res.ok) {
-          const text = await res.text();
-          setOutput(`❌ Judge0 error (HTTP ${res.status}): ${text}`);
-          return;
-        }
-
-        const data = await res.json();
-        let resultOutput = data.output || '';
-
-        if (!resultOutput.trim()) {
-          if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n`;
-          if (data.stderr) resultOutput += `❌ Runtime Error:\n${data.stderr}\n`;
-          if (data.stdout) resultOutput += `✅ Output:\n${data.stdout}\n`;
-          if (data.message) resultOutput += `ℹ Message:\n${data.message}\n`;
-          if (data.status) resultOutput += `📌 Status: ${data.status.description}\n`;
-        }
-
-        if (!resultOutput.trim()) resultOutput = '⚠ No output returned.';
-
-        setOutput(resultOutput);
-
-        if (!data.stderr && resultOutput.trim()) await saveExercise();
+      if (!res.ok) {
+        const text = await res.text();
+        setOutput(`❌ Judge0 error (HTTP ${res.status}): ${text}`);
         return;
       }
 
-      // יש טסטים — נעבור עליהם סדרתית
-      const results: string[] = [];
-      let allPassed = true;
+      const data = await res.json();
+      let resultOutput = data.output || '';
 
-      for (let i = 0; i < tests.length; i++) {
-        const test = tests[i];
-        // שולחים ל־judge את הקוד עם stdin מה־example
-        const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          body: JSON.stringify({ code, language, stdin: test.input }),
-          credentials: token ? undefined : 'include',
-        });
-
-        if (!res.ok) {
-          const txt = await res.text();
-          results.push(`❌ Test ${i + 1}: Judge error (HTTP ${res.status}): ${txt}`);
-          allPassed = false;
-          // לא נשבור — נמשיך לבדוק שאר הטסטים
-          continue;
-        }
-
-        const data = await res.json();
-
-        // נספק עדיפות ל־stdout/ output כמקור אמת
-        const actual = normalize((data.stdout || data.output || '').toString());
-        const expected = normalize((test.output || '').toString());
-
-        // אם יש שגיאת קומפילציה או stderr — דווח ככישלון עם פרטי השגיאה
-        if ((data.compile_output && data.compile_output.toString().trim()) || (data.stderr && data.stderr.toString().trim())) {
-          allPassed = false;
-          const compileMsg = data.compile_output ? `Compile Output:\n${data.compile_output}\n` : '';
-          const stderrMsg = data.stderr ? `Stderr:\n${data.stderr}\n` : '';
-          results.push(
-            `❌ Test ${i + 1} failed (compile/runtime error)\nInput: ${test.input}\n${compileMsg}${stderrMsg}Got Output: ${actual || '(empty)'}`
-          );
-          continue;
-        }
-
-        // השוואת פלט מנורמל
-        if (actual === expected) {
-          results.push(`✅ Test ${i + 1} passed\nInput: ${test.input}\nOutput: ${actual}`);
-        } else {
-          allPassed = false;
-          results.push(
-            `❌ Test ${i + 1} failed\nInput: ${test.input}\nExpected: ${expected || '(empty)'}\nGot: ${actual || '(empty)'}`
-          );
-        }
+      if (!resultOutput.trim()) {
+        if (data.compile_output) resultOutput += `💻 Compile Output:\n${data.compile_output}\n`;
+        if (data.stderr) resultOutput += `❌ Runtime Error:\n${data.stderr}\n`;
+        if (data.stdout) resultOutput += `✅ Output:\n${data.stdout}\n`;
+        if (data.message) resultOutput += `ℹ Message:\n${data.message}\n`;
+        if (data.status) resultOutput += `📌 Status: ${data.status.description}\n`;
       }
 
-      setOutput(results.join('\n\n'));
+      if (!resultOutput.trim()) resultOutput = '⚠ No output returned.';
+      setOutput(resultOutput);
 
-      if (allPassed) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Correct!',
-          text: 'All tests passed 🎉',
-          background: '#f4f6f9',
-        });
-        await saveExercise();
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Some tests failed',
-          text: 'See output for details and try again.',
-          background: '#fff7f7',
-        });
-      }
-    } catch (e: unknown) {
-      setOutput(`❌ Error running code: ${e instanceof Error ? e.message : JSON.stringify(e)}`);
-    } finally {
-      setIsRunning(false);
+      if (!data.stderr && resultOutput.trim()) await saveExercise();
+      return;
     }
+
+    const results: string[] = [];
+    let allPassed = true;
+
+    for (let i = 0; i < tests.length; i++) {
+      const test = tests[i];
+      const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify({ code, language, stdin: test.input }),
+        credentials: token ? undefined : 'include',
+      });
+
+      if (!res.ok) {
+        const txt = await res.text();
+        results.push(`❌ Test ${i + 1}: Judge error (HTTP ${res.status}): ${txt}`);
+        allPassed = false;
+        continue;
+      }
+
+      const data = await res.json();
+      const actualRaw = data.stdout || data.output || '';
+      const expectedRaw = test.output || '';
+
+      let actualNormalized, expectedNormalized;
+
+      try {
+        actualNormalized = JSON.stringify(JSON.parse(actualRaw));
+      } catch {
+        actualNormalized = JSON.stringify(actualRaw).trim();
+      }
+
+      try {
+        expectedNormalized = JSON.stringify(JSON.parse(expectedRaw));
+      } catch {
+        expectedNormalized = JSON.stringify(expectedRaw).trim();
+      }
+
+      if ((data.compile_output && data.compile_output.trim()) || (data.stderr && data.stderr.trim())) {
+        allPassed = false;
+        const compileMsg = data.compile_output ? `Compile Output:\n${data.compile_output}\n` : '';
+        const stderrMsg = data.stderr ? `Stderr:\n${data.stderr}\n` : '';
+        results.push(
+          `❌ Test ${i + 1} failed (compile/runtime error)\nInput: ${test.input}\n${compileMsg}${stderrMsg}Got Output: ${actualRaw || '(empty)'}`
+        );
+        continue;
+      }
+
+      if (actualNormalized === expectedNormalized) {
+        results.push(`✅ Test ${i + 1} passed\nInput: ${test.input}\nOutput: ${actualRaw}`);
+      } else {
+        allPassed = false;
+        results.push(
+          `❌ Test ${i + 1} failed\nInput: ${test.input}\nExpected: ${expectedRaw || '(empty)'}\nGot: ${actualRaw || '(empty)'}`
+        );
+      }
+    }
+
+    setOutput(results.join('\n\n'));
+
+    if (allPassed) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Correct!',
+        text: 'All tests passed 🎉',
+        background: '#f4f6f9',
+      });
+      await saveExercise();
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Some tests failed',
+        text: 'See output for details and try again.',
+        background: '#fff7f7',
+      });
+    }
+  } catch (e: unknown) {
+    setOutput(`❌ Error running code: ${e instanceof Error ? e.message : JSON.stringify(e)}`);
+  } finally {
+    setIsRunning(false);
   }
+}
 
   async function analyzeCode() {
     const loggedIn = await isLoggedIn();
