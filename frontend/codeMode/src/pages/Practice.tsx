@@ -200,11 +200,11 @@ async function runCode() {
         credentials: token ? undefined : 'include',
       });
 
-      if (!res.ok) {
-        const text = await res.text();
-        setOutput(`❌ Judge0 error (HTTP ${res.status}): ${text}`);
-        return;
-      }
+      // if (!res.ok) {
+      //   const text = await res.text();
+      //   setOutput(`❌ Judge0 error (HTTP ${res.status}): ${text}`);
+      //   return;
+      // }
 
       const data = await res.json();
       const resultOutput = data.stdout || data.output || '';
