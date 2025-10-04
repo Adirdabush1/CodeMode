@@ -56,7 +56,6 @@ const Practice: React.FC = () => {
   const [aiQuery, setAiQuery] = useState('');
   const [aiChat, setAiChat] = useState<ChatMessage[]>([]);
   const historyRef = useRef<HTMLDivElement | null>(null);
-
   const [showAiChat, setShowAiChat] = useState(false);
 
   useEffect(() => {
@@ -64,8 +63,8 @@ const Practice: React.FC = () => {
     if (el) {
       try {
         el.scrollTop = el.scrollHeight;
-      } catch {
-        /* ignore */
+      } catch (e) {
+        console.log('Error scrolling AI chat history', e);
       }
     }
   }, [aiChat, showAiChat]);
@@ -78,7 +77,7 @@ const Practice: React.FC = () => {
     return () => window.removeEventListener('keydown', onKey);
   }, [showAiChat]);
 
-  // כשנבחר תרגיל — נטען את פרטי התרגיל מהמיאבק (כולל examples)
+  // טעינת פרטי התרגיל שנבחר
   useEffect(() => {
     if (!selectedExercise) {
       setCurrentExercise(null);
@@ -88,13 +87,11 @@ const Practice: React.FC = () => {
     let canceled = false;
     async function fetchExercise() {
       try {
-        // נניח שיש endpoint GET /questions/:id שמחזיר את פרטי התרגיל
         const res = await fetch(
           `https://backend-codemode-9p1s.onrender.com/questions/${selectedExercise}`,
           { credentials: 'include' }
         );
         if (!res.ok) {
-          // fallback: אם אין endpoint כזה, אפשר לנסות /questions?id=...
           console.warn('Failed to fetch exercise details', res.status);
           setCurrentExercise(null);
           return;
@@ -102,7 +99,6 @@ const Practice: React.FC = () => {
         const data = await res.json();
         if (!canceled) {
           setCurrentExercise(data);
-          // אם יש starterCode בתרגיל, נטען אותו אוטומטית לעריכה
           if (data?.starterCode && typeof data.starterCode === 'string') {
             setCode(data.starterCode);
           }
@@ -166,7 +162,6 @@ const Practice: React.FC = () => {
     }
   }
 
-  // Run Code — עכשיו גם בודק מול ה-examples אם קיימים
   async function runCode() {
     if (!selectedExercise) return;
 
@@ -177,14 +172,11 @@ const Practice: React.FC = () => {
 
     try {
       const token = localStorage.getItem('token');
-
-      // אם יש examples בתרגיל — להריץ עבור כל אחד מהם ולבדוק תוצאה
       const tests = currentExercise?.examples && currentExercise.examples.length > 0
         ? currentExercise.examples
         : null;
 
       if (!tests) {
-        // התנהגות ישנה: הרצה יחידה עם stdin הרגיל
         const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
           method: 'POST',
           headers: {
@@ -213,20 +205,17 @@ const Practice: React.FC = () => {
         }
 
         if (!resultOutput.trim()) resultOutput = '⚠ No output returned.';
-
         setOutput(resultOutput);
 
         if (!data.stderr && resultOutput.trim()) await saveExercise();
         return;
       }
 
-      // יש טסטים — נעבור עליהם סדרתית
       const results: string[] = [];
       let allPassed = true;
 
       for (let i = 0; i < tests.length; i++) {
         const test = tests[i];
-        // שולחים ל־judge את הקוד עם stdin מה־example
         const res = await fetch('https://backend-codemode-9p1s.onrender.com/judge/run', {
           method: 'POST',
           headers: {
@@ -241,18 +230,14 @@ const Practice: React.FC = () => {
           const txt = await res.text();
           results.push(`❌ Test ${i + 1}: Judge error (HTTP ${res.status}): ${txt}`);
           allPassed = false;
-          // לא נשבור — נמשיך לבדוק שאר הטסטים
           continue;
         }
 
         const data = await res.json();
-
-        // נספק עדיפות ל־stdout/ output כמקור אמת
         const actualRaw = (data.stdout || data.output || '').toString();
         const actual = actualRaw.trim();
         const expected = (test.output || '').toString().trim();
 
-        // אם יש שגיאת קומפילציה או stderr — דווח ככישלון עם פרטי השגיאה
         if ((data.compile_output && data.compile_output.trim()) || (data.stderr && data.stderr.trim())) {
           allPassed = false;
           const compileMsg = data.compile_output ? `Compile Output:\n${data.compile_output}\n` : '';
@@ -263,7 +248,6 @@ const Practice: React.FC = () => {
           continue;
         }
 
-        // השוואת פלט מדויק (trim). אפשר לשפר להשוואה גמישה אם תרצה (ignore whitespace, JSON parse, etc.)
         if (actual === expected) {
           results.push(`✅ Test ${i + 1} passed\nInput: ${test.input}\nOutput: ${actual}`);
         } else {
@@ -412,7 +396,6 @@ const Practice: React.FC = () => {
   return (
     <div className="practice-page">
       <MenuBar />
-      <h1></h1>
 
       <ExerciseList
         selectedLanguage={language}
@@ -448,7 +431,6 @@ const Practice: React.FC = () => {
         </button>
       </div>
 
-      {/* הצגת סטטוס רק אחרי ניסיון שמירה */}
       {saveStatus !== 'idle' && (
         <div style={{ marginTop: 16 }}>
           {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
