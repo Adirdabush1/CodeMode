@@ -58,6 +58,9 @@ const Practice: React.FC = () => {
   const historyRef = useRef<HTMLDivElement | null>(null);
   const [showAiChat, setShowAiChat] = useState(false);
 
+  const [leftPanePercent, setLeftPanePercent] = useState(30);
+  const isResizingRef = useRef(false);
+
   useEffect(() => {
     const el = historyRef.current || document.getElementById('aiChatHistory');
     if (el) {
@@ -418,7 +421,11 @@ async function runCode() {
 
       <div className="practice-container">
         <div className="practice-layout">
-          <div className="practice-left" aria-label="Exercises">
+          <div
+            className="practice-left"
+            aria-label="Exercises"
+            style={{ flexBasis: `${leftPanePercent}%` }}
+          >
             <ExerciseList
               selectedLanguage={language}
               selectedExercise={selectedExercise}
@@ -431,7 +438,62 @@ async function runCode() {
             />
           </div>
 
-          <div className="practice-right" aria-label="Editor">
+          <div
+            className="practice-splitter"
+            role="separator"
+            aria-orientation="vertical"
+            aria-label="Resize panels"
+            tabIndex={0}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              isResizingRef.current = true;
+
+              const startX = e.clientX;
+              const startLeft = leftPanePercent;
+              const container = (e.currentTarget.parentElement as HTMLElement | null);
+
+              function onMove(ev: MouseEvent) {
+                if (!isResizingRef.current || !container) return;
+                const rect = container.getBoundingClientRect();
+                const deltaPx = ev.clientX - startX;
+                const deltaPercent = (deltaPx / rect.width) * 100;
+                const next = Math.min(60, Math.max(20, startLeft + deltaPercent));
+                setLeftPanePercent(next);
+              }
+
+              function onUp() {
+                isResizingRef.current = false;
+                window.removeEventListener('mousemove', onMove);
+                window.removeEventListener('mouseup', onUp);
+              }
+
+              window.addEventListener('mousemove', onMove);
+              window.addEventListener('mouseup', onUp);
+            }}
+            onClick={() => {
+              setLeftPanePercent((prev) => (prev <= 30 ? 40 : 30));
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setLeftPanePercent((prev) => (prev <= 30 ? 40 : 30));
+              }
+              if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                setLeftPanePercent((prev) => Math.max(20, prev - 5));
+              }
+              if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                setLeftPanePercent((prev) => Math.min(60, prev + 5));
+              }
+            }}
+          />
+
+          <div
+            className="practice-right"
+            aria-label="Editor"
+            style={{ flexBasis: `${100 - leftPanePercent}%` }}
+          >
             <div className="practice-editor-panel">
               <Editor
                 height="400px"
