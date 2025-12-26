@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo, useRef, useState, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuBar from "../components/MenuBar";
 import "./Home.css";
-import MonacoEditor from "../components/MonacoEditor";
 import axios from "axios";
 import Swal from "sweetalert2"; // ✅ הוספת SweetAlert2
+
+const LazyMonacoEditor = React.lazy(() => import("../components/MonacoEditor"));
 
 const exercisesByLanguage: Record<string, string[]> = {
   javascript: [
@@ -42,9 +43,13 @@ const exercisesByLanguage: Record<string, string[]> = {
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loadingAuth, setLoadingAuth] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
+
+  const editorSentinelRef = useRef<HTMLDivElement | null>(null);
+  const [shouldLoadEditor, setShouldLoadEditor] = useState(false);
+
+  const supportsIO = useMemo(() => typeof window !== "undefined" && "IntersectionObserver" in window, []);
 
   // ✅ Alert של קוקיז
   useEffect(() => {
@@ -84,15 +89,40 @@ const Home: React.FC = () => {
       })
       .catch(() => {
         if (mounted) setIsLoggedIn(false);
-      })
-      .then(() => {
-        if (mounted) setLoadingAuth(false);
       });
 
     return () => {
       mounted = false;
     };
   }, []);
+
+  // Defer loading the Monaco bundle until the editor area is near the viewport.
+  useEffect(() => {
+    if (shouldLoadEditor) return;
+    if (!supportsIO) {
+      setShouldLoadEditor(true);
+      return;
+    }
+
+    const element = editorSentinelRef.current;
+    if (!element) {
+      setShouldLoadEditor(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries.some(e => e.isIntersecting)) {
+          setShouldLoadEditor(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px" }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [shouldLoadEditor, supportsIO]);
 
   const handleMoreExercisesClick = () => {
     if (!isLoggedIn) {
@@ -115,22 +145,38 @@ const Home: React.FC = () => {
 
   const exercises = exercisesByLanguage[selectedLanguage] || [];
 
-  if (loadingAuth) {
-    return (
-      <>
-        <MenuBar />
-        <div className="profile-page">
-          <h1>Loading...</h1>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <MenuBar />
 
       <main className="main-container" aria-live="polite">
+        {/* עוזר אישי */}
+        <div className="card-section special-card" aria-label="Personal AI Assistant">
+          <div className="card">
+            <div className="text-content">
+              <h2>Personal AI Assistant</h2>
+              {!isLoggedIn ? (
+                <>
+                  <p>
+                    To use the personal AI assistant, please log in or sign up.
+                  </p>
+                  <button
+                    onClick={() =>
+                      navigate("/login", { state: { redirectTo: "/practice" } })
+                    }
+                    className="login-button"
+                    aria-label="Login or sign up"
+                  >
+                    Login / Sign Up
+                  </button>
+                </>
+              ) : (
+                <p>Welcome back! Use the AI assistant to enhance your coding skills.</p>
+              )}
+            </div>
+          </div>
+        </div>
+
         <div className="animated-title-container">
           <div className="split-text-container" aria-hidden={false}>
             <span className="text-part left">Learn With </span>
@@ -139,33 +185,6 @@ const Home: React.FC = () => {
         </div>
 
         <div className="cards-list">
-          {/* עוזר אישי */}
-          <div className="card-section special-card">
-            <div className="card">
-              <div className="text-content">
-                <h2>Personal AI Assistant</h2>
-                {!isLoggedIn ? (
-                  <>
-                    <p>
-                      To use the personal AI assistant, please log in or sign up.
-                    </p>
-                    <button
-                      onClick={() =>
-                        navigate("/login", { state: { redirectTo: "/practice" } })
-                      }
-                      className="login-button"
-                      aria-label="Login or sign up"
-                    >
-                      Login / Sign Up
-                    </button>
-                  </>
-                ) : (
-                  <p>Welcome back! Use the AI assistant to enhance your coding skills.</p>
-                )}
-              </div>
-            </div>
-          </div>
-
           {/* תכנות */}
           <div className="card-section">
             <div className="side-text left text-white">AI Learns </div>
@@ -233,7 +252,14 @@ const Home: React.FC = () => {
 
           <section className="home-editor-section" aria-label="Code editor">
             <div className="home-editor-container">
-              <MonacoEditor />
+              <div ref={editorSentinelRef} />
+              {shouldLoadEditor ? (
+                <Suspense fallback={<div style={{ padding: "1rem" }}>Loading editor…</div>}>
+                  <LazyMonacoEditor />
+                </Suspense>
+              ) : (
+                <div style={{ padding: "1rem" }}>Scroll to load the editor…</div>
+              )}
             </div>
           </section>
 
@@ -292,8 +318,7 @@ const Home: React.FC = () => {
           </div>
 
           {/* תחזוקה */}
-          <div className="card-section">
-            <div className="side-text left text-black">Maintain Like a Pro</div>
+          <div className="card-section maintenance-section">
             <div className="card">
               <div className="icon" aria-hidden>
                 <i className="fa-thin fa-wrench-simple"></i>
