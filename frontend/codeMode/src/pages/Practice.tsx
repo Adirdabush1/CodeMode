@@ -60,6 +60,7 @@ const Practice: React.FC = () => {
 
   const [leftPanePercent, setLeftPanePercent] = useState(30);
   const isResizingRef = useRef(false);
+  const leftPaneRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const el = historyRef.current || document.getElementById('aiChatHistory');
@@ -71,6 +72,20 @@ const Practice: React.FC = () => {
       }
     }
   }, [aiChat, showAiChat]);
+
+  // Ensure left exercises panel is scrolled to top on mount and when language changes
+  useEffect(() => {
+    const container = leftPaneRef.current;
+    if (!container) return;
+    const card = container.querySelector('.card-section.exercises-samples') as HTMLElement | null;
+    if (card) {
+      try {
+        card.scrollTop = 0;
+      } catch (e) {
+        /* ignore */
+      }
+    }
+  }, [language]);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
@@ -425,6 +440,7 @@ async function runCode() {
             className="practice-left"
             aria-label="Exercises"
             style={{ flexBasis: `${leftPanePercent}%` }}
+            ref={leftPaneRef}
           >
             <ExerciseList
               selectedLanguage={language}
