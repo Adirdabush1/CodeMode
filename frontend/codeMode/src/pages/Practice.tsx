@@ -417,52 +417,60 @@ async function runCode() {
       <h1></h1>
 
       <div className="practice-container">
-        <ExerciseList
-          selectedLanguage={language}
-          selectedExercise={selectedExercise}
-          onSelectExercise={(exercise) => {
-            setSelectedExercise(exercise.id);
-            setLanguage(exercise.language);
-            setSaveStatus('idle');
-            setSaveErrorMessage(null);
-          }}
-        />
-
-        <Editor
-          height="400px"
-          language={language}
-          value={code}
-          onChange={(value) => setCode(value || '')}
-          theme="vs-dark"
-          options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
-        />
-
-        <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-          <button onClick={runCode} disabled={isRunning || !selectedExercise}>
-            {isRunning ? 'Running...' : 'Run Code'}
-          </button>
-
-          <button onClick={analyzeCode} disabled={isAiRunning}>
-            {isAiRunning ? 'Analyzing...' : 'Analyze Code (AI)'}
-          </button>
-
-          <button onClick={() => setShowAiChat(true)} disabled={showAiChat}>
-            Open AI Assistant
-          </button>
-        </div>
-
-        {/* הצגת סטטוס רק אחרי ניסיון שמירה */}
-        {saveStatus !== 'idle' && (
-          <div style={{ marginTop: 16 }}>
-            {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
-            {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
-            {saveStatus === 'error' && (
-              <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>
-            )}
+        <div className="practice-layout">
+          <div className="practice-left" aria-label="Exercises">
+            <ExerciseList
+              selectedLanguage={language}
+              selectedExercise={selectedExercise}
+              onSelectExercise={(exercise) => {
+                setSelectedExercise(exercise.id);
+                setLanguage(exercise.language);
+                setSaveStatus('idle');
+                setSaveErrorMessage(null);
+              }}
+            />
           </div>
-        )}
 
-        <pre className="output-pre">{output}</pre>
+          <div className="practice-right" aria-label="Editor">
+            <div className="practice-editor-panel">
+              <Editor
+                height="400px"
+                language={language}
+                value={code}
+                onChange={(value) => setCode(value || '')}
+                theme="vs-dark"
+                options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
+              />
+
+              <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                <button onClick={runCode} disabled={isRunning || !selectedExercise}>
+                  {isRunning ? 'Running...' : 'Run Code'}
+                </button>
+
+                <button onClick={analyzeCode} disabled={isAiRunning}>
+                  {isAiRunning ? 'Analyzing...' : 'Analyze Code (AI)'}
+                </button>
+
+                <button onClick={() => setShowAiChat(true)} disabled={showAiChat}>
+                  Open AI Assistant
+                </button>
+              </div>
+
+              {/* הצגת סטטוס רק אחרי ניסיון שמירה */}
+              {saveStatus !== 'idle' && (
+                <div style={{ marginTop: 16 }}>
+                  {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
+                  {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
+                  {saveStatus === 'error' && (
+                    <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>
+                  )}
+                </div>
+              )}
+
+              <pre className="output-pre">{output}</pre>
+            </div>
+          </div>
+        </div>
       </div>
 
       {showAiChat && (
