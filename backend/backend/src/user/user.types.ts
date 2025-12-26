@@ -1,6 +1,6 @@
 // יצירת קובץ נפרד לטיפוסים - מומלץ ליצור אותו ב-src/user/user.types.ts
 
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 
 // ממשק המשתמש הבסיסי
 export interface User {
@@ -11,7 +11,7 @@ export interface User {
 
 // ממשק למסמך משתמש מ-MongoDB
 export interface UserDocument extends User, Document {
-  _id: Types.ObjectId;
+  _id: string;
 }
 
 // ממשק למשתמש מאומת (ללא סיסמה)
