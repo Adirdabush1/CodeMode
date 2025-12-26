@@ -26,7 +26,7 @@ a {
 }
 
 /* תיבה מרכזית */
-.practice-page>div {
+.practice-page .practice-container {
   width: 100%;
   max-width: 600px;
   margin: 2rem 0 6rem 0;
@@ -163,7 +163,7 @@ a {
 
 /* ===================== רספונסיביות ===================== */
 @media (max-width: 768px) {
-  .practice-page>div {
+  .practice-page .practice-container {
     width: 100% !important;
     max-width: 600px !important;
     margin: 1.5rem 0 !important;
