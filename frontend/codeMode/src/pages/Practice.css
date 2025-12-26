@@ -19,8 +19,8 @@ a {
   font-family: system-ui, sans-serif;
   margin: 0;
   padding: 2rem;
-  /* top offset to clear the fixed MenuBar */
-  --practice-top-offset: calc(140px + 2rem);
+  /* top offset to clear the fixed MenuBar (use compact value so content starts directly under the menu) */
+  --practice-top-offset: 90px;
   padding-top: var(--practice-top-offset);
   display: flex;
   flex-direction: column;
@@ -32,11 +32,11 @@ a {
 .practice-page .practice-container {
   width: 100%;
   max-width: 1200px;
-  margin: 2rem 0 6rem 0;
+  /* remove top margin so panels start right under the MenuBar offset */
+  margin: 0;
   padding: 0;
   color: #444447;
   opacity: 1;
-  /* תמיד נראה */
 }
 
 /* Split layout: left (exercises) / right (editor) */
@@ -47,7 +47,7 @@ a {
   /* ensure both panels stretch to same height */
   align-items: stretch;
   /* layout fills viewport below the menu so panels don't push page height */
-  height: calc(100vh - var(--practice-top-offset) - 2rem);
+  height: calc(100vh - var(--practice-top-offset));
 }
 
 .practice-left,
@@ -90,6 +90,9 @@ a {
   max-height: 100%;
   min-height: 0;
   overflow-y: auto;
+  /* ensure the exercises card starts at the top of the left pane */
+  align-self: flex-start;
+  margin-top: 0;
 }
 
 /* Right side: editor card */
