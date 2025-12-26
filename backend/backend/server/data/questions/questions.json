@@ -1,0 +1,5692 @@
+{
+  "javascript": [
+    {
+      "title": "Two Sum",
+      "description": "Return indices of two numbers that add to target.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15], target=9",
+          "output": "[0,1]"
+        }
+      ],
+      "fullDescription": "Return indices of two numbers that add to target. Example input: [2,7,11,15], target=9",
+      "topics": [
+        "Array",
+        "Hash Table"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Consider whether index positions or values are required.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Reverse String",
+      "description": "Reverse an array of characters in-place.",
+      "difficulty": "easy",
+      "tags": [
+        "string",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "['h','e','l','l','o']",
+          "output": "['o','l','l','e','h']"
+        }
+      ],
+      "fullDescription": "Reverse an array of characters in-place. Example input: ['h','e','l','l','o']",
+      "topics": [
+        "String",
+        "Two Pointers"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Valid Parentheses",
+      "description": "Check if parentheses string is valid.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "()[]{}",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Check if parentheses string is valid. Example input: ()[]{}",
+      "topics": [
+        "Stack",
+        "String"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Merge Sorted Arrays",
+      "description": "Merge two sorted arrays into one sorted array.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[1,3],[2,4]",
+          "output": "[1,2,3,4]"
+        }
+      ],
+      "fullDescription": "Merge two sorted arrays into one sorted array. Example input: [1,3],[2,4]",
+      "topics": [
+        "Array",
+        "Two Pointers"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Remove Duplicates from Sorted Array",
+      "description": "Remove duplicates in-place return new length.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[1,1,2]",
+          "output": "2"
+        }
+      ],
+      "fullDescription": "Remove duplicates in-place return new length. Example input: [1,1,2]",
+      "topics": [
+        "Array",
+        "Two Pointers"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Contains Duplicate",
+      "description": "Return true if array contains any duplicates.",
+      "difficulty": "easy",
+      "tags": [
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,1]",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Return true if array contains any duplicates. Example input: [1,2,3,1]",
+      "topics": [
+        "Hash Table"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Best Time to Buy and Sell Stock",
+      "description": "Maximize profit with single buy-sell.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "dynamic-programming"
+      ],
+      "examples": [
+        {
+          "input": "[7,1,5,3,6,4]",
+          "output": "5"
+        }
+      ],
+      "fullDescription": "Maximize profit with single buy-sell. Example input: [7,1,5,3,6,4]",
+      "topics": [
+        "Array",
+        "Dynamic Programming"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Intersection of Two Arrays",
+      "description": "Return intersection (unique) of two arrays.",
+      "difficulty": "easy",
+      "tags": [
+        "hash-table",
+        "array"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,2,1],[2,2]",
+          "output": "[2]"
+        }
+      ],
+      "fullDescription": "Return intersection (unique) of two arrays. Example input: [1,2,2,1],[2,2]",
+      "topics": [
+        "Hash Table",
+        "Array"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Reverse Linked List (JS)",
+      "description": "Reverse a singly linked list.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "1->2->3",
+          "output": "3->2->1"
+        }
+      ],
+      "fullDescription": "Reverse a singly linked list. Example input: 1->2->3",
+      "topics": [
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Climb Stairs",
+      "description": "Number of ways to climb n stairs",
+      "difficulty": "easy",
+      "tags": [
+        "dp",
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "n=3",
+          "output": "3"
+        }
+      ],
+      "fullDescription": "Number of ways to climb n stairs Example input: n=3",
+      "topics": [
+        "Dp",
+        "Math"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Valid Anagram",
+      "description": "Check if two strings are anagrams.",
+      "difficulty": "easy",
+      "tags": [
+        "hash-table",
+        "sorting"
+      ],
+      "examples": [
+        {
+          "input": "anagram, nagaram",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Check if two strings are anagrams. Example input: anagram, nagaram",
+      "topics": [
+        "Hash Table",
+        "Sorting"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Fizz Buzz",
+      "description": "Return FizzBuzz sequence for n.",
+      "difficulty": "easy",
+      "tags": [
+        "implementation"
+      ],
+      "examples": [
+        {
+          "input": "n=3",
+          "output": "[1,2,'Fizz']"
+        }
+      ],
+      "fullDescription": "Return FizzBuzz sequence for n. Example input: n=3",
+      "topics": [
+        "Implementation"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Contains Nearby Duplicate",
+      "description": "Check duplicates within k distance.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table",
+        "sliding-window"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,1],k=3",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Check duplicates within k distance. Example input: [1,2,3,1],k=3",
+      "topics": [
+        "Hash Table",
+        "Sliding Window"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Product of Array Except Self",
+      "description": "Return product array without using division.",
+      "difficulty": "medium",
+      "tags": [
+        "array",
+        "prefix-suffix"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,4]",
+          "output": "[24,12,8,6]"
+        }
+      ],
+      "fullDescription": "Return product array without using division. Example input: [1,2,3,4]",
+      "topics": [
+        "Array",
+        "Prefix Suffix"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Top K Frequent Elements",
+      "description": "Return k most frequent elements.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[1,1,1,2,2,3],k=2",
+          "output": "[1,2]"
+        }
+      ],
+      "fullDescription": "Return k most frequent elements. Example input: [1,1,1,2,2,3],k=2",
+      "topics": [
+        "Heap",
+        "Hash Table"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Find Minimum in Rotated Sorted Array",
+      "description": "Find minimum element in rotated sorted array.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[3,4,5,1,2]",
+          "output": "1"
+        }
+      ],
+      "fullDescription": "Find minimum element in rotated sorted array. Example input: [3,4,5,1,2]",
+      "topics": [
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Search in Rotated Sorted Array",
+      "description": "Find target in rotated sorted array.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[4,5,6,7,0,1,2],target=0",
+          "output": "4"
+        }
+      ],
+      "fullDescription": "Find target in rotated sorted array. Example input: [4,5,6,7,0,1,2],target=0",
+      "topics": [
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Longest Substring Without Repeating Characters",
+      "description": "Length of longest substring without repeating chars.",
+      "difficulty": "medium",
+      "tags": [
+        "sliding-window",
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "abcabcbb",
+          "output": "3"
+        }
+      ],
+      "fullDescription": "Length of longest substring without repeating chars. Example input: abcabcbb",
+      "topics": [
+        "Sliding Window",
+        "String"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Group Anagrams",
+      "description": "Group anagrams together.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table",
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "['eat','tea','tan','ate','nat','bat']",
+          "output": "[['eat','tea','ate'],['tan','nat'],['bat']]"
+        }
+      ],
+      "fullDescription": "Group anagrams together. Example input: ['eat','tea','tan','ate','nat','bat']",
+      "topics": [
+        "Hash Table",
+        "String"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Word Break",
+      "description": "Check if s can be segmented into words from dict.",
+      "difficulty": "medium",
+      "tags": [
+        "dp",
+        "trie"
+      ],
+      "examples": [
+        {
+          "input": "s='leetcode',wordDict=['leet','code']",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Check if s can be segmented into words from dict. Example input: s='leetcode',wordDict=['leet','code']",
+      "topics": [
+        "Dp",
+        "Trie"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "LRU Cache (JS)",
+      "description": "Design and implement LRU cache.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "linked-list",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "capacity=2",
+          "output": "operations"
+        }
+      ],
+      "fullDescription": "Design and implement LRU cache. Example input: capacity=2",
+      "topics": [
+        "Design",
+        "Linked List",
+        "Hash Table"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Serialize and Deserialize Binary Tree",
+      "description": "Implement tree serialization/deserialization.",
+      "difficulty": "hard",
+      "tags": [
+        "tree",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,null,null,4,5]",
+          "output": "serialized string"
+        }
+      ],
+      "fullDescription": "Implement tree serialization/deserialization. Example input: [1,2,3,null,null,4,5]",
+      "topics": [
+        "Tree",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Word Ladder",
+      "description": "Shortest transformation sequence length.",
+      "difficulty": "hard",
+      "tags": [
+        "bfs",
+        "graph"
+      ],
+      "examples": [
+        {
+          "input": "hit->cog with dict",
+          "output": "5"
+        }
+      ],
+      "fullDescription": "Shortest transformation sequence length. Example input: hit->cog with dict",
+      "topics": [
+        "Bfs",
+        "Graph"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "N-Queens",
+      "description": "Return all distinct solutions to the n-queens puzzle.",
+      "difficulty": "hard",
+      "tags": [
+        "backtracking"
+      ],
+      "examples": [
+        {
+          "input": "n=4",
+          "output": "solutions"
+        }
+      ],
+      "fullDescription": "Return all distinct solutions to the n-queens puzzle. Example input: n=4",
+      "topics": [
+        "Backtracking"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Maximum Subarray",
+      "description": "Find contiguous subarray with max sum.",
+      "difficulty": "medium",
+      "tags": [
+        "dp",
+        "divide-and-conquer"
+      ],
+      "examples": [
+        {
+          "input": "[-2,1,-3,4,-1,2,1,-5,4]",
+          "output": "6"
+        }
+      ],
+      "fullDescription": "Find contiguous subarray with max sum. Example input: [-2,1,-3,4,-1,2,1,-5,4]",
+      "topics": [
+        "Dp",
+        "Divide And Conquer"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Minimum Window Substring",
+      "description": "Find minimum window containing all chars of t.",
+      "difficulty": "hard",
+      "tags": [
+        "sliding-window",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "s='ADOBECODEBANC',t='ABC'",
+          "output": "'BANC'"
+        }
+      ],
+      "fullDescription": "Find minimum window containing all chars of t. Example input: s='ADOBECODEBANC',t='ABC'",
+      "topics": [
+        "Sliding Window",
+        "Two Pointers"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Course Schedule",
+      "description": "Determine if you can finish all courses (cycle detection).",
+      "difficulty": "medium",
+      "tags": [
+        "graph",
+        "topological-sort"
+      ],
+      "examples": [
+        {
+          "input": "numCourses=2,[[1,0]]",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Determine if you can finish all courses (cycle detection). Example input: numCourses=2,[[1,0]]",
+      "topics": [
+        "Graph",
+        "Topological Sort"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Merge k Sorted Lists",
+      "description": "Merge k sorted linked lists.",
+      "difficulty": "hard",
+      "tags": [
+        "heap",
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "lists",
+          "output": "merged list"
+        }
+      ],
+      "fullDescription": "Merge k sorted linked lists. Example input: lists",
+      "topics": [
+        "Heap",
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    }
+  ],
+  "typescript": [
+    {
+      "title": "Basic Interface Usage",
+      "description": "Define interface and use in function parameter.",
+      "difficulty": "easy",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "{name:'A'}",
+          "output": "greet"
+        }
+      ],
+      "fullDescription": "Define interface and use in function parameter. Example input: {name:'A'}",
+      "topics": [
+        "Typescript",
+        "Types"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Optional & Default Props",
+      "description": "Function with optional props and defaults.",
+      "difficulty": "easy",
+      "tags": [
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "{a:1}",
+          "output": "result"
+        }
+      ],
+      "fullDescription": "Function with optional props and defaults. Example input: {a:1}",
+      "topics": [
+        "Typescript"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Generics - Identity",
+      "description": "Write generic identity function.",
+      "difficulty": "easy",
+      "tags": [
+        "typescript",
+        "generics"
+      ],
+      "examples": [
+        {
+          "input": "identity<number>(5)",
+          "output": "5"
+        }
+      ],
+      "fullDescription": "Write generic identity function. Example input: identity<number>(5)",
+      "topics": [
+        "Typescript",
+        "Generics"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Tuple Types",
+      "description": "Use tuple types to model fixed arrays.",
+      "difficulty": "easy",
+      "tags": [
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "[string, number]",
+          "output": "typed tuple"
+        }
+      ],
+      "fullDescription": "Use tuple types to model fixed arrays. Example input: [string, number]",
+      "topics": [
+        "Typescript"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Type Guards",
+      "description": "Implement custom type guard function.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "arg",
+          "output": "narrowed type"
+        }
+      ],
+      "fullDescription": "Implement custom type guard function. Example input: arg",
+      "topics": [
+        "Typescript",
+        "Types"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Mapped Types",
+      "description": "Create mapped type that makes properties readonly.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "advanced-types"
+      ],
+      "examples": [
+        {
+          "input": "type X",
+          "output": "Readonly<X>"
+        }
+      ],
+      "fullDescription": "Create mapped type that makes properties readonly. Example input: type X",
+      "topics": [
+        "Typescript",
+        "Advanced Types"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Conditional Types",
+      "description": "Use conditional types to infer array item type.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "advanced-types"
+      ],
+      "examples": [
+        {
+          "input": "type T",
+          "output": "inferred"
+        }
+      ],
+      "fullDescription": "Use conditional types to infer array item type. Example input: type T",
+      "topics": [
+        "Typescript",
+        "Advanced Types"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Generic Constraints",
+      "description": "Write generic constrained by interface with id.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "generics"
+      ],
+      "examples": [
+        {
+          "input": "T extends {id:number}",
+          "output": "works"
+        }
+      ],
+      "fullDescription": "Write generic constrained by interface with id. Example input: T extends {id:number}",
+      "topics": [
+        "Typescript",
+        "Generics"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Utility Types (Pick/Omit)",
+      "description": "Implement function using Omit/Partial.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "utility-types"
+      ],
+      "examples": [
+        {
+          "input": "obj",
+          "output": "mapped"
+        }
+      ],
+      "fullDescription": "Implement function using Omit/Partial. Example input: obj",
+      "topics": [
+        "Typescript",
+        "Utility Types"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Decorators (basic)",
+      "description": "Create simple class decorator.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "decorators"
+      ],
+      "examples": [
+        {
+          "input": "class A",
+          "output": "decorated"
+        }
+      ],
+      "fullDescription": "Create simple class decorator. Example input: class A",
+      "topics": [
+        "Typescript",
+        "Decorators"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Advanced Generics",
+      "description": "Implement typed Map utility preserving keys.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "generics"
+      ],
+      "examples": [
+        {
+          "input": "mapping",
+          "output": "typed result"
+        }
+      ],
+      "fullDescription": "Implement typed Map utility preserving keys. Example input: mapping",
+      "topics": [
+        "Typescript",
+        "Generics"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Type Inference from Function",
+      "description": "Infer return type using ReturnType<T> utilities.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "fn",
+          "output": "inferred type"
+        }
+      ],
+      "fullDescription": "Infer return type using ReturnType<T> utilities. Example input: fn",
+      "topics": [
+        "Typescript"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Promise Types",
+      "description": "Create utility to unwrap Promise type.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "async"
+      ],
+      "examples": [
+        {
+          "input": "Promise<number>",
+          "output": "number"
+        }
+      ],
+      "fullDescription": "Create utility to unwrap Promise type. Example input: Promise<number>",
+      "topics": [
+        "Typescript",
+        "Async"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Discriminated Unions",
+      "description": "Model shapes with discriminated unions and narrow by tag.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "shape",
+          "output": "narrowed"
+        }
+      ],
+      "fullDescription": "Model shapes with discriminated unions and narrow by tag. Example input: shape",
+      "topics": [
+        "Typescript",
+        "Types"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Implement Event Emitter",
+      "description": "Type-safe event emitter with generics.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "on('click', handler)",
+          "output": "typed handler"
+        }
+      ],
+      "fullDescription": "Type-safe event emitter with generics. Example input: on('click', handler)",
+      "topics": [
+        "Typescript",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Validate JSON shape",
+      "description": "Type-guard JSON response into typed object.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "runtime-checks"
+      ],
+      "examples": [
+        {
+          "input": "json",
+          "output": "typed object"
+        }
+      ],
+      "fullDescription": "Type-guard JSON response into typed object. Example input: json",
+      "topics": [
+        "Typescript",
+        "Runtime Checks"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "React Props Typing",
+      "description": "Define component props with generics and default props.",
+      "difficulty": "medium",
+      "tags": [
+        "react",
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "<Comp/>",
+          "output": "typed"
+        }
+      ],
+      "fullDescription": "Define component props with generics and default props. Example input: <Comp/>",
+      "topics": [
+        "React",
+        "Typescript"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Keyof/Index Access",
+      "description": "Use keyof and indexed access types.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "type T",
+          "output": "index type"
+        }
+      ],
+      "fullDescription": "Use keyof and indexed access types. Example input: type T",
+      "topics": [
+        "Typescript",
+        "Types"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Consider whether index positions or values are required.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Implement Debounce (typed)",
+      "description": "Implement debounce with typed function signature.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "timers"
+      ],
+      "examples": [
+        {
+          "input": "calls",
+          "output": "debounced"
+        }
+      ],
+      "fullDescription": "Implement debounce with typed function signature. Example input: calls",
+      "topics": [
+        "Typescript",
+        "Timers"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Serialize/Deserialize with Types",
+      "description": "Ensure types while serializing objects.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "io"
+      ],
+      "examples": [
+        {
+          "input": "object",
+          "output": "string"
+        }
+      ],
+      "fullDescription": "Ensure types while serializing objects. Example input: object",
+      "topics": [
+        "Typescript",
+        "Io"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Build Typed Middleware",
+      "description": "Create middleware with typed request/response.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "express"
+      ],
+      "examples": [
+        {
+          "input": "req",
+          "output": "typed req"
+        }
+      ],
+      "fullDescription": "Create middleware with typed request/response. Example input: req",
+      "topics": [
+        "Typescript",
+        "Express"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Implement Retry Utility",
+      "description": "Generic retry wrapper that preserves types.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "async"
+      ],
+      "examples": [
+        {
+          "input": "asyncFn",
+          "output": "retried result"
+        }
+      ],
+      "fullDescription": "Generic retry wrapper that preserves types. Example input: asyncFn",
+      "topics": [
+        "Typescript",
+        "Async"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Array Utility Types",
+      "description": "Create type that converts array to union.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "['a','b']",
+          "output": "'a'|'b'"
+        }
+      ],
+      "fullDescription": "Create type that converts array to union. Example input: ['a','b']",
+      "topics": [
+        "Typescript",
+        "Types"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Extract Function Params",
+      "description": "Use Parameters<T> to extract function params.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "fn",
+          "output": "[arg1,arg2]"
+        }
+      ],
+      "fullDescription": "Use Parameters<T> to extract function params. Example input: fn",
+      "topics": [
+        "Typescript"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Implement Opaque Types",
+      "description": "Create branded types to prevent mixing IDs.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "UserId",
+          "output": "opaque type"
+        }
+      ],
+      "fullDescription": "Create branded types to prevent mixing IDs. Example input: UserId",
+      "topics": [
+        "Typescript",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Type-safe Form Builder",
+      "description": "Build typed form state and validators.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "forms"
+      ],
+      "examples": [
+        {
+          "input": "schema",
+          "output": "typed state"
+        }
+      ],
+      "fullDescription": "Build typed form state and validators. Example input: schema",
+      "topics": [
+        "Typescript",
+        "Forms"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Implement Pipe Utility",
+      "description": "Compose functions with preserved types.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "functional"
+      ],
+      "examples": [
+        {
+          "input": "f,g",
+          "output": "composed"
+        }
+      ],
+      "fullDescription": "Compose functions with preserved types. Example input: f,g",
+      "topics": [
+        "Typescript",
+        "Functional"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Deep Readonly Type",
+      "description": "Implement DeepReadonly<T> recursively.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "advanced-types"
+      ],
+      "examples": [
+        {
+          "input": "obj",
+          "output": "readonly obj"
+        }
+      ],
+      "fullDescription": "Implement DeepReadonly<T> recursively. Example input: obj",
+      "topics": [
+        "Typescript",
+        "Advanced Types"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    }
+  ],
+  "python": [
+    {
+      "title": "Check Prime Number",
+      "description": "Return whether n is prime.",
+      "difficulty": "easy",
+      "tags": [
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "n=17",
+          "output": "True"
+        }
+      ],
+      "fullDescription": "Return whether n is prime. Example input: n=17",
+      "topics": [
+        "Math"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Factorial (recursion)",
+      "description": "Compute factorial recursively.",
+      "difficulty": "easy",
+      "tags": [
+        "recursion"
+      ],
+      "examples": [
+        {
+          "input": "5",
+          "output": "120"
+        }
+      ],
+      "fullDescription": "Compute factorial recursively. Example input: 5",
+      "topics": [
+        "Recursion"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Reverse String (py)",
+      "description": "Reverse a string in-place or return reversed.",
+      "difficulty": "easy",
+      "tags": [
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "'hello'",
+          "output": "'olleh'"
+        }
+      ],
+      "fullDescription": "Reverse a string in-place or return reversed. Example input: 'hello'",
+      "topics": [
+        "String"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Fizz Buzz (py)",
+      "description": "Return FizzBuzz sequence for n.",
+      "difficulty": "easy",
+      "tags": [
+        "implementation"
+      ],
+      "examples": [
+        {
+          "input": "3",
+          "output": "[1,2,'Fizz']"
+        }
+      ],
+      "fullDescription": "Return FizzBuzz sequence for n. Example input: 3",
+      "topics": [
+        "Implementation"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Two Sum (py)",
+      "description": "Return indices of two numbers adding to target.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15],9",
+          "output": "[0,1]"
+        }
+      ],
+      "fullDescription": "Return indices of two numbers adding to target. Example input: [2,7,11,15],9",
+      "topics": [
+        "Array",
+        "Hash Table"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Consider whether index positions or values are required.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Valid Palindrome",
+      "description": "Check if string is palindrome after ignoring non-alnum.",
+      "difficulty": "easy",
+      "tags": [
+        "string",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "'A man, a plan, a canal: Panama'",
+          "output": "True"
+        }
+      ],
+      "fullDescription": "Check if string is palindrome after ignoring non-alnum. Example input: 'A man, a plan, a canal: Panama'",
+      "topics": [
+        "String",
+        "Two Pointers"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Merge Intervals",
+      "description": "Merge overlapping intervals.",
+      "difficulty": "medium",
+      "tags": [
+        "array",
+        "sorting"
+      ],
+      "examples": [
+        {
+          "input": "[[1,3],[2,6],[8,10]]",
+          "output": "[[1,6],[8,10]]"
+        }
+      ],
+      "fullDescription": "Merge overlapping intervals. Example input: [[1,3],[2,6],[8,10]]",
+      "topics": [
+        "Array",
+        "Sorting"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Longest Common Prefix",
+      "description": "Find longest common prefix among strings.",
+      "difficulty": "easy",
+      "tags": [
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "['flower','flow','flight']",
+          "output": "'fl'"
+        }
+      ],
+      "fullDescription": "Find longest common prefix among strings. Example input: ['flower','flow','flight']",
+      "topics": [
+        "String"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Binary Search",
+      "description": "Classic binary search in sorted array.",
+      "difficulty": "easy",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3],target=2",
+          "output": "1"
+        }
+      ],
+      "fullDescription": "Classic binary search in sorted array. Example input: [1,2,3],target=2",
+      "topics": [
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Two Sum II - Input array sorted",
+      "description": "Return indices for sorted input two-sum.",
+      "difficulty": "easy",
+      "tags": [
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15],9",
+          "output": "[1,2]"
+        }
+      ],
+      "fullDescription": "Return indices for sorted input two-sum. Example input: [2,7,11,15],9",
+      "topics": [
+        "Two Pointers"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Consider whether index positions or values are required.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "House Robber",
+      "description": "Max money without robbing adjacent houses.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,1]",
+          "output": "4"
+        }
+      ],
+      "fullDescription": "Max money without robbing adjacent houses. Example input: [1,2,3,1]",
+      "topics": [
+        "Dp"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Coin Change",
+      "description": "Minimum coins to make amount.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "coins=[1,2,5],amount=11",
+          "output": "3"
+        }
+      ],
+      "fullDescription": "Minimum coins to make amount. Example input: coins=[1,2,5],amount=11",
+      "topics": [
+        "Dp"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Subarray Sum Equals K",
+      "description": "Count subarrays summing to k.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table",
+        "prefix-sum"
+      ],
+      "examples": [
+        {
+          "input": "[1,1,1],k=2",
+          "output": "2"
+        }
+      ],
+      "fullDescription": "Count subarrays summing to k. Example input: [1,1,1],k=2",
+      "topics": [
+        "Hash Table",
+        "Prefix Sum"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Product of Array Except Self",
+      "description": "Return product array without division.",
+      "difficulty": "medium",
+      "tags": [
+        "array"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,4]",
+          "output": "[24,12,8,6]"
+        }
+      ],
+      "fullDescription": "Return product array without division. Example input: [1,2,3,4]",
+      "topics": [
+        "Array"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Top K Frequent Elements (py)",
+      "description": "Return k most frequent elements.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[1,1,1,2,2,3],k=2",
+          "output": "[1,2]"
+        }
+      ],
+      "fullDescription": "Return k most frequent elements. Example input: [1,1,1,2,2,3],k=2",
+      "topics": [
+        "Heap",
+        "Hash Table"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "LRU Cache (py)",
+      "description": "Design LRU cache with O(1) ops.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "linked-list",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "capacity=2",
+          "output": "operations"
+        }
+      ],
+      "fullDescription": "Design LRU cache with O(1) ops. Example input: capacity=2",
+      "topics": [
+        "Design",
+        "Linked List",
+        "Hash Table"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Serialize and Deserialize BST",
+      "description": "Serialize/deserialize binary search tree.",
+      "difficulty": "hard",
+      "tags": [
+        "tree",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "[2,1,3]",
+          "output": "string"
+        }
+      ],
+      "fullDescription": "Serialize/deserialize binary search tree. Example input: [2,1,3]",
+      "topics": [
+        "Tree",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Word Break",
+      "description": "Check if string can be segmented by dict.",
+      "difficulty": "medium",
+      "tags": [
+        "dp",
+        "trie"
+      ],
+      "examples": [
+        {
+          "input": "'leetcode',['leet','code']",
+          "output": "True"
+        }
+      ],
+      "fullDescription": "Check if string can be segmented by dict. Example input: 'leetcode',['leet','code']",
+      "topics": [
+        "Dp",
+        "Trie"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Number of Islands",
+      "description": "Count islands in grid with DFS/BFS.",
+      "difficulty": "medium",
+      "tags": [
+        "graph",
+        "dfs",
+        "bfs"
+      ],
+      "examples": [
+        {
+          "input": "grid",
+          "output": "count"
+        }
+      ],
+      "fullDescription": "Count islands in grid with DFS/BFS. Example input: grid",
+      "topics": [
+        "Graph",
+        "Dfs",
+        "Bfs"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Minimum Path Sum",
+      "description": "Minimum path sum in grid from top-left to bottom-right.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "grid",
+          "output": "min sum"
+        }
+      ],
+      "fullDescription": "Minimum path sum in grid from top-left to bottom-right. Example input: grid",
+      "topics": [
+        "Dp"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Kth Largest Element",
+      "description": "Find kth largest element in array.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "selection"
+      ],
+      "examples": [
+        {
+          "input": "[3,2,1,5,6,4],k=2",
+          "output": "5"
+        }
+      ],
+      "fullDescription": "Find kth largest element in array. Example input: [3,2,1,5,6,4],k=2",
+      "topics": [
+        "Heap",
+        "Selection"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Longest Increasing Subsequence",
+      "description": "Length of LIS in array.",
+      "difficulty": "hard",
+      "tags": [
+        "dp",
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[10,9,2,5,3,7,101,18]",
+          "output": "4"
+        }
+      ],
+      "fullDescription": "Length of LIS in array. Example input: [10,9,2,5,3,7,101,18]",
+      "topics": [
+        "Dp",
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Trapping Rain Water",
+      "description": "Compute trapped rainwater.",
+      "difficulty": "hard",
+      "tags": [
+        "two-pointers",
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "[0,1,0,2]",
+          "output": "1"
+        }
+      ],
+      "fullDescription": "Compute trapped rainwater. Example input: [0,1,0,2]",
+      "topics": [
+        "Two Pointers",
+        "Stack"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Graph traversal DFS/BFS (py)",
+      "description": "Implement DFS and BFS for graphs.",
+      "difficulty": "hard",
+      "tags": [
+        "graph"
+      ],
+      "examples": [
+        {
+          "input": "adj list",
+          "output": "orders"
+        }
+      ],
+      "fullDescription": "Implement DFS and BFS for graphs. Example input: adj list",
+      "topics": [
+        "Graph"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Find Peak Element",
+      "description": "Find a peak element using binary search.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,1]",
+          "output": "2"
+        }
+      ],
+      "fullDescription": "Find a peak element using binary search. Example input: [1,2,3,1]",
+      "topics": [
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Evaluate Reverse Polish Notation",
+      "description": "Evaluate expression in RPN.",
+      "difficulty": "medium",
+      "tags": [
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "['2','1','+','3','*']",
+          "output": "9"
+        }
+      ],
+      "fullDescription": "Evaluate expression in RPN. Example input: ['2','1','+','3','*']",
+      "topics": [
+        "Stack"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Implement Trie",
+      "description": "Implement insert, search and startsWith methods.",
+      "difficulty": "hard",
+      "tags": [
+        "trie",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "'apple'",
+          "output": "found"
+        }
+      ],
+      "fullDescription": "Implement insert, search and startsWith methods. Example input: 'apple'",
+      "topics": [
+        "Trie",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Minimum Window Substring (py)",
+      "description": "Find minimum window substring containing all chars.",
+      "difficulty": "hard",
+      "tags": [
+        "sliding-window"
+      ],
+      "examples": [
+        {
+          "input": "s='ADOBECODEBANC',t='ABC'",
+          "output": "'BANC'"
+        }
+      ],
+      "fullDescription": "Find minimum window substring containing all chars. Example input: s='ADOBECODEBANC',t='ABC'",
+      "topics": [
+        "Sliding Window"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    }
+  ],
+  "java": [
+    {
+      "title": "Class with getters/setters",
+      "description": "Create class Person with private fields and public getters/setters.",
+      "difficulty": "easy",
+      "tags": [
+        "oop"
+      ],
+      "examples": [
+        {
+          "input": "name,age",
+          "output": "Person instance"
+        }
+      ],
+      "fullDescription": "Create class Person with private fields and public getters/setters. Example input: name,age",
+      "topics": [
+        "Oop"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Reverse Linked List (java)",
+      "description": "Reverse singly linked list.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "1->2->3",
+          "output": "3->2->1"
+        }
+      ],
+      "fullDescription": "Reverse singly linked list. Example input: 1->2->3",
+      "topics": [
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Merge Two Sorted Lists",
+      "description": "Merge two sorted linked lists.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "lists",
+          "output": "merged"
+        }
+      ],
+      "fullDescription": "Merge two sorted linked lists. Example input: lists",
+      "topics": [
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Binary Search (java)",
+      "description": "Implement binary search for sorted array.",
+      "difficulty": "easy",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3],2",
+          "output": "1"
+        }
+      ],
+      "fullDescription": "Implement binary search for sorted array. Example input: [1,2,3],2",
+      "topics": [
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Valid Parentheses (java)",
+      "description": "Check validity of parentheses.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "()[]{}",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Check validity of parentheses. Example input: ()[]{}",
+      "topics": [
+        "Stack",
+        "String"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Implement Queue using Stacks",
+      "description": "Use two stacks to implement a queue.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "push,pop",
+          "output": "queue behavior"
+        }
+      ],
+      "fullDescription": "Use two stacks to implement a queue. Example input: push,pop",
+      "topics": [
+        "Stack",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Climbing Stairs (java)",
+      "description": "Number of ways to climb n stairs.",
+      "difficulty": "easy",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "3",
+          "output": "3"
+        }
+      ],
+      "fullDescription": "Number of ways to climb n stairs. Example input: 3",
+      "topics": [
+        "Dp"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Search in Rotated Sorted Array (java)",
+      "description": "Find target in rotated sorted array.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[4,5,6,7,0,1,2],0",
+          "output": "4"
+        }
+      ],
+      "fullDescription": "Find target in rotated sorted array. Example input: [4,5,6,7,0,1,2],0",
+      "topics": [
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Lowest Common Ancestor",
+      "description": "Find LCA in binary tree.",
+      "difficulty": "medium",
+      "tags": [
+        "tree"
+      ],
+      "examples": [
+        {
+          "input": "tree,a,b",
+          "output": "lca"
+        }
+      ],
+      "fullDescription": "Find LCA in binary tree. Example input: tree,a,b",
+      "topics": [
+        "Tree"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Serialize Binary Tree (java)",
+      "description": "Serialize and deserialize binary tree.",
+      "difficulty": "hard",
+      "tags": [
+        "tree",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,null,null,4,5]",
+          "output": "serialized"
+        }
+      ],
+      "fullDescription": "Serialize and deserialize binary tree. Example input: [1,2,3,null,null,4,5]",
+      "topics": [
+        "Tree",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Binary Tree Level Order Traversal",
+      "description": "Return level order traversal of nodes.",
+      "difficulty": "medium",
+      "tags": [
+        "tree",
+        "bfs"
+      ],
+      "examples": [
+        {
+          "input": "tree",
+          "output": "levels"
+        }
+      ],
+      "fullDescription": "Return level order traversal of nodes. Example input: tree",
+      "topics": [
+        "Tree",
+        "Bfs"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Implement HashMap (basic)",
+      "description": "Implement simple hash map with put/get/remove.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "operations",
+          "output": "result"
+        }
+      ],
+      "fullDescription": "Implement simple hash map with put/get/remove. Example input: operations",
+      "topics": [
+        "Hash Table",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Linked List Cycle",
+      "description": "Detect if linked list has a cycle.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "list",
+          "output": "true/false"
+        }
+      ],
+      "fullDescription": "Detect if linked list has a cycle. Example input: list",
+      "topics": [
+        "Linked List",
+        "Two Pointers"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Merge K Sorted Lists",
+      "description": "Merge k sorted lists using heap.",
+      "difficulty": "hard",
+      "tags": [
+        "heap",
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "lists",
+          "output": "merged"
+        }
+      ],
+      "fullDescription": "Merge k sorted lists using heap. Example input: lists",
+      "topics": [
+        "Heap",
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Word Ladder (java)",
+      "description": "Shortest transformation between words.",
+      "difficulty": "hard",
+      "tags": [
+        "bfs",
+        "graph"
+      ],
+      "examples": [
+        {
+          "input": "hit->cog",
+          "output": "length"
+        }
+      ],
+      "fullDescription": "Shortest transformation between words. Example input: hit->cog",
+      "topics": [
+        "Bfs",
+        "Graph"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Top K Frequent Elements (java)",
+      "description": "Return k most frequent elements.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "top k"
+        }
+      ],
+      "fullDescription": "Return k most frequent elements. Example input: array,k",
+      "topics": [
+        "Heap",
+        "Hash Table"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Design Tic-Tac-Toe",
+      "description": "Design Tic-Tac-Toe game class.",
+      "difficulty": "hard",
+      "tags": [
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "moves",
+          "output": "winner"
+        }
+      ],
+      "fullDescription": "Design Tic-Tac-Toe game class. Example input: moves",
+      "topics": [
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Implement Stack Min",
+      "description": "Stack that returns min in O(1).",
+      "difficulty": "medium",
+      "tags": [
+        "stack",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "push(2),push(1),getMin",
+          "output": "1"
+        }
+      ],
+      "fullDescription": "Stack that returns min in O(1). Example input: push(2),push(1),getMin",
+      "topics": [
+        "Stack",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "LRU Cache (java)",
+      "description": "Implement LRU cache with O(1) ops.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "capacity=2",
+          "output": "ops"
+        }
+      ],
+      "fullDescription": "Implement LRU cache with O(1) ops. Example input: capacity=2",
+      "topics": [
+        "Design",
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Minimum Path Sum (java)",
+      "description": "Min sum path in grid.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "grid",
+          "output": "sum"
+        }
+      ],
+      "fullDescription": "Min sum path in grid. Example input: grid",
+      "topics": [
+        "Dp"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Unique Paths",
+      "description": "Number of unique paths in grid.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "m=3,n=7",
+          "output": "28"
+        }
+      ],
+      "fullDescription": "Number of unique paths in grid. Example input: m=3,n=7",
+      "topics": [
+        "Dp"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Validate Binary Search Tree",
+      "description": "Check if binary tree is valid BST.",
+      "difficulty": "medium",
+      "tags": [
+        "tree"
+      ],
+      "examples": [
+        {
+          "input": "tree",
+          "output": "true/false"
+        }
+      ],
+      "fullDescription": "Check if binary tree is valid BST. Example input: tree",
+      "topics": [
+        "Tree"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Search 2D Matrix",
+      "description": "Search target in 2D matrix.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search",
+        "matrix"
+      ],
+      "examples": [
+        {
+          "input": "matrix,target",
+          "output": "true/false"
+        }
+      ],
+      "fullDescription": "Search target in 2D matrix. Example input: matrix,target",
+      "topics": [
+        "Binary Search",
+        "Matrix"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Pow(x,n)",
+      "description": "Implement power function.",
+      "difficulty": "medium",
+      "tags": [
+        "math",
+        "binary-exponentiation"
+      ],
+      "examples": [
+        {
+          "input": "2.00000,10",
+          "output": "1024.00000"
+        }
+      ],
+      "fullDescription": "Implement power function. Example input: 2.00000,10",
+      "topics": [
+        "Math",
+        "Binary Exponentiation"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Partition List",
+      "description": "Partition linked list around x.",
+      "difficulty": "medium",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "list,x",
+          "output": "partitioned list"
+        }
+      ],
+      "fullDescription": "Partition linked list around x. Example input: list,x",
+      "topics": [
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Palindrome Linked List",
+      "description": "Check if linked list is palindrome.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "1->2->2->1",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Check if linked list is palindrome. Example input: 1->2->2->1",
+      "topics": [
+        "Linked List",
+        "Two Pointers"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Meeting Rooms II",
+      "description": "Min number of meeting rooms required.",
+      "difficulty": "medium",
+      "tags": [
+        "intervals",
+        "heap"
+      ],
+      "examples": [
+        {
+          "input": "intervals",
+          "output": "rooms"
+        }
+      ],
+      "fullDescription": "Min number of meeting rooms required. Example input: intervals",
+      "topics": [
+        "Intervals",
+        "Heap"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Subarray Sum Equals K (java)",
+      "description": "Count subarrays summing to k.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "count"
+        }
+      ],
+      "fullDescription": "Count subarrays summing to k. Example input: array,k",
+      "topics": [
+        "Hash Table"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    }
+  ],
+  "csharp": [
+    {
+      "title": "Console IO Basics",
+      "description": "Read input and write output to console.",
+      "difficulty": "easy",
+      "tags": [
+        "io"
+      ],
+      "examples": [
+        {
+          "input": "Hello",
+          "output": "Echo Hello"
+        }
+      ],
+      "fullDescription": "Read input and write output to console. Example input: Hello",
+      "topics": [
+        "Io"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Fizz Buzz (c#)",
+      "description": "Return FizzBuzz sequence.",
+      "difficulty": "easy",
+      "tags": [
+        "implementation"
+      ],
+      "examples": [
+        {
+          "input": "n=3",
+          "output": "[1,2,'Fizz']"
+        }
+      ],
+      "fullDescription": "Return FizzBuzz sequence. Example input: n=3",
+      "topics": [
+        "Implementation"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Reverse Linked List (c#)",
+      "description": "Reverse singly linked list.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "1->2->3",
+          "output": "3->2->1"
+        }
+      ],
+      "fullDescription": "Reverse singly linked list. Example input: 1->2->3",
+      "topics": [
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Two Sum (c#)",
+      "description": "Return indices of two numbers that add to target.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15],9",
+          "output": "[0,1]"
+        }
+      ],
+      "fullDescription": "Return indices of two numbers that add to target. Example input: [2,7,11,15],9",
+      "topics": [
+        "Array",
+        "Hash Table"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Consider whether index positions or values are required.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Valid Parentheses (c#)",
+      "description": "Validate parentheses string.",
+      "difficulty": "easy",
+      "tags": [
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "()[]{}",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Validate parentheses string. Example input: ()[]{}",
+      "topics": [
+        "Stack"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Implement Stack (c#)",
+      "description": "Implement stack with push/pop/peek.",
+      "difficulty": "easy",
+      "tags": [
+        "design",
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "operations",
+          "output": "result"
+        }
+      ],
+      "fullDescription": "Implement stack with push/pop/peek. Example input: operations",
+      "topics": [
+        "Design",
+        "Stack"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Async Await Example",
+      "description": "Demonstrate async IO and await.",
+      "difficulty": "medium",
+      "tags": [
+        "async",
+        "tasks"
+      ],
+      "examples": [
+        {
+          "input": "async call",
+          "output": "result"
+        }
+      ],
+      "fullDescription": "Demonstrate async IO and await. Example input: async call",
+      "topics": [
+        "Async",
+        "Tasks"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Task Cancellation",
+      "description": "Use CancellationToken to cancel tasks.",
+      "difficulty": "medium",
+      "tags": [
+        "async",
+        "concurrency"
+      ],
+      "examples": [
+        {
+          "input": "start cancel",
+          "output": "stopped"
+        }
+      ],
+      "fullDescription": "Use CancellationToken to cancel tasks. Example input: start cancel",
+      "topics": [
+        "Async",
+        "Concurrency"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "LINQ Filtering",
+      "description": "Use LINQ to filter and project collections.",
+      "difficulty": "easy",
+      "tags": [
+        "linq"
+      ],
+      "examples": [
+        {
+          "input": "list",
+          "output": "filtered list"
+        }
+      ],
+      "fullDescription": "Use LINQ to filter and project collections. Example input: list",
+      "topics": [
+        "Linq"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Binary Tree Traversal",
+      "description": "Inorder, preorder, postorder traversals.",
+      "difficulty": "medium",
+      "tags": [
+        "tree"
+      ],
+      "examples": [
+        {
+          "input": "tree",
+          "output": "orders"
+        }
+      ],
+      "fullDescription": "Inorder, preorder, postorder traversals. Example input: tree",
+      "topics": [
+        "Tree"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Design Logger (c#)",
+      "description": "Design thread-safe logger.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "concurrency"
+      ],
+      "examples": [
+        {
+          "input": "logs",
+          "output": "written"
+        }
+      ],
+      "fullDescription": "Design thread-safe logger. Example input: logs",
+      "topics": [
+        "Design",
+        "Concurrency"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "LRU Cache (c#)",
+      "description": "Implement LRU cache with O(1) ops.",
+      "difficulty": "hard",
+      "tags": [
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "capacity",
+          "output": "ops"
+        }
+      ],
+      "fullDescription": "Implement LRU cache with O(1) ops. Example input: capacity",
+      "topics": [
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Implement Queue using Stacks (c#)",
+      "description": "Queue implemented by two stacks.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "ops",
+          "output": "queue"
+        }
+      ],
+      "fullDescription": "Queue implemented by two stacks. Example input: ops",
+      "topics": [
+        "Stack",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Serialize Object to JSON",
+      "description": "Serialize/deserialize objects using System.Text.Json.",
+      "difficulty": "easy",
+      "tags": [
+        "io",
+        "json"
+      ],
+      "examples": [
+        {
+          "input": "object",
+          "output": "json"
+        }
+      ],
+      "fullDescription": "Serialize/deserialize objects using System.Text.Json. Example input: object",
+      "topics": [
+        "Io",
+        "Json"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Dependency Injection (basic)",
+      "description": "Use DI container to inject services.",
+      "difficulty": "medium",
+      "tags": [
+        "design",
+        "di"
+      ],
+      "examples": [
+        {
+          "input": "service",
+          "output": "injected"
+        }
+      ],
+      "fullDescription": "Use DI container to inject services. Example input: service",
+      "topics": [
+        "Design",
+        "Di"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Expression Trees",
+      "description": "Build and compile expression trees at runtime.",
+      "difficulty": "hard",
+      "tags": [
+        "advanced"
+      ],
+      "examples": [
+        {
+          "input": "expr",
+          "output": "compiled"
+        }
+      ],
+      "fullDescription": "Build and compile expression trees at runtime. Example input: expr",
+      "topics": [
+        "Advanced"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Implement Trie (c#)",
+      "description": "Insert and search prefixes in trie.",
+      "difficulty": "hard",
+      "tags": [
+        "trie"
+      ],
+      "examples": [
+        {
+          "input": "words",
+          "output": "search results"
+        }
+      ],
+      "fullDescription": "Insert and search prefixes in trie. Example input: words",
+      "topics": [
+        "Trie"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Median of Two Sorted Arrays",
+      "description": "Find median of two sorted arrays efficiently.",
+      "difficulty": "hard",
+      "tags": [
+        "binary-search",
+        "divide-and-conquer"
+      ],
+      "examples": [
+        {
+          "input": "arrays",
+          "output": "median"
+        }
+      ],
+      "fullDescription": "Find median of two sorted arrays efficiently. Example input: arrays",
+      "topics": [
+        "Binary Search",
+        "Divide And Conquer"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Design Rate Limiter",
+      "description": "Implement rate limiter per user IP.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "concurrency"
+      ],
+      "examples": [
+        {
+          "input": "requests",
+          "output": "throttled"
+        }
+      ],
+      "fullDescription": "Implement rate limiter per user IP. Example input: requests",
+      "topics": [
+        "Design",
+        "Concurrency"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Graph BFS Shortest Path",
+      "description": "Shortest path on unweighted graph using BFS.",
+      "difficulty": "medium",
+      "tags": [
+        "graph",
+        "bfs"
+      ],
+      "examples": [
+        {
+          "input": "graph,start",
+          "output": "distances"
+        }
+      ],
+      "fullDescription": "Shortest path on unweighted graph using BFS. Example input: graph,start",
+      "topics": [
+        "Graph",
+        "Bfs"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Top K Frequent Elements (c#)",
+      "description": "Return k most frequent elements using heap.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "top k"
+        }
+      ],
+      "fullDescription": "Return k most frequent elements using heap. Example input: array,k",
+      "topics": [
+        "Heap",
+        "Hash Table"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Implement Observer Pattern",
+      "description": "Create publisher/subscriber pattern.",
+      "difficulty": "medium",
+      "tags": [
+        "design",
+        "patterns"
+      ],
+      "examples": [
+        {
+          "input": "subscribe",
+          "output": "notifications"
+        }
+      ],
+      "fullDescription": "Create publisher/subscriber pattern. Example input: subscribe",
+      "topics": [
+        "Design",
+        "Patterns"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Thread-safe Counter",
+      "description": "Implement atomic counter for multi-threading.",
+      "difficulty": "medium",
+      "tags": [
+        "concurrency"
+      ],
+      "examples": [
+        {
+          "input": "increments",
+          "output": "final count"
+        }
+      ],
+      "fullDescription": "Implement atomic counter for multi-threading. Example input: increments",
+      "topics": [
+        "Concurrency"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Calculate Fibonacci (iterative/recursion)",
+      "description": "Return nth Fibonacci number.",
+      "difficulty": "easy",
+      "tags": [
+        "recursion",
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "n=5",
+          "output": "5"
+        }
+      ],
+      "fullDescription": "Return nth Fibonacci number. Example input: n=5",
+      "topics": [
+        "Recursion",
+        "Dp"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Validate BST (c#)",
+      "description": "Check whether a binary tree is a valid BST.",
+      "difficulty": "medium",
+      "tags": [
+        "tree"
+      ],
+      "examples": [
+        {
+          "input": "tree",
+          "output": "true/false"
+        }
+      ],
+      "fullDescription": "Check whether a binary tree is a valid BST. Example input: tree",
+      "topics": [
+        "Tree"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Rotate Array",
+      "description": "Rotate array to the right by k steps.",
+      "difficulty": "easy",
+      "tags": [
+        "array"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,4,5],k=2",
+          "output": "[4,5,1,2,3]"
+        }
+      ],
+      "fullDescription": "Rotate array to the right by k steps. Example input: [1,2,3,4,5],k=2",
+      "topics": [
+        "Array"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Find Duplicate Number",
+      "description": "Find duplicate in array of n+1 integers.",
+      "difficulty": "medium",
+      "tags": [
+        "array",
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,3,4,2,2]",
+          "output": "2"
+        }
+      ],
+      "fullDescription": "Find duplicate in array of n+1 integers. Example input: [1,3,4,2,2]",
+      "topics": [
+        "Array",
+        "Binary Search"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Minimum Window Substring (c#)",
+      "description": "Find minimum window containing all chars of t.",
+      "difficulty": "hard",
+      "tags": [
+        "sliding-window"
+      ],
+      "examples": [
+        {
+          "input": "s,t",
+          "output": "substr"
+        }
+      ],
+      "fullDescription": "Find minimum window containing all chars of t. Example input: s,t",
+      "topics": [
+        "Sliding Window"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Implement Promise-like (Task) Wrapper",
+      "description": "Create lightweight promise-like wrapper using Task.",
+      "difficulty": "hard",
+      "tags": [
+        "async",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "async func",
+          "output": "task"
+        }
+      ],
+      "fullDescription": "Create lightweight promise-like wrapper using Task. Example input: async func",
+      "topics": [
+        "Async",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    }
+  ],
+  "cpp": [
+    {
+      "title": "Swap Two Numbers",
+      "description": "Swap two numbers using std::swap or bitwise.",
+      "difficulty": "easy",
+      "tags": [
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "a=2,b=3",
+          "output": "a=3,b=2"
+        }
+      ],
+      "fullDescription": "Swap two numbers using std::swap or bitwise. Example input: a=2,b=3",
+      "topics": [
+        "Math"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Reverse String (cpp)",
+      "description": "Reverse a string in-place.",
+      "difficulty": "easy",
+      "tags": [
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "'hello'",
+          "output": "'olleh'"
+        }
+      ],
+      "fullDescription": "Reverse a string in-place. Example input: 'hello'",
+      "topics": [
+        "String"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Implement Stack (array)",
+      "description": "Implement stack using array with push/pop.",
+      "difficulty": "easy",
+      "tags": [
+        "data-structures"
+      ],
+      "examples": [
+        {
+          "input": "push/pop",
+          "output": "stack"
+        }
+      ],
+      "fullDescription": "Implement stack using array with push/pop. Example input: push/pop",
+      "topics": [
+        "Data Structures"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Two Sum (cpp)",
+      "description": "Return indices of two numbers summing to target.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15],9",
+          "output": "[0,1]"
+        }
+      ],
+      "fullDescription": "Return indices of two numbers summing to target. Example input: [2,7,11,15],9",
+      "topics": [
+        "Array",
+        "Hash Table"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Consider whether index positions or values are required.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Linked List - Insert/Delete",
+      "description": "Implement basic singly linked list operations.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "operations",
+          "output": "list"
+        }
+      ],
+      "fullDescription": "Implement basic singly linked list operations. Example input: operations",
+      "topics": [
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Valid Parentheses (cpp)",
+      "description": "Check if string of parentheses is valid.",
+      "difficulty": "easy",
+      "tags": [
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "()[]{}",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Check if string of parentheses is valid. Example input: ()[]{}",
+      "topics": [
+        "Stack"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Merge Two Sorted Lists (cpp)",
+      "description": "Merge two sorted linked lists.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "lists",
+          "output": "merged"
+        }
+      ],
+      "fullDescription": "Merge two sorted linked lists. Example input: lists",
+      "topics": [
+        "Linked List"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Binary Search (cpp)",
+      "description": "Implement binary search in sorted array.",
+      "difficulty": "easy",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3],2",
+          "output": "1"
+        }
+      ],
+      "fullDescription": "Implement binary search in sorted array. Example input: [1,2,3],2",
+      "topics": [
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Move Zeroes",
+      "description": "Move zeroes to end preserving order.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[0,1,0,3,12]",
+          "output": "[1,3,12,0,0]"
+        }
+      ],
+      "fullDescription": "Move zeroes to end preserving order. Example input: [0,1,0,3,12]",
+      "topics": [
+        "Array",
+        "Two Pointers"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Iterate the array with appropriate data structure.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Container With Most Water",
+      "description": "Max area between lines using two pointers.",
+      "difficulty": "medium",
+      "tags": [
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[1,8,6,2,5,4,8,3,7]",
+          "output": "49"
+        }
+      ],
+      "fullDescription": "Max area between lines using two pointers. Example input: [1,8,6,2,5,4,8,3,7]",
+      "topics": [
+        "Two Pointers"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Add Two Numbers (linked list)",
+      "description": "Add numbers represented by linked lists.",
+      "difficulty": "medium",
+      "tags": [
+        "linked-list",
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "(2->4->3)+(5->6->4)",
+          "output": "7->0->8"
+        }
+      ],
+      "fullDescription": "Add numbers represented by linked lists. Example input: (2->4->3)+(5->6->4)",
+      "topics": [
+        "Linked List",
+        "Math"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Detect Cycle in Linked List",
+      "description": "Use Floyd's cycle detection algorithm.",
+      "difficulty": "medium",
+      "tags": [
+        "linked-list",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "list",
+          "output": "true/false"
+        }
+      ],
+      "fullDescription": "Use Floyd's cycle detection algorithm. Example input: list",
+      "topics": [
+        "Linked List",
+        "Two Pointers"
+      ],
+      "constraints": [
+        "1 <= n <= 10^5",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Longest Increasing Subsequence (cpp)",
+      "description": "Length of LIS using nlogn solution.",
+      "difficulty": "hard",
+      "tags": [
+        "dp",
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[10,9,2,5,3,7,101,18]",
+          "output": "4"
+        }
+      ],
+      "fullDescription": "Length of LIS using nlogn solution. Example input: [10,9,2,5,3,7,101,18]",
+      "topics": [
+        "Dp",
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Serialize/Deserialize Binary Tree (cpp)",
+      "description": "Implement tree serialization and deserialization.",
+      "difficulty": "hard",
+      "tags": [
+        "tree",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,null,null,4,5]",
+          "output": "string"
+        }
+      ],
+      "fullDescription": "Implement tree serialization and deserialization. Example input: [1,2,3,null,null,4,5]",
+      "topics": [
+        "Tree",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Number of Islands (cpp)",
+      "description": "Count islands in grid using DFS/BFS.",
+      "difficulty": "medium",
+      "tags": [
+        "graph",
+        "dfs"
+      ],
+      "examples": [
+        {
+          "input": "grid",
+          "output": "count"
+        }
+      ],
+      "fullDescription": "Count islands in grid using DFS/BFS. Example input: grid",
+      "topics": [
+        "Graph",
+        "Dfs"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Kth Smallest Element in BST",
+      "description": "Find kth smallest element in BST.",
+      "difficulty": "medium",
+      "tags": [
+        "tree",
+        "dfs"
+      ],
+      "examples": [
+        {
+          "input": "tree,k",
+          "output": "value"
+        }
+      ],
+      "fullDescription": "Find kth smallest element in BST. Example input: tree,k",
+      "topics": [
+        "Tree",
+        "Dfs"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Word Search",
+      "description": "Check if word exists in grid by dfs backtracking.",
+      "difficulty": "hard",
+      "tags": [
+        "backtracking"
+      ],
+      "examples": [
+        {
+          "input": "board,word",
+          "output": "true/false"
+        }
+      ],
+      "fullDescription": "Check if word exists in grid by dfs backtracking. Example input: board,word",
+      "topics": [
+        "Backtracking"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Trapping Rain Water (cpp)",
+      "description": "Compute amount of trapped rain water.",
+      "difficulty": "hard",
+      "tags": [
+        "two-pointers",
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "[0,1,0,2]",
+          "output": "1"
+        }
+      ],
+      "fullDescription": "Compute amount of trapped rain water. Example input: [0,1,0,2]",
+      "topics": [
+        "Two Pointers",
+        "Stack"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Two pointers (start and end) might allow linear-time operations.",
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Implement Queue using Stacks (cpp)",
+      "description": "Implement queue with two stacks.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "ops",
+          "output": "queue"
+        }
+      ],
+      "fullDescription": "Implement queue with two stacks. Example input: ops",
+      "topics": [
+        "Stack",
+        "Design"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "A stack can help track nested or LIFO patterns.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Top K Frequent Elements (cpp)",
+      "description": "Return k most frequent elements.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "top k"
+        }
+      ],
+      "fullDescription": "Return k most frequent elements. Example input: array,k",
+      "topics": [
+        "Heap",
+        "Hash Table"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Minimum Window Substring (cpp)",
+      "description": "Find minimum window containing all chars of t.",
+      "difficulty": "hard",
+      "tags": [
+        "sliding-window"
+      ],
+      "examples": [
+        {
+          "input": "s,t",
+          "output": "substring"
+        }
+      ],
+      "fullDescription": "Find minimum window containing all chars of t. Example input: s,t",
+      "topics": [
+        "Sliding Window"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Search in Rotated Sorted Array (cpp)",
+      "description": "Find target in rotated sorted array.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "array,target",
+          "output": "index"
+        }
+      ],
+      "fullDescription": "Find target in rotated sorted array. Example input: array,target",
+      "topics": [
+        "Binary Search"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Implement Trie (cpp)",
+      "description": "Insert and search words with trie.",
+      "difficulty": "hard",
+      "tags": [
+        "trie"
+      ],
+      "examples": [
+        {
+          "input": "words",
+          "output": "search results"
+        }
+      ],
+      "fullDescription": "Insert and search words with trie. Example input: words",
+      "topics": [
+        "Trie"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Alien Dictionary (cpp)",
+      "description": "Topological sort from alien language order.",
+      "difficulty": "hard",
+      "tags": [
+        "graph",
+        "topological-sort"
+      ],
+      "examples": [
+        {
+          "input": "words",
+          "output": "order"
+        }
+      ],
+      "fullDescription": "Topological sort from alien language order. Example input: words",
+      "topics": [
+        "Graph",
+        "Topological Sort"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    },
+    {
+      "title": "Subarray Sum Equals K (cpp)",
+      "description": "Count subarrays sum to k using prefix sum.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "count"
+        }
+      ],
+      "fullDescription": "Count subarrays sum to k using prefix sum. Example input: array,k",
+      "topics": [
+        "Hash Table"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Consider using a hash map / dictionary for O(1) lookups.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Count Primes",
+      "description": "Count primes less than n.",
+      "difficulty": "medium",
+      "tags": [
+        "math",
+        "sieve"
+      ],
+      "examples": [
+        {
+          "input": "10",
+          "output": "4"
+        }
+      ],
+      "fullDescription": "Count primes less than n. Example input: 10",
+      "topics": [
+        "Math",
+        "Sieve"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Heap Implementation",
+      "description": "Implement min-heap operations.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "data-structures"
+      ],
+      "examples": [
+        {
+          "input": "insert,extract",
+          "output": "heap"
+        }
+      ],
+      "fullDescription": "Implement min-heap operations. Example input: insert,extract",
+      "topics": [
+        "Heap",
+        "Data Structures"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "May require O(n log n) or O(n) with extra memory"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n log n) or O(n) with extra space"
+    },
+    {
+      "title": "Palindrome Number",
+      "description": "Check whether integer is palindrome.",
+      "difficulty": "easy",
+      "tags": [
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "121",
+          "output": "true"
+        }
+      ],
+      "fullDescription": "Check whether integer is palindrome. Example input: 121",
+      "topics": [
+        "Math"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Expected simple O(n) or O(n log n) solution"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "O(n) expected"
+    },
+    {
+      "title": "Word Ladder II (cpp)",
+      "description": "Find all shortest transformation sequences.",
+      "difficulty": "hard",
+      "tags": [
+        "graph",
+        "bfs"
+      ],
+      "examples": [
+        {
+          "input": "begin,end,wordList",
+          "output": "paths"
+        }
+      ],
+      "fullDescription": "Find all shortest transformation sequences. Example input: begin,end,wordList",
+      "topics": [
+        "Graph",
+        "Bfs"
+      ],
+      "constraints": [
+        "Constraints depend on problem input sizes",
+        "Optimized algorithms expected (log factors, advanced DS)"
+      ],
+      "hints": [
+        "Try to reduce complexity and avoid nested loops when possible.",
+        "Start with a simple brute-force to clarify the logic, then optimize."
+      ],
+      "solutionOutline": [
+        "Understand the input and output format.",
+        "Handle edge cases (empty input, minimal sizes).",
+        "Return result in expected format."
+      ],
+      "complexity": "Optimized solution required (varies)"
+    }
+  ]
+}

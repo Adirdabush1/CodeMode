@@ -1,0 +1,99 @@
+.dashboard-page {
+  background: #f0f2f5;
+  padding: 20px 0;
+}
+
+.panel {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.media-block {
+  display: flex;
+  gap: 12px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.avatar-sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.post-image {
+  max-width: 100%;
+  /* לא יחרוג מרוחב הפוסט */
+  height: auto;
+  /* יחס גובה/רוחב נשמר */
+  border-radius: 8px;
+  /* אופציונלי, למראה עגול */
+  margin-top: 10px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+.avatar-sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.new-post textarea {
+  width: 100%;
+  resize: none;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.new-post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.btn-share {
+  background: #1877f2;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-share:hover {
+  background: #166fe5;
+}
+
+.actions button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.comments {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.comment {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+}

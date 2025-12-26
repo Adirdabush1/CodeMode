@@ -1,0 +1,2502 @@
+{
+  "javascript": [
+    {
+      "title": "Two Sum",
+      "description": "Return indices of two numbers that add to target.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15], target=9",
+          "output": "[0,1]"
+        }
+      ]
+    },
+    {
+      "title": "Reverse String",
+      "description": "Reverse an array of characters in-place.",
+      "difficulty": "easy",
+      "tags": [
+        "string",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "['h','e','l','l','o']",
+          "output": "['o','l','l','e','h']"
+        }
+      ]
+    },
+    {
+      "title": "Valid Parentheses",
+      "description": "Check if parentheses string is valid.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "()[]{}",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Merge Sorted Arrays",
+      "description": "Merge two sorted arrays into one sorted array.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[1,3],[2,4]",
+          "output": "[1,2,3,4]"
+        }
+      ]
+    },
+    {
+      "title": "Remove Duplicates from Sorted Array",
+      "description": "Remove duplicates in-place return new length.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[1,1,2]",
+          "output": "2"
+        }
+      ]
+    },
+    {
+      "title": "Contains Duplicate",
+      "description": "Return true if array contains any duplicates.",
+      "difficulty": "easy",
+      "tags": [
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,1]",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Best Time to Buy and Sell Stock",
+      "description": "Maximize profit with single buy-sell.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "dynamic-programming"
+      ],
+      "examples": [
+        {
+          "input": "[7,1,5,3,6,4]",
+          "output": "5"
+        }
+      ]
+    },
+    {
+      "title": "Intersection of Two Arrays",
+      "description": "Return intersection (unique) of two arrays.",
+      "difficulty": "easy",
+      "tags": [
+        "hash-table",
+        "array"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,2,1],[2,2]",
+          "output": "[2]"
+        }
+      ]
+    },
+    {
+      "title": "Reverse Linked List (JS)",
+      "description": "Reverse a singly linked list.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "1->2->3",
+          "output": "3->2->1"
+        }
+      ]
+    },
+    {
+      "title": "Climb Stairs",
+      "description": "Number of ways to climb n stairs",
+      "difficulty": "easy",
+      "tags": [
+        "dp",
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "n=3",
+          "output": "3"
+        }
+      ]
+    },
+    {
+      "title": "Valid Anagram",
+      "description": "Check if two strings are anagrams.",
+      "difficulty": "easy",
+      "tags": [
+        "hash-table",
+        "sorting"
+      ],
+      "examples": [
+        {
+          "input": "anagram, nagaram",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Fizz Buzz",
+      "description": "Return FizzBuzz sequence for n.",
+      "difficulty": "easy",
+      "tags": [
+        "implementation"
+      ],
+      "examples": [
+        {
+          "input": "n=3",
+          "output": "[1,2,'Fizz']"
+        }
+      ]
+    },
+    {
+      "title": "Contains Nearby Duplicate",
+      "description": "Check duplicates within k distance.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table",
+        "sliding-window"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,1],k=3",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Product of Array Except Self",
+      "description": "Return product array without using division.",
+      "difficulty": "medium",
+      "tags": [
+        "array",
+        "prefix-suffix"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,4]",
+          "output": "[24,12,8,6]"
+        }
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements",
+      "description": "Return k most frequent elements.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[1,1,1,2,2,3],k=2",
+          "output": "[1,2]"
+        }
+      ]
+    },
+    {
+      "title": "Find Minimum in Rotated Sorted Array",
+      "description": "Find minimum element in rotated sorted array.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[3,4,5,1,2]",
+          "output": "1"
+        }
+      ]
+    },
+    {
+      "title": "Search in Rotated Sorted Array",
+      "description": "Find target in rotated sorted array.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[4,5,6,7,0,1,2],target=0",
+          "output": "4"
+        }
+      ]
+    },
+    {
+      "title": "Longest Substring Without Repeating Characters",
+      "description": "Length of longest substring without repeating chars.",
+      "difficulty": "medium",
+      "tags": [
+        "sliding-window",
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "abcabcbb",
+          "output": "3"
+        }
+      ]
+    },
+    {
+      "title": "Group Anagrams",
+      "description": "Group anagrams together.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table",
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "['eat','tea','tan','ate','nat','bat']",
+          "output": "[['eat','tea','ate'],['tan','nat'],['bat']]"
+        }
+      ]
+    },
+    {
+      "title": "Word Break",
+      "description": "Check if s can be segmented into words from dict.",
+      "difficulty": "medium",
+      "tags": [
+        "dp",
+        "trie"
+      ],
+      "examples": [
+        {
+          "input": "s='leetcode',wordDict=['leet','code']",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "LRU Cache (JS)",
+      "description": "Design and implement LRU cache.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "linked-list",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "capacity=2",
+          "output": "operations"
+        }
+      ]
+    },
+    {
+      "title": "Serialize and Deserialize Binary Tree",
+      "description": "Implement tree serialization/deserialization.",
+      "difficulty": "hard",
+      "tags": [
+        "tree",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,null,null,4,5]",
+          "output": "serialized string"
+        }
+      ]
+    },
+    {
+      "title": "Word Ladder",
+      "description": "Shortest transformation sequence length.",
+      "difficulty": "hard",
+      "tags": [
+        "bfs",
+        "graph"
+      ],
+      "examples": [
+        {
+          "input": "hit->cog with dict",
+          "output": "5"
+        }
+      ]
+    },
+    {
+      "title": "N-Queens",
+      "description": "Return all distinct solutions to the n-queens puzzle.",
+      "difficulty": "hard",
+      "tags": [
+        "backtracking"
+      ],
+      "examples": [
+        {
+          "input": "n=4",
+          "output": "solutions"
+        }
+      ]
+    },
+    {
+      "title": "Maximum Subarray",
+      "description": "Find contiguous subarray with max sum.",
+      "difficulty": "medium",
+      "tags": [
+        "dp",
+        "divide-and-conquer"
+      ],
+      "examples": [
+        {
+          "input": "[-2,1,-3,4,-1,2,1,-5,4]",
+          "output": "6"
+        }
+      ]
+    },
+    {
+      "title": "Minimum Window Substring",
+      "description": "Find minimum window containing all chars of t.",
+      "difficulty": "hard",
+      "tags": [
+        "sliding-window",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "s='ADOBECODEBANC',t='ABC'",
+          "output": "'BANC'"
+        }
+      ]
+    },
+    {
+      "title": "Course Schedule",
+      "description": "Determine if you can finish all courses (cycle detection).",
+      "difficulty": "medium",
+      "tags": [
+        "graph",
+        "topological-sort"
+      ],
+      "examples": [
+        {
+          "input": "numCourses=2,[[1,0]]",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Merge k Sorted Lists",
+      "description": "Merge k sorted linked lists.",
+      "difficulty": "hard",
+      "tags": [
+        "heap",
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "lists",
+          "output": "merged list"
+        }
+      ]
+    }
+  ],
+  "typescript": [
+    {
+      "title": "Basic Interface Usage",
+      "description": "Define interface and use in function parameter.",
+      "difficulty": "easy",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "{name:'A'}",
+          "output": "greet"
+        }
+      ]
+    },
+    {
+      "title": "Optional & Default Props",
+      "description": "Function with optional props and defaults.",
+      "difficulty": "easy",
+      "tags": [
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "{a:1}",
+          "output": "result"
+        }
+      ]
+    },
+    {
+      "title": "Generics - Identity",
+      "description": "Write generic identity function.",
+      "difficulty": "easy",
+      "tags": [
+        "typescript",
+        "generics"
+      ],
+      "examples": [
+        {
+          "input": "identity<number>(5)",
+          "output": "5"
+        }
+      ]
+    },
+    {
+      "title": "Tuple Types",
+      "description": "Use tuple types to model fixed arrays.",
+      "difficulty": "easy",
+      "tags": [
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "[string, number]",
+          "output": "typed tuple"
+        }
+      ]
+    },
+    {
+      "title": "Type Guards",
+      "description": "Implement custom type guard function.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "arg",
+          "output": "narrowed type"
+        }
+      ]
+    },
+    {
+      "title": "Mapped Types",
+      "description": "Create mapped type that makes properties readonly.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "advanced-types"
+      ],
+      "examples": [
+        {
+          "input": "type X",
+          "output": "Readonly<X>"
+        }
+      ]
+    },
+    {
+      "title": "Conditional Types",
+      "description": "Use conditional types to infer array item type.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "advanced-types"
+      ],
+      "examples": [
+        {
+          "input": "type T",
+          "output": "inferred"
+        }
+      ]
+    },
+    {
+      "title": "Generic Constraints",
+      "description": "Write generic constrained by interface with id.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "generics"
+      ],
+      "examples": [
+        {
+          "input": "T extends {id:number}",
+          "output": "works"
+        }
+      ]
+    },
+    {
+      "title": "Utility Types (Pick/Omit)",
+      "description": "Implement function using Omit/Partial.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "utility-types"
+      ],
+      "examples": [
+        {
+          "input": "obj",
+          "output": "mapped"
+        }
+      ]
+    },
+    {
+      "title": "Decorators (basic)",
+      "description": "Create simple class decorator.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "decorators"
+      ],
+      "examples": [
+        {
+          "input": "class A",
+          "output": "decorated"
+        }
+      ]
+    },
+    {
+      "title": "Advanced Generics",
+      "description": "Implement typed Map utility preserving keys.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "generics"
+      ],
+      "examples": [
+        {
+          "input": "mapping",
+          "output": "typed result"
+        }
+      ]
+    },
+    {
+      "title": "Type Inference from Function",
+      "description": "Infer return type using ReturnType<T> utilities.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "fn",
+          "output": "inferred type"
+        }
+      ]
+    },
+    {
+      "title": "Promise Types",
+      "description": "Create utility to unwrap Promise type.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "async"
+      ],
+      "examples": [
+        {
+          "input": "Promise<number>",
+          "output": "number"
+        }
+      ]
+    },
+    {
+      "title": "Discriminated Unions",
+      "description": "Model shapes with discriminated unions and narrow by tag.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "shape",
+          "output": "narrowed"
+        }
+      ]
+    },
+    {
+      "title": "Implement Event Emitter",
+      "description": "Type-safe event emitter with generics.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "on('click', handler)",
+          "output": "typed handler"
+        }
+      ]
+    },
+    {
+      "title": "Validate JSON shape",
+      "description": "Type-guard JSON response into typed object.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "runtime-checks"
+      ],
+      "examples": [
+        {
+          "input": "json",
+          "output": "typed object"
+        }
+      ]
+    },
+    {
+      "title": "React Props Typing",
+      "description": "Define component props with generics and default props.",
+      "difficulty": "medium",
+      "tags": [
+        "react",
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "<Comp/>",
+          "output": "typed"
+        }
+      ]
+    },
+    {
+      "title": "Keyof/Index Access",
+      "description": "Use keyof and indexed access types.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "type T",
+          "output": "index type"
+        }
+      ]
+    },
+    {
+      "title": "Implement Debounce (typed)",
+      "description": "Implement debounce with typed function signature.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "timers"
+      ],
+      "examples": [
+        {
+          "input": "calls",
+          "output": "debounced"
+        }
+      ]
+    },
+    {
+      "title": "Serialize/Deserialize with Types",
+      "description": "Ensure types while serializing objects.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "io"
+      ],
+      "examples": [
+        {
+          "input": "object",
+          "output": "string"
+        }
+      ]
+    },
+    {
+      "title": "Build Typed Middleware",
+      "description": "Create middleware with typed request/response.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "express"
+      ],
+      "examples": [
+        {
+          "input": "req",
+          "output": "typed req"
+        }
+      ]
+    },
+    {
+      "title": "Implement Retry Utility",
+      "description": "Generic retry wrapper that preserves types.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "async"
+      ],
+      "examples": [
+        {
+          "input": "asyncFn",
+          "output": "retried result"
+        }
+      ]
+    },
+    {
+      "title": "Array Utility Types",
+      "description": "Create type that converts array to union.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript",
+        "types"
+      ],
+      "examples": [
+        {
+          "input": "['a','b']",
+          "output": "'a'|'b'"
+        }
+      ]
+    },
+    {
+      "title": "Extract Function Params",
+      "description": "Use Parameters<T> to extract function params.",
+      "difficulty": "medium",
+      "tags": [
+        "typescript"
+      ],
+      "examples": [
+        {
+          "input": "fn",
+          "output": "[arg1,arg2]"
+        }
+      ]
+    },
+    {
+      "title": "Implement Opaque Types",
+      "description": "Create branded types to prevent mixing IDs.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "UserId",
+          "output": "opaque type"
+        }
+      ]
+    },
+    {
+      "title": "Type-safe Form Builder",
+      "description": "Build typed form state and validators.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "forms"
+      ],
+      "examples": [
+        {
+          "input": "schema",
+          "output": "typed state"
+        }
+      ]
+    },
+    {
+      "title": "Implement Pipe Utility",
+      "description": "Compose functions with preserved types.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "functional"
+      ],
+      "examples": [
+        {
+          "input": "f,g",
+          "output": "composed"
+        }
+      ]
+    },
+    {
+      "title": "Deep Readonly Type",
+      "description": "Implement DeepReadonly<T> recursively.",
+      "difficulty": "hard",
+      "tags": [
+        "typescript",
+        "advanced-types"
+      ],
+      "examples": [
+        {
+          "input": "obj",
+          "output": "readonly obj"
+        }
+      ]
+    }
+  ],
+  "python": [
+    {
+      "title": "Check Prime Number",
+      "description": "Return whether n is prime.",
+      "difficulty": "easy",
+      "tags": [
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "n=17",
+          "output": "True"
+        }
+      ]
+    },
+    {
+      "title": "Factorial (recursion)",
+      "description": "Compute factorial recursively.",
+      "difficulty": "easy",
+      "tags": [
+        "recursion"
+      ],
+      "examples": [
+        {
+          "input": "5",
+          "output": "120"
+        }
+      ]
+    },
+    {
+      "title": "Reverse String (py)",
+      "description": "Reverse a string in-place or return reversed.",
+      "difficulty": "easy",
+      "tags": [
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "'hello'",
+          "output": "'olleh'"
+        }
+      ]
+    },
+    {
+      "title": "Fizz Buzz (py)",
+      "description": "Return FizzBuzz sequence for n.",
+      "difficulty": "easy",
+      "tags": [
+        "implementation"
+      ],
+      "examples": [
+        {
+          "input": "3",
+          "output": "[1,2,'Fizz']"
+        }
+      ]
+    },
+    {
+      "title": "Two Sum (py)",
+      "description": "Return indices of two numbers adding to target.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15],9",
+          "output": "[0,1]"
+        }
+      ]
+    },
+    {
+      "title": "Valid Palindrome",
+      "description": "Check if string is palindrome after ignoring non-alnum.",
+      "difficulty": "easy",
+      "tags": [
+        "string",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "'A man, a plan, a canal: Panama'",
+          "output": "True"
+        }
+      ]
+    },
+    {
+      "title": "Merge Intervals",
+      "description": "Merge overlapping intervals.",
+      "difficulty": "medium",
+      "tags": [
+        "array",
+        "sorting"
+      ],
+      "examples": [
+        {
+          "input": "[[1,3],[2,6],[8,10]]",
+          "output": "[[1,6],[8,10]]"
+        }
+      ]
+    },
+    {
+      "title": "Longest Common Prefix",
+      "description": "Find longest common prefix among strings.",
+      "difficulty": "easy",
+      "tags": [
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "['flower','flow','flight']",
+          "output": "'fl'"
+        }
+      ]
+    },
+    {
+      "title": "Binary Search",
+      "description": "Classic binary search in sorted array.",
+      "difficulty": "easy",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3],target=2",
+          "output": "1"
+        }
+      ]
+    },
+    {
+      "title": "Two Sum II - Input array sorted",
+      "description": "Return indices for sorted input two-sum.",
+      "difficulty": "easy",
+      "tags": [
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15],9",
+          "output": "[1,2]"
+        }
+      ]
+    },
+    {
+      "title": "House Robber",
+      "description": "Max money without robbing adjacent houses.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,1]",
+          "output": "4"
+        }
+      ]
+    },
+    {
+      "title": "Coin Change",
+      "description": "Minimum coins to make amount.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "coins=[1,2,5],amount=11",
+          "output": "3"
+        }
+      ]
+    },
+    {
+      "title": "Subarray Sum Equals K",
+      "description": "Count subarrays summing to k.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table",
+        "prefix-sum"
+      ],
+      "examples": [
+        {
+          "input": "[1,1,1],k=2",
+          "output": "2"
+        }
+      ]
+    },
+    {
+      "title": "Product of Array Except Self",
+      "description": "Return product array without division.",
+      "difficulty": "medium",
+      "tags": [
+        "array"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,4]",
+          "output": "[24,12,8,6]"
+        }
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements (py)",
+      "description": "Return k most frequent elements.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[1,1,1,2,2,3],k=2",
+          "output": "[1,2]"
+        }
+      ]
+    },
+    {
+      "title": "LRU Cache (py)",
+      "description": "Design LRU cache with O(1) ops.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "linked-list",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "capacity=2",
+          "output": "operations"
+        }
+      ]
+    },
+    {
+      "title": "Serialize and Deserialize BST",
+      "description": "Serialize/deserialize binary search tree.",
+      "difficulty": "hard",
+      "tags": [
+        "tree",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "[2,1,3]",
+          "output": "string"
+        }
+      ]
+    },
+    {
+      "title": "Word Break",
+      "description": "Check if string can be segmented by dict.",
+      "difficulty": "medium",
+      "tags": [
+        "dp",
+        "trie"
+      ],
+      "examples": [
+        {
+          "input": "'leetcode',['leet','code']",
+          "output": "True"
+        }
+      ]
+    },
+    {
+      "title": "Number of Islands",
+      "description": "Count islands in grid with DFS/BFS.",
+      "difficulty": "medium",
+      "tags": [
+        "graph",
+        "dfs",
+        "bfs"
+      ],
+      "examples": [
+        {
+          "input": "grid",
+          "output": "count"
+        }
+      ]
+    },
+    {
+      "title": "Minimum Path Sum",
+      "description": "Minimum path sum in grid from top-left to bottom-right.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "grid",
+          "output": "min sum"
+        }
+      ]
+    },
+    {
+      "title": "Kth Largest Element",
+      "description": "Find kth largest element in array.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "selection"
+      ],
+      "examples": [
+        {
+          "input": "[3,2,1,5,6,4],k=2",
+          "output": "5"
+        }
+      ]
+    },
+    {
+      "title": "Longest Increasing Subsequence",
+      "description": "Length of LIS in array.",
+      "difficulty": "hard",
+      "tags": [
+        "dp",
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[10,9,2,5,3,7,101,18]",
+          "output": "4"
+        }
+      ]
+    },
+    {
+      "title": "Trapping Rain Water",
+      "description": "Compute trapped rainwater.",
+      "difficulty": "hard",
+      "tags": [
+        "two-pointers",
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "[0,1,0,2]",
+          "output": "1"
+        }
+      ]
+    },
+    {
+      "title": "Graph traversal DFS/BFS (py)",
+      "description": "Implement DFS and BFS for graphs.",
+      "difficulty": "hard",
+      "tags": [
+        "graph"
+      ],
+      "examples": [
+        {
+          "input": "adj list",
+          "output": "orders"
+        }
+      ]
+    },
+    {
+      "title": "Find Peak Element",
+      "description": "Find a peak element using binary search.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,1]",
+          "output": "2"
+        }
+      ]
+    },
+    {
+      "title": "Evaluate Reverse Polish Notation",
+      "description": "Evaluate expression in RPN.",
+      "difficulty": "medium",
+      "tags": [
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "['2','1','+','3','*']",
+          "output": "9"
+        }
+      ]
+    },
+    {
+      "title": "Implement Trie",
+      "description": "Implement insert, search and startsWith methods.",
+      "difficulty": "hard",
+      "tags": [
+        "trie",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "'apple'",
+          "output": "found"
+        }
+      ]
+    },
+    {
+      "title": "Minimum Window Substring (py)",
+      "description": "Find minimum window substring containing all chars.",
+      "difficulty": "hard",
+      "tags": [
+        "sliding-window"
+      ],
+      "examples": [
+        {
+          "input": "s='ADOBECODEBANC',t='ABC'",
+          "output": "'BANC'"
+        }
+      ]
+    }
+  ],
+  "java": [
+    {
+      "title": "Class with getters/setters",
+      "description": "Create class Person with private fields and public getters/setters.",
+      "difficulty": "easy",
+      "tags": [
+        "oop"
+      ],
+      "examples": [
+        {
+          "input": "name,age",
+          "output": "Person instance"
+        }
+      ]
+    },
+    {
+      "title": "Reverse Linked List (java)",
+      "description": "Reverse singly linked list.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "1->2->3",
+          "output": "3->2->1"
+        }
+      ]
+    },
+    {
+      "title": "Merge Two Sorted Lists",
+      "description": "Merge two sorted linked lists.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "lists",
+          "output": "merged"
+        }
+      ]
+    },
+    {
+      "title": "Binary Search (java)",
+      "description": "Implement binary search for sorted array.",
+      "difficulty": "easy",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3],2",
+          "output": "1"
+        }
+      ]
+    },
+    {
+      "title": "Valid Parentheses (java)",
+      "description": "Check validity of parentheses.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "()[]{}",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Implement Queue using Stacks",
+      "description": "Use two stacks to implement a queue.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "push,pop",
+          "output": "queue behavior"
+        }
+      ]
+    },
+    {
+      "title": "Climbing Stairs (java)",
+      "description": "Number of ways to climb n stairs.",
+      "difficulty": "easy",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "3",
+          "output": "3"
+        }
+      ]
+    },
+    {
+      "title": "Search in Rotated Sorted Array (java)",
+      "description": "Find target in rotated sorted array.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[4,5,6,7,0,1,2],0",
+          "output": "4"
+        }
+      ]
+    },
+    {
+      "title": "Lowest Common Ancestor",
+      "description": "Find LCA in binary tree.",
+      "difficulty": "medium",
+      "tags": [
+        "tree"
+      ],
+      "examples": [
+        {
+          "input": "tree,a,b",
+          "output": "lca"
+        }
+      ]
+    },
+    {
+      "title": "Serialize Binary Tree (java)",
+      "description": "Serialize and deserialize binary tree.",
+      "difficulty": "hard",
+      "tags": [
+        "tree",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,null,null,4,5]",
+          "output": "serialized"
+        }
+      ]
+    },
+    {
+      "title": "Binary Tree Level Order Traversal",
+      "description": "Return level order traversal of nodes.",
+      "difficulty": "medium",
+      "tags": [
+        "tree",
+        "bfs"
+      ],
+      "examples": [
+        {
+          "input": "tree",
+          "output": "levels"
+        }
+      ]
+    },
+    {
+      "title": "Implement HashMap (basic)",
+      "description": "Implement simple hash map with put/get/remove.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "operations",
+          "output": "result"
+        }
+      ]
+    },
+    {
+      "title": "Linked List Cycle",
+      "description": "Detect if linked list has a cycle.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "list",
+          "output": "true/false"
+        }
+      ]
+    },
+    {
+      "title": "Merge K Sorted Lists",
+      "description": "Merge k sorted lists using heap.",
+      "difficulty": "hard",
+      "tags": [
+        "heap",
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "lists",
+          "output": "merged"
+        }
+      ]
+    },
+    {
+      "title": "Word Ladder (java)",
+      "description": "Shortest transformation between words.",
+      "difficulty": "hard",
+      "tags": [
+        "bfs",
+        "graph"
+      ],
+      "examples": [
+        {
+          "input": "hit->cog",
+          "output": "length"
+        }
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements (java)",
+      "description": "Return k most frequent elements.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "top k"
+        }
+      ]
+    },
+    {
+      "title": "Design Tic-Tac-Toe",
+      "description": "Design Tic-Tac-Toe game class.",
+      "difficulty": "hard",
+      "tags": [
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "moves",
+          "output": "winner"
+        }
+      ]
+    },
+    {
+      "title": "Implement Stack Min",
+      "description": "Stack that returns min in O(1).",
+      "difficulty": "medium",
+      "tags": [
+        "stack",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "push(2),push(1),getMin",
+          "output": "1"
+        }
+      ]
+    },
+    {
+      "title": "LRU Cache (java)",
+      "description": "Implement LRU cache with O(1) ops.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "capacity=2",
+          "output": "ops"
+        }
+      ]
+    },
+    {
+      "title": "Minimum Path Sum (java)",
+      "description": "Min sum path in grid.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "grid",
+          "output": "sum"
+        }
+      ]
+    },
+    {
+      "title": "Unique Paths",
+      "description": "Number of unique paths in grid.",
+      "difficulty": "medium",
+      "tags": [
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "m=3,n=7",
+          "output": "28"
+        }
+      ]
+    },
+    {
+      "title": "Validate Binary Search Tree",
+      "description": "Check if binary tree is valid BST.",
+      "difficulty": "medium",
+      "tags": [
+        "tree"
+      ],
+      "examples": [
+        {
+          "input": "tree",
+          "output": "true/false"
+        }
+      ]
+    },
+    {
+      "title": "Search 2D Matrix",
+      "description": "Search target in 2D matrix.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search",
+        "matrix"
+      ],
+      "examples": [
+        {
+          "input": "matrix,target",
+          "output": "true/false"
+        }
+      ]
+    },
+    {
+      "title": "Pow(x,n)",
+      "description": "Implement power function.",
+      "difficulty": "medium",
+      "tags": [
+        "math",
+        "binary-exponentiation"
+      ],
+      "examples": [
+        {
+          "input": "2.00000,10",
+          "output": "1024.00000"
+        }
+      ]
+    },
+    {
+      "title": "Partition List",
+      "description": "Partition linked list around x.",
+      "difficulty": "medium",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "list,x",
+          "output": "partitioned list"
+        }
+      ]
+    },
+    {
+      "title": "Palindrome Linked List",
+      "description": "Check if linked list is palindrome.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "1->2->2->1",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Meeting Rooms II",
+      "description": "Min number of meeting rooms required.",
+      "difficulty": "medium",
+      "tags": [
+        "intervals",
+        "heap"
+      ],
+      "examples": [
+        {
+          "input": "intervals",
+          "output": "rooms"
+        }
+      ]
+    },
+    {
+      "title": "Subarray Sum Equals K (java)",
+      "description": "Count subarrays summing to k.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "count"
+        }
+      ]
+    }
+  ],
+  "csharp": [
+    {
+      "title": "Console IO Basics",
+      "description": "Read input and write output to console.",
+      "difficulty": "easy",
+      "tags": [
+        "io"
+      ],
+      "examples": [
+        {
+          "input": "Hello",
+          "output": "Echo Hello"
+        }
+      ]
+    },
+    {
+      "title": "Fizz Buzz (c#)",
+      "description": "Return FizzBuzz sequence.",
+      "difficulty": "easy",
+      "tags": [
+        "implementation"
+      ],
+      "examples": [
+        {
+          "input": "n=3",
+          "output": "[1,2,'Fizz']"
+        }
+      ]
+    },
+    {
+      "title": "Reverse Linked List (c#)",
+      "description": "Reverse singly linked list.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "1->2->3",
+          "output": "3->2->1"
+        }
+      ]
+    },
+    {
+      "title": "Two Sum (c#)",
+      "description": "Return indices of two numbers that add to target.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15],9",
+          "output": "[0,1]"
+        }
+      ]
+    },
+    {
+      "title": "Valid Parentheses (c#)",
+      "description": "Validate parentheses string.",
+      "difficulty": "easy",
+      "tags": [
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "()[]{}",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Implement Stack (c#)",
+      "description": "Implement stack with push/pop/peek.",
+      "difficulty": "easy",
+      "tags": [
+        "design",
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "operations",
+          "output": "result"
+        }
+      ]
+    },
+    {
+      "title": "Async Await Example",
+      "description": "Demonstrate async IO and await.",
+      "difficulty": "medium",
+      "tags": [
+        "async",
+        "tasks"
+      ],
+      "examples": [
+        {
+          "input": "async call",
+          "output": "result"
+        }
+      ]
+    },
+    {
+      "title": "Task Cancellation",
+      "description": "Use CancellationToken to cancel tasks.",
+      "difficulty": "medium",
+      "tags": [
+        "async",
+        "concurrency"
+      ],
+      "examples": [
+        {
+          "input": "start cancel",
+          "output": "stopped"
+        }
+      ]
+    },
+    {
+      "title": "LINQ Filtering",
+      "description": "Use LINQ to filter and project collections.",
+      "difficulty": "easy",
+      "tags": [
+        "linq"
+      ],
+      "examples": [
+        {
+          "input": "list",
+          "output": "filtered list"
+        }
+      ]
+    },
+    {
+      "title": "Binary Tree Traversal",
+      "description": "Inorder, preorder, postorder traversals.",
+      "difficulty": "medium",
+      "tags": [
+        "tree"
+      ],
+      "examples": [
+        {
+          "input": "tree",
+          "output": "orders"
+        }
+      ]
+    },
+    {
+      "title": "Design Logger (c#)",
+      "description": "Design thread-safe logger.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "concurrency"
+      ],
+      "examples": [
+        {
+          "input": "logs",
+          "output": "written"
+        }
+      ]
+    },
+    {
+      "title": "LRU Cache (c#)",
+      "description": "Implement LRU cache with O(1) ops.",
+      "difficulty": "hard",
+      "tags": [
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "capacity",
+          "output": "ops"
+        }
+      ]
+    },
+    {
+      "title": "Implement Queue using Stacks (c#)",
+      "description": "Queue implemented by two stacks.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "ops",
+          "output": "queue"
+        }
+      ]
+    },
+    {
+      "title": "Serialize Object to JSON",
+      "description": "Serialize/deserialize objects using System.Text.Json.",
+      "difficulty": "easy",
+      "tags": [
+        "io",
+        "json"
+      ],
+      "examples": [
+        {
+          "input": "object",
+          "output": "json"
+        }
+      ]
+    },
+    {
+      "title": "Dependency Injection (basic)",
+      "description": "Use DI container to inject services.",
+      "difficulty": "medium",
+      "tags": [
+        "design",
+        "di"
+      ],
+      "examples": [
+        {
+          "input": "service",
+          "output": "injected"
+        }
+      ]
+    },
+    {
+      "title": "Expression Trees",
+      "description": "Build and compile expression trees at runtime.",
+      "difficulty": "hard",
+      "tags": [
+        "advanced"
+      ],
+      "examples": [
+        {
+          "input": "expr",
+          "output": "compiled"
+        }
+      ]
+    },
+    {
+      "title": "Implement Trie (c#)",
+      "description": "Insert and search prefixes in trie.",
+      "difficulty": "hard",
+      "tags": [
+        "trie"
+      ],
+      "examples": [
+        {
+          "input": "words",
+          "output": "search results"
+        }
+      ]
+    },
+    {
+      "title": "Median of Two Sorted Arrays",
+      "description": "Find median of two sorted arrays efficiently.",
+      "difficulty": "hard",
+      "tags": [
+        "binary-search",
+        "divide-and-conquer"
+      ],
+      "examples": [
+        {
+          "input": "arrays",
+          "output": "median"
+        }
+      ]
+    },
+    {
+      "title": "Design Rate Limiter",
+      "description": "Implement rate limiter per user IP.",
+      "difficulty": "hard",
+      "tags": [
+        "design",
+        "concurrency"
+      ],
+      "examples": [
+        {
+          "input": "requests",
+          "output": "throttled"
+        }
+      ]
+    },
+    {
+      "title": "Graph BFS Shortest Path",
+      "description": "Shortest path on unweighted graph using BFS.",
+      "difficulty": "medium",
+      "tags": [
+        "graph",
+        "bfs"
+      ],
+      "examples": [
+        {
+          "input": "graph,start",
+          "output": "distances"
+        }
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements (c#)",
+      "description": "Return k most frequent elements using heap.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "top k"
+        }
+      ]
+    },
+    {
+      "title": "Implement Observer Pattern",
+      "description": "Create publisher/subscriber pattern.",
+      "difficulty": "medium",
+      "tags": [
+        "design",
+        "patterns"
+      ],
+      "examples": [
+        {
+          "input": "subscribe",
+          "output": "notifications"
+        }
+      ]
+    },
+    {
+      "title": "Thread-safe Counter",
+      "description": "Implement atomic counter for multi-threading.",
+      "difficulty": "medium",
+      "tags": [
+        "concurrency"
+      ],
+      "examples": [
+        {
+          "input": "increments",
+          "output": "final count"
+        }
+      ]
+    },
+    {
+      "title": "Calculate Fibonacci (iterative/recursion)",
+      "description": "Return nth Fibonacci number.",
+      "difficulty": "easy",
+      "tags": [
+        "recursion",
+        "dp"
+      ],
+      "examples": [
+        {
+          "input": "n=5",
+          "output": "5"
+        }
+      ]
+    },
+    {
+      "title": "Validate BST (c#)",
+      "description": "Check whether a binary tree is a valid BST.",
+      "difficulty": "medium",
+      "tags": [
+        "tree"
+      ],
+      "examples": [
+        {
+          "input": "tree",
+          "output": "true/false"
+        }
+      ]
+    },
+    {
+      "title": "Rotate Array",
+      "description": "Rotate array to the right by k steps.",
+      "difficulty": "easy",
+      "tags": [
+        "array"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,4,5],k=2",
+          "output": "[4,5,1,2,3]"
+        }
+      ]
+    },
+    {
+      "title": "Find Duplicate Number",
+      "description": "Find duplicate in array of n+1 integers.",
+      "difficulty": "medium",
+      "tags": [
+        "array",
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,3,4,2,2]",
+          "output": "2"
+        }
+      ]
+    },
+    {
+      "title": "Minimum Window Substring (c#)",
+      "description": "Find minimum window containing all chars of t.",
+      "difficulty": "hard",
+      "tags": [
+        "sliding-window"
+      ],
+      "examples": [
+        {
+          "input": "s,t",
+          "output": "substr"
+        }
+      ]
+    },
+    {
+      "title": "Implement Promise-like (Task) Wrapper",
+      "description": "Create lightweight promise-like wrapper using Task.",
+      "difficulty": "hard",
+      "tags": [
+        "async",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "async func",
+          "output": "task"
+        }
+      ]
+    }
+  ],
+  "cpp": [
+    {
+      "title": "Swap Two Numbers",
+      "description": "Swap two numbers using std::swap or bitwise.",
+      "difficulty": "easy",
+      "tags": [
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "a=2,b=3",
+          "output": "a=3,b=2"
+        }
+      ]
+    },
+    {
+      "title": "Reverse String (cpp)",
+      "description": "Reverse a string in-place.",
+      "difficulty": "easy",
+      "tags": [
+        "string"
+      ],
+      "examples": [
+        {
+          "input": "'hello'",
+          "output": "'olleh'"
+        }
+      ]
+    },
+    {
+      "title": "Implement Stack (array)",
+      "description": "Implement stack using array with push/pop.",
+      "difficulty": "easy",
+      "tags": [
+        "data-structures"
+      ],
+      "examples": [
+        {
+          "input": "push/pop",
+          "output": "stack"
+        }
+      ]
+    },
+    {
+      "title": "Two Sum (cpp)",
+      "description": "Return indices of two numbers summing to target.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "[2,7,11,15],9",
+          "output": "[0,1]"
+        }
+      ]
+    },
+    {
+      "title": "Linked List - Insert/Delete",
+      "description": "Implement basic singly linked list operations.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "operations",
+          "output": "list"
+        }
+      ]
+    },
+    {
+      "title": "Valid Parentheses (cpp)",
+      "description": "Check if string of parentheses is valid.",
+      "difficulty": "easy",
+      "tags": [
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "()[]{}",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Merge Two Sorted Lists (cpp)",
+      "description": "Merge two sorted linked lists.",
+      "difficulty": "easy",
+      "tags": [
+        "linked-list"
+      ],
+      "examples": [
+        {
+          "input": "lists",
+          "output": "merged"
+        }
+      ]
+    },
+    {
+      "title": "Binary Search (cpp)",
+      "description": "Implement binary search in sorted array.",
+      "difficulty": "easy",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3],2",
+          "output": "1"
+        }
+      ]
+    },
+    {
+      "title": "Move Zeroes",
+      "description": "Move zeroes to end preserving order.",
+      "difficulty": "easy",
+      "tags": [
+        "array",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[0,1,0,3,12]",
+          "output": "[1,3,12,0,0]"
+        }
+      ]
+    },
+    {
+      "title": "Container With Most Water",
+      "description": "Max area between lines using two pointers.",
+      "difficulty": "medium",
+      "tags": [
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "[1,8,6,2,5,4,8,3,7]",
+          "output": "49"
+        }
+      ]
+    },
+    {
+      "title": "Add Two Numbers (linked list)",
+      "description": "Add numbers represented by linked lists.",
+      "difficulty": "medium",
+      "tags": [
+        "linked-list",
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "(2->4->3)+(5->6->4)",
+          "output": "7->0->8"
+        }
+      ]
+    },
+    {
+      "title": "Detect Cycle in Linked List",
+      "description": "Use Floyd's cycle detection algorithm.",
+      "difficulty": "medium",
+      "tags": [
+        "linked-list",
+        "two-pointers"
+      ],
+      "examples": [
+        {
+          "input": "list",
+          "output": "true/false"
+        }
+      ]
+    },
+    {
+      "title": "Longest Increasing Subsequence (cpp)",
+      "description": "Length of LIS using nlogn solution.",
+      "difficulty": "hard",
+      "tags": [
+        "dp",
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "[10,9,2,5,3,7,101,18]",
+          "output": "4"
+        }
+      ]
+    },
+    {
+      "title": "Serialize/Deserialize Binary Tree (cpp)",
+      "description": "Implement tree serialization and deserialization.",
+      "difficulty": "hard",
+      "tags": [
+        "tree",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "[1,2,3,null,null,4,5]",
+          "output": "string"
+        }
+      ]
+    },
+    {
+      "title": "Number of Islands (cpp)",
+      "description": "Count islands in grid using DFS/BFS.",
+      "difficulty": "medium",
+      "tags": [
+        "graph",
+        "dfs"
+      ],
+      "examples": [
+        {
+          "input": "grid",
+          "output": "count"
+        }
+      ]
+    },
+    {
+      "title": "Kth Smallest Element in BST",
+      "description": "Find kth smallest element in BST.",
+      "difficulty": "medium",
+      "tags": [
+        "tree",
+        "dfs"
+      ],
+      "examples": [
+        {
+          "input": "tree,k",
+          "output": "value"
+        }
+      ]
+    },
+    {
+      "title": "Word Search",
+      "description": "Check if word exists in grid by dfs backtracking.",
+      "difficulty": "hard",
+      "tags": [
+        "backtracking"
+      ],
+      "examples": [
+        {
+          "input": "board,word",
+          "output": "true/false"
+        }
+      ]
+    },
+    {
+      "title": "Trapping Rain Water (cpp)",
+      "description": "Compute amount of trapped rain water.",
+      "difficulty": "hard",
+      "tags": [
+        "two-pointers",
+        "stack"
+      ],
+      "examples": [
+        {
+          "input": "[0,1,0,2]",
+          "output": "1"
+        }
+      ]
+    },
+    {
+      "title": "Implement Queue using Stacks (cpp)",
+      "description": "Implement queue with two stacks.",
+      "difficulty": "easy",
+      "tags": [
+        "stack",
+        "design"
+      ],
+      "examples": [
+        {
+          "input": "ops",
+          "output": "queue"
+        }
+      ]
+    },
+    {
+      "title": "Top K Frequent Elements (cpp)",
+      "description": "Return k most frequent elements.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "top k"
+        }
+      ]
+    },
+    {
+      "title": "Minimum Window Substring (cpp)",
+      "description": "Find minimum window containing all chars of t.",
+      "difficulty": "hard",
+      "tags": [
+        "sliding-window"
+      ],
+      "examples": [
+        {
+          "input": "s,t",
+          "output": "substring"
+        }
+      ]
+    },
+    {
+      "title": "Search in Rotated Sorted Array (cpp)",
+      "description": "Find target in rotated sorted array.",
+      "difficulty": "medium",
+      "tags": [
+        "binary-search"
+      ],
+      "examples": [
+        {
+          "input": "array,target",
+          "output": "index"
+        }
+      ]
+    },
+    {
+      "title": "Implement Trie (cpp)",
+      "description": "Insert and search words with trie.",
+      "difficulty": "hard",
+      "tags": [
+        "trie"
+      ],
+      "examples": [
+        {
+          "input": "words",
+          "output": "search results"
+        }
+      ]
+    },
+    {
+      "title": "Alien Dictionary (cpp)",
+      "description": "Topological sort from alien language order.",
+      "difficulty": "hard",
+      "tags": [
+        "graph",
+        "topological-sort"
+      ],
+      "examples": [
+        {
+          "input": "words",
+          "output": "order"
+        }
+      ]
+    },
+    {
+      "title": "Subarray Sum Equals K (cpp)",
+      "description": "Count subarrays sum to k using prefix sum.",
+      "difficulty": "medium",
+      "tags": [
+        "hash-table"
+      ],
+      "examples": [
+        {
+          "input": "array,k",
+          "output": "count"
+        }
+      ]
+    },
+    {
+      "title": "Count Primes",
+      "description": "Count primes less than n.",
+      "difficulty": "medium",
+      "tags": [
+        "math",
+        "sieve"
+      ],
+      "examples": [
+        {
+          "input": "10",
+          "output": "4"
+        }
+      ]
+    },
+    {
+      "title": "Heap Implementation",
+      "description": "Implement min-heap operations.",
+      "difficulty": "medium",
+      "tags": [
+        "heap",
+        "data-structures"
+      ],
+      "examples": [
+        {
+          "input": "insert,extract",
+          "output": "heap"
+        }
+      ]
+    },
+    {
+      "title": "Palindrome Number",
+      "description": "Check whether integer is palindrome.",
+      "difficulty": "easy",
+      "tags": [
+        "math"
+      ],
+      "examples": [
+        {
+          "input": "121",
+          "output": "true"
+        }
+      ]
+    },
+    {
+      "title": "Word Ladder II (cpp)",
+      "description": "Find all shortest transformation sequences.",
+      "difficulty": "hard",
+      "tags": [
+        "graph",
+        "bfs"
+      ],
+      "examples": [
+        {
+          "input": "begin,end,wordList",
+          "output": "paths"
+        }
+      ]
+    }
+  ]
+}

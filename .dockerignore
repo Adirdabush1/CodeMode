@@ -1,0 +1,32 @@
+# Ignore everything by default
+.*
+
+# Allow only files we really need
+!Gemfile
+!Gemfile.lock
+!package.json
+!package-lock.json
+!yarn.lock
+!app/
+!lib/
+!config/
+!public/
+!bin/
+
+# Ignore heavy/development stuff
+node_modules
+vendor/bundle
+log/*
+tmp/*
+coverage
+*.log
+
+# Ignore docs & configs not needed in container
+*.md
+agricius
+Dockerfile*
+docker-compose*
+docs/maintainers/
+judge0.conf
+scripts/dev/
+srv/
