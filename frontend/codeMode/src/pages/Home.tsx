@@ -207,11 +207,7 @@ const Home: React.FC = () => {
                   key={index}
                   role="listitem"
                   onClick={() => handleExerciseSelect(ex)}
-                  className={selectedExercise === ex ? "selected" : ""}
-                  style={{
-                    cursor: "pointer",
-                    fontWeight: selectedExercise === ex ? "bold" : "normal",
-                  }}
+                  className={`exercise-item ${selectedExercise === ex ? "selected" : ""}`}
                 >
                   {`Exercise ${index + 1}: ${ex}`}
                 </li>
@@ -235,8 +231,10 @@ const Home: React.FC = () => {
             </button>
           </div>
 
-          <div style={{ width: "100%", maxWidth: 1200, margin: "0 auto" }}>
-            <MonacoEditor />
+          <div className="home-editor-section">
+            <div className="home-editor-container">
+              <MonacoEditor />
+            </div>
           </div>
 
           {/* כרטיסים נוספים רק למשתמשים מחוברים */}
