@@ -44,7 +44,12 @@ a {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
+  /* place directly under the fixed nav (the page already offsets content with --practice-top-offset) */
+  position: sticky;
+  top: 0;
+  z-index: 120;
   margin: 0 0 1rem 0;
+  margin-top: 0;
   width: 100%;
 }
 
@@ -60,8 +65,8 @@ a {
   gap: 1.5rem;
   /* ensure both panels stretch to same height */
   align-items: stretch;
-  /* layout fills viewport below the menu so panels don't push page height */
-  height: calc(100vh - var(--practice-top-offset));
+  /* layout fills viewport below the menu; increase height so top area is longer */
+  height: calc(100vh - var(--practice-top-offset) + 120px);
 }
 
 .practice-left,
@@ -109,6 +114,8 @@ a {
   /* ensure the exercises card starts at the top of the left pane */
   align-self: flex-start;
   margin-top: 0;
+  /* make left card taller so top area is more prominent */
+  min-height: calc(100vh - var(--practice-top-offset) + 80px);
 }
 
 /* Right side: editor card */
@@ -123,6 +130,8 @@ a {
   gap: 1rem;
   /* fill right panel height */
   height: 100%;
+  /* increase right panel height to match left expansion */
+  min-height: calc(100vh - var(--practice-top-offset) + 80px);
 }
 
 /* editor should expand to fill remaining vertical space inside the panel */
