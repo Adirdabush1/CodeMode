@@ -62,7 +62,8 @@
   margin-bottom: 0.75rem;
   /* keep language selector visible when scrolling, but don't overlap content */
   position: sticky;
-  top: 0; /* stick to the top of the scroll container */
+  /* place the sticky selector below the card padding so it won't overlap list items */
+  top: 1.5rem; /* equals the card padding */
   z-index: 6;
   background: rgba(242, 246, 249, 0.95);
   padding: 0.5rem 0;
