@@ -22,7 +22,6 @@ const MyEditor: React.FC = () => {
   const [language, setLanguage] = useState<typeof supportedLanguages[number]>('javascript');
   const [stdin, setStdin] = useState<string>(''); 
   const [output, setOutput] = useState<string>('');
-  const [userFeedback, setUserFeedback] = useState<string>('');
   const [isRunning, setIsRunning] = useState<boolean>(false);
 
   const [aiUsageCount, setAiUsageCount] = useState<number>(() => {
@@ -121,7 +120,7 @@ const MyEditor: React.FC = () => {
           'Content-Type': 'application/json',
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({ code, userFeedback }),
+        body: JSON.stringify({ code, userFeedback: '' }),
         credentials: token ? undefined : 'include',
       });
 
@@ -175,14 +174,7 @@ const MyEditor: React.FC = () => {
         style={{ width: '100%', height: 80, marginTop: 10, fontSize: 14, padding: 10 }}
       />
 
-      <textarea
-        placeholder="What did you learn? Where did you get stuck?"
-        value={userFeedback}
-        onChange={e => setUserFeedback(e.target.value)}
-        style={{ width: '100%', height: 100, marginTop: 20, fontSize: 16, padding: 10 }}
-      />
-
-      <div style={{ marginTop: 10 }}>
+      <div className="monaco-actions">
         <button onClick={runCode} disabled={isRunning} className="run-button glass-button">
           {isRunning ? 'Running...' : 'Run Code'}
         </button>
@@ -191,7 +183,6 @@ const MyEditor: React.FC = () => {
           onClick={analyzeCode}
           disabled={isRunning}
           className="analyze-button glass-button"
-          style={{ marginLeft: 10 }}
         >
           {isRunning ? 'Analyzing...' : 'Analyze with AI'}
         </button>

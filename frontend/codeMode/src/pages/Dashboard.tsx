@@ -5,7 +5,7 @@ import MenuBar from '../components/MenuBar';
 import { useAuth } from '../components/useAuth';
 import './Dashboard.css';
 
-const API_URL = process.env.REACT_APP_API_URL || '';
+const API_URL = import.meta.env.VITE_API_URL || '';
 
 type UserSummary = { name: string; avatarUrl?: string };
 type Comment = { id: string; author: UserSummary; content: string; createdAt: string };
