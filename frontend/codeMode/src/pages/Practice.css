@@ -76,6 +76,8 @@ a {
 .practice-splitter:hover {
   background: rgba(0, 0, 0, 0.12);
 }
+  /* small padding so the language selector / header are visible */
+  padding-top: 0.75rem;
 
 .practice-splitter:focus-visible {
   outline: 2px solid rgba(0, 0, 0, 0.35);
