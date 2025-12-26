@@ -39,6 +39,20 @@ a {
   opacity: 1;
 }
 
+/* styles for global language selector above the two panels */
+.practice-language-selector {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 0 1rem 0;
+  width: 100%;
+}
+
+.practice-language-selector .language-card {
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+}
+
 /* Split layout: left (exercises) / right (editor) */
 .practice-layout {
   width: 100%;
