@@ -59,12 +59,19 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: flex-start;
-  margin-bottom: 1rem;
-  /* keep language selector visible when scrolling */
+  margin-bottom: 0.75rem;
+  /* keep language selector visible when scrolling, but don't overlap content */
   position: sticky;
-  top: 0.75rem;
-  z-index: 5;
-  background: transparent;
+  top: 0; /* stick to the top of the scroll container */
+  z-index: 6;
+  background: rgba(242, 246, 249, 0.95);
+  padding: 0.5rem 0;
+  border-radius: 0.6rem;
+}
+
+.card-section.exercises-samples ul {
+  /* ensure list content starts below the sticky language selector when it sticks */
+  margin-top: 0.5rem;
 }
 
 .language-card {
