@@ -2,28 +2,21 @@
 .card-section.exercises-samples {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* keep children aligned to the top/left so header and selector stay visible */
+  align-items: flex-start;
   justify-content: flex-start;
-  /* השפה תמיד למעלה */
-  margin: 0 auto;
-  width: 95%;
-  /* קצת יותר רחב */
+  margin: 0;
+  width: 100%;
   max-width: 900px;
-  /* הגדלנו מ-800px */
-  min-height: 600px;
-  /* הגדלנו את הגובה */
-  height: auto;
-  /* מאפשר גובה משתנה לפי תוכן */
+  min-height: 360px;
+  height: 100%;
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
-  padding: 2rem;
-  /* יותר מרווח פנימי */
+  padding: 1.5rem;
   border-radius: 1.5rem;
-  box-shadow:
-    inset -2px 2px hsl(0 0% 100% / 1),
-    -10px 10px 20px hsl(0 0% 0% / 0.1);
+  box-shadow: inset -2px 2px hsl(0 0% 100% / 1), -10px 10px 20px hsl(0 0% 0% / 0.1);
   text-align: right;
   overflow-y: auto;
-  animation: slideInFromLeft 1s ease forwards;
+  animation: none !important;
   opacity: 1;
 }
 
@@ -65,8 +58,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  justify-content: center;
-  margin-bottom: 2rem;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  /* keep language selector visible when scrolling */
+  position: sticky;
+  top: 0.75rem;
+  z-index: 5;
+  background: transparent;
 }
 
 .language-card {
