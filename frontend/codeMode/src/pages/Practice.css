@@ -50,6 +50,11 @@ a {
   min-width: 320px;
 }
 
+/* Match questions pane height to code editor height */
+.practice-left {
+  height: 400px;
+}
+
 .practice-splitter {
   width: 12px;
   align-self: stretch;
@@ -71,6 +76,10 @@ a {
 .practice-left .card-section.exercises-samples {
   width: 100%;
   max-width: none;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 /* Right side: editor card */
@@ -226,6 +235,10 @@ a {
 
   .practice-layout {
     flex-direction: column;
+  }
+
+  .practice-left {
+    height: auto;
   }
 
   .practice-splitter {
