@@ -152,3 +152,8 @@
     line-height: 1.5rem;
   }
 }
+
+/* hide the in-card language selector because we render a global one in Practice.tsx */
+.card-section.exercises-samples .language-card-grid {
+  display: none !important;
+}

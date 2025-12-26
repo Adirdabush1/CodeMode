@@ -435,6 +435,34 @@ async function runCode() {
       <h1></h1>
 
       <div className="practice-container">
+        {/* Global language selector above both panels */}
+        <div className="practice-language-selector language-card-grid" role="tablist" aria-label="Languages">
+          {[
+            'javascript',
+            'python',
+            'java',
+            'typescript',
+            'csharp',
+            'cpp',
+            'html',
+            'css',
+          ].map((lang) => (
+            <button
+              key={lang}
+              className={`language-card ${language === (lang as any) ? 'active' : ''}`}
+              onClick={() => {
+                setLanguage(lang as any);
+                setSelectedExercise(null);
+                setSaveStatus('idle');
+                setSaveErrorMessage(null);
+              }}
+              aria-pressed={language === (lang as any)}
+            >
+              {lang.toUpperCase()}
+            </button>
+          ))}
+        </div>
+
         <div className="practice-layout">
           <div
             className="practice-left"
