@@ -50,6 +50,23 @@ a {
   min-width: 320px;
 }
 
+.practice-splitter {
+  width: 12px;
+  align-self: stretch;
+  cursor: col-resize;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.practice-splitter:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.practice-splitter:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.35);
+  outline-offset: 2px;
+}
+
 /* Make the ExerciseList card fit the left column */
 .practice-left .card-section.exercises-samples {
   width: 100%;
@@ -209,6 +226,10 @@ a {
 
   .practice-layout {
     flex-direction: column;
+  }
+
+  .practice-splitter {
+    display: none;
   }
 
   .practice-page select {
