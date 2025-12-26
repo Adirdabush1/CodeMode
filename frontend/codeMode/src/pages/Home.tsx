@@ -292,7 +292,7 @@ const Home: React.FC = () => {
           </div>
 
           {/* תחזוקה */}
-          <div className="card-section">
+          <div className="card-section maintenance-section">
             <div className="side-text left text-black">Maintain Like a Pro</div>
             <div className="card">
               <div className="icon" aria-hidden>
