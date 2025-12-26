@@ -28,8 +28,37 @@ a {
 /* תיבה מרכזית */
 .practice-page .practice-container {
   width: 100%;
-  max-width: 600px;
+  max-width: 1200px;
   margin: 2rem 0 6rem 0;
+  padding: 0;
+  color: #444447;
+  opacity: 1;
+  /* תמיד נראה */
+}
+
+/* Split layout: left (exercises) / right (editor) */
+.practice-layout {
+  width: 100%;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.practice-left,
+.practice-right {
+  flex: 1;
+  min-width: 320px;
+}
+
+/* Make the ExerciseList card fit the left column */
+.practice-left .card-section.exercises-samples {
+  width: 100%;
+  max-width: none;
+}
+
+/* Right side: editor card */
+.practice-editor-panel {
+  width: 100%;
   padding: 2rem;
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
   border-radius: 1.5rem;
@@ -37,9 +66,17 @@ a {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  color: #444447;
-  opacity: 1;
-  /* תמיד נראה */
+}
+
+.output-pre {
+  margin: 0;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 /* תוויות, תיבות בחירה, textarea */
@@ -165,9 +202,13 @@ a {
 @media (max-width: 768px) {
   .practice-page .practice-container {
     width: 100% !important;
-    max-width: 600px !important;
+    max-width: 1200px !important;
     margin: 1.5rem 0 !important;
-    padding: 2rem !important;
+    padding: 0 !important;
+  }
+
+  .practice-layout {
+    flex-direction: column;
   }
 
   .practice-page select {
