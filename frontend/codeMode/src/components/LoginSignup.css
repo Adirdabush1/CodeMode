@@ -342,14 +342,30 @@
 
 @media (max-width: 480px) {
   .login-signup-root {
-    padding: 80px 12px 30px;
+    padding: 70px 8px 30px;
   }
 
   .login-signup-root form {
-    padding: 24px 16px;
+    padding: 20px 12px;
   }
 
   .login-signup-root h2 {
     font-size: 1.3rem;
+  }
+
+  .login-signup-root input {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .login-signup-root button {
+    min-height: 44px;
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .login-signup-root .mobile-toggle button {
+    min-height: 44px;
+    font-size: 13px;
   }
 }

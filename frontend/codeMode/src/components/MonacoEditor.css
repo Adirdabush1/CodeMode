@@ -79,3 +79,51 @@
   white-space: pre-wrap;
   word-break: break-word;
 }
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .monaco-editor-wrapper {
+    margin: 20px auto;
+    padding: 12px;
+  }
+
+  .editor-container {
+    height: 350px;
+  }
+
+  .glass-button {
+    padding: 10px 16px;
+    min-height: 44px;
+  }
+
+  .language-select {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .monaco-editor-wrapper {
+    margin: 10px auto;
+    padding: 8px;
+  }
+
+  .editor-container {
+    height: 280px;
+  }
+
+  .glass-button {
+    padding: 10px 14px;
+    font-size: 0.85rem;
+  }
+
+  .language-select {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .output-pre {
+    font-size: 13px;
+    padding: 12px;
+  }
+}

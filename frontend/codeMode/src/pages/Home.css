@@ -279,9 +279,10 @@ a {
 
 .home-editor-container .language-select {
   align-self: center;
-  font-size: 18px;
-  padding: 14px 22px;
-  min-width: 220px;
+  font-size: 16px;
+  padding: 12px 18px;
+  min-width: 180px;
+  max-width: 100%;
   border-radius: 10px;
 }
 
@@ -496,7 +497,7 @@ video {
 /* ================== אנימציות ================== */
 @keyframes slideInFromLeft {
   from {
-    transform: translateX(-400px);
+    transform: translateX(-100%);
     opacity: 0;
   }
 
@@ -508,7 +509,7 @@ video {
 
 @keyframes slideInFromRight {
   from {
-    transform: translateX(400px);
+    transform: translateX(100%);
     opacity: 0;
   }
 
@@ -520,7 +521,7 @@ video {
 
 @keyframes slideInFromBottom {
   from {
-    transform: translateY(200px);
+    transform: translateY(50%);
     opacity: 0;
   }
 
@@ -617,6 +618,13 @@ video {
   .language-card {
     flex: 1 1 100%;
     max-width: 100%;
+    min-height: 44px;
+  }
+
+  .home-editor-container .language-select {
+    font-size: 14px;
+    padding: 10px 14px;
+    min-width: 140px;
   }
 }
 
