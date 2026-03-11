@@ -229,9 +229,8 @@ async function runCode() {
       // }
 
       const data = await res.json();
-      const resultOutput = data.stdout || data.output || '';
-      setOutput(resultOutput || '⚠ No output returned.');
-      if (resultOutput.trim()) await saveExercise();
+      setOutput(data.output || data.stdout || '⚠ No output returned.');
+      if ((data.stdout || '').trim()) await saveExercise();
       return;
     }
 
@@ -259,8 +258,19 @@ async function runCode() {
       }
 
       const data = await res.json();
-      const actualRaw = data.stdout || data.output || '';
+      // Use stdout (raw program output) for comparison, not the formatted output
+      const actualRaw = (data.stdout != null ? data.stdout : '') as string;
+      const hasError = data.output && (data.output.includes('Runtime Error') || data.output.includes('Compile Output') || data.output.includes('Server error'));
       const expectedRaw = test.output || '';
+
+      // If there was a compilation/runtime error, show it and skip comparison
+      if (hasError && !actualRaw.trim()) {
+        allPassed = false;
+        results.push(
+          `❌ Test ${i + 1} — Error\nInput: ${test.input}\n${data.output}`
+        );
+        continue;
+      }
 
       let normalizedActual = normalize(actualRaw);
       let normalizedExpected = normalize(expectedRaw);
@@ -276,23 +286,12 @@ async function runCode() {
       }
 
       if (normalizedActual === normalizedExpected) {
-        results.push(`✅ Test ${i + 1} passed\nInput: ${test.input}\nOutput: ${actualRaw}`);
+        results.push(`✅ Test ${i + 1} passed\nInput: ${test.input}\nOutput: ${actualRaw.trim()}`);
       } else {
         allPassed = false;
 
-        const actualLines = normalizedActual.split('\n');
-        const expectedLines = normalizedExpected.split('\n');
-        const lineDiffs: string[] = [];
-
-        const maxLines = Math.max(actualLines.length, expectedLines.length);
-        for (let j = 0; j < maxLines; j++) {
-          const a = actualLines[j] ?? '(empty)';
-          const e = expectedLines[j] ?? '(empty)';
-          if (a !== e) lineDiffs.push(`Line ${j + 1}: Expected "${e}", got "${a}"`);
-        }
-
         results.push(
-          `❌ Test ${i + 1} failed\nInput: ${test.input}\nExpected: ${expectedRaw || '(empty)'}\nGot: ${actualRaw || '(empty)'}\nDifferences:\n${lineDiffs.join('\n')}`
+          `❌ Test ${i + 1} failed\nInput: ${test.input}\nExpected: ${expectedRaw || '(empty)'}\nGot: ${actualRaw.trim() || '(no output)'}`
         );
       }
     }
