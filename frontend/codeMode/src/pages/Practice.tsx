@@ -90,10 +90,14 @@ const Practice: React.FC = () => {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape' && showAiChat) setShowAiChat(false);
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        if (selectedExercise && !isRunning) runCode();
+      }
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [showAiChat]);
+  }, [showAiChat, selectedExercise, isRunning]);
 
   // כשנבחר תרגיל — נטען את פרטי התרגיל מהמיאבק (כולל examples)
   useEffect(() => {
@@ -432,31 +436,21 @@ async function runCode() {
   return (
     <div className="practice-page">
       <MenuBar />
-      <h1></h1>
 
       <div className="practice-container">
-        {/* Global language selector above both panels */}
+        {/* Global language selector */}
         <div className="practice-language-selector language-card-grid" role="tablist" aria-label="Languages">
-          {[
-            'javascript',
-            'python',
-            'java',
-            'typescript',
-            'csharp',
-            'cpp',
-            'html',
-            'css',
-          ].map((lang) => (
+          {(['javascript', 'python', 'java', 'typescript', 'csharp', 'cpp', 'html', 'css'] as const).map((lang) => (
             <button
               key={lang}
-              className={`language-card ${language === (lang as any) ? 'active' : ''}`}
+              className={`language-card ${language === lang ? 'active' : ''}`}
               onClick={() => {
-                setLanguage(lang as any);
+                setLanguage(lang);
                 setSelectedExercise(null);
                 setSaveStatus('idle');
                 setSaveErrorMessage(null);
               }}
-              aria-pressed={language === (lang as any)}
+              aria-pressed={language === lang}
             >
               {lang.toUpperCase()}
             </button>
@@ -464,6 +458,7 @@ async function runCode() {
         </div>
 
         <div className="practice-layout">
+          {/* Left: Exercise list */}
           <div
             className="practice-left"
             aria-label="Exercises"
@@ -482,6 +477,7 @@ async function runCode() {
             />
           </div>
 
+          {/* Splitter */}
           <div
             className="practice-splitter"
             role="separator"
@@ -491,89 +487,113 @@ async function runCode() {
             onMouseDown={(e) => {
               e.preventDefault();
               isResizingRef.current = true;
-
               const startX = e.clientX;
               const startLeft = leftPanePercent;
-              const container = (e.currentTarget.parentElement as HTMLElement | null);
+              const container = e.currentTarget.parentElement as HTMLElement | null;
 
               function onMove(ev: MouseEvent) {
                 if (!isResizingRef.current || !container) return;
                 const rect = container.getBoundingClientRect();
                 const deltaPx = ev.clientX - startX;
                 const deltaPercent = (deltaPx / rect.width) * 100;
-                const next = Math.min(60, Math.max(20, startLeft + deltaPercent));
-                setLeftPanePercent(next);
+                setLeftPanePercent(Math.min(60, Math.max(20, startLeft + deltaPercent)));
               }
-
               function onUp() {
                 isResizingRef.current = false;
                 window.removeEventListener('mousemove', onMove);
                 window.removeEventListener('mouseup', onUp);
               }
-
               window.addEventListener('mousemove', onMove);
               window.addEventListener('mouseup', onUp);
             }}
-            onClick={() => {
-              setLeftPanePercent((prev) => (prev <= 30 ? 40 : 30));
-            }}
             onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                setLeftPanePercent((prev) => (prev <= 30 ? 40 : 30));
-              }
-              if (e.key === 'ArrowLeft') {
-                e.preventDefault();
-                setLeftPanePercent((prev) => Math.max(20, prev - 5));
-              }
-              if (e.key === 'ArrowRight') {
-                e.preventDefault();
-                setLeftPanePercent((prev) => Math.min(60, prev + 5));
-              }
+              if (e.key === 'ArrowLeft') { e.preventDefault(); setLeftPanePercent((p) => Math.max(20, p - 5)); }
+              if (e.key === 'ArrowRight') { e.preventDefault(); setLeftPanePercent((p) => Math.min(60, p + 5)); }
             }}
           />
 
+          {/* Right: Editor + controls */}
           <div
             className="practice-right"
             aria-label="Editor"
             style={{ flexBasis: `${100 - leftPanePercent}%` }}
           >
             <div className="practice-editor-panel">
-              <Editor
-                height="100%"
-                language={language}
-                value={code}
-                onChange={(value) => setCode(value || '')}
-                theme="vs-dark"
-                options={{ minimap: { enabled: false }, automaticLayout: true, fontSize: 14 }}
-              />
-
-              <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                <button onClick={runCode} disabled={isRunning || !selectedExercise}>
-                  {isRunning ? 'Running...' : 'Run Code'}
-                </button>
-
-                <button onClick={analyzeCode} disabled={isAiRunning}>
-                  {isAiRunning ? 'Analyzing...' : 'Analyze Code (AI)'}
-                </button>
-
-                <button onClick={() => setShowAiChat(true)} disabled={showAiChat}>
-                  Open AI Assistant
-                </button>
-              </div>
-
-              {/* הצגת סטטוס רק אחרי ניסיון שמירה */}
-              {saveStatus !== 'idle' && (
-                <div style={{ marginTop: 16 }}>
-                  {saveStatus === 'saving' && <p style={{ color: 'blue' }}>Saving exercise...</p>}
-                  {saveStatus === 'success' && <p style={{ color: 'green' }}>Exercise saved successfully!</p>}
-                  {saveStatus === 'error' && (
-                    <p style={{ color: 'red' }}>Error saving exercise: {saveErrorMessage || 'Unknown error'}</p>
+              {/* Exercise detail (shown when one is selected) */}
+              {currentExercise && (
+                <div className="exercise-detail-panel">
+                  <h3>
+                    {currentExercise.name}
+                    <span className={`difficulty-badge ${currentExercise.difficulty}`}>
+                      {currentExercise.difficulty}
+                    </span>
+                  </h3>
+                  {currentExercise.description && (
+                    <p className="exercise-detail-desc">{currentExercise.description}</p>
+                  )}
+                  {currentExercise.tags && currentExercise.tags.length > 0 && (
+                    <div className="exercise-detail-tags">
+                      {currentExercise.tags.map((tag) => (
+                        <span key={tag} className="exercise-detail-tag">{tag}</span>
+                      ))}
+                    </div>
                   )}
                 </div>
               )}
 
-              <pre className="output-pre">{output}</pre>
+              {/* Code editor */}
+              <section style={{ flex: '1 1 0', minHeight: 200, borderRadius: '0.75rem', overflow: 'hidden' }}>
+                <Editor
+                  height="100%"
+                  language={language}
+                  value={code}
+                  onChange={(value) => setCode(value || '')}
+                  theme="vs-dark"
+                  options={{
+                    minimap: { enabled: false },
+                    automaticLayout: true,
+                    fontSize: 14,
+                    padding: { top: 12 },
+                  }}
+                />
+              </section>
+
+              {/* Action buttons */}
+              <div className="practice-btn-row">
+                <button
+                  className="btn-primary"
+                  onClick={runCode}
+                  disabled={isRunning || !selectedExercise}
+                  title={!selectedExercise ? 'Select an exercise first' : 'Run code (Ctrl+Enter)'}
+                >
+                  {isRunning ? 'Running...' : 'Run Code'}
+                  {!isRunning && <span className="kbd-hint">Ctrl+Enter</span>}
+                </button>
+
+                <button className="btn-ai" onClick={analyzeCode} disabled={isAiRunning}>
+                  {isAiRunning ? 'Analyzing...' : 'AI Analysis'}
+                </button>
+
+                <button onClick={() => setShowAiChat(true)} disabled={showAiChat}>
+                  AI Chat
+                </button>
+
+                {saveStatus !== 'idle' && (
+                  <span className={`save-status ${saveStatus}`}>
+                    {saveStatus === 'saving' && 'Saving...'}
+                    {saveStatus === 'success' && 'Saved!'}
+                    {saveStatus === 'error' && `Error: ${saveErrorMessage || 'Unknown'}`}
+                  </span>
+                )}
+              </div>
+
+              {/* Output */}
+              {output && (
+                <div className="output-section">
+                  <div className="output-label">Output</div>
+                  <pre className="output-pre">{output}</pre>
+                </div>
+              )}
             </div>
           </div>
         </div>

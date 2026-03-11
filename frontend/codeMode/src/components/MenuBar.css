@@ -25,6 +25,9 @@
 .menu-bar .logo {
   font-weight: 700;
   font-size: 1.2rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .menu-bar ul {
@@ -36,15 +39,32 @@
 }
 
 .menu-bar li {
-  cursor: pointer;
-  font-weight: 700;
-  padding: 10px 15px;
   border-radius: 20px;
   transition: all 0.3s ease;
 }
 
 .menu-bar li:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+.menu-bar li a {
+  display: block;
+  padding: 10px 15px;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.menu-bar .nav-logout-btn {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  font-weight: 700;
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
 }
 
 /* Hamburger */
@@ -55,6 +75,9 @@
   width: 25px;
   height: 20px;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .menu-bar .hamburger span {
@@ -84,15 +107,18 @@
   }
 
   .menu-bar ul.open {
-    max-height: 300px;
-    /* גובה מתאים לכל הפריטים */
+    max-height: 400px;
   }
 
   .menu-bar li {
-    padding: 15px 0;
+    padding: 0;
     width: 100%;
     text-align: center;
     margin: 0;
+  }
+
+  .menu-bar li a {
+    padding: 15px 0;
   }
 
   .menu-bar .hamburger {
@@ -100,7 +126,6 @@
   }
 }
 
-/* דחיקת תוכן למטה כדי לא להסתירו מתחת לתפריט */
 .home-content {
   padding-top: 90px;
   max-width: 1200px;

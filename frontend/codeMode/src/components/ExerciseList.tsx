@@ -133,6 +133,7 @@ const ExerciseList: React.FC<ExerciseListProps> = ({
           <button
             key={lang}
             className={`language-card ${selectedLanguage === lang ? 'active' : ''}`}
+            aria-pressed={selectedLanguage === lang}
             onClick={() => {
               setPage(1);
               onSelectExercise({ id: '', language: lang });

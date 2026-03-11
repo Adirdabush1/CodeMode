@@ -1,4 +1,4 @@
-@import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+/* Icons provided by react-icons (tree-shakeable SVGs) */
 
 /* ================== כללי ================== */
 * {
@@ -12,7 +12,7 @@ body {
 
 body {
   background: #d0dbe1;
-  font-family: system-ui, sans-serif;
+  font-family: 'Montserrat', system-ui, sans-serif;
   color: #444447;
   margin: 0;
   overflow-x: hidden;
@@ -45,7 +45,8 @@ a {
   font-weight: bold;
   color: #222;
   overflow: hidden;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  margin: 0;
 }
 
 .text-part {
@@ -202,7 +203,7 @@ a {
   padding: 1rem;
   border-radius: 1.5rem;
   box-shadow: inset -2px 2px hsl(0 0% 100% / 1), -10px 10px 20px hsl(0 0% 0% / 0.1);
-  text-align: right;
+  text-align: center;
   overflow-y: auto;
   animation: slideInFromLeft 1s ease forwards;
   opacity: 0;
@@ -461,10 +462,7 @@ a {
 .icon {
   flex-shrink: 0;
   font-size: 4rem;
-  background: linear-gradient(to right, #ff416c, #ff4b2b);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ff4b2b;
 }
 
 .text-content {
@@ -669,5 +667,11 @@ video {
   .text-part {
     animation: none !important;
     transition: none !important;
+    opacity: 1 !important;
+  }
+
+  .card-section.exercises-samples {
+    animation: none !important;
+    opacity: 1 !important;
   }
 }

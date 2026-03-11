@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaLaptopCode, FaChartLine, FaLightbulb, FaShieldAlt, FaWrench } from "react-icons/fa";
 import MenuBar from "../components/MenuBar";
 import "./Home.css";
-import MonacoEditor from "../components/MonacoEditor";
 import axios from "axios";
-import Swal from "sweetalert2"; // ✅ הוספת SweetAlert2
+import Swal from "sweetalert2";
+
+const MonacoEditor = lazy(() => import("../components/MonacoEditor"));
 
 const exercisesByLanguage: Record<string, string[]> = {
   javascript: [
@@ -42,7 +44,6 @@ const exercisesByLanguage: Record<string, string[]> = {
 const Home: React.FC = () => {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [loadingAuth, setLoadingAuth] = useState(true);
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
 
@@ -85,9 +86,7 @@ const Home: React.FC = () => {
       .catch(() => {
         if (mounted) setIsLoggedIn(false);
       })
-      .then(() => {
-        if (mounted) setLoadingAuth(false);
-      });
+;
 
     return () => {
       mounted = false;
@@ -115,27 +114,16 @@ const Home: React.FC = () => {
 
   const exercises = exercisesByLanguage[selectedLanguage] || [];
 
-  if (loadingAuth) {
-    return (
-      <>
-        <MenuBar />
-        <div className="profile-page">
-          <h1>Loading...</h1>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <MenuBar />
 
       <main className="main-container" aria-live="polite">
         <div className="animated-title-container">
-          <div className="split-text-container" aria-hidden={false}>
+          <h1 className="split-text-container">
             <span className="text-part left">Learn With </span>
             <span className="text-part right">Your AI Mentor</span>
-          </div>
+          </h1>
         </div>
 
         <div className="cards-list">
@@ -171,7 +159,7 @@ const Home: React.FC = () => {
             <div className="side-text left text-white">AI Learns </div>
             <div className="card">
               <div className="icon" aria-hidden>
-                <i className="fa-thin fa-laptop-code"></i>
+                <FaLaptopCode />
               </div>
               <div className="text-content" style={{ minWidth: 0 }}>
                 <h2>Programming</h2>
@@ -233,7 +221,9 @@ const Home: React.FC = () => {
 
           <div className="home-editor-section">
             <div className="home-editor-container">
-              <MonacoEditor />
+              <Suspense fallback={<div style={{ padding: "2rem", textAlign: "center" }}>Loading editor...</div>}>
+                <MonacoEditor />
+              </Suspense>
             </div>
           </div>
 
@@ -244,7 +234,7 @@ const Home: React.FC = () => {
                 <div className="side-text left text-black">Your Progress</div>
                 <div className="card">
                   <div className="icon" aria-hidden>
-                    <i className="fa-thin fa-chart-line"></i>
+                    <FaChartLine />
                   </div>
                   <div className="text-content" style={{ minWidth: 0 }}>
                     <h2>Practice History</h2>
@@ -260,7 +250,7 @@ const Home: React.FC = () => {
                 <div className="side-text right text-black">For You</div>
                 <div className="card">
                   <div className="icon" aria-hidden>
-                    <i className="fa-thin fa-lightbulb-on"></i>
+                    <FaLightbulb />
                   </div>
                   <div className="text-content" style={{ minWidth: 0 }}>
                     <h2>Recommended Topics</h2>
@@ -279,7 +269,7 @@ const Home: React.FC = () => {
             <div className="side-text right text-gray">Secure Your Skills</div>
             <div className="card">
               <div className="icon" aria-hidden>
-                <i className="fa-thin fa-shield-check"></i>
+                <FaShieldAlt />
               </div>
               <div className="text-content" style={{ minWidth: 0 }}>
                 <h2>Security</h2>
@@ -296,7 +286,7 @@ const Home: React.FC = () => {
             <div className="side-text left text-black">Maintain Like a Pro</div>
             <div className="card">
               <div className="icon" aria-hidden>
-                <i className="fa-thin fa-wrench-simple"></i>
+                <FaWrench />
               </div>
               <div className="text-content" style={{ minWidth: 0 }}>
                 <h2>Maintenance</h2>

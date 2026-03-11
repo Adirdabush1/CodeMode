@@ -36,7 +36,6 @@ video {
 button {
   cursor: pointer;
   border: none;
-  outline: none;
 }
 
 /* ================== כותרת ================== */
@@ -53,7 +52,7 @@ button {
   text-transform: none;
   color: #222;
   overflow: hidden;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Montserrat', system-ui, sans-serif;
 }
 
 .text-part {
@@ -166,10 +165,7 @@ button {
 .icon {
   flex-shrink: 0;
   font-size: 4rem;
-  background: linear-gradient(to right, #ff416c, #ff4b2b);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ff4b2b;
 }
 
 .text-content {
@@ -197,8 +193,8 @@ button {
 .card-section.exercises-samples {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   margin: 0 auto;
   width: 90%;
   max-width: 700px;
@@ -208,9 +204,9 @@ button {
   box-shadow:
     inset -2px 2px hsl(0 0% 100% / 1),
     -10px 10px 20px hsl(0 0% 0% / 0.1);
-  text-align: right;
+  text-align: left;
   overflow-y: auto;
-  opacity: 0;
+  opacity: 1;
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
@@ -233,6 +229,11 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
   white-space: nowrap;
+}
+
+.language-card:focus-visible {
+  outline: 2px solid #E67E22;
+  outline-offset: 2px;
 }
 
 .language-card.active {
@@ -450,5 +451,6 @@ button {
   .text-part {
     animation: none !important;
     transition: none !important;
+    opacity: 1 !important;
   }
 }

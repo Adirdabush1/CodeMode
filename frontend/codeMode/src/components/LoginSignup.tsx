@@ -1,4 +1,3 @@
-//login and signup component with form validation and error handling
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -34,6 +33,7 @@ const LoginSignup: React.FC = () => {
   const [signUpEmail, setSignUpEmail] = useState('');
   const [signUpPassword, setSignUpPassword] = useState('');
   const [signUpMessage, setSignUpMessage] = useState('');
+  const [signUpLoading, setSignUpLoading] = useState(false);
 
   const [signInEmail, setSignInEmail] = useState('');
   const [signInPassword, setSignInPassword] = useState('');
@@ -45,14 +45,11 @@ const LoginSignup: React.FC = () => {
 
   const handleSignUpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSignUpLoading(true);
     try {
       await axios.post(
         `${BACKEND_URL}/auth/signup`,
-        {
-          name: signUpName,
-          email: signUpEmail,
-          password: signUpPassword,
-        },
+        { name: signUpName, email: signUpEmail, password: signUpPassword },
         { withCredentials: true }
       );
       await Swal.fire({
@@ -63,8 +60,6 @@ const LoginSignup: React.FC = () => {
       });
       setSignUpMessage('');
       containerRef.current?.classList.remove('right-panel-active');
-
-      // אופציה: לנווט לפרופיל או ל-login אוטומטי אם ה-backend יוצר session
       navigate('/profile');
     } catch (error: unknown) {
       if (isAxiosError(error)) {
@@ -80,6 +75,8 @@ const LoginSignup: React.FC = () => {
           text: 'An unexpected error occurred',
         });
       }
+    } finally {
+      setSignUpLoading(false);
     }
   };
 
@@ -89,26 +86,19 @@ const LoginSignup: React.FC = () => {
     try {
       const res = await axios.post(
         `${BACKEND_URL}/auth/login`,
-        {
-          email: signInEmail,
-          password: signInPassword,
-        },
+        { email: signInEmail, password: signInPassword },
         { withCredentials: true }
       );
 
-      // --- שינוי: cast ל-any כדי למנוע שגיאות טיפוסיות על res.data ---
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const data: any = res.data;
-
-      // נסה להוציא את פרטי המשתמש מהתשובה (support ל-data.user או data)
       let userFromServer: User | null = (data?.user ?? data) as User | null;
 
-      // אם אין פרטי משתמש בתשובת ה-login — בקש /user/me כגיבוי
       if (!userFromServer || !userFromServer.name) {
         try {
           const meRes = await axios.get<User>(`${BACKEND_URL}/user/me`, { withCredentials: true });
           userFromServer = meRes.data;
-        } catch  {
+        } catch {
           userFromServer = null;
         }
       }
@@ -117,7 +107,6 @@ const LoginSignup: React.FC = () => {
         throw new Error('Login succeeded but failed to retrieve user profile.');
       }
 
-      // מעדכן את ה־AuthContext עם פרטי המשתמש
       login(userFromServer);
 
       await Swal.fire({
@@ -152,25 +141,28 @@ const LoginSignup: React.FC = () => {
     <>
       <MenuBar />
       <div className="login-signup-root">
+        <h1 className="sr-only">CodeMode - Login or Sign Up</h1>
         <div className="container" id="container" ref={containerRef}>
           {/* Sign Up */}
           <div className="form-container sign-up-container">
             <form onSubmit={handleSignUpSubmit}>
-              <h1>Create Account</h1>
-              <span>or use your email for registration</span>
+              <h2>Create Account</h2>
+              <span>Start your coding journey today</span>
               <input
                 type="text"
-                placeholder="Name"
+                placeholder="Full Name"
                 value={signUpName}
                 onChange={(e) => setSignUpName(e.target.value)}
                 required
+                aria-label="Full name"
               />
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="Email Address"
                 value={signUpEmail}
                 onChange={(e) => setSignUpEmail(e.target.value)}
                 required
+                aria-label="Email address"
               />
               <input
                 type="password"
@@ -179,24 +171,29 @@ const LoginSignup: React.FC = () => {
                 onChange={(e) => setSignUpPassword(e.target.value)}
                 required
                 autoComplete="new-password"
+                aria-label="Password"
+                minLength={6}
               />
-              <button type="submit">Sign Up</button>
-              {signUpMessage && <p>{signUpMessage}</p>}
+              <button type="submit" disabled={signUpLoading}>
+                {signUpLoading ? 'Creating...' : 'Sign Up'}
+              </button>
+              {signUpMessage && <p role="alert">{signUpMessage}</p>}
             </form>
           </div>
 
           {/* Sign In */}
           <div className="form-container sign-in-container">
             <form onSubmit={handleSignInSubmit}>
-              <h1>Sign in</h1>
-              <span>or use your account</span>
+              <h2>Welcome Back</h2>
+              <span>Sign in to continue coding</span>
               <input
                 type="email"
-                placeholder="Email"
+                placeholder="Email Address"
                 value={signInEmail}
                 onChange={(e) => setSignInEmail(e.target.value)}
                 required
                 autoComplete="username"
+                aria-label="Email address"
               />
               <input
                 type="password"
@@ -205,33 +202,40 @@ const LoginSignup: React.FC = () => {
                 onChange={(e) => setSignInPassword(e.target.value)}
                 required
                 autoComplete="current-password"
+                aria-label="Password"
               />
               <button type="submit" disabled={signInLoading}>
                 {signInLoading ? 'Signing in...' : 'Sign In'}
               </button>
-              {signInMessage && <p>{signInMessage}</p>}
+              {signInMessage && <p role="alert">{signInMessage}</p>}
             </form>
           </div>
 
-          {/* Overlay */}
+          {/* Overlay (desktop) */}
           <div className="overlay-container">
             <div className="overlay">
               <div className="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
-                <button className="ghost" onClick={handleSignInClick}>Sign In</button>
+                <h2>Welcome Back!</h2>
+                <p>Already have an account? Sign in to pick up where you left off.</p>
+                <button className="ghost" onClick={handleSignInClick} type="button">Sign In</button>
               </div>
               <div className="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>
-                <button className="ghost" onClick={handleSignUpClick}>Sign Up</button>
+                <h2>New Here?</h2>
+                <p>Create an account and start practicing with your AI coding mentor.</p>
+                <button className="ghost" onClick={handleSignUpClick} type="button">Sign Up</button>
               </div>
             </div>
           </div>
         </div>
 
+        {/* Mobile toggle (visible only on small screens) */}
+        <div className="mobile-toggle">
+          <button type="button" onClick={handleSignUpClick}>Don't have an account? Sign Up</button>
+          <button type="button" onClick={handleSignInClick}>Already have an account? Sign In</button>
+        </div>
+
         <footer>
-          <p>all rights reserved &copy; 2025 CodeMode</p>
+          <p>All rights reserved &copy; {new Date().getFullYear()} CodeMode</p>
         </footer>
       </div>
     </>

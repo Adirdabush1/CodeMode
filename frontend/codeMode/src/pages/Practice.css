@@ -1,25 +1,11 @@
-/* ===================== בסיס ===================== */
-body {
-  background: #d0dbe1;
-  font-family: system-ui, sans-serif;
-  color: #444447;
-  margin: 0;
-  padding: 2rem;
-  overflow-x: hidden;
-}
+/* ===================== Practice Page ===================== */
 
-a {
-  color: black;
-}
-
-/* ===================== practice page ===================== */
 .practice-page {
   background: #d0dbe1;
   color: #444447;
-  font-family: system-ui, sans-serif;
+  font-family: 'Montserrat', system-ui, sans-serif;
   margin: 0;
   padding: 2rem;
-  /* top offset to clear the fixed MenuBar (use compact value so content starts directly under the menu) */
   --practice-top-offset: 90px;
   padding-top: var(--practice-top-offset);
   display: flex;
@@ -28,82 +14,81 @@ a {
   min-height: 100vh;
 }
 
-/* תיבה מרכזית */
+a { color: black; }
+
+/* ---- Container ---- */
 .practice-page .practice-container {
   width: 100%;
-  max-width: 1200px;
-  /* remove top margin so panels start right under the MenuBar offset */
+  max-width: 1400px;
   margin: 0;
   padding: 0;
-  color: #444447;
-  opacity: 1;
 }
 
-/* styles for global language selector above the two panels */
+/* ---- Language Selector ---- */
 .practice-language-selector {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
-  /* place directly under the fixed nav (the page already offsets content with --practice-top-offset) */
+  flex-wrap: wrap;
+  gap: 0.4rem;
   position: sticky;
   top: 0;
   z-index: 120;
-  margin: 0 0 1rem 0;
-  margin-top: 0;
+  margin: 0 0 1rem;
+  padding: 0.5rem 0;
   width: 100%;
+  background: rgba(208, 219, 225, 0.9);
+  backdrop-filter: blur(8px);
 }
 
 .practice-language-selector .language-card {
-  padding: 0.6rem 1rem;
-  font-size: 0.95rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
 }
 
-/* Split layout: left (exercises) / right (editor) */
+/* ---- Split Layout ---- */
 .practice-layout {
   width: 100%;
   display: flex;
-  gap: 1.5rem;
-  /* ensure both panels stretch to same height */
+  gap: 1rem;
   align-items: stretch;
-  /* layout fills viewport below the menu; increase height so top area is longer */
-  height: calc(100vh - var(--practice-top-offset) + 120px);
+  height: calc(100vh - var(--practice-top-offset) - 20px);
 }
 
 .practice-left,
 .practice-right {
-  flex: 1;
-  min-width: 320px;
-  /* occupy full height of the layout so both sides match */
+  min-width: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-/* Left panel fills layout height */
 .practice-left {
-  height: 100%;
+  overflow-y: auto;
 }
 
+/* ---- Splitter ---- */
 .practice-splitter {
-  width: 12px;
+  width: 8px;
+  flex-shrink: 0;
   align-self: stretch;
   cursor: col-resize;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.06);
+  transition: background 0.2s ease;
 }
 
 .practice-splitter:hover {
-  background: rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.15);
 }
-  /* small padding so the language selector / header are visible */
-  padding-top: 0.75rem;
 
 .practice-splitter:focus-visible {
   outline: 2px solid rgba(0, 0, 0, 0.35);
   outline-offset: 2px;
 }
 
-/* Make the ExerciseList card fit the left column */
+/* ---- Left panel: exercises ---- */
 .practice-left .card-section.exercises-samples {
   width: 100%;
   max-width: none;
@@ -111,52 +96,206 @@ a {
   max-height: 100%;
   min-height: 0;
   overflow-y: auto;
-  /* ensure the exercises card starts at the top of the left pane */
   align-self: flex-start;
   margin-top: 0;
-  /* make left card taller so top area is more prominent */
-  min-height: calc(100vh - var(--practice-top-offset) + 80px);
+  text-align: left;
 }
 
-/* Right side: editor card */
+/* ---- Right panel: editor ---- */
 .practice-editor-panel {
   width: 100%;
   padding: 1rem;
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   box-shadow: inset -2px 2px hsl(0 0% 100% / 1), -10px 10px 20px hsl(0 0% 0% / 0.1);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  /* fill right panel height */
+  gap: 0.75rem;
   height: 100%;
-  /* increase right panel height to match left expansion */
-  min-height: calc(100vh - var(--practice-top-offset) + 80px);
+  overflow: hidden;
 }
 
-/* editor should expand to fill remaining vertical space inside the panel */
-.practice-editor-panel > .monaco-editor {
-  flex: 1 1 auto;
+/* Editor fills remaining space */
+.practice-editor-panel > section:first-of-type {
+  flex: 1 1 0;
+  min-height: 200px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.practice-page .monaco-editor {
+  border-radius: 0.75rem;
   height: auto !important;
+  width: 100%;
+  display: block;
+}
+
+/* ---- Exercise Detail Panel ---- */
+.exercise-detail-panel {
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 10px;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.exercise-detail-panel h3 {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.exercise-detail-panel .exercise-detail-desc {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.exercise-detail-panel .exercise-detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.exercise-detail-panel .exercise-detail-tag {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.07);
+  color: #555;
+  font-weight: 600;
+}
+
+.exercise-detail-panel .difficulty-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-left: 8px;
+}
+
+.difficulty-badge.easy { background: #e8f5e9; color: #2e7d32; }
+.difficulty-badge.medium { background: #fff3e0; color: #e65100; }
+.difficulty-badge.hard { background: #ffebee; color: #c62828; }
+
+/* ---- Button Row ---- */
+.practice-btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.practice-page button {
+  border: 1.5px solid rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(10px);
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: #333;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.2s ease;
+  margin: 0;
+}
+
+.practice-page button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.practice-page button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Primary action (Run Code) */
+.practice-page button.btn-primary {
+  background: #2C3E50;
+  color: #fff;
+  border-color: #2C3E50;
+}
+
+.practice-page button.btn-primary:hover:not(:disabled) {
+  background: #34495e;
+  box-shadow: 0 4px 12px rgba(44, 62, 80, 0.35);
+}
+
+/* AI action */
+.practice-page button.btn-ai {
+  background: linear-gradient(135deg, #E67E22, #f39c12);
+  color: #fff;
+  border-color: transparent;
+}
+
+.practice-page button.btn-ai:hover:not(:disabled) {
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.35);
+}
+
+/* Keyboard shortcut hint */
+.kbd-hint {
+  font-size: 0.7rem;
+  color: #999;
+  margin-left: 4px;
+  font-weight: 400;
+}
+
+/* ---- Output ---- */
+.output-section {
+  flex-shrink: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.output-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  margin-bottom: 4px;
 }
 
 .output-pre {
   margin: 0;
   width: 100%;
-  padding: 1rem;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.05);
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #1e1e1e;
+  color: #d4d4d4;
   overflow: auto;
   white-space: pre-wrap;
   word-break: break-word;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 
-/* תוויות, תיבות בחירה, textarea */
+/* ---- Save Status ---- */
+.save-status {
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-block;
+}
+.save-status.saving { color: #1565c0; background: #e3f2fd; }
+.save-status.success { color: #2e7d32; background: #e8f5e9; }
+.save-status.error { color: #c62828; background: #ffebee; }
+
+/* ---- Labels & inputs ---- */
 .practice-page label {
   display: block;
   font-weight: 700;
-  margin-bottom: 8px;
-  font-size: 1.1rem;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
   color: #222;
 }
 
@@ -167,210 +306,259 @@ a {
   color: #444447;
   padding: 6px 10px;
   border-radius: 8px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   width: 100%;
   box-sizing: border-box;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s ease;
 }
 
-.practice-page select:hover,
 .practice-page select:focus,
 .practice-page textarea:focus {
-  border-color: #ff4b2b;
+  border-color: #E67E22;
   outline: none;
-  box-shadow: 0 0 8px #ff4b2b;
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15);
 }
 
-.practice-page textarea {
-  min-height: 100px;
-  resize: vertical;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem;
-  padding: 10px;
+/* ===================== AI Chat Modal ===================== */
+.ai-chat-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-/* כפתורים */
-.practice-page button {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  padding: 10px 20px;
-  border-radius: 1rem;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1rem;
-  color: #222;
-  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-  align-self: flex-start;
-  margin-top: 1rem;
-}
-
-.practice-page button:hover:not(:disabled) {
-  background: linear-gradient(to right, #888, #aaa);
-  border-color: transparent;
-  color: #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-}
-
-.practice-page button:disabled {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.4);
-  color: #999;
-  cursor: not-allowed;
-  box-shadow: none;
-}
-
-/* Monaco Editor */
-.practice-page .monaco-editor {
-  border-radius: 1rem;
-  box-shadow: inset 0 0 10px #ff4b2b;
-  height: auto !important;
+.ai-chat-modal {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
   width: 100%;
-  display: block;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-/* ===================== כרטיסיות ===================== */
+.ai-chat-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #eee;
+  background: #fafafa;
+}
+
+.ai-chat-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.ai-chat-sub {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 2px;
+}
+
+.ai-close-btn {
+  background: none !important;
+  border: 1px solid #ddd !important;
+  color: #666 !important;
+  padding: 6px 14px !important;
+  border-radius: 8px !important;
+  font-size: 0.85rem !important;
+  cursor: pointer;
+}
+
+.ai-close-btn:hover {
+  background: #f5f5f5 !important;
+}
+
+.ai-chat-modal-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  overflow: hidden;
+}
+
+.ai-chat-history {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 12px;
+  min-height: 200px;
+}
+
+.ai-msg {
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 85%;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.ai-msg.user {
+  align-self: flex-end;
+  background: #2C3E50;
+  color: #fff;
+}
+
+.ai-msg.assistant {
+  align-self: flex-start;
+  background: #f1f3f5;
+  color: #333;
+}
+
+.ai-chat-input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.ai-chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.ai-chat-input:focus {
+  outline: none;
+  border-color: #E67E22;
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.12);
+}
+
+.ai-send-btn {
+  background: linear-gradient(135deg, #E67E22, #f39c12) !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 10px 18px !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  font-size: 0.85rem !important;
+}
+
+.ai-send-btn:disabled {
+  opacity: 0.5 !important;
+}
+
+.ai-usage {
+  font-size: 0.75rem;
+  color: #999;
+  text-align: center;
+}
+
+/* ===================== Exercise List overrides ===================== */
 .card-section.exercises-samples {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
-  width: 90%;
+  width: 100%;
   max-width: 900px;
   height: auto;
-  min-height: 500px;
+  min-height: 0;
   background: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   box-shadow: inset -2px 2px hsl(0 0% 100% / 1), -10px 10px 20px hsl(0 0% 0% / 0.1);
-  text-align: right;
+  text-align: left;
   overflow-y: auto;
   opacity: 1 !important;
-  /* תמיד נראה */
   animation: none !important;
 }
 
 .card-section.exercises-samples ul {
-  padding-right: 1.5rem;
-  list-style: disc;
+  padding-left: 1.2rem;
+  padding-right: 0;
+  list-style: none;
 }
 
 .card-section.exercises-samples li {
-  font-size: 1.5rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
-/* ===================== אנימציות — ביטול מסתיר ===================== */
+/* ===================== Responsive ===================== */
 @media (prefers-reduced-motion: reduce) {
-
-  .card,
-  .more-exercises-button,
-  .text-part {
+  .card, .more-exercises-button, .text-part {
     animation: none !important;
     transition: none !important;
+    opacity: 1 !important;
   }
 }
 
-/* ===================== רספונסיביות ===================== */
 @media (max-width: 768px) {
-  .practice-page .practice-container {
-    width: 100% !important;
-    max-width: 1200px !important;
-    margin: 1.5rem 0 !important;
-    padding: 0 !important;
+  .practice-page {
+    padding: 1rem;
+    padding-top: 80px;
   }
 
   .practice-layout {
     flex-direction: column;
+    height: auto;
   }
 
   .practice-left {
     height: auto;
+    max-height: 40vh;
   }
 
   .practice-splitter {
     display: none;
   }
 
-  .practice-page select {
-    width: 100% !important;
-  }
-
-  .practice-page button {
-    width: auto !important;
-    align-self: flex-start !important;
-    margin-top: 1rem !important;
-  }
-
   .practice-page .monaco-editor {
-    height: 400px !important;
-  }
-
-  .card {
-    flex-direction: row !important;
-    text-align: left !important;
-    margin: 0 !important;
-  }
-
-  .icon {
-    font-size: 4rem !important;
-  }
-
-  .text-content h2 {
-    font-size: 1.8rem !important;
-  }
-
-  .side-text {
-    display: block !important;
+    height: 350px !important;
   }
 
   .card-section.exercises-samples {
-    min-height: 500px;
+    min-height: 300px;
     max-height: none;
-    padding: 2rem;
-    opacity: 1 !important;
-    animation: none !important;
+    padding: 1rem;
+  }
+
+  .ai-chat-modal {
+    max-width: 100%;
+    max-height: 90vh;
+  }
+
+  .practice-btn-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
 
 @media (max-width: 480px) {
-  .split-text-container {
-    font-size: 3.5rem !important;
-  }
-
-  .icon {
-    font-size: 4rem !important;
-  }
-
-  .text-content h2 {
-    font-size: 1.8rem !important;
-  }
-
-  .text-content p {
-    font-size: 1rem !important;
-  }
-
-  .cards-list {
-    padding: 3rem 2rem !important;
+  .practice-language-selector .language-card {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.75rem;
   }
 }
 
-/* ================== תיקון כרטיסי תרגילים למובייל ================== */
+/* ================== Visibility fix ================== */
 .card-section.exercises-samples {
   opacity: 1 !important;
-  /* תמיד נראה */
   animation: none !important;
-  /* מבטל אנימציות מסתירות */
   max-height: none;
-  /* לא חוסם תוכן */
-  overflow-y: visible;
-  /* מאפשר גלילה טבעית */
+  overflow-y: auto;
 }
 
 .card-section.exercises-samples ul,
 .card-section.exercises-samples li,
 .selected-exercise {
   opacity: 1 !important;
-  /* מבטיח שהשאלות נראות */
   animation: none !important;
 }

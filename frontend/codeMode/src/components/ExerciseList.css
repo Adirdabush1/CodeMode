@@ -14,7 +14,7 @@
   padding: 1.5rem;
   border-radius: 1.5rem;
   box-shadow: inset -2px 2px hsl(0 0% 100% / 1), -10px 10px 20px hsl(0 0% 0% / 0.1);
-  text-align: right;
+  text-align: left;
   overflow-y: auto;
   animation: none !important;
   opacity: 1;
@@ -92,6 +92,11 @@
   transform: scale(1.05);
 }
 
+.language-card:focus-visible {
+  outline: 2px solid #E67E22;
+  outline-offset: 2px;
+}
+
 .language-card.active {
   background: #000;
   color: #fff;
@@ -151,6 +156,79 @@
     font-size: 1.2rem;
     line-height: 1.5rem;
   }
+}
+
+/* ================== Exercise list items ================== */
+.exercise-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.exercise-item {
+  margin-bottom: 0.25rem;
+}
+
+.exercise-header {
+  padding: 0.5rem 0.25rem;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.exercise-header:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.exercise-details {
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.25rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.exercise-details p {
+  margin: 0.25rem 0;
+}
+
+.exercise-details pre {
+  margin: 0.15rem 0;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.exercise-item.solved {
+  opacity: 0.75;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+.pagination-controls button {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  background: #ffffff88;
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background: #ffffffcc;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* hide the in-card language selector because we render a global one in Practice.tsx */

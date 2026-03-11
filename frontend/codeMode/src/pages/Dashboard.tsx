@@ -5,19 +5,19 @@ import MenuBar from '../components/MenuBar';
 import { useAuth } from '../components/useAuth';
 import './Dashboard.css';
 
-const API_URL = process.env.REACT_APP_API_URL || '';
+const API_URL = import.meta.env.VITE_API_URL || '';
 
 type UserSummary = { name: string; avatarUrl?: string };
 type Comment = { id: string; author: UserSummary; content: string; createdAt: string };
-type Post = { 
-  id: string; 
-  author: UserSummary; 
-  content: string; 
-  imageUrl?: string; 
-  createdAt: string; 
-  likes: number; 
-  likedByMe?: boolean; 
-  comments?: Comment[]; 
+type Post = {
+  id: string;
+  author: UserSummary;
+  content: string;
+  imageUrl?: string;
+  createdAt: string;
+  likes: number;
+  likedByMe?: boolean;
+  comments?: Comment[];
 };
 
 const Dashboard: React.FC = () => {
@@ -65,13 +65,13 @@ const Dashboard: React.FC = () => {
     setNewPostText('');
     setNewPostImage(null);
 
-    try { if (API_URL) await axios.post(`${API_URL}/posts`, formData, { withCredentials: true }); } 
+    try { if (API_URL) await axios.post(`${API_URL}/posts`, formData, { withCredentials: true }); }
     catch (err) { console.error(err); }
   };
 
   const toggleLike = async (postId: string) => {
     setPosts((prev) => prev.map((p) => p.id === postId ? { ...p, likedByMe: !p.likedByMe, likes: p.likedByMe ? p.likes -1 : p.likes +1 } : p));
-    try { if (API_URL) await axios.post(`${API_URL}/posts/${postId}/like`, null, { withCredentials: true }); } 
+    try { if (API_URL) await axios.post(`${API_URL}/posts/${postId}/like`, null, { withCredentials: true }); }
     catch (err) { console.error(err); }
   };
 
@@ -81,7 +81,7 @@ const Dashboard: React.FC = () => {
     setPosts((prev) => prev.map((p) => p.id === postId ? { ...p, comments: [...(p.comments||[]), newComment] } : p));
     setCommentText((prev) => ({ ...prev, [postId]: '' }));
 
-    try { if (API_URL) await axios.post(`${API_URL}/posts/${postId}/comments`, { content: newComment.content }, { withCredentials: true }); } 
+    try { if (API_URL) await axios.post(`${API_URL}/posts/${postId}/comments`, { content: newComment.content }, { withCredentials: true }); }
     catch (err) { console.error(err); }
   };
 
@@ -103,11 +103,12 @@ const Dashboard: React.FC = () => {
     <>
       <MenuBar />
       <div className="dashboard-page" ref={containerRef}>
+        <h1 className="sr-only">Dashboard</h1>
         <div className="container">
           {/* New post */}
           <div className="panel new-post">
             <div className="new-post-header">
-              <img className="avatar" src={user?.avatarUrl || 'https://i.pravatar.cc/150'} />
+              <img className="avatar" src={user?.avatarUrl || 'https://i.pravatar.cc/150'} alt={user?.name ? `${user.name}'s avatar` : 'User avatar'} />
               <textarea placeholder="What's on your mind?" value={newPostText} onChange={(e) => setNewPostText(e.target.value)} />
             </div>
             <div className="new-post-actions">
@@ -120,23 +121,23 @@ const Dashboard: React.FC = () => {
           {posts.map((post) => (
             <div key={post.id} className="panel post">
               <div className="media-block">
-                <img className="avatar" src={post.author.avatarUrl || 'https://i.pravatar.cc/150'} />
+                <img className="avatar" src={post.author.avatarUrl || 'https://i.pravatar.cc/150'} alt={`${post.author.name}'s avatar`} />
                 <div className="media-body">
                   <div className="header">
                     <strong>{post.author.name}</strong> • <small>{formatRelative(post.createdAt)}</small>
                   </div>
                   <p>{post.content}</p>
-                  {post.imageUrl && <img src={post.imageUrl} className="post-image" />}
+                  {post.imageUrl && <img src={post.imageUrl} className="post-image" alt="Post attachment" loading="lazy" />}
 
                   <div className="actions">
-                    <button onClick={() => toggleLike(post.id)}>{post.likedByMe ? '💙' : '🤍'} {post.likes}</button>
+                    <button onClick={() => toggleLike(post.id)} aria-label={post.likedByMe ? 'Unlike post' : 'Like post'}>{post.likedByMe ? '💙' : '🤍'} {post.likes}</button>
                   </div>
 
                   {/* Comments */}
                   <div className="comments">
                     {post.comments?.map((c) => (
                       <div key={c.id} className="comment">
-                        <img className="avatar-sm" src={c.author.avatarUrl || 'https://i.pravatar.cc/150'} />
+                        <img className="avatar-sm" src={c.author.avatarUrl || 'https://i.pravatar.cc/150'} alt={`${c.author.name}'s avatar`} />
                         <div>
                           <strong>{c.author.name}</strong>: {c.content} • {formatRelative(c.createdAt)}
                         </div>
