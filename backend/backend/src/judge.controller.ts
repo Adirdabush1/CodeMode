@@ -8,7 +8,18 @@ const languageToIdMap: Record<string, number> = {
   cpp: 54,
   c: 50,
   csharp: 51,
+  typescript: 74,
+  html: 63,
+  css: 63,
 };
+
+function toBase64(str: string): string {
+  return Buffer.from(str, 'utf-8').toString('base64');
+}
+
+function fromBase64(str: string): string {
+  return Buffer.from(str, 'base64').toString('utf-8');
+}
 
 interface Judge0Response {
   stdout?: string | null;
@@ -30,7 +41,7 @@ interface RunCodeDto {
 @Controller('judge')
 export class JudgeController {
   @Post('run')
-  async runCode(@Body() body: RunCodeDto): Promise<{ output: string }> {
+  async runCode(@Body() body: RunCodeDto): Promise<{ output: string; stdout?: string }> {
     const { code, language, stdin = '' } = body;
 
     try {
@@ -40,7 +51,7 @@ export class JudgeController {
       }
 
       const response = await fetch(
-        'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true',
+        'https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=true&wait=true',
         {
           method: 'POST',
           headers: {
@@ -49,9 +60,9 @@ export class JudgeController {
             'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com',
           },
           body: JSON.stringify({
-            source_code: code,
+            source_code: toBase64(code),
             language_id: languageId,
-            stdin,
+            stdin: toBase64(stdin),
           }),
         },
       );
@@ -71,22 +82,26 @@ export class JudgeController {
 
       const data = (await response.json()) as Judge0Response;
 
-      console.log('Judge0 full response:', JSON.stringify(data, null, 2));
+      // Decode base64 response fields
+      const stdout = data.stdout ? fromBase64(data.stdout) : null;
+      const stderr = data.stderr ? fromBase64(data.stderr) : null;
+      const compileOutput = data.compile_output ? fromBase64(data.compile_output) : null;
+      const message = data.message ? fromBase64(data.message) : null;
 
       let output = '';
 
-      if (data.compile_output)
-        output += `🛠 Compile Output:\n${data.compile_output}\n`;
-      if (data.stderr) output += `⚠ Runtime Error:\n${data.stderr}\n`;
-      if (data.stdout) output += `✅ Output:\n${data.stdout}\n`;
-      if (data.message) output += `ℹ Message:\n${data.message}\n`;
+      if (compileOutput)
+        output += `🛠 Compile Output:\n${compileOutput}\n`;
+      if (stderr) output += `⚠ Runtime Error:\n${stderr}\n`;
+      if (stdout) output += `✅ Output:\n${stdout}\n`;
+      if (message) output += `ℹ Message:\n${message}\n`;
       if (data.status) output += `📌 Status: ${data.status.description}\n`;
 
       if (!output.trim()) {
         output = `⚠ No output returned. Status: ${data.status?.description || 'Unknown'}`;
       }
 
-      return { output };
+      return { output, stdout: stdout || '' };
     } catch (err: unknown) {
       const errorMessage =
         err instanceof Error ? err.message : JSON.stringify(err);

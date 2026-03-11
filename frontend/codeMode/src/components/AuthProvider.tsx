@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { AuthContext } from './AuthContext';
 import type { AuthContextType, User } from './AuthContext';
-import { Loader } from './Loader';
 
 type Props = { children: React.ReactNode };
 
@@ -13,9 +12,13 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // בקשה ל־/user/me כדי לבדוק אם יש משתמש מחובר ולמלא את ה־user
+    const controller = new AbortController();
     axios
-      .get<User>('https://backend-codemode-9p1s.onrender.com/user/me', { withCredentials: true })
+      .get<User>('https://backend-codemode-9p1s.onrender.com/user/me', {
+        withCredentials: true,
+        signal: controller.signal,
+        timeout: 8000,
+      })
       .then((res) => {
         if (res && res.data) {
           setUser(res.data);
@@ -30,6 +33,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         setIsLoggedIn(false);
       })
       .then(() => setLoading(false));
+    return () => controller.abort();
   }, []);
 
   // לפי הטייפ ב־AuthContext: login מקבל User
@@ -52,10 +56,6 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setIsLoggedIn(false);
   }
 };
-
- if (loading) {
-    return <Loader />;
-  }
 
   const value: AuthContextType = {
     user,

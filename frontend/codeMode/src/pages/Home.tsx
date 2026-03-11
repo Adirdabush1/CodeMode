@@ -1,10 +1,9 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect, lazy, Suspense, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaLaptopCode, FaChartLine, FaLightbulb, FaShieldAlt, FaWrench } from "react-icons/fa";
 import MenuBar from "../components/MenuBar";
+import { AuthContext } from "../components/AuthContext";
 import "./Home.css";
-import axios from "axios";
-import Swal from "sweetalert2";
 
 const MonacoEditor = lazy(() => import("../components/MonacoEditor"));
 
@@ -43,7 +42,8 @@ const exercisesByLanguage: Record<string, string[]> = {
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const auth = useContext(AuthContext);
+  const isLoggedIn = auth?.isLoggedIn ?? false;
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedExercise, setSelectedExercise] = useState<string | null>(null);
 
@@ -52,46 +52,32 @@ const Home: React.FC = () => {
     const cookiesChoice = localStorage.getItem("cookiesChoice");
 
     if (!cookiesChoice) {
-      Swal.fire({
-        title: "Cookies Consent",
-        text: "This website uses cookies to enhance your experience. Do you accept?",
-        icon: "info",
-        showCancelButton: true,
-        confirmButtonText: "Accept",
-        cancelButtonText: "Decline",
-        reverseButtons: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          localStorage.setItem("cookiesChoice", "accepted");
-          Swal.fire("Thank you!", "You have accepted cookies.", "success");
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          localStorage.setItem("cookiesChoice", "declined");
-          Swal.fire(
-            "Notice",
-            "You have declined cookies. Some features may not work properly.",
-            "warning"
-          );
-        }
+      import("sweetalert2").then(({ default: Swal }) => {
+        Swal.fire({
+          title: "Cookies Consent",
+          text: "This website uses cookies to enhance your experience. Do you accept?",
+          icon: "info",
+          showCancelButton: true,
+          confirmButtonText: "Accept",
+          cancelButtonText: "Decline",
+          reverseButtons: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            localStorage.setItem("cookiesChoice", "accepted");
+            Swal.fire("Thank you!", "You have accepted cookies.", "success");
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            localStorage.setItem("cookiesChoice", "declined");
+            Swal.fire(
+              "Notice",
+              "You have declined cookies. Some features may not work properly.",
+              "warning"
+            );
+          }
+        });
       });
     }
   }, []);
 
-  useEffect(() => {
-    let mounted = true;
-    axios
-      .get("https://backend-codemode-9p1s.onrender.com/user/me", { withCredentials: true })
-      .then(() => {
-        if (mounted) setIsLoggedIn(true);
-      })
-      .catch(() => {
-        if (mounted) setIsLoggedIn(false);
-      })
-;
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   const handleMoreExercisesClick = () => {
     if (!isLoggedIn) {
